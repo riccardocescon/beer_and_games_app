@@ -13,6 +13,7 @@ class _UsersVotesArea extends StatelessWidget {
         horizontal: _homepageSidePadding - _topAreaSidePadding,
       ),
       child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Expanded(
             child: BlocBuilder<HomepageBloc, HomepageState>(
