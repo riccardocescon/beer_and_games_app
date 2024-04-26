@@ -1,5 +1,6 @@
 import 'package:beer_and_games/core/enums/date_time_enums.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/models/user_model.dart';
 
 class HangoutModel extends Hangout {
   HangoutModel({
@@ -19,9 +20,15 @@ class HangoutModel extends Hangout {
       time: json[timeField],
       dayOfWeek: Day.values
           .firstWhere((element) => element.value == json[dayOfWeekField]),
-      presentUsers: List<String>.from(json['present']),
-      waitingUsers: List<String>.from(json['waiting']),
-      absentUsers: List<String>.from(json['absent']),
+      presentUsers: List<String>.from(json['present'])
+          .map((e) => UserModel.fromData(e))
+          .toList(),
+      waitingUsers: List<String>.from(json['waiting'])
+          .map((e) => UserModel.fromData(e))
+          .toList(),
+      absentUsers: List<String>.from(json['absent'])
+          .map((e) => UserModel.fromData(e))
+          .toList(),
       skipNextWeek: json['skip_next'],
     );
   }

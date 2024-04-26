@@ -1,5 +1,8 @@
+import 'dart:math';
+
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
+import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/edit_hangout/edit_hangout_page_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
@@ -12,6 +15,8 @@ part 'next_date.dart';
 part 'next_time.dart';
 part 'offline_button.dart';
 part 'next_date_time_area.dart';
+part 'users_votes_area.dart';
+part 'user_vote_item.dart';
 
 class TopArea extends StatelessWidget {
   const TopArea({super.key});
@@ -40,6 +45,10 @@ class TopArea extends StatelessWidget {
                 ),
               ),
             ],
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 8),
+            child: _UsersVotesArea(),
           ),
         ],
       ),
