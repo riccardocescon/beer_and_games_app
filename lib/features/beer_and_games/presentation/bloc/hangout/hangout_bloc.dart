@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
+import 'package:beer_and_games/core/enums/date_time_enums.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/hangout_usecases.dart';
 import 'package:equatable/equatable.dart';
@@ -15,6 +16,8 @@ part 'hangout_state.dart';
 
 class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
   final HangoutStream hangoutStream;
+  final HangoutDateTimeUpdate hangoutDateTimeUpdate;
+  final HangoutUpdateVote hangoutUpdateVote;
 
   Hangout? _hangout;
   Timer? _countdownDeamonTimer;
@@ -23,6 +26,8 @@ class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
 
   HangoutBloc({
     required this.hangoutStream,
+    required this.hangoutDateTimeUpdate,
+    required this.hangoutUpdateVote,
   }) : super(const HangoutState.init()) {
     on<Select>((event, emit) async {
       emit(const HangoutState.loading());
@@ -65,6 +70,40 @@ class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
           ),
         );
       }
+    });
+    on<UpdateDateTime>((event, emit) async {
+      emit(const HangoutState.loading());
+      final result = await hangoutDateTimeUpdate.call(
+        HangoutDateTimeUpdateParams(
+          day: event.day,
+          time: event.time,
+        ),
+      );
+      emit(
+        result.fold(
+          (l) => HangoutState.error(l),
+          (_) => const HangoutState.dayTimeUpdate(),
+        ),
+      );
+    });
+    on<UpdateUserPresence>((event, emit) async {
+      emit(const HangoutState.loading());
+      final result = await hangoutUpdateVote.call(
+        HangoutHangoutUpdateVoteParams(
+          presentEmailToRemove: event.presentEmailToRemove,
+          presentEmailToAdd: event.presentEmailToAdd,
+          absentEmailToRemove: event.absentEmailToRemove,
+          absentEmailToAdd: event.absentEmailToAdd,
+          waitingEmailToRemove: event.waitingEmailToRemove,
+          waitingEmailToAdd: event.waitingEmailToAdd,
+        ),
+      );
+      emit(
+        result.fold(
+          (l) => HangoutState.error(l),
+          (_) => const HangoutState.userPresenceUpdated(),
+        ),
+      );
     });
   }
 

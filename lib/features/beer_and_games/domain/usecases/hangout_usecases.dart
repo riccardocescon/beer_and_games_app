@@ -8,3 +8,4 @@ import 'package:flutter/material.dart';
 
 part 'hangout_date_time_update.dart';
 part 'hangout_stream.dart';
+part 'hangout_update_vote.dart';

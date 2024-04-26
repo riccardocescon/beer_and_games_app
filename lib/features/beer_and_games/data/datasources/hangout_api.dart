@@ -12,6 +12,14 @@ abstract class _HangoutAPI {
     required int day,
     required String time,
   });
+  Future<Either<CloudFailure, void>> updatePresence({
+    required String? presentEmailToRemove,
+    required String? presentEmailToAdd,
+    required String? absentEmailToRemove,
+    required String? absentEmailToAdd,
+    required String? waitingEmailToRemove,
+    required String? waitingEmailToAdd,
+  });
 }
 
 class HangoutAPI implements _HangoutAPI {
@@ -43,6 +51,50 @@ class HangoutAPI implements _HangoutAPI {
         HangoutModel.dayOfWeekField: day,
         HangoutModel.timeField: time,
       });
+
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> updatePresence({
+    required String? presentEmailToRemove,
+    required String? presentEmailToAdd,
+    required String? absentEmailToRemove,
+    required String? absentEmailToAdd,
+    required String? waitingEmailToRemove,
+    required String? waitingEmailToAdd,
+  }) async {
+    try {
+      final Map<String, dynamic> update = {};
+
+      if (presentEmailToRemove != null) {
+        update['present'] = FieldValue.arrayRemove([presentEmailToRemove]);
+      }
+
+      if (presentEmailToAdd != null) {
+        update['present'] = FieldValue.arrayUnion([presentEmailToAdd]);
+      }
+
+      if (absentEmailToRemove != null) {
+        update['absent'] = FieldValue.arrayRemove([absentEmailToRemove]);
+      }
+
+      if (absentEmailToAdd != null) {
+        update['absent'] = FieldValue.arrayUnion([absentEmailToAdd]);
+      }
+
+      if (waitingEmailToRemove != null) {
+        update['waiting'] = FieldValue.arrayRemove([waitingEmailToRemove]);
+      }
+
+      if (waitingEmailToAdd != null) {
+        update['waiting'] = FieldValue.arrayUnion([waitingEmailToAdd]);
+      }
+
+      await firestore.collection('hangout').doc('cespuglio').update(update);
 
       return const Right(null);
     } catch (e) {

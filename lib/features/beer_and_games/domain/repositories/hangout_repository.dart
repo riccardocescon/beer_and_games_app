@@ -10,4 +10,12 @@ abstract class HangoutRepository {
     required Day day,
     required TimeOfDay time,
   });
+  Future<Either<CloudFailure, void>> updatePresence({
+    required String? presentEmailToRemove,
+    required String? presentEmailToAdd,
+    required String? absentEmailToRemove,
+    required String? absentEmailToAdd,
+    required String? waitingEmailToRemove,
+    required String? waitingEmailToAdd,
+  });
 }

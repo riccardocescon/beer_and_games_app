@@ -21,13 +21,13 @@ class HangoutModel extends Hangout {
       dayOfWeek: Day.values
           .firstWhere((element) => element.value == json[dayOfWeekField]),
       presentUsers: List<String>.from(json['present'])
-          .map((e) => UserModel.fromData(e))
+          .map((e) => UserModel.fromData(e).toEntity)
           .toList(),
       waitingUsers: List<String>.from(json['waiting'])
-          .map((e) => UserModel.fromData(e))
+          .map((e) => UserModel.fromData(e).toEntity)
           .toList(),
       absentUsers: List<String>.from(json['absent'])
-          .map((e) => UserModel.fromData(e))
+          .map((e) => UserModel.fromData(e).toEntity)
           .toList(),
       skipNextWeek: json['skip_next'],
     );

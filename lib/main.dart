@@ -1,4 +1,5 @@
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/bloc/user_bloc.dart/user_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/pages/homepage.dart';
 import 'package:beer_and_games/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -43,8 +44,15 @@ class MyApp extends StatelessWidget {
       scrollBehavior: ScrollConfiguration.of(context).copyWith(
         physics: const BouncingScrollPhysics(),
       ),
-      home: BlocProvider(
-        create: (context) => di.sl<HomepageBloc>(),
+      home: MultiBlocProvider(
+        providers: [
+          BlocProvider(
+            create: (context) => di.sl<HomepageBloc>(),
+          ),
+          BlocProvider(
+            create: (context) => di.sl<UserBloc>(),
+          ),
+        ],
         child: const Homepage(),
       ),
     );

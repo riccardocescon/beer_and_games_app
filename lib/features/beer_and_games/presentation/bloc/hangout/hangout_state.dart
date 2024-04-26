@@ -10,6 +10,9 @@ sealed class HangoutState extends AppState with _$HangoutState, EquatableMixin {
 
   const factory HangoutState.loaded(Hangout hangout) = Loaded;
 
+  const factory HangoutState.dayTimeUpdate() = DayTimeUpdate;
+  const factory HangoutState.userPresenceUpdated() = UserPresenceUpdated;
+
   const factory HangoutState.dateTimeUpdate({
     required int missingDays,
     required int missingHours,
@@ -24,6 +27,8 @@ sealed class HangoutState extends AppState with _$HangoutState, EquatableMixin {
         init: (value) => [],
         loading: (value) => [],
         loaded: (value) => [value.hangout],
+        dayTimeUpdate: (value) => [],
+        userPresenceUpdated: (value) => [],
         dateTimeUpdate: (nextHangout) => [
           nextHangout.date,
           nextHangout.missingDays,

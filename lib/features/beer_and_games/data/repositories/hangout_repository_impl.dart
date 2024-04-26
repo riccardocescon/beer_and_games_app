@@ -31,4 +31,23 @@ class HangoutRepositoryImpl extends HangoutRepository {
       time: '${time.hour}:${time.minute.toString().padLeft(2, '0')}',
     );
   }
+
+  @override
+  Future<Either<CloudFailure, void>> updatePresence({
+    required String? presentEmailToRemove,
+    required String? presentEmailToAdd,
+    required String? absentEmailToRemove,
+    required String? absentEmailToAdd,
+    required String? waitingEmailToRemove,
+    required String? waitingEmailToAdd,
+  }) async {
+    return hangoutAPI.updatePresence(
+      presentEmailToRemove: presentEmailToRemove,
+      presentEmailToAdd: presentEmailToAdd,
+      absentEmailToRemove: absentEmailToRemove,
+      absentEmailToAdd: absentEmailToAdd,
+      waitingEmailToRemove: waitingEmailToRemove,
+      waitingEmailToAdd: waitingEmailToAdd,
+    );
+  }
 }

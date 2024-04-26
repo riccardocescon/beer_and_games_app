@@ -19,32 +19,65 @@ mixin _$HangoutEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() select,
+    required TResult Function(Day day, TimeOfDay time) updateDateTime,
+    required TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)
+        updateUserPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? select,
+    TResult? Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult? Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? select,
+    TResult Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Select value) select,
+    required TResult Function(UpdateDateTime value) updateDateTime,
+    required TResult Function(UpdateUserPresence value) updateUserPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Select value)? select,
+    TResult? Function(UpdateDateTime value)? updateDateTime,
+    TResult? Function(UpdateUserPresence value)? updateUserPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Select value)? select,
+    TResult Function(UpdateDateTime value)? updateDateTime,
+    TResult Function(UpdateUserPresence value)? updateUserPresence,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -93,6 +126,15 @@ class _$SelectImpl extends Select {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() select,
+    required TResult Function(Day day, TimeOfDay time) updateDateTime,
+    required TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)
+        updateUserPresence,
   }) {
     return select();
   }
@@ -101,6 +143,15 @@ class _$SelectImpl extends Select {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? select,
+    TResult? Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult? Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
   }) {
     return select?.call();
   }
@@ -109,6 +160,15 @@ class _$SelectImpl extends Select {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? select,
+    TResult Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
     required TResult orElse(),
   }) {
     if (select != null) {
@@ -121,6 +181,8 @@ class _$SelectImpl extends Select {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Select value) select,
+    required TResult Function(UpdateDateTime value) updateDateTime,
+    required TResult Function(UpdateUserPresence value) updateUserPresence,
   }) {
     return select(this);
   }
@@ -129,6 +191,8 @@ class _$SelectImpl extends Select {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Select value)? select,
+    TResult? Function(UpdateDateTime value)? updateDateTime,
+    TResult? Function(UpdateUserPresence value)? updateUserPresence,
   }) {
     return select?.call(this);
   }
@@ -137,6 +201,8 @@ class _$SelectImpl extends Select {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Select value)? select,
+    TResult Function(UpdateDateTime value)? updateDateTime,
+    TResult Function(UpdateUserPresence value)? updateUserPresence,
     required TResult orElse(),
   }) {
     if (select != null) {
@@ -152,12 +218,394 @@ abstract class Select extends HangoutEvent {
 }
 
 /// @nodoc
+abstract class _$$UpdateDateTimeImplCopyWith<$Res> {
+  factory _$$UpdateDateTimeImplCopyWith(_$UpdateDateTimeImpl value,
+          $Res Function(_$UpdateDateTimeImpl) then) =
+      __$$UpdateDateTimeImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Day day, TimeOfDay time});
+}
+
+/// @nodoc
+class __$$UpdateDateTimeImplCopyWithImpl<$Res>
+    extends _$HangoutEventCopyWithImpl<$Res, _$UpdateDateTimeImpl>
+    implements _$$UpdateDateTimeImplCopyWith<$Res> {
+  __$$UpdateDateTimeImplCopyWithImpl(
+      _$UpdateDateTimeImpl _value, $Res Function(_$UpdateDateTimeImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? day = freezed,
+    Object? time = null,
+  }) {
+    return _then(_$UpdateDateTimeImpl(
+      day: freezed == day
+          ? _value.day
+          : day // ignore: cast_nullable_to_non_nullable
+              as Day,
+      time: null == time
+          ? _value.time
+          : time // ignore: cast_nullable_to_non_nullable
+              as TimeOfDay,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateDateTimeImpl extends UpdateDateTime {
+  const _$UpdateDateTimeImpl({required this.day, required this.time})
+      : super._();
+
+  @override
+  final Day day;
+  @override
+  final TimeOfDay time;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateDateTimeImplCopyWith<_$UpdateDateTimeImpl> get copyWith =>
+      __$$UpdateDateTimeImplCopyWithImpl<_$UpdateDateTimeImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() select,
+    required TResult Function(Day day, TimeOfDay time) updateDateTime,
+    required TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)
+        updateUserPresence,
+  }) {
+    return updateDateTime(day, time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? select,
+    TResult? Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult? Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
+  }) {
+    return updateDateTime?.call(day, time);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? select,
+    TResult Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
+    required TResult orElse(),
+  }) {
+    if (updateDateTime != null) {
+      return updateDateTime(day, time);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Select value) select,
+    required TResult Function(UpdateDateTime value) updateDateTime,
+    required TResult Function(UpdateUserPresence value) updateUserPresence,
+  }) {
+    return updateDateTime(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Select value)? select,
+    TResult? Function(UpdateDateTime value)? updateDateTime,
+    TResult? Function(UpdateUserPresence value)? updateUserPresence,
+  }) {
+    return updateDateTime?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Select value)? select,
+    TResult Function(UpdateDateTime value)? updateDateTime,
+    TResult Function(UpdateUserPresence value)? updateUserPresence,
+    required TResult orElse(),
+  }) {
+    if (updateDateTime != null) {
+      return updateDateTime(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateDateTime extends HangoutEvent {
+  const factory UpdateDateTime(
+      {required final Day day,
+      required final TimeOfDay time}) = _$UpdateDateTimeImpl;
+  const UpdateDateTime._() : super._();
+
+  Day get day;
+  TimeOfDay get time;
+  @JsonKey(ignore: true)
+  _$$UpdateDateTimeImplCopyWith<_$UpdateDateTimeImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateUserPresenceImplCopyWith<$Res> {
+  factory _$$UpdateUserPresenceImplCopyWith(_$UpdateUserPresenceImpl value,
+          $Res Function(_$UpdateUserPresenceImpl) then) =
+      __$$UpdateUserPresenceImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String? presentEmailToAdd,
+      String? presentEmailToRemove,
+      String? absentEmailToAdd,
+      String? absentEmailToRemove,
+      String? waitingEmailToAdd,
+      String? waitingEmailToRemove});
+}
+
+/// @nodoc
+class __$$UpdateUserPresenceImplCopyWithImpl<$Res>
+    extends _$HangoutEventCopyWithImpl<$Res, _$UpdateUserPresenceImpl>
+    implements _$$UpdateUserPresenceImplCopyWith<$Res> {
+  __$$UpdateUserPresenceImplCopyWithImpl(_$UpdateUserPresenceImpl _value,
+      $Res Function(_$UpdateUserPresenceImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? presentEmailToAdd = freezed,
+    Object? presentEmailToRemove = freezed,
+    Object? absentEmailToAdd = freezed,
+    Object? absentEmailToRemove = freezed,
+    Object? waitingEmailToAdd = freezed,
+    Object? waitingEmailToRemove = freezed,
+  }) {
+    return _then(_$UpdateUserPresenceImpl(
+      presentEmailToAdd: freezed == presentEmailToAdd
+          ? _value.presentEmailToAdd
+          : presentEmailToAdd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      presentEmailToRemove: freezed == presentEmailToRemove
+          ? _value.presentEmailToRemove
+          : presentEmailToRemove // ignore: cast_nullable_to_non_nullable
+              as String?,
+      absentEmailToAdd: freezed == absentEmailToAdd
+          ? _value.absentEmailToAdd
+          : absentEmailToAdd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      absentEmailToRemove: freezed == absentEmailToRemove
+          ? _value.absentEmailToRemove
+          : absentEmailToRemove // ignore: cast_nullable_to_non_nullable
+              as String?,
+      waitingEmailToAdd: freezed == waitingEmailToAdd
+          ? _value.waitingEmailToAdd
+          : waitingEmailToAdd // ignore: cast_nullable_to_non_nullable
+              as String?,
+      waitingEmailToRemove: freezed == waitingEmailToRemove
+          ? _value.waitingEmailToRemove
+          : waitingEmailToRemove // ignore: cast_nullable_to_non_nullable
+              as String?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateUserPresenceImpl extends UpdateUserPresence {
+  const _$UpdateUserPresenceImpl(
+      {required this.presentEmailToAdd,
+      required this.presentEmailToRemove,
+      required this.absentEmailToAdd,
+      required this.absentEmailToRemove,
+      required this.waitingEmailToAdd,
+      required this.waitingEmailToRemove})
+      : super._();
+
+  @override
+  final String? presentEmailToAdd;
+  @override
+  final String? presentEmailToRemove;
+  @override
+  final String? absentEmailToAdd;
+  @override
+  final String? absentEmailToRemove;
+  @override
+  final String? waitingEmailToAdd;
+  @override
+  final String? waitingEmailToRemove;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateUserPresenceImplCopyWith<_$UpdateUserPresenceImpl> get copyWith =>
+      __$$UpdateUserPresenceImplCopyWithImpl<_$UpdateUserPresenceImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() select,
+    required TResult Function(Day day, TimeOfDay time) updateDateTime,
+    required TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)
+        updateUserPresence,
+  }) {
+    return updateUserPresence(
+        presentEmailToAdd,
+        presentEmailToRemove,
+        absentEmailToAdd,
+        absentEmailToRemove,
+        waitingEmailToAdd,
+        waitingEmailToRemove);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? select,
+    TResult? Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult? Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
+  }) {
+    return updateUserPresence?.call(
+        presentEmailToAdd,
+        presentEmailToRemove,
+        absentEmailToAdd,
+        absentEmailToRemove,
+        waitingEmailToAdd,
+        waitingEmailToRemove);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? select,
+    TResult Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
+    required TResult orElse(),
+  }) {
+    if (updateUserPresence != null) {
+      return updateUserPresence(
+          presentEmailToAdd,
+          presentEmailToRemove,
+          absentEmailToAdd,
+          absentEmailToRemove,
+          waitingEmailToAdd,
+          waitingEmailToRemove);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Select value) select,
+    required TResult Function(UpdateDateTime value) updateDateTime,
+    required TResult Function(UpdateUserPresence value) updateUserPresence,
+  }) {
+    return updateUserPresence(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Select value)? select,
+    TResult? Function(UpdateDateTime value)? updateDateTime,
+    TResult? Function(UpdateUserPresence value)? updateUserPresence,
+  }) {
+    return updateUserPresence?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Select value)? select,
+    TResult Function(UpdateDateTime value)? updateDateTime,
+    TResult Function(UpdateUserPresence value)? updateUserPresence,
+    required TResult orElse(),
+  }) {
+    if (updateUserPresence != null) {
+      return updateUserPresence(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateUserPresence extends HangoutEvent {
+  const factory UpdateUserPresence(
+      {required final String? presentEmailToAdd,
+      required final String? presentEmailToRemove,
+      required final String? absentEmailToAdd,
+      required final String? absentEmailToRemove,
+      required final String? waitingEmailToAdd,
+      required final String? waitingEmailToRemove}) = _$UpdateUserPresenceImpl;
+  const UpdateUserPresence._() : super._();
+
+  String? get presentEmailToAdd;
+  String? get presentEmailToRemove;
+  String? get absentEmailToAdd;
+  String? get absentEmailToRemove;
+  String? get waitingEmailToAdd;
+  String? get waitingEmailToRemove;
+  @JsonKey(ignore: true)
+  _$$UpdateUserPresenceImplCopyWith<_$UpdateUserPresenceImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$HangoutState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
+    required TResult Function() dayTimeUpdate,
+    required TResult Function() userPresenceUpdated,
     required TResult Function(int missingDays, int missingHours,
             int missingMinutes, DateTime date)
         dateTimeUpdate,
@@ -169,6 +617,8 @@ mixin _$HangoutState {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
+    TResult? Function()? dayTimeUpdate,
+    TResult? Function()? userPresenceUpdated,
     TResult? Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -180,6 +630,8 @@ mixin _$HangoutState {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
+    TResult Function()? dayTimeUpdate,
+    TResult Function()? userPresenceUpdated,
     TResult Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -192,6 +644,8 @@ mixin _$HangoutState {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(DayTimeUpdate value) dayTimeUpdate,
+    required TResult Function(UserPresenceUpdated value) userPresenceUpdated,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
     required TResult Function(Error value) error,
   }) =>
@@ -201,6 +655,8 @@ mixin _$HangoutState {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult? Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult? Function(Error value)? error,
   }) =>
@@ -210,6 +666,8 @@ mixin _$HangoutState {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -261,6 +719,8 @@ class _$InitImpl extends Init {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
+    required TResult Function() dayTimeUpdate,
+    required TResult Function() userPresenceUpdated,
     required TResult Function(int missingDays, int missingHours,
             int missingMinutes, DateTime date)
         dateTimeUpdate,
@@ -275,6 +735,8 @@ class _$InitImpl extends Init {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
+    TResult? Function()? dayTimeUpdate,
+    TResult? Function()? userPresenceUpdated,
     TResult? Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -289,6 +751,8 @@ class _$InitImpl extends Init {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
+    TResult Function()? dayTimeUpdate,
+    TResult Function()? userPresenceUpdated,
     TResult Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -307,6 +771,8 @@ class _$InitImpl extends Init {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(DayTimeUpdate value) dayTimeUpdate,
+    required TResult Function(UserPresenceUpdated value) userPresenceUpdated,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
     required TResult Function(Error value) error,
   }) {
@@ -319,6 +785,8 @@ class _$InitImpl extends Init {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult? Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult? Function(Error value)? error,
   }) {
@@ -331,6 +799,8 @@ class _$InitImpl extends Init {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -374,6 +844,8 @@ class _$LoadingImpl extends Loading {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
+    required TResult Function() dayTimeUpdate,
+    required TResult Function() userPresenceUpdated,
     required TResult Function(int missingDays, int missingHours,
             int missingMinutes, DateTime date)
         dateTimeUpdate,
@@ -388,6 +860,8 @@ class _$LoadingImpl extends Loading {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
+    TResult? Function()? dayTimeUpdate,
+    TResult? Function()? userPresenceUpdated,
     TResult? Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -402,6 +876,8 @@ class _$LoadingImpl extends Loading {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
+    TResult Function()? dayTimeUpdate,
+    TResult Function()? userPresenceUpdated,
     TResult Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -420,6 +896,8 @@ class _$LoadingImpl extends Loading {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(DayTimeUpdate value) dayTimeUpdate,
+    required TResult Function(UserPresenceUpdated value) userPresenceUpdated,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
     required TResult Function(Error value) error,
   }) {
@@ -432,6 +910,8 @@ class _$LoadingImpl extends Loading {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult? Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult? Function(Error value)? error,
   }) {
@@ -444,6 +924,8 @@ class _$LoadingImpl extends Loading {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -511,6 +993,8 @@ class _$LoadedImpl extends Loaded {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
+    required TResult Function() dayTimeUpdate,
+    required TResult Function() userPresenceUpdated,
     required TResult Function(int missingDays, int missingHours,
             int missingMinutes, DateTime date)
         dateTimeUpdate,
@@ -525,6 +1009,8 @@ class _$LoadedImpl extends Loaded {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
+    TResult? Function()? dayTimeUpdate,
+    TResult? Function()? userPresenceUpdated,
     TResult? Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -539,6 +1025,8 @@ class _$LoadedImpl extends Loaded {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
+    TResult Function()? dayTimeUpdate,
+    TResult Function()? userPresenceUpdated,
     TResult Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -557,6 +1045,8 @@ class _$LoadedImpl extends Loaded {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(DayTimeUpdate value) dayTimeUpdate,
+    required TResult Function(UserPresenceUpdated value) userPresenceUpdated,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
     required TResult Function(Error value) error,
   }) {
@@ -569,6 +1059,8 @@ class _$LoadedImpl extends Loaded {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult? Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult? Function(Error value)? error,
   }) {
@@ -581,6 +1073,8 @@ class _$LoadedImpl extends Loaded {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -600,6 +1094,256 @@ abstract class Loaded extends HangoutState {
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DayTimeUpdateImplCopyWith<$Res> {
+  factory _$$DayTimeUpdateImplCopyWith(
+          _$DayTimeUpdateImpl value, $Res Function(_$DayTimeUpdateImpl) then) =
+      __$$DayTimeUpdateImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$DayTimeUpdateImplCopyWithImpl<$Res>
+    extends _$HangoutStateCopyWithImpl<$Res, _$DayTimeUpdateImpl>
+    implements _$$DayTimeUpdateImplCopyWith<$Res> {
+  __$$DayTimeUpdateImplCopyWithImpl(
+      _$DayTimeUpdateImpl _value, $Res Function(_$DayTimeUpdateImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$DayTimeUpdateImpl extends DayTimeUpdate {
+  const _$DayTimeUpdateImpl() : super._();
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function(Hangout hangout) loaded,
+    required TResult Function() dayTimeUpdate,
+    required TResult Function() userPresenceUpdated,
+    required TResult Function(int missingDays, int missingHours,
+            int missingMinutes, DateTime date)
+        dateTimeUpdate,
+    required TResult Function(CloudFailure failure) error,
+  }) {
+    return dayTimeUpdate();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? loading,
+    TResult? Function(Hangout hangout)? loaded,
+    TResult? Function()? dayTimeUpdate,
+    TResult? Function()? userPresenceUpdated,
+    TResult? Function(int missingDays, int missingHours, int missingMinutes,
+            DateTime date)?
+        dateTimeUpdate,
+    TResult? Function(CloudFailure failure)? error,
+  }) {
+    return dayTimeUpdate?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Hangout hangout)? loaded,
+    TResult Function()? dayTimeUpdate,
+    TResult Function()? userPresenceUpdated,
+    TResult Function(int missingDays, int missingHours, int missingMinutes,
+            DateTime date)?
+        dateTimeUpdate,
+    TResult Function(CloudFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (dayTimeUpdate != null) {
+      return dayTimeUpdate();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(DayTimeUpdate value) dayTimeUpdate,
+    required TResult Function(UserPresenceUpdated value) userPresenceUpdated,
+    required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(Error value) error,
+  }) {
+    return dayTimeUpdate(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Init value)? init,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult? Function(UserPresenceUpdated value)? userPresenceUpdated,
+    TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(Error value)? error,
+  }) {
+    return dayTimeUpdate?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult Function(UserPresenceUpdated value)? userPresenceUpdated,
+    TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (dayTimeUpdate != null) {
+      return dayTimeUpdate(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class DayTimeUpdate extends HangoutState {
+  const factory DayTimeUpdate() = _$DayTimeUpdateImpl;
+  const DayTimeUpdate._() : super._();
+}
+
+/// @nodoc
+abstract class _$$UserPresenceUpdatedImplCopyWith<$Res> {
+  factory _$$UserPresenceUpdatedImplCopyWith(_$UserPresenceUpdatedImpl value,
+          $Res Function(_$UserPresenceUpdatedImpl) then) =
+      __$$UserPresenceUpdatedImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$UserPresenceUpdatedImplCopyWithImpl<$Res>
+    extends _$HangoutStateCopyWithImpl<$Res, _$UserPresenceUpdatedImpl>
+    implements _$$UserPresenceUpdatedImplCopyWith<$Res> {
+  __$$UserPresenceUpdatedImplCopyWithImpl(_$UserPresenceUpdatedImpl _value,
+      $Res Function(_$UserPresenceUpdatedImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$UserPresenceUpdatedImpl extends UserPresenceUpdated {
+  const _$UserPresenceUpdatedImpl() : super._();
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function(Hangout hangout) loaded,
+    required TResult Function() dayTimeUpdate,
+    required TResult Function() userPresenceUpdated,
+    required TResult Function(int missingDays, int missingHours,
+            int missingMinutes, DateTime date)
+        dateTimeUpdate,
+    required TResult Function(CloudFailure failure) error,
+  }) {
+    return userPresenceUpdated();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? loading,
+    TResult? Function(Hangout hangout)? loaded,
+    TResult? Function()? dayTimeUpdate,
+    TResult? Function()? userPresenceUpdated,
+    TResult? Function(int missingDays, int missingHours, int missingMinutes,
+            DateTime date)?
+        dateTimeUpdate,
+    TResult? Function(CloudFailure failure)? error,
+  }) {
+    return userPresenceUpdated?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Hangout hangout)? loaded,
+    TResult Function()? dayTimeUpdate,
+    TResult Function()? userPresenceUpdated,
+    TResult Function(int missingDays, int missingHours, int missingMinutes,
+            DateTime date)?
+        dateTimeUpdate,
+    TResult Function(CloudFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (userPresenceUpdated != null) {
+      return userPresenceUpdated();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(DayTimeUpdate value) dayTimeUpdate,
+    required TResult Function(UserPresenceUpdated value) userPresenceUpdated,
+    required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(Error value) error,
+  }) {
+    return userPresenceUpdated(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Init value)? init,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult? Function(UserPresenceUpdated value)? userPresenceUpdated,
+    TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(Error value)? error,
+  }) {
+    return userPresenceUpdated?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult Function(UserPresenceUpdated value)? userPresenceUpdated,
+    TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (userPresenceUpdated != null) {
+      return userPresenceUpdated(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UserPresenceUpdated extends HangoutState {
+  const factory UserPresenceUpdated() = _$UserPresenceUpdatedImpl;
+  const UserPresenceUpdated._() : super._();
 }
 
 /// @nodoc
@@ -681,6 +1425,8 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
+    required TResult Function() dayTimeUpdate,
+    required TResult Function() userPresenceUpdated,
     required TResult Function(int missingDays, int missingHours,
             int missingMinutes, DateTime date)
         dateTimeUpdate,
@@ -695,6 +1441,8 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
+    TResult? Function()? dayTimeUpdate,
+    TResult? Function()? userPresenceUpdated,
     TResult? Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -710,6 +1458,8 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
+    TResult Function()? dayTimeUpdate,
+    TResult Function()? userPresenceUpdated,
     TResult Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -728,6 +1478,8 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(DayTimeUpdate value) dayTimeUpdate,
+    required TResult Function(UserPresenceUpdated value) userPresenceUpdated,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
     required TResult Function(Error value) error,
   }) {
@@ -740,6 +1492,8 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult? Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult? Function(Error value)? error,
   }) {
@@ -752,6 +1506,8 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult Function(Error value)? error,
     required TResult orElse(),
@@ -841,6 +1597,8 @@ class _$ErrorImpl extends Error {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
+    required TResult Function() dayTimeUpdate,
+    required TResult Function() userPresenceUpdated,
     required TResult Function(int missingDays, int missingHours,
             int missingMinutes, DateTime date)
         dateTimeUpdate,
@@ -855,6 +1613,8 @@ class _$ErrorImpl extends Error {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
+    TResult? Function()? dayTimeUpdate,
+    TResult? Function()? userPresenceUpdated,
     TResult? Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -869,6 +1629,8 @@ class _$ErrorImpl extends Error {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
+    TResult Function()? dayTimeUpdate,
+    TResult Function()? userPresenceUpdated,
     TResult Function(int missingDays, int missingHours, int missingMinutes,
             DateTime date)?
         dateTimeUpdate,
@@ -887,6 +1649,8 @@ class _$ErrorImpl extends Error {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
+    required TResult Function(DayTimeUpdate value) dayTimeUpdate,
+    required TResult Function(UserPresenceUpdated value) userPresenceUpdated,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
     required TResult Function(Error value) error,
   }) {
@@ -899,6 +1663,8 @@ class _$ErrorImpl extends Error {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
+    TResult? Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult? Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult? Function(Error value)? error,
   }) {
@@ -911,6 +1677,8 @@ class _$ErrorImpl extends Error {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
+    TResult Function(DayTimeUpdate value)? dayTimeUpdate,
+    TResult Function(UserPresenceUpdated value)? userPresenceUpdated,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
     TResult Function(Error value)? error,
     required TResult orElse(),
