@@ -2,7 +2,7 @@ import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
 import 'package:beer_and_games/core/enums/date_time_enums.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/usecases/hangout_usecases.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -14,13 +14,13 @@ part 'edit_hangout_page_state.dart';
 
 class EditHangoutPageBloc
     extends Bloc<EditHangoutPageEvent, EditHangoutPageState> {
-  final HangoutDateTimeUpdate hangoutDateTimeUpdate;
+  final HangoutBloc hangoutBloc;
 
   late Day day;
   late TimeOfDay time;
 
   EditHangoutPageBloc({
-    required this.hangoutDateTimeUpdate,
+    required this.hangoutBloc,
   }) : super(const EditHangoutPageState.init()) {
     on<Setup>((event, emit) {
       day = event.hangout.dayOfWeek;
@@ -37,19 +37,27 @@ class EditHangoutPageBloc
     });
     on<Save>((event, emit) async {
       emit(const EditHangoutPageState.loading());
-      final foUpdate = await hangoutDateTimeUpdate.call(
-        HangoutDateTimeUpdateParams(
+      hangoutBloc.add(
+        HangoutEvent.updateDateTime(
           day: day,
           time: time,
         ),
       );
+      await for (final state in hangoutBloc.stream) {
+        final completed = state.maybeMap<bool>(
+          dateTimeUpdate: (value) {
+            emit(const EditHangoutPageState.saved());
+            return true;
+          },
+          error: (value) {
+            emit(EditHangoutPageState.error(value.failure));
+            return true;
+          },
+          orElse: () => false,
+        );
 
-      emit(
-        foUpdate.fold(
-          (l) => EditHangoutPageState.error(l),
-          (r) => const EditHangoutPageState.saved(),
-        ),
-      );
+        if (completed) break;
+      }
     });
   }
 }

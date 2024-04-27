@@ -2,6 +2,7 @@ import 'dart:async';
 
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
+import 'package:beer_and_games/core/enums/date_time_enums.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/hangout_usecases.dart';
 import 'package:equatable/equatable.dart';
@@ -15,6 +16,9 @@ part 'hangout_state.dart';
 
 class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
   final HangoutStream hangoutStream;
+  final HangoutDateTimeUpdate hangoutDateTimeUpdate;
+  final HangoutUpdateVote hangoutUpdateVote;
+  final HangoutGetUsersPresence hangoutGetUsersPresence;
 
   Hangout? _hangout;
   Timer? _countdownDeamonTimer;
@@ -23,6 +27,9 @@ class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
 
   HangoutBloc({
     required this.hangoutStream,
+    required this.hangoutDateTimeUpdate,
+    required this.hangoutUpdateVote,
+    required this.hangoutGetUsersPresence,
   }) : super(const HangoutState.init()) {
     on<Select>((event, emit) async {
       emit(const HangoutState.loading());
@@ -65,6 +72,74 @@ class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
           ),
         );
       }
+    });
+    on<UpdateDateTime>((event, emit) async {
+      emit(const HangoutState.loading());
+      final result = await hangoutDateTimeUpdate.call(
+        HangoutDateTimeUpdateParams(
+          day: event.day,
+          time: event.time,
+        ),
+      );
+      emit(
+        result.fold(
+          (l) => HangoutState.error(l),
+          (_) => const HangoutState.dayTimeUpdate(),
+        ),
+      );
+    });
+    on<UpdateUserPresence>((event, emit) async {
+      emit(const HangoutState.loading());
+      final result = await hangoutUpdateVote.call(
+        HangoutHangoutUpdateVoteParams(
+          presentEmailToRemove: event.presentEmailToRemove,
+          presentEmailToAdd: event.presentEmailToAdd,
+          absentEmailToRemove: event.absentEmailToRemove,
+          absentEmailToAdd: event.absentEmailToAdd,
+          waitingEmailToRemove: event.waitingEmailToRemove,
+          waitingEmailToAdd: event.waitingEmailToAdd,
+        ),
+      );
+      emit(
+        result.fold(
+          (l) => HangoutState.error(l),
+          (_) => const HangoutState.userPresenceUpdated(),
+        ),
+      );
+    });
+    on<GetUserPresence>((event, emit) async {
+      emit(const HangoutState.loading());
+      final result = await hangoutGetUsersPresence.call(
+        HangoutGetUsersPresenceParams(users: _hangout!.allUsers),
+      );
+      emit(
+        result.fold((l) => HangoutState.error(l), (users) {
+          final presentUsers = _hangout!.presentUsers.toList();
+          final absentUsers = _hangout!.absentUsers.toList();
+          final waitingUsers = _hangout!.waitingUsers.toList();
+
+          for (final user in users) {
+            if (presentUsers.contains(user)) {
+              presentUsers.remove(user);
+              presentUsers.add(user);
+            } else if (absentUsers.contains(user)) {
+              absentUsers.remove(user);
+              absentUsers.add(user);
+            } else if (waitingUsers.contains(user)) {
+              waitingUsers.remove(user);
+              waitingUsers.add(user);
+            }
+          }
+
+          _hangout = _hangout!.copyWith(
+            presentUsers: presentUsers,
+            absentUsers: absentUsers,
+            waitingUsers: waitingUsers,
+          );
+
+          return HangoutState.loaded(_hangout!);
+        }),
+      );
     });
   }
 
@@ -131,6 +206,8 @@ class _LocalTimeTracker {
     missingDays = seconds ~/ 86400;
     missingHours = (seconds % 86400) ~/ 3600;
     missingMinutes = (seconds % 3600) ~/ 60;
+    if (missingDays > 0) missingDays--;
+
     timeLeftDateTime = DateTime(
       now.year,
       now.month,
