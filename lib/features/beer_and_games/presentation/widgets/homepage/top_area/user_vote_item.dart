@@ -103,14 +103,25 @@ class _UserVoteItemState extends State<_UserVoteItem>
       mainAxisAlignment: alignment,
       crossAxisAlignment: CrossAxisAlignment.start,
       children: List.generate(
-        items,
+        maxAvatars,
         (index) {
           final isOverflow =
               index == maxAvatars - 1 && widget.users.length > maxAvatars;
 
-          return isOverflow
-              ? _maxAvatar(context, widget.users.length - maxAvatars + 1)
-              : _userAvatar(context, widget.users[index], index == 0);
+          final showItem = index < items;
+
+          final item = !showItem
+              ? const SizedBox.shrink()
+              : isOverflow
+                  ? _maxAvatar(context, widget.users.length - maxAvatars + 1)
+                  : _userAvatar(context, widget.users[index], index == 0);
+
+          return AnimatedSwitcher(
+            duration: const Duration(milliseconds: 500),
+            switchInCurve: Curves.easeInOutCubic,
+            switchOutCurve: Curves.easeInOutCubic,
+            child: item,
+          );
         },
       ),
     );
@@ -122,20 +133,31 @@ class _UserVoteItemState extends State<_UserVoteItem>
     return Wrap(
       spacing: 0,
       runSpacing: 4,
-      children: List.generate(items, (index) {
+      children: List.generate(maxAvatars, (index) {
         final isOverflow =
             index == maxAvatars - 1 && widget.users.length > maxAvatars;
 
-        return isOverflow
-            ? _maxAvatar(
-                context,
-                widget.users.length - maxAvatars + 1,
-              )
-            : _userAvatar(
-                context,
-                widget.users[index],
-                index == 0 || index == maxAvatars ~/ 2,
-              );
+        final showItem = index < items;
+
+        final child = !showItem
+            ? const SizedBox.shrink()
+            : isOverflow
+                ? _maxAvatar(
+                    context,
+                    widget.users.length - maxAvatars + 1,
+                  )
+                : _userAvatar(
+                    context,
+                    widget.users[index],
+                    index == 0 || index == maxAvatars ~/ 2,
+                  );
+
+        return AnimatedSwitcher(
+          duration: const Duration(milliseconds: 500),
+          switchInCurve: Curves.easeInOutCubic,
+          switchOutCurve: Curves.easeInOutCubic,
+          child: child,
+        );
       }),
     );
   }

@@ -1,7 +1,6 @@
 import 'package:beer_and_games/core/enums/presence_state.dart';
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/widgets/homepage_vote_area_bloc.dart';
