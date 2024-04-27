@@ -47,7 +47,8 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) => di.sl<HomepageBloc>(),
+            create: (context) =>
+                di.sl<HomepageBloc>()..add(const HomepageEvent.setup()),
           ),
           BlocProvider(
             create: (context) => di.sl<UserBloc>(),

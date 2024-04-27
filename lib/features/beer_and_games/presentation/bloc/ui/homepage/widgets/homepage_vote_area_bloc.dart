@@ -70,7 +70,7 @@ class HomepageVoteAreaBloc
       );
 
       await for (final state in hangoutBloc.stream) {
-        state.maybeMap(
+        final completed = state.maybeMap<bool>(
           userPresenceUpdated: (value) {
             emit(
               HomepageVoteAreaState.presenceSet(
@@ -78,14 +78,16 @@ class HomepageVoteAreaBloc
                 newPresence: _presenceState,
               ),
             );
-            return;
+            return true;
           },
           error: (value) {
             emit(HomepageVoteAreaState.error(message: value.failure.message));
-            return;
+            return true;
           },
-          orElse: () {},
+          orElse: () => false,
         );
+
+        if (completed) break;
       }
     });
   }

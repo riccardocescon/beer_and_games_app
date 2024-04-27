@@ -28,6 +28,7 @@ mixin _$HangoutEvent {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)
         updateUserPresence,
+    required TResult Function() getUserPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -42,6 +43,7 @@ mixin _$HangoutEvent {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)?
         updateUserPresence,
+    TResult? Function()? getUserPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -56,6 +58,7 @@ mixin _$HangoutEvent {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)?
         updateUserPresence,
+    TResult Function()? getUserPresence,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -64,6 +67,7 @@ mixin _$HangoutEvent {
     required TResult Function(Select value) select,
     required TResult Function(UpdateDateTime value) updateDateTime,
     required TResult Function(UpdateUserPresence value) updateUserPresence,
+    required TResult Function(GetUserPresence value) getUserPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -71,6 +75,7 @@ mixin _$HangoutEvent {
     TResult? Function(Select value)? select,
     TResult? Function(UpdateDateTime value)? updateDateTime,
     TResult? Function(UpdateUserPresence value)? updateUserPresence,
+    TResult? Function(GetUserPresence value)? getUserPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -78,6 +83,7 @@ mixin _$HangoutEvent {
     TResult Function(Select value)? select,
     TResult Function(UpdateDateTime value)? updateDateTime,
     TResult Function(UpdateUserPresence value)? updateUserPresence,
+    TResult Function(GetUserPresence value)? getUserPresence,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -135,6 +141,7 @@ class _$SelectImpl extends Select {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)
         updateUserPresence,
+    required TResult Function() getUserPresence,
   }) {
     return select();
   }
@@ -152,6 +159,7 @@ class _$SelectImpl extends Select {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)?
         updateUserPresence,
+    TResult? Function()? getUserPresence,
   }) {
     return select?.call();
   }
@@ -169,6 +177,7 @@ class _$SelectImpl extends Select {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)?
         updateUserPresence,
+    TResult Function()? getUserPresence,
     required TResult orElse(),
   }) {
     if (select != null) {
@@ -183,6 +192,7 @@ class _$SelectImpl extends Select {
     required TResult Function(Select value) select,
     required TResult Function(UpdateDateTime value) updateDateTime,
     required TResult Function(UpdateUserPresence value) updateUserPresence,
+    required TResult Function(GetUserPresence value) getUserPresence,
   }) {
     return select(this);
   }
@@ -193,6 +203,7 @@ class _$SelectImpl extends Select {
     TResult? Function(Select value)? select,
     TResult? Function(UpdateDateTime value)? updateDateTime,
     TResult? Function(UpdateUserPresence value)? updateUserPresence,
+    TResult? Function(GetUserPresence value)? getUserPresence,
   }) {
     return select?.call(this);
   }
@@ -203,6 +214,7 @@ class _$SelectImpl extends Select {
     TResult Function(Select value)? select,
     TResult Function(UpdateDateTime value)? updateDateTime,
     TResult Function(UpdateUserPresence value)? updateUserPresence,
+    TResult Function(GetUserPresence value)? getUserPresence,
     required TResult orElse(),
   }) {
     if (select != null) {
@@ -237,11 +249,11 @@ class __$$UpdateDateTimeImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? day = freezed,
+    Object? day = null,
     Object? time = null,
   }) {
     return _then(_$UpdateDateTimeImpl(
-      day: freezed == day
+      day: null == day
           ? _value.day
           : day // ignore: cast_nullable_to_non_nullable
               as Day,
@@ -284,6 +296,7 @@ class _$UpdateDateTimeImpl extends UpdateDateTime {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)
         updateUserPresence,
+    required TResult Function() getUserPresence,
   }) {
     return updateDateTime(day, time);
   }
@@ -301,6 +314,7 @@ class _$UpdateDateTimeImpl extends UpdateDateTime {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)?
         updateUserPresence,
+    TResult? Function()? getUserPresence,
   }) {
     return updateDateTime?.call(day, time);
   }
@@ -318,6 +332,7 @@ class _$UpdateDateTimeImpl extends UpdateDateTime {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)?
         updateUserPresence,
+    TResult Function()? getUserPresence,
     required TResult orElse(),
   }) {
     if (updateDateTime != null) {
@@ -332,6 +347,7 @@ class _$UpdateDateTimeImpl extends UpdateDateTime {
     required TResult Function(Select value) select,
     required TResult Function(UpdateDateTime value) updateDateTime,
     required TResult Function(UpdateUserPresence value) updateUserPresence,
+    required TResult Function(GetUserPresence value) getUserPresence,
   }) {
     return updateDateTime(this);
   }
@@ -342,6 +358,7 @@ class _$UpdateDateTimeImpl extends UpdateDateTime {
     TResult? Function(Select value)? select,
     TResult? Function(UpdateDateTime value)? updateDateTime,
     TResult? Function(UpdateUserPresence value)? updateUserPresence,
+    TResult? Function(GetUserPresence value)? getUserPresence,
   }) {
     return updateDateTime?.call(this);
   }
@@ -352,6 +369,7 @@ class _$UpdateDateTimeImpl extends UpdateDateTime {
     TResult Function(Select value)? select,
     TResult Function(UpdateDateTime value)? updateDateTime,
     TResult Function(UpdateUserPresence value)? updateUserPresence,
+    TResult Function(GetUserPresence value)? getUserPresence,
     required TResult orElse(),
   }) {
     if (updateDateTime != null) {
@@ -481,6 +499,7 @@ class _$UpdateUserPresenceImpl extends UpdateUserPresence {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)
         updateUserPresence,
+    required TResult Function() getUserPresence,
   }) {
     return updateUserPresence(
         presentEmailToAdd,
@@ -504,6 +523,7 @@ class _$UpdateUserPresenceImpl extends UpdateUserPresence {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)?
         updateUserPresence,
+    TResult? Function()? getUserPresence,
   }) {
     return updateUserPresence?.call(
         presentEmailToAdd,
@@ -527,6 +547,7 @@ class _$UpdateUserPresenceImpl extends UpdateUserPresence {
             String? waitingEmailToAdd,
             String? waitingEmailToRemove)?
         updateUserPresence,
+    TResult Function()? getUserPresence,
     required TResult orElse(),
   }) {
     if (updateUserPresence != null) {
@@ -547,6 +568,7 @@ class _$UpdateUserPresenceImpl extends UpdateUserPresence {
     required TResult Function(Select value) select,
     required TResult Function(UpdateDateTime value) updateDateTime,
     required TResult Function(UpdateUserPresence value) updateUserPresence,
+    required TResult Function(GetUserPresence value) getUserPresence,
   }) {
     return updateUserPresence(this);
   }
@@ -557,6 +579,7 @@ class _$UpdateUserPresenceImpl extends UpdateUserPresence {
     TResult? Function(Select value)? select,
     TResult? Function(UpdateDateTime value)? updateDateTime,
     TResult? Function(UpdateUserPresence value)? updateUserPresence,
+    TResult? Function(GetUserPresence value)? getUserPresence,
   }) {
     return updateUserPresence?.call(this);
   }
@@ -567,6 +590,7 @@ class _$UpdateUserPresenceImpl extends UpdateUserPresence {
     TResult Function(Select value)? select,
     TResult Function(UpdateDateTime value)? updateDateTime,
     TResult Function(UpdateUserPresence value)? updateUserPresence,
+    TResult Function(GetUserPresence value)? getUserPresence,
     required TResult orElse(),
   }) {
     if (updateUserPresence != null) {
@@ -595,6 +619,128 @@ abstract class UpdateUserPresence extends HangoutEvent {
   @JsonKey(ignore: true)
   _$$UpdateUserPresenceImplCopyWith<_$UpdateUserPresenceImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GetUserPresenceImplCopyWith<$Res> {
+  factory _$$GetUserPresenceImplCopyWith(_$GetUserPresenceImpl value,
+          $Res Function(_$GetUserPresenceImpl) then) =
+      __$$GetUserPresenceImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$GetUserPresenceImplCopyWithImpl<$Res>
+    extends _$HangoutEventCopyWithImpl<$Res, _$GetUserPresenceImpl>
+    implements _$$GetUserPresenceImplCopyWith<$Res> {
+  __$$GetUserPresenceImplCopyWithImpl(
+      _$GetUserPresenceImpl _value, $Res Function(_$GetUserPresenceImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$GetUserPresenceImpl extends GetUserPresence {
+  const _$GetUserPresenceImpl() : super._();
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() select,
+    required TResult Function(Day day, TimeOfDay time) updateDateTime,
+    required TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)
+        updateUserPresence,
+    required TResult Function() getUserPresence,
+  }) {
+    return getUserPresence();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? select,
+    TResult? Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult? Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
+    TResult? Function()? getUserPresence,
+  }) {
+    return getUserPresence?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? select,
+    TResult Function(Day day, TimeOfDay time)? updateDateTime,
+    TResult Function(
+            String? presentEmailToAdd,
+            String? presentEmailToRemove,
+            String? absentEmailToAdd,
+            String? absentEmailToRemove,
+            String? waitingEmailToAdd,
+            String? waitingEmailToRemove)?
+        updateUserPresence,
+    TResult Function()? getUserPresence,
+    required TResult orElse(),
+  }) {
+    if (getUserPresence != null) {
+      return getUserPresence();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Select value) select,
+    required TResult Function(UpdateDateTime value) updateDateTime,
+    required TResult Function(UpdateUserPresence value) updateUserPresence,
+    required TResult Function(GetUserPresence value) getUserPresence,
+  }) {
+    return getUserPresence(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Select value)? select,
+    TResult? Function(UpdateDateTime value)? updateDateTime,
+    TResult? Function(UpdateUserPresence value)? updateUserPresence,
+    TResult? Function(GetUserPresence value)? getUserPresence,
+  }) {
+    return getUserPresence?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Select value)? select,
+    TResult Function(UpdateDateTime value)? updateDateTime,
+    TResult Function(UpdateUserPresence value)? updateUserPresence,
+    TResult Function(GetUserPresence value)? getUserPresence,
+    required TResult orElse(),
+  }) {
+    if (getUserPresence != null) {
+      return getUserPresence(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GetUserPresence extends HangoutEvent {
+  const factory GetUserPresence() = _$GetUserPresenceImpl;
+  const GetUserPresence._() : super._();
 }
 
 /// @nodoc

@@ -9,6 +9,8 @@ class Hangout with EquatableMixin {
   final List<User> presentUsers, waitingUsers, absentUsers;
   final bool skipNextWeek;
 
+  List<User> get allUsers => [...presentUsers, ...waitingUsers, ...absentUsers];
+
   TimeOfDay get timeOfDay {
     final timeSplit = time.split(':');
     return TimeOfDay(

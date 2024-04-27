@@ -1,8 +1,7 @@
-import 'dart:developer';
-
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/loggers/loggers.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/models/hangout_model.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/models/user_presence.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
@@ -20,6 +19,7 @@ abstract class _HangoutAPI {
     required String? waitingEmailToRemove,
     required String? waitingEmailToAdd,
   });
+  Future<Either<CloudFailure, List<UserPresenceModel>>> getUsersPresence();
 }
 
 class HangoutAPI implements _HangoutAPI {
@@ -37,8 +37,6 @@ class HangoutAPI implements _HangoutAPI {
         );
       },
     );
-
-    log('Closed');
   }
 
   @override
@@ -97,6 +95,27 @@ class HangoutAPI implements _HangoutAPI {
       await firestore.collection('hangout').doc('cespuglio').update(update);
 
       return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, List<UserPresenceModel>>>
+      getUsersPresence() async {
+    try {
+      final rawPresence = await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('precence')
+          .doc('users')
+          .get();
+
+      final emails = rawPresence.data()!['emails'] as List<dynamic>;
+      logCloud('HangoutGetUsersPresence', emails.toString());
+      return Right(
+        emails.map((e) => UserPresenceModel.fromData(e as String)).toList(),
+      );
     } catch (e) {
       return Left(CloudFailure.unknown(e.toString()));
     }

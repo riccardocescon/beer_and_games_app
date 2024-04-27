@@ -2,6 +2,7 @@ import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/enums/date_time_enums.dart';
 import 'package:beer_and_games/features/beer_and_games/data/datasources/hangout_api.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
+import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/hangout_repository.dart';
 import 'package:dartz/dartz.dart';
 import 'package:flutter/material.dart';
@@ -48,6 +49,36 @@ class HangoutRepositoryImpl extends HangoutRepository {
       absentEmailToAdd: absentEmailToAdd,
       waitingEmailToRemove: waitingEmailToRemove,
       waitingEmailToAdd: waitingEmailToAdd,
+    );
+  }
+
+  @override
+  Future<Either<CloudFailure, List<User>>> getUsersPresence({
+    required List<User> users,
+  }) async {
+    final result = await hangoutAPI.getUsersPresence();
+
+    return result.fold(
+      (l) => Left(l),
+      (r) {
+        final foundUsers = r
+            .where(
+              (precence) => users.any((user) => user.email == precence.email),
+            )
+            .toList();
+        final updatedDataUsers = <User>[];
+        for (final presence in foundUsers) {
+          final user = users.firstWhere((user) => user.email == presence.email);
+          updatedDataUsers.add(
+            user.copyWith(
+              precenceCount: presence.presenceCount,
+              forcePercenceCountUpdate: true,
+            ),
+          );
+        }
+
+        return Right(updatedDataUsers);
+      },
     );
   }
 }

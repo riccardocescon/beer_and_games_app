@@ -18,6 +18,7 @@ class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
   final HangoutStream hangoutStream;
   final HangoutDateTimeUpdate hangoutDateTimeUpdate;
   final HangoutUpdateVote hangoutUpdateVote;
+  final HangoutGetUsersPresence hangoutGetUsersPresence;
 
   Hangout? _hangout;
   Timer? _countdownDeamonTimer;
@@ -28,6 +29,7 @@ class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
     required this.hangoutStream,
     required this.hangoutDateTimeUpdate,
     required this.hangoutUpdateVote,
+    required this.hangoutGetUsersPresence,
   }) : super(const HangoutState.init()) {
     on<Select>((event, emit) async {
       emit(const HangoutState.loading());
@@ -103,6 +105,40 @@ class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
           (l) => HangoutState.error(l),
           (_) => const HangoutState.userPresenceUpdated(),
         ),
+      );
+    });
+    on<GetUserPresence>((event, emit) async {
+      emit(const HangoutState.loading());
+      final result = await hangoutGetUsersPresence.call(
+        HangoutGetUsersPresenceParams(users: _hangout!.allUsers),
+      );
+      emit(
+        result.fold((l) => HangoutState.error(l), (users) {
+          final presentUsers = _hangout!.presentUsers.toList();
+          final absentUsers = _hangout!.absentUsers.toList();
+          final waitingUsers = _hangout!.waitingUsers.toList();
+
+          for (final user in users) {
+            if (presentUsers.contains(user)) {
+              presentUsers.remove(user);
+              presentUsers.add(user);
+            } else if (absentUsers.contains(user)) {
+              absentUsers.remove(user);
+              absentUsers.add(user);
+            } else if (waitingUsers.contains(user)) {
+              waitingUsers.remove(user);
+              waitingUsers.add(user);
+            }
+          }
+
+          _hangout = _hangout!.copyWith(
+            presentUsers: presentUsers,
+            absentUsers: absentUsers,
+            waitingUsers: waitingUsers,
+          );
+
+          return HangoutState.loaded(_hangout!);
+        }),
       );
     });
   }

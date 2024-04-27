@@ -2,6 +2,7 @@ import 'package:equatable/equatable.dart';
 
 class User with EquatableMixin {
   final String email;
+  int? precenceCount;
 
   String get letters {
     // returns 2 letters before the @ with the following rules:
@@ -18,7 +19,18 @@ class User with EquatableMixin {
     return '${emailName[0]}${emailName[1]}'.toUpperCase();
   }
 
-  User({required this.email});
+  User({required this.email, this.precenceCount});
+
+  User copyWith({
+    String? email,
+    int? precenceCount,
+    bool forcePercenceCountUpdate = false,
+  }) {
+    return User(
+      email: email ?? this.email,
+      precenceCount: precenceCount ?? this.precenceCount,
+    );
+  }
 
   @override
   List<Object?> get props => [email];

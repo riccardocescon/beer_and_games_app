@@ -17,6 +17,7 @@ sealed class HangoutEvent extends AppEvent with _$HangoutEvent, EquatableMixin {
     required String? waitingEmailToAdd,
     required String? waitingEmailToRemove,
   }) = UpdateUserPresence;
+  const factory HangoutEvent.getUserPresence() = GetUserPresence;
 
   @override
   List<Object?> get props => map(
@@ -30,5 +31,6 @@ sealed class HangoutEvent extends AppEvent with _$HangoutEvent, EquatableMixin {
           value.waitingEmailToAdd,
           value.waitingEmailToRemove,
         ],
+        getUserPresence: (value) => [],
       );
 }

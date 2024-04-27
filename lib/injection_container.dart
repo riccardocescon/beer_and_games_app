@@ -4,6 +4,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/repositories/hango
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/hangout_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/edit_hangout/edit_hangout_page_bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/hangout_stats_page/hangout_stats_page_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/widgets/homepage_vote_area_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/user_bloc.dart/user_bloc.dart';
@@ -18,6 +19,7 @@ void init() {
       hangoutStream: sl(),
       hangoutDateTimeUpdate: sl(),
       hangoutUpdateVote: sl(),
+      hangoutGetUsersPresence: sl(),
     ),
   );
   sl.registerLazySingleton(() => UserBloc());
@@ -28,11 +30,13 @@ void init() {
     ),
   );
   sl.registerFactory(() => HomepageVoteAreaBloc(hangoutBloc: sl()));
+  sl.registerFactory(() => HangoutStatsPageBloc(hangoutBloc: sl()));
 
   // Use cases
   sl.registerFactory(() => HangoutStream(repository: sl()));
   sl.registerFactory(() => HangoutDateTimeUpdate(repository: sl()));
   sl.registerFactory(() => HangoutUpdateVote(repository: sl()));
+  sl.registerFactory(() => HangoutGetUsersPresence(repository: sl()));
 
   // Repository
   sl.registerFactory<HangoutRepository>(

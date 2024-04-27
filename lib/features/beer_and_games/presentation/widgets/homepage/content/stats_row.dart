@@ -1,7 +1,9 @@
 part of 'homepage_content.dart';
 
 class _StatsRow extends StatelessWidget {
-  const _StatsRow();
+  const _StatsRow({required this.hangout});
+
+  final Hangout hangout;
 
   @override
   Widget build(BuildContext context) {
@@ -18,7 +20,15 @@ class _StatsRow extends StatelessWidget {
         Expanded(
           child: _button(
             context,
-            () {},
+            () {
+              context.push(
+                BlocProvider(
+                  create: (context) => sl<HangoutStatsPageBloc>()
+                    ..add(HangoutStatsPageEvent.setup(hangout: hangout)),
+                  child: const HangoutStatsPage(),
+                ),
+              );
+            },
             'Statistiche',
           ),
         ),

@@ -50,7 +50,7 @@ class _OfflineButtonState extends State<_OfflineButton>
           height: _buttonHeigth,
           child: FilledButton(
             onPressed: () {
-              context.read<HomepageBloc>().add(const HomepageEvent.setup());
+              context.warningSnackbar('Work in progress', 'Coming soon!');
             },
             style: ButtonStyle(
               backgroundColor:

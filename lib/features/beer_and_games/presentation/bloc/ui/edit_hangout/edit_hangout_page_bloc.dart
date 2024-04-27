@@ -44,17 +44,19 @@ class EditHangoutPageBloc
         ),
       );
       await for (final state in hangoutBloc.stream) {
-        state.maybeMap(
+        final completed = state.maybeMap<bool>(
           dateTimeUpdate: (value) {
             emit(const EditHangoutPageState.saved());
-            return;
+            return true;
           },
           error: (value) {
             emit(EditHangoutPageState.error(value.failure));
-            return;
+            return true;
           },
-          orElse: () {},
+          orElse: () => false,
         );
+
+        if (completed) break;
       }
     });
   }

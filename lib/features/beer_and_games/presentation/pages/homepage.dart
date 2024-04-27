@@ -7,12 +7,12 @@ class Homepage extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
+    return const SafeArea(
       child: Scaffold(
         body: Column(
           children: [
-            const TopArea(),
-            const HomepageContent(),
+            TopArea(),
+            HomepageContent(),
           ],
         ),
       ),
