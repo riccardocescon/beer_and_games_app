@@ -12,6 +12,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 part 'vote_area.dart';
 part 'vote_button.dart';
+part 'stats_row.dart';
 
 class HomepageContent extends StatelessWidget {
   const HomepageContent({super.key});
@@ -32,33 +33,43 @@ class HomepageContent extends StatelessWidget {
           padding: const EdgeInsets.all(24.0),
           child: Column(
             children: [
-              BlocBuilder<HomepageBloc, HomepageState>(
-                buildWhen: (previous, current) => current.maybeMap(
-                  loaded: (value) => true,
-                  orElse: () => false,
+              _voteArea(),
+              const Padding(
+                padding: EdgeInsets.symmetric(
+                  vertical: 16,
                 ),
-                builder: (context, state) {
-                  return state.maybeMap(
-                    loaded: (value) {
-                      return BlocProvider(
-                        create: (context) => sl<HomepageVoteAreaBloc>()
-                          ..add(
-                            HomepageVoteAreaEvent.setup(
-                              hangout: value.hangout,
-                              user: sl<UserBloc>().user,
-                            ),
-                          ),
-                        child: const _VoteArea(),
-                      );
-                    },
-                    orElse: () => const SizedBox.shrink(),
-                  );
-                },
+                child: _StatsRow(),
               ),
             ],
           ),
         ),
       ),
+    );
+  }
+
+  Widget _voteArea() {
+    return BlocBuilder<HomepageBloc, HomepageState>(
+      buildWhen: (previous, current) => current.maybeMap(
+        loaded: (value) => true,
+        orElse: () => false,
+      ),
+      builder: (context, state) {
+        return state.maybeMap(
+          loaded: (value) {
+            return BlocProvider(
+              create: (context) => sl<HomepageVoteAreaBloc>()
+                ..add(
+                  HomepageVoteAreaEvent.setup(
+                    hangout: value.hangout,
+                    user: sl<UserBloc>().user,
+                  ),
+                ),
+              child: const _VoteArea(),
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
+      },
     );
   }
 }
