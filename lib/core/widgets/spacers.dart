@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+Widget get width5 => const SizedBox(width: 5);
 Widget get width10 => const SizedBox(width: 10);
 Widget get width20 => const SizedBox(width: 20);
 Widget get width30 => const SizedBox(width: 30);
@@ -11,6 +12,7 @@ Widget get width80 => const SizedBox(width: 80);
 Widget get width90 => const SizedBox(width: 90);
 Widget get width100 => const SizedBox(width: 100);
 
+Widget get height5 => const SizedBox(height: 5);
 Widget get height10 => const SizedBox(height: 10);
 Widget get height20 => const SizedBox(height: 20);
 Widget get height30 => const SizedBox(height: 30);

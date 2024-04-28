@@ -78,88 +78,89 @@ class _UserVoteItemState extends State<_UserVoteItem>
           backgroundColor: MaterialStateProperty.all(widget.backgroundColor),
         ),
         child: LayoutBuilder(
-          builder: (context, constraints) {
-            final maxWidth = constraints.maxWidth;
-            if (_expand) {
-              return _expandedItems(maxWidth);
-            } else {
-              return _compactItems(maxWidth);
-            }
+          builder: (_, __) {
+            return _expand ? _expandedItems() : _compactItems();
           },
         ),
       ),
     );
   }
 
+  Widget _animatedItem({required Widget child}) {
+    return AnimatedSwitcher(
+      duration: const Duration(milliseconds: 500),
+      switchInCurve: Curves.easeInOutCubic,
+      switchOutCurve: Curves.easeInOutCubic,
+      child: child,
+    );
+  }
+
   //#region Layouts
-  Widget _compactItems(double maxWidth) {
-    final maxAvatars = maxWidth ~/ (_avatarSize + _avatarPadding);
-    final items = min(widget.users.length, maxAvatars);
-    final alignment =
-        widget.users.length != maxAvatars && widget.users.length < maxAvatars
-            ? MainAxisAlignment.start
-            : MainAxisAlignment.spaceEvenly;
-    return Row(
-      mainAxisAlignment: alignment,
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: List.generate(
-        maxAvatars,
-        (index) {
+  Widget _compactItems() {
+    return FillHorizontalRow(
+      itemWidth: _avatarSize,
+      padding: _avatarPadding,
+      mainAxisAlignment: MainAxisAlignment.start,
+      itemsCount: widget.users.length,
+      overflowBuilder: (context, maxItems) {
+        return _animatedItem(
+          child: _maxAvatar(
+            context,
+            widget.users.length - maxItems + 1,
+          ),
+        );
+      },
+      paddingBuilder: (_, __, ___) => EdgeInsets.only(left: _avatarPadding),
+      builder: (context, index, maxItems) {
+        final isFirst =
+            _expand ? index == 0 : index == 0 || index == maxItems ~/ 2;
+        return _animatedItem(
+          child: _userAvatar(
+            context,
+            widget.users[index],
+            isFirst,
+          ),
+        );
+      },
+    );
+  }
+
+  Widget _expandedItems() {
+    return LayoutBuilder(builder: (context, constraints) {
+      final maxAvatars =
+          constraints.maxWidth ~/ (_avatarSize + _avatarPadding) * 2;
+      final items = min(widget.users.length, maxAvatars);
+      return Wrap(
+        spacing: 0,
+        runSpacing: 4,
+        children: List.generate(maxAvatars, (index) {
           final isOverflow =
               index == maxAvatars - 1 && widget.users.length > maxAvatars;
 
           final showItem = index < items;
 
-          final item = !showItem
+          final child = !showItem
               ? const SizedBox.shrink()
               : isOverflow
-                  ? _maxAvatar(context, widget.users.length - maxAvatars + 1)
-                  : _userAvatar(context, widget.users[index], index == 0);
+                  ? _maxAvatar(
+                      context,
+                      widget.users.length - maxAvatars + 1,
+                    )
+                  : _userAvatar(
+                      context,
+                      widget.users[index],
+                      index == 0 || index == maxAvatars ~/ 2,
+                    );
 
           return AnimatedSwitcher(
             duration: const Duration(milliseconds: 500),
             switchInCurve: Curves.easeInOutCubic,
             switchOutCurve: Curves.easeInOutCubic,
-            child: item,
+            child: child,
           );
-        },
-      ),
-    );
-  }
-
-  Widget _expandedItems(double maxWidth) {
-    final maxAvatars = maxWidth ~/ (_avatarSize + _avatarPadding) * 2;
-    final items = min(widget.users.length, maxAvatars);
-    return Wrap(
-      spacing: 0,
-      runSpacing: 4,
-      children: List.generate(maxAvatars, (index) {
-        final isOverflow =
-            index == maxAvatars - 1 && widget.users.length > maxAvatars;
-
-        final showItem = index < items;
-
-        final child = !showItem
-            ? const SizedBox.shrink()
-            : isOverflow
-                ? _maxAvatar(
-                    context,
-                    widget.users.length - maxAvatars + 1,
-                  )
-                : _userAvatar(
-                    context,
-                    widget.users[index],
-                    index == 0 || index == maxAvatars ~/ 2,
-                  );
-
-        return AnimatedSwitcher(
-          duration: const Duration(milliseconds: 500),
-          switchInCurve: Curves.easeInOutCubic,
-          switchOutCurve: Curves.easeInOutCubic,
-          child: child,
-        );
-      }),
-    );
+        }),
+      );
+    });
   }
   //#endregion
 

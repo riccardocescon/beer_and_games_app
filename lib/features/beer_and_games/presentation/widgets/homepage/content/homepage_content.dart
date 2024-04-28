@@ -1,6 +1,7 @@
 import 'package:beer_and_games/core/enums/presence_state.dart';
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
+import 'package:beer_and_games/core/widgets/static_bottom_sheet.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/hangout_stats_page/hangout_stats_page_bloc.dart';
@@ -23,15 +24,7 @@ class HomepageContent extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Expanded(
-      child: Container(
-        width: double.maxFinite,
-        decoration: BoxDecoration(
-          color: MaterialTheme.darkScheme().surfaceContainer,
-          borderRadius: const BorderRadius.only(
-            topLeft: Radius.circular(24 * 2),
-            topRight: Radius.circular(24 * 2),
-          ),
-        ),
+      child: StaticBottomSheet(
         child: Padding(
           padding: const EdgeInsets.all(24.0),
           child: BlocBuilder<HomepageBloc, HomepageState>(

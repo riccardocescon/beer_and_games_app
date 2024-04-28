@@ -1,6 +1,7 @@
 import 'dart:math';
 
 import 'package:beer_and_games/core/extentions/context_extension.dart';
+import 'package:beer_and_games/core/widgets/fill_horizontal_row.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
