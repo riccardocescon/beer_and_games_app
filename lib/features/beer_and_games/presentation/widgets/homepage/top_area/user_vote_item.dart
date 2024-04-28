@@ -78,8 +78,10 @@ class _UserVoteItemState extends State<_UserVoteItem>
           backgroundColor: MaterialStateProperty.all(widget.backgroundColor),
         ),
         child: LayoutBuilder(
-          builder: (_, __) {
-            return _expand ? _expandedItems() : _compactItems();
+          builder: (_, constraints) {
+            return _expand
+                ? _expandedItems()
+                : _compactItems(constraints.maxWidth);
           },
         ),
       ),
@@ -96,32 +98,33 @@ class _UserVoteItemState extends State<_UserVoteItem>
   }
 
   //#region Layouts
-  Widget _compactItems() {
-    return FillHorizontalRow(
-      itemWidth: _avatarSize,
-      padding: _avatarPadding,
-      mainAxisAlignment: MainAxisAlignment.start,
-      itemsCount: widget.users.length,
-      overflowBuilder: (context, maxItems) {
-        return _animatedItem(
-          child: _maxAvatar(
-            context,
-            widget.users.length - maxItems + 1,
-          ),
-        );
-      },
-      paddingBuilder: (_, __, ___) => EdgeInsets.only(left: _avatarPadding),
-      builder: (context, index, maxItems) {
-        final isFirst =
-            _expand ? index == 0 : index == 0 || index == maxItems ~/ 2;
-        return _animatedItem(
-          child: _userAvatar(
-            context,
-            widget.users[index],
-            isFirst,
-          ),
-        );
-      },
+  Widget _compactItems(double maxWidth) {
+    final maxAvatars = maxWidth ~/ (_avatarSize + _avatarPadding);
+    final items = min(widget.users.length, maxAvatars);
+    final alignment =
+        widget.users.length != maxAvatars && widget.users.length < maxAvatars
+            ? MainAxisAlignment.start
+            : MainAxisAlignment.spaceEvenly;
+    return Row(
+      mainAxisAlignment: alignment,
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: List.generate(
+        maxAvatars,
+        (index) {
+          final isOverflow =
+              index == maxAvatars - 1 && widget.users.length > maxAvatars;
+
+          final showItem = index < items;
+
+          final item = !showItem
+              ? const SizedBox.shrink()
+              : isOverflow
+                  ? _maxAvatar(context, widget.users.length - maxAvatars + 1)
+                  : _userAvatar(context, widget.users[index], false);
+
+          return _animatedItem(child: item);
+        },
+      ),
     );
   }
 
@@ -152,12 +155,7 @@ class _UserVoteItemState extends State<_UserVoteItem>
                       index == 0 || index == maxAvatars ~/ 2,
                     );
 
-          return AnimatedSwitcher(
-            duration: const Duration(milliseconds: 500),
-            switchInCurve: Curves.easeInOutCubic,
-            switchOutCurve: Curves.easeInOutCubic,
-            child: child,
-          );
+          return _animatedItem(child: child);
         }),
       );
     });

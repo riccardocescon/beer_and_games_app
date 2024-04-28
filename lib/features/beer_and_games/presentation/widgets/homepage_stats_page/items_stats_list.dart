@@ -3,9 +3,11 @@ part of 'package:beer_and_games/features/beer_and_games/presentation/pages/hango
 class _ItemsStatsList extends StatelessWidget {
   const _ItemsStatsList({
     required this.onExpand,
+    required this.maxWidth,
   });
 
   final VoidCallback onExpand;
+  final double maxWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +33,7 @@ class _ItemsStatsList extends StatelessWidget {
           ),
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: ListView(
+            child: Column(
               children: [
                 height20,
                 height5,
@@ -52,6 +54,7 @@ class _ItemsStatsList extends StatelessWidget {
 
   Widget _gameList() {
     return _ItemGroupSection(
+      maxWidth: maxWidth,
       title: 'Giochi',
       items: [
         Game(
@@ -90,6 +93,7 @@ class _ItemsStatsList extends StatelessWidget {
 
   Widget _beerList() {
     return _ItemGroupSection(
+      maxWidth: maxWidth,
       title: 'Birre',
       items: [
         Beer(
@@ -123,6 +127,7 @@ class _ItemsStatsList extends StatelessWidget {
 
   Widget _wineList() {
     return _ItemGroupSection(
+      maxWidth: maxWidth,
       title: 'Vino',
       items: [
         Wine(

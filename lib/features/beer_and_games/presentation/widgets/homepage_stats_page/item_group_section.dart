@@ -4,8 +4,10 @@ class _ItemGroupSection extends StatelessWidget {
   const _ItemGroupSection({
     required this.title,
     required this.items,
+    required this.maxWidth,
   });
 
+  final double maxWidth;
   final String title;
   final List<Item> items;
 
@@ -54,6 +56,7 @@ class _ItemGroupSection extends StatelessWidget {
 
   Widget _itemsRow(BuildContext context) {
     return FillHorizontalRow(
+      maxWidth: maxWidth,
       itemWidth: _itemLength,
       padding: _itemPadding,
       itemsCount: items.length,

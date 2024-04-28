@@ -41,7 +41,7 @@ class HangoutBloc extends Bloc<HangoutEvent, HangoutState> {
             (r) {
               _hangout = r.copyWith();
 
-              final now = DateTime.now().toUtc();
+              final now = DateTime.now();
               final currentDayOfWeek = now.weekday;
               final hangoutDayOfWeek = _hangout!.dayOfWeek;
               int reaminingDays = hangoutDayOfWeek.value - currentDayOfWeek;
@@ -200,13 +200,9 @@ class _LocalTimeTracker {
   late Duration timeLeft;
 
   _LocalTimeTracker(this.timeLeft) {
-    final now = DateTime.now().toUtc();
+    final now = DateTime.now();
 
-    seconds = timeLeft.inSeconds;
-    missingDays = seconds ~/ 86400;
-    missingHours = (seconds % 86400) ~/ 3600;
-    missingMinutes = (seconds % 3600) ~/ 60;
-    if (missingDays > 0) missingDays--;
+    _updateTimeLeft();
 
     timeLeftDateTime = DateTime(
       now.year,
@@ -217,12 +213,17 @@ class _LocalTimeTracker {
     );
   }
 
-  void removeMinute() {
-    timeLeft = timeLeft - const Duration(minutes: 1);
-    timeLeftDateTime = timeLeftDateTime.subtract(const Duration(minutes: 1));
+  void _updateTimeLeft() {
     seconds = timeLeft.inSeconds;
     missingDays = seconds ~/ 86400;
     missingHours = (seconds % 86400) ~/ 3600;
     missingMinutes = (seconds % 3600) ~/ 60;
+    if (missingDays > 0) missingDays--;
+  }
+
+  void removeMinute() {
+    timeLeft = timeLeft - const Duration(minutes: 1);
+    timeLeftDateTime = timeLeftDateTime.subtract(const Duration(minutes: 1));
+    _updateTimeLeft();
   }
 }

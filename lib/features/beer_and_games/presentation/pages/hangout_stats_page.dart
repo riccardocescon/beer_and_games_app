@@ -27,10 +27,13 @@ class HangoutStatsPage extends StatefulWidget {
 }
 
 class _HangoutStatsPageState extends State<HangoutStatsPage> {
-  bool _expandContent = false;
+  final ScrollController _scrollController = ScrollController();
 
-  final _animationDuration = const Duration(milliseconds: 200);
-  final _animationCurve = Curves.easeInOutCubic;
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,57 +47,55 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
         builder: (context, state) {
           return state.maybeMap(
             hangout: (value) {
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  return Column(
-                    children: [
-                      height20,
-                      _appearDisappearAnimator(
-                        maxHeight: constraints.maxHeight,
-                        child: _UsersStatsGraph(
-                          users: value.hangout.allUsers,
-                        ),
-                      ),
-                      height20,
-                      Expanded(
-                        child: _ItemsStatsList(
-                          onExpand: () {
-                            setState(() {
-                              _expandContent = !_expandContent;
-                            });
-                          },
-                        ),
-                      ),
-                    ],
-                  );
+              return NestedScrollView(
+                controller: _scrollController,
+                physics: const BouncingScrollPhysics(),
+                headerSliverBuilder: (context, innerBoxIsScrolled) {
+                  return [
+                    SliverLayoutBuilder(
+                      builder: (context, constraints) {
+                        final x = _scrollController.offset;
+                        final maxHeight = constraints.crossAxisExtent * 0.6;
+                        final y = ((-x / maxHeight) + 1);
+                        return SliverToBoxAdapter(
+                          child: Transform.scale(
+                            scale: y.clamp(0.01, 1.0),
+                            alignment: Alignment.bottomCenter,
+                            child: Opacity(
+                              opacity: y.clamp(0.01, 1.0),
+                              child: SizedBox(
+                                height: maxHeight,
+                                child: _UsersStatsGraph(
+                                  users: value.hangout.allUsers,
+                                ),
+                              ),
+                            ),
+                          ),
+                        );
+                      },
+                    ),
+                  ];
                 },
+                body: CustomScrollView(
+                  slivers: [
+                    SliverLayoutBuilder(
+                      builder: (context, constraints) {
+                        return SliverFillRemaining(
+                          hasScrollBody: false,
+                          child: _ItemsStatsList(
+                            maxWidth: constraints.crossAxisExtent,
+                            onExpand: () {},
+                          ),
+                        );
+                      },
+                    ),
+                  ],
+                ),
               );
             },
             orElse: () => const SizedBox.shrink(),
           );
         },
-      ),
-    );
-  }
-
-  Widget _appearDisappearAnimator({
-    required double maxHeight,
-    required Widget child,
-  }) {
-    return AnimatedSize(
-      duration: _animationDuration,
-      curve: _animationCurve,
-      child: SizedBox(
-        height: _expandContent ? 0 : maxHeight * 0.28,
-        child: AnimatedOpacity(
-          duration: _animationDuration,
-          curve: _animationCurve,
-          opacity: _expandContent ? 0 : 1,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: child,
-          ),
-        ),
       ),
     );
   }
