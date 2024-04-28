@@ -23,32 +23,30 @@ class HomepageContent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Expanded(
-      child: StaticBottomSheet(
-        child: Padding(
-          padding: const EdgeInsets.all(24.0),
-          child: BlocBuilder<HomepageBloc, HomepageState>(
-            buildWhen: (previous, current) => current.maybeMap(
-              loaded: (value) => true,
-              orElse: () => false,
-            ),
-            builder: (context, state) {
-              return state.maybeMap(
-                loaded: (value) {
-                  return Column(
-                    children: [
-                      _voteArea(value.hangout),
-                      Padding(
-                        padding: const EdgeInsets.symmetric(vertical: 16),
-                        child: _StatsRow(hangout: value.hangout),
-                      ),
-                    ],
-                  );
-                },
-                orElse: () => const SizedBox.shrink(),
-              );
-            },
+    return StaticBottomSheet(
+      child: Padding(
+        padding: const EdgeInsets.all(24.0),
+        child: BlocBuilder<HomepageBloc, HomepageState>(
+          buildWhen: (previous, current) => current.maybeMap(
+            loaded: (value) => true,
+            orElse: () => false,
           ),
+          builder: (context, state) {
+            return state.maybeMap(
+              loaded: (value) {
+                return Column(
+                  children: [
+                    _voteArea(value.hangout),
+                    Padding(
+                      padding: const EdgeInsets.symmetric(vertical: 16),
+                      child: _StatsRow(hangout: value.hangout),
+                    ),
+                  ],
+                );
+              },
+              orElse: () => const SizedBox.shrink(),
+            );
+          },
         ),
       ),
     );

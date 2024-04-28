@@ -6,12 +6,14 @@ class _UserVoteItem extends StatefulWidget {
     required this.backgroundColor,
     required this.avatarColor,
     required this.onAvatarColor,
+    required this.maxWidth,
   });
 
   final List<User> users;
   final Color backgroundColor;
   final Color avatarColor;
   final Color onAvatarColor;
+  final double maxWidth;
 
   @override
   State<_UserVoteItem> createState() => _UserVoteItemState();
@@ -78,10 +80,8 @@ class _UserVoteItemState extends State<_UserVoteItem>
           backgroundColor: MaterialStateProperty.all(widget.backgroundColor),
         ),
         child: LayoutBuilder(
-          builder: (_, constraints) {
-            return _expand
-                ? _expandedItems()
-                : _compactItems(constraints.maxWidth);
+          builder: (_, __) {
+            return _expand ? _expandedItems() : _compactItems(widget.maxWidth);
           },
         ),
       ),
@@ -129,36 +129,33 @@ class _UserVoteItemState extends State<_UserVoteItem>
   }
 
   Widget _expandedItems() {
-    return LayoutBuilder(builder: (context, constraints) {
-      final maxAvatars =
-          constraints.maxWidth ~/ (_avatarSize + _avatarPadding) * 2;
-      final items = min(widget.users.length, maxAvatars);
-      return Wrap(
-        spacing: 0,
-        runSpacing: 4,
-        children: List.generate(maxAvatars, (index) {
-          final isOverflow =
-              index == maxAvatars - 1 && widget.users.length > maxAvatars;
+    final maxAvatars = widget.maxWidth ~/ (_avatarSize + _avatarPadding) * 2;
+    final items = min(widget.users.length, maxAvatars);
+    return Wrap(
+      spacing: 0,
+      runSpacing: 4,
+      children: List.generate(maxAvatars, (index) {
+        final isOverflow =
+            index == maxAvatars - 1 && widget.users.length > maxAvatars;
 
-          final showItem = index < items;
+        final showItem = index < items;
 
-          final child = !showItem
-              ? const SizedBox.shrink()
-              : isOverflow
-                  ? _maxAvatar(
-                      context,
-                      widget.users.length - maxAvatars + 1,
-                    )
-                  : _userAvatar(
-                      context,
-                      widget.users[index],
-                      index == 0 || index == maxAvatars ~/ 2,
-                    );
+        final child = !showItem
+            ? const SizedBox.shrink()
+            : isOverflow
+                ? _maxAvatar(
+                    context,
+                    widget.users.length - maxAvatars + 1,
+                  )
+                : _userAvatar(
+                    context,
+                    widget.users[index],
+                    index == 0 || index == maxAvatars ~/ 2,
+                  );
 
-          return _animatedItem(child: child);
-        }),
-      );
-    });
+        return _animatedItem(child: child);
+      }),
+    );
   }
   //#endregion
 

@@ -1,3 +1,4 @@
+import 'package:beer_and_games/core/animations/formula.dart';
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/fill_horizontal_row.dart';
 import 'package:beer_and_games/core/widgets/hangout_app_bar.dart';
@@ -56,13 +57,17 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
                       builder: (context, constraints) {
                         final x = _scrollController.offset;
                         final maxHeight = constraints.crossAxisExtent * 0.6;
-                        final y = ((-x / maxHeight) + 1);
+                        final scale = linearDecrease(x: x, maxValue: maxHeight)
+                            .clamp(0.01, 1.0);
+                        final opacity =
+                            linearDecrease(x: x, maxValue: maxHeight)
+                                .clamp(0.01, 1.0);
                         return SliverToBoxAdapter(
                           child: Transform.scale(
-                            scale: y.clamp(0.01, 1.0),
+                            scale: scale,
                             alignment: Alignment.bottomCenter,
                             child: Opacity(
-                              opacity: y.clamp(0.01, 1.0),
+                              opacity: opacity,
                               child: SizedBox(
                                 height: maxHeight,
                                 child: _UsersStatsGraph(

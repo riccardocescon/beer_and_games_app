@@ -1,7 +1,11 @@
 part of 'top_area.dart';
 
 class _UsersVotesArea extends StatelessWidget {
-  const _UsersVotesArea();
+  const _UsersVotesArea({
+    required this.maxWidth,
+  });
+
+  final double maxWidth;
 
   final _homepageSidePadding = 24.0;
   final _topAreaSidePadding = 16.0;
@@ -31,6 +35,7 @@ class _UsersVotesArea extends StatelessWidget {
                   backgroundColor: context.colorScheme.inversePrimary,
                   avatarColor: context.colorScheme.primary,
                   onAvatarColor: context.colorScheme.onPrimary,
+                  maxWidth: maxWidth,
                 );
               },
             ),
@@ -52,6 +57,7 @@ class _UsersVotesArea extends StatelessWidget {
                   backgroundColor: context.colorScheme.secondaryContainer,
                   avatarColor: context.colorScheme.secondary,
                   onAvatarColor: context.colorScheme.onSecondary,
+                  maxWidth: maxWidth,
                 );
               },
             ),
@@ -73,6 +79,7 @@ class _UsersVotesArea extends StatelessWidget {
                   backgroundColor: context.colorScheme.tertiaryContainer,
                   avatarColor: context.colorScheme.tertiary,
                   onAvatarColor: context.colorScheme.onTertiary,
+                  maxWidth: maxWidth,
                 );
               },
             ),

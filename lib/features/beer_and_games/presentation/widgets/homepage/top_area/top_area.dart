@@ -1,7 +1,6 @@
 import 'dart:math';
 
 import 'package:beer_and_games/core/extentions/context_extension.dart';
-import 'package:beer_and_games/core/widgets/fill_horizontal_row.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
@@ -20,7 +19,9 @@ part 'users_votes_area.dart';
 part 'user_vote_item.dart';
 
 class TopArea extends StatelessWidget {
-  const TopArea({super.key});
+  const TopArea({super.key, required this.maxWidth});
+
+  final double maxWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -48,8 +49,8 @@ class TopArea extends StatelessWidget {
             ],
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: _UsersVotesArea(),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: _UsersVotesArea(maxWidth: maxWidth),
           ),
         ],
       ),
