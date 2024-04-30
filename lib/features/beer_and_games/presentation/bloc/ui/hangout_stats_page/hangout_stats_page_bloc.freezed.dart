@@ -16,43 +16,42 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HangoutStatsPageEvent {
+  Hangout get hangout => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Hangout hangout) setup,
-    required TResult Function() getUsersPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Hangout hangout)? setup,
-    TResult? Function()? getUsersPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Hangout hangout)? setup,
-    TResult Function()? getUsersPresence,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
-    required TResult Function(GetUsersPresence value) getUsersPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
-    TResult? Function(GetUsersPresence value)? getUsersPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
-    TResult Function(GetUsersPresence value)? getUsersPresence,
     required TResult orElse(),
   }) =>
+      throw _privateConstructorUsedError;
+
+  @JsonKey(ignore: true)
+  $HangoutStatsPageEventCopyWith<HangoutStatsPageEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -61,6 +60,8 @@ abstract class $HangoutStatsPageEventCopyWith<$Res> {
   factory $HangoutStatsPageEventCopyWith(HangoutStatsPageEvent value,
           $Res Function(HangoutStatsPageEvent) then) =
       _$HangoutStatsPageEventCopyWithImpl<$Res, HangoutStatsPageEvent>;
+  @useResult
+  $Res call({Hangout hangout});
 }
 
 /// @nodoc
@@ -73,13 +74,28 @@ class _$HangoutStatsPageEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? hangout = null,
+  }) {
+    return _then(_value.copyWith(
+      hangout: null == hangout
+          ? _value.hangout
+          : hangout // ignore: cast_nullable_to_non_nullable
+              as Hangout,
+    ) as $Val);
+  }
 }
 
 /// @nodoc
-abstract class _$$SetupImplCopyWith<$Res> {
+abstract class _$$SetupImplCopyWith<$Res>
+    implements $HangoutStatsPageEventCopyWith<$Res> {
   factory _$$SetupImplCopyWith(
           _$SetupImpl value, $Res Function(_$SetupImpl) then) =
       __$$SetupImplCopyWithImpl<$Res>;
+  @override
   @useResult
   $Res call({Hangout hangout});
 }
@@ -124,7 +140,6 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Hangout hangout) setup,
-    required TResult Function() getUsersPresence,
   }) {
     return setup(hangout);
   }
@@ -133,7 +148,6 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Hangout hangout)? setup,
-    TResult? Function()? getUsersPresence,
   }) {
     return setup?.call(hangout);
   }
@@ -142,7 +156,6 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Hangout hangout)? setup,
-    TResult Function()? getUsersPresence,
     required TResult orElse(),
   }) {
     if (setup != null) {
@@ -155,7 +168,6 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
-    required TResult Function(GetUsersPresence value) getUsersPresence,
   }) {
     return setup(this);
   }
@@ -164,7 +176,6 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
-    TResult? Function(GetUsersPresence value)? getUsersPresence,
   }) {
     return setup?.call(this);
   }
@@ -173,7 +184,6 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
-    TResult Function(GetUsersPresence value)? getUsersPresence,
     required TResult orElse(),
   }) {
     if (setup != null) {
@@ -187,99 +197,12 @@ abstract class Setup extends HangoutStatsPageEvent {
   const factory Setup({required final Hangout hangout}) = _$SetupImpl;
   const Setup._() : super._();
 
+  @override
   Hangout get hangout;
+  @override
   @JsonKey(ignore: true)
   _$$SetupImplCopyWith<_$SetupImpl> get copyWith =>
       throw _privateConstructorUsedError;
-}
-
-/// @nodoc
-abstract class _$$GetUsersPresenceImplCopyWith<$Res> {
-  factory _$$GetUsersPresenceImplCopyWith(_$GetUsersPresenceImpl value,
-          $Res Function(_$GetUsersPresenceImpl) then) =
-      __$$GetUsersPresenceImplCopyWithImpl<$Res>;
-}
-
-/// @nodoc
-class __$$GetUsersPresenceImplCopyWithImpl<$Res>
-    extends _$HangoutStatsPageEventCopyWithImpl<$Res, _$GetUsersPresenceImpl>
-    implements _$$GetUsersPresenceImplCopyWith<$Res> {
-  __$$GetUsersPresenceImplCopyWithImpl(_$GetUsersPresenceImpl _value,
-      $Res Function(_$GetUsersPresenceImpl) _then)
-      : super(_value, _then);
-}
-
-/// @nodoc
-
-class _$GetUsersPresenceImpl extends GetUsersPresence {
-  const _$GetUsersPresenceImpl() : super._();
-
-  @override
-  @optionalTypeArgs
-  TResult when<TResult extends Object?>({
-    required TResult Function(Hangout hangout) setup,
-    required TResult Function() getUsersPresence,
-  }) {
-    return getUsersPresence();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Hangout hangout)? setup,
-    TResult? Function()? getUsersPresence,
-  }) {
-    return getUsersPresence?.call();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Hangout hangout)? setup,
-    TResult Function()? getUsersPresence,
-    required TResult orElse(),
-  }) {
-    if (getUsersPresence != null) {
-      return getUsersPresence();
-    }
-    return orElse();
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult map<TResult extends Object?>({
-    required TResult Function(Setup value) setup,
-    required TResult Function(GetUsersPresence value) getUsersPresence,
-  }) {
-    return getUsersPresence(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult? mapOrNull<TResult extends Object?>({
-    TResult? Function(Setup value)? setup,
-    TResult? Function(GetUsersPresence value)? getUsersPresence,
-  }) {
-    return getUsersPresence?.call(this);
-  }
-
-  @override
-  @optionalTypeArgs
-  TResult maybeMap<TResult extends Object?>({
-    TResult Function(Setup value)? setup,
-    TResult Function(GetUsersPresence value)? getUsersPresence,
-    required TResult orElse(),
-  }) {
-    if (getUsersPresence != null) {
-      return getUsersPresence(this);
-    }
-    return orElse();
-  }
-}
-
-abstract class GetUsersPresence extends HangoutStatsPageEvent {
-  const factory GetUsersPresence() = _$GetUsersPresenceImpl;
-  const GetUsersPresence._() : super._();
 }
 
 /// @nodoc

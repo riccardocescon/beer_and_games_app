@@ -12,6 +12,5 @@ sealed class HangoutStatsPageEvent extends AppEvent
   @override
   List<Object?> get props => map(
         setup: (value) => [value.hangout],
-        getUsersPresence: (value) => [],
       );
 }

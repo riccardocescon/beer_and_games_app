@@ -159,6 +159,7 @@ mixin _$HomepageState {
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
     required TResult Function(String date, String timeLeft) dateTimeUpdate,
+    required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(CloudFailure failure) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -168,6 +169,7 @@ mixin _$HomepageState {
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
     TResult? Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(CloudFailure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -177,6 +179,7 @@ mixin _$HomepageState {
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
     TResult Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) =>
@@ -187,6 +190,7 @@ mixin _$HomepageState {
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -196,6 +200,7 @@ mixin _$HomepageState {
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -205,6 +210,7 @@ mixin _$HomepageState {
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) =>
@@ -256,6 +262,7 @@ class _$InitImpl extends Init {
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
     required TResult Function(String date, String timeLeft) dateTimeUpdate,
+    required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(CloudFailure failure) error,
   }) {
     return init();
@@ -268,6 +275,7 @@ class _$InitImpl extends Init {
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
     TResult? Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return init?.call();
@@ -280,6 +288,7 @@ class _$InitImpl extends Init {
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
     TResult Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -296,6 +305,7 @@ class _$InitImpl extends Init {
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(Error value) error,
   }) {
     return init(this);
@@ -308,6 +318,7 @@ class _$InitImpl extends Init {
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(Error value)? error,
   }) {
     return init?.call(this);
@@ -320,6 +331,7 @@ class _$InitImpl extends Init {
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -363,6 +375,7 @@ class _$LoadingImpl extends Loading {
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
     required TResult Function(String date, String timeLeft) dateTimeUpdate,
+    required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(CloudFailure failure) error,
   }) {
     return loading();
@@ -375,6 +388,7 @@ class _$LoadingImpl extends Loading {
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
     TResult? Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return loading?.call();
@@ -387,6 +401,7 @@ class _$LoadingImpl extends Loading {
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
     TResult Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -403,6 +418,7 @@ class _$LoadingImpl extends Loading {
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(Error value) error,
   }) {
     return loading(this);
@@ -415,6 +431,7 @@ class _$LoadingImpl extends Loading {
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(Error value)? error,
   }) {
     return loading?.call(this);
@@ -427,6 +444,7 @@ class _$LoadingImpl extends Loading {
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -494,6 +512,7 @@ class _$LoadedImpl extends Loaded {
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
     required TResult Function(String date, String timeLeft) dateTimeUpdate,
+    required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(CloudFailure failure) error,
   }) {
     return loaded(hangout);
@@ -506,6 +525,7 @@ class _$LoadedImpl extends Loaded {
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
     TResult? Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return loaded?.call(hangout);
@@ -518,6 +538,7 @@ class _$LoadedImpl extends Loaded {
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
     TResult Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -534,6 +555,7 @@ class _$LoadedImpl extends Loaded {
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(Error value) error,
   }) {
     return loaded(this);
@@ -546,6 +568,7 @@ class _$LoadedImpl extends Loaded {
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(Error value)? error,
   }) {
     return loaded?.call(this);
@@ -558,6 +581,7 @@ class _$LoadedImpl extends Loaded {
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -639,6 +663,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
     required TResult Function(String date, String timeLeft) dateTimeUpdate,
+    required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(CloudFailure failure) error,
   }) {
     return dateTimeUpdate(date, timeLeft);
@@ -651,6 +676,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
     TResult? Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return dateTimeUpdate?.call(date, timeLeft);
@@ -663,6 +689,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
     TResult Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -679,6 +706,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(Error value) error,
   }) {
     return dateTimeUpdate(this);
@@ -691,6 +719,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(Error value)? error,
   }) {
     return dateTimeUpdate?.call(this);
@@ -703,6 +732,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -723,6 +753,156 @@ abstract class DateTimeUpdate extends HomepageState {
   String get timeLeft;
   @JsonKey(ignore: true)
   _$$DateTimeUpdateImplCopyWith<_$DateTimeUpdateImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GamesLoadedImplCopyWith<$Res> {
+  factory _$$GamesLoadedImplCopyWith(
+          _$GamesLoadedImpl value, $Res Function(_$GamesLoadedImpl) then) =
+      __$$GamesLoadedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Game> games});
+}
+
+/// @nodoc
+class __$$GamesLoadedImplCopyWithImpl<$Res>
+    extends _$HomepageStateCopyWithImpl<$Res, _$GamesLoadedImpl>
+    implements _$$GamesLoadedImplCopyWith<$Res> {
+  __$$GamesLoadedImplCopyWithImpl(
+      _$GamesLoadedImpl _value, $Res Function(_$GamesLoadedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? games = null,
+  }) {
+    return _then(_$GamesLoadedImpl(
+      games: null == games
+          ? _value._games
+          : games // ignore: cast_nullable_to_non_nullable
+              as List<Game>,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GamesLoadedImpl extends GamesLoaded {
+  const _$GamesLoadedImpl({required final List<Game> games})
+      : _games = games,
+        super._();
+
+  final List<Game> _games;
+  @override
+  List<Game> get games {
+    if (_games is EqualUnmodifiableListView) return _games;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(_games);
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GamesLoadedImplCopyWith<_$GamesLoadedImpl> get copyWith =>
+      __$$GamesLoadedImplCopyWithImpl<_$GamesLoadedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function(Hangout hangout) loaded,
+    required TResult Function(String date, String timeLeft) dateTimeUpdate,
+    required TResult Function(List<Game> games) gamesLoaded,
+    required TResult Function(CloudFailure failure) error,
+  }) {
+    return gamesLoaded(games);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? loading,
+    TResult? Function(Hangout hangout)? loaded,
+    TResult? Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult? Function(List<Game> games)? gamesLoaded,
+    TResult? Function(CloudFailure failure)? error,
+  }) {
+    return gamesLoaded?.call(games);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Hangout hangout)? loaded,
+    TResult Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult Function(List<Game> games)? gamesLoaded,
+    TResult Function(CloudFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (gamesLoaded != null) {
+      return gamesLoaded(games);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(GamesLoaded value) gamesLoaded,
+    required TResult Function(Error value) error,
+  }) {
+    return gamesLoaded(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Init value)? init,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(GamesLoaded value)? gamesLoaded,
+    TResult? Function(Error value)? error,
+  }) {
+    return gamesLoaded?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(GamesLoaded value)? gamesLoaded,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (gamesLoaded != null) {
+      return gamesLoaded(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GamesLoaded extends HomepageState {
+  const factory GamesLoaded({required final List<Game> games}) =
+      _$GamesLoadedImpl;
+  const GamesLoaded._() : super._();
+
+  List<Game> get games;
+  @JsonKey(ignore: true)
+  _$$GamesLoadedImplCopyWith<_$GamesLoadedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -788,6 +968,7 @@ class _$ErrorImpl extends Error {
     required TResult Function() loading,
     required TResult Function(Hangout hangout) loaded,
     required TResult Function(String date, String timeLeft) dateTimeUpdate,
+    required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(CloudFailure failure) error,
   }) {
     return error(failure);
@@ -800,6 +981,7 @@ class _$ErrorImpl extends Error {
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? loaded,
     TResult? Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return error?.call(failure);
@@ -812,6 +994,7 @@ class _$ErrorImpl extends Error {
     TResult Function()? loading,
     TResult Function(Hangout hangout)? loaded,
     TResult Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -828,6 +1011,7 @@ class _$ErrorImpl extends Error {
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) loaded,
     required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(Error value) error,
   }) {
     return error(this);
@@ -840,6 +1024,7 @@ class _$ErrorImpl extends Error {
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? loaded,
     TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(Error value)? error,
   }) {
     return error?.call(this);
@@ -852,6 +1037,7 @@ class _$ErrorImpl extends Error {
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? loaded,
     TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {

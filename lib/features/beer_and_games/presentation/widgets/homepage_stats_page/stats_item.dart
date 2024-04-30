@@ -29,30 +29,16 @@ class _StatsItem extends StatelessWidget {
   }
 
   Widget _image() {
-    return Container(
-      width: itemWidth,
-      height: itemWidth,
-      decoration: BoxDecoration(
+    return ClipRRect(
+      borderRadius: BorderRadius.circular(16),
+      child: Container(
+        width: itemWidth,
+        height: itemWidth,
         color: MaterialTheme.darkScheme().surfaceContainerHigh,
-        borderRadius: BorderRadius.circular(16),
+        child: item.imageBytes == null
+            ? const SizedBox.shrink()
+            : Image.memory(item.imageBytes!, fit: BoxFit.cover),
       ),
-      child: item.imageUrl == null
-          ? const SizedBox.shrink()
-          : Image.network(
-              item.imageUrl!,
-              fit: BoxFit.cover,
-              loadingBuilder: (context, child, loadingProgress) {
-                if (loadingProgress == null) return child;
-                return Center(
-                  child: CircularProgressIndicator(
-                    value: loadingProgress.expectedTotalBytes != null
-                        ? loadingProgress.cumulativeBytesLoaded /
-                            loadingProgress.expectedTotalBytes!
-                        : null,
-                  ),
-                );
-              },
-            ),
     );
   }
 

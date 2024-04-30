@@ -1,6 +1,9 @@
-abstract class Item {
-  final String name;
-  final String? imageUrl;
+import 'dart:typed_data';
 
-  Item({required this.name, this.imageUrl});
+abstract class Item {
+  final String id;
+  final String name;
+  Uint8List? imageBytes;
+
+  Item({required this.id, required this.name, this.imageBytes});
 }

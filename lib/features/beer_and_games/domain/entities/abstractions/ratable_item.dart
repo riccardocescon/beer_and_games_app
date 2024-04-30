@@ -5,8 +5,9 @@ abstract class RateableItem extends Item {
   final List<UserRating> ratings;
 
   RateableItem({
+    required super.id,
     required super.name,
     required this.ratings,
-    super.imageUrl,
+    super.imageBytes,
   });
 }

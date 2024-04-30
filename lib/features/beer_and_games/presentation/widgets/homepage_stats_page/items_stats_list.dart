@@ -53,41 +53,23 @@ class _ItemsStatsList extends StatelessWidget {
   }
 
   Widget _gameList() {
-    return _ItemGroupSection(
-      maxWidth: maxWidth,
-      title: 'Giochi',
-      items: [
-        Game(
-          name: 'Unstable Unicorns',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        ),
-        Game(
-          name: 'War Chest',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        ),
-        Game(
-          name: 'War Chest',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        ),
-        Game(
-          name: 'War Chest',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        ),
-        Game(
-          name: 'War Chest',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        )
-      ],
+    return BlocBuilder<HomepageBloc, HomepageState>(
+      buildWhen: (previous, current) => current.maybeMap(
+        gamesLoaded: (value) => true,
+        orElse: () => false,
+      ),
+      builder: (context, state) {
+        return state.maybeMap(
+          gamesLoaded: (value) {
+            return _ItemGroupSection(
+              maxWidth: maxWidth,
+              title: 'Giochi',
+              items: value.games,
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
+      },
     );
   }
 
@@ -97,28 +79,33 @@ class _ItemsStatsList extends StatelessWidget {
       title: 'Birre',
       items: [
         Beer(
+          id: 'a',
           name: 'Leffe',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
         Beer(
+          id: 'a',
           name: 'Leffe',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
         Beer(
+          id: 'a',
           name: 'Leffe',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
         Beer(
+          id: 'a',
           name: 'Leffe',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
         Beer(
+          id: 'a',
           name: 'Leffe',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
       ],
@@ -131,28 +118,33 @@ class _ItemsStatsList extends StatelessWidget {
       title: 'Vino',
       items: [
         Wine(
+          id: 'a',
           name: 'Merlot',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
         Wine(
+          id: 'a',
           name: 'Merlot',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
         Wine(
+          id: 'a',
           name: 'Merlot',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
         Wine(
+          id: 'a',
           name: 'Merlot',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
         Wine(
+          id: 'a',
           name: 'Merlot',
-          imageUrl: null,
+          imageBytes: null,
           ratings: [],
         ),
       ],
