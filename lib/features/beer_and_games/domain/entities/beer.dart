@@ -1,4 +1,4 @@
-import 'package:beer_and_games/features/beer_and_games/data/entities/abstractions/ratable_item.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/ratable_item.dart';
 
 class Beer extends RateableItem {
   Beer({

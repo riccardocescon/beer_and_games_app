@@ -1,7 +1,7 @@
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/loggers/loggers.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/models/hangout_model.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/models/user_presence.dart';
+import 'package:beer_and_games/features/beer_and_games/data/models/hangout_model.dart';
+import 'package:beer_and_games/features/beer_and_games/data/models/user_presence.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 

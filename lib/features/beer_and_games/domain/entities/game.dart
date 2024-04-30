@@ -1,4 +1,4 @@
-import 'package:beer_and_games/features/beer_and_games/data/entities/abstractions/item.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
 
 class Game extends Item {
   final int minplayers, maxplayers;

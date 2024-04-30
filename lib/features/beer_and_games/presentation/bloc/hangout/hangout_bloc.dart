@@ -3,7 +3,7 @@ import 'dart:async';
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
 import 'package:beer_and_games/core/enums/date_time_enums.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/hangout_usecases.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter/material.dart';

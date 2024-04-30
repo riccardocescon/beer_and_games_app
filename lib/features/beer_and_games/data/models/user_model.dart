@@ -1,4 +1,4 @@
-import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart';
 
 class UserModel extends User {
   UserModel({

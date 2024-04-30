@@ -1,6 +1,6 @@
 import 'package:beer_and_games/core/enums/date_time_enums.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/models/user_model.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
+import 'package:beer_and_games/features/beer_and_games/data/models/user_model.dart';
 
 class HangoutModel extends Hangout {
   HangoutModel({
