@@ -1,18 +1,17 @@
-import 'dart:developer';
-
 import 'package:beer_and_games/core/animations/formula.dart';
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/fill_horizontal_row.dart';
 import 'package:beer_and_games/core/widgets/hangout_app_bar.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/core/widgets/static_bottom_sheet.dart';
+import 'package:beer_and_games/core/widgets/stats_item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/hangout_stats_page/hangout_stats_page_bloc.dart';
-import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
-import 'package:beer_and_games/theme.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/pages/rating_items_page.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -20,7 +19,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part '../widgets/homepage_stats_page/users_stats_graph.dart';
 part '../widgets/homepage_stats_page/items_stats_list.dart';
 part '../widgets/homepage_stats_page/item_group_section.dart';
-part '../widgets/homepage_stats_page/stats_item.dart';
 
 class HangoutStatsPage extends StatefulWidget {
   const HangoutStatsPage({super.key});

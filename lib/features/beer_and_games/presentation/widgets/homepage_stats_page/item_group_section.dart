@@ -63,7 +63,7 @@ class _ItemGroupSection extends StatelessWidget {
       paddingBuilder: (context, index, maxItems) =>
           index == 0 ? EdgeInsets.zero : EdgeInsets.only(left: _itemPadding),
       builder: (context, index, maxItems) {
-        return _StatsItem(
+        return StatsItem(
           itemWidth: _itemLength,
           itemHeight: _itemHeight,
           item: items[index],
@@ -78,7 +78,13 @@ class _ItemGroupSection extends StatelessWidget {
       children: [
         GestureDetector(
           onTap: () {
-            context.warningSnackbar('Work in progress', 'Coming soon!');
+            if (items is List<Beer>) {
+              context.push(RatingItemsPage(items: items as List<Beer>));
+            } else if (items is List<Wine>) {
+              context.push(RatingItemsPage(items: items as List<Wine>));
+            } else {
+              context.warningSnackbar('Work in progress', 'Coming soon!');
+            }
           },
           child: Text(
             'Vedi di più',

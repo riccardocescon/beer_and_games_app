@@ -1,10 +1,14 @@
-part of 'package:beer_and_games/features/beer_and_games/presentation/pages/hangout_stats_page.dart';
+import 'package:beer_and_games/core/extentions/context_extension.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
+import 'package:beer_and_games/theme.dart';
+import 'package:flutter/material.dart';
 
-class _StatsItem extends StatelessWidget {
-  const _StatsItem({
+class StatsItem extends StatelessWidget {
+  const StatsItem({
+    super.key,
     required this.item,
-    required this.itemWidth,
-    required this.itemHeight,
+    this.itemWidth = 80,
+    this.itemHeight = 110,
   });
 
   final Item item;

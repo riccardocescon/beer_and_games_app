@@ -10,8 +10,13 @@ extension TextStyleShortcut on BuildContext {
 }
 
 extension NavigationShortcut on BuildContext {
-  void push(Widget page) {
-    Navigator.of(this).push(MaterialPageRoute(builder: (context) => page));
+  void push(Widget page, {bool fullscreenDialog = false}) {
+    Navigator.of(this).push(
+      MaterialPageRoute(
+        fullscreenDialog: fullscreenDialog,
+        builder: (context) => page,
+      ),
+    );
   }
 
   void pop() {
