@@ -54,10 +54,10 @@ class _ItemsStatsList extends StatelessWidget {
 
   Widget _gameList() {
     return BlocBuilder<ItemsBloc, ItemsState>(
-      // buildWhen: (previous, current) => current.maybeMap(
-      //   update: (value) => true,
-      //   orElse: () => false,
-      // ),
+      buildWhen: (previous, current) => current.maybeMap(
+        update: (value) => true,
+        orElse: () => false,
+      ),
       builder: (context, state) {
         return state.maybeMap(
           update: (value) {
@@ -75,10 +75,10 @@ class _ItemsStatsList extends StatelessWidget {
 
   Widget _beerList() {
     return BlocBuilder<ItemsBloc, ItemsState>(
-      // buildWhen: (previous, current) => current.maybeMap(
-      //   update: (value) => true,
-      //   orElse: () => false,
-      // ),
+      buildWhen: (previous, current) => current.maybeMap(
+        update: (value) => true,
+        orElse: () => false,
+      ),
       builder: (context, state) {
         return state.maybeMap(
           update: (value) {
@@ -95,41 +95,23 @@ class _ItemsStatsList extends StatelessWidget {
   }
 
   Widget _wineList() {
-    return _ItemGroupSection(
-      maxWidth: maxWidth,
-      title: 'Vino',
-      items: [
-        Wine(
-          id: 'a',
-          name: 'Merlot',
-          imageBytes: null,
-          ratings: [],
-        ),
-        Wine(
-          id: 'a',
-          name: 'Merlot',
-          imageBytes: null,
-          ratings: [],
-        ),
-        Wine(
-          id: 'a',
-          name: 'Merlot',
-          imageBytes: null,
-          ratings: [],
-        ),
-        Wine(
-          id: 'a',
-          name: 'Merlot',
-          imageBytes: null,
-          ratings: [],
-        ),
-        Wine(
-          id: 'a',
-          name: 'Merlot',
-          imageBytes: null,
-          ratings: [],
-        ),
-      ],
+    return BlocBuilder<ItemsBloc, ItemsState>(
+      buildWhen: (previous, current) => current.maybeMap(
+        update: (value) => true,
+        orElse: () => false,
+      ),
+      builder: (context, state) {
+        return state.maybeMap(
+          update: (value) {
+            return _ItemGroupSection(
+              maxWidth: maxWidth,
+              title: 'Vino',
+              items: value.wines,
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
+      },
     );
   }
 }

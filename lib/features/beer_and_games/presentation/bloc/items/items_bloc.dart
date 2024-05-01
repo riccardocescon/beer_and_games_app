@@ -7,6 +7,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart
 import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/beers/beers_selector.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_selector.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/usecases/wines/wines_selector.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -18,10 +19,12 @@ part 'items_state.dart';
 class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final GamesSelector gamesSelector;
   final BeersSelector beersSelector;
+  final WinesSelector winesSelector;
 
   ItemsBloc({
     required this.gamesSelector,
     required this.beersSelector,
+    required this.winesSelector,
   }) : super(const ItemsState.init()) {
     on<Download>((event, emit) async {
       List<Game> games = [];
@@ -68,8 +71,31 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
         );
       });
 
+      final wineSubscription = winesSelector.call(null).listen((event) {
+        event.fold(
+          (l) {
+            log('Error downloading wines: ${l.toString()}');
+          },
+          (w) {
+            log('Downlaoded wines: ${beers.map((e) => e.name).toList()}');
+            wines = w.toList();
+            emit(
+              ItemsState.update(
+                games: games.map((e) => e.copyWith()).toList(),
+                beers: beers.map((e) => e.copyWith()).toList(),
+                wines: wines.map((e) => e.copyWith()).toList(),
+              ),
+            );
+          },
+        );
+      });
+
       await Future.wait(
-        [gameSubscription.asFuture(), beerSubscription.asFuture()],
+        [
+          gameSubscription.asFuture(),
+          beerSubscription.asFuture(),
+          wineSubscription.asFuture(),
+        ],
       );
     });
   }
