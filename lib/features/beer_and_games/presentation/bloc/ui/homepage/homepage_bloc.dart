@@ -1,10 +1,9 @@
-import 'dart:developer';
-
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_selector.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -17,27 +16,13 @@ part 'homepage_state.dart';
 
 class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
   final HangoutBloc hangoutBloc;
-  final GamesSelector gamesSelector;
 
   HomepageBloc({
     required this.hangoutBloc,
-    required this.gamesSelector,
   }) : super(const HomepageState.init()) {
     on<Setup>((event, emit) async {
       emit(const HomepageState.loading());
       hangoutBloc.add(const HangoutEvent.select());
-
-      gamesSelector.call(null).listen((event) {
-        event.fold(
-          (l) {
-            log('Error downloading games: ${l.toString()}');
-          },
-          (games) {
-            log('Downlaoded games: ${games.map((e) => e.name).toList()}');
-            emit(HomepageState.gamesLoaded(games: games));
-          },
-        );
-      });
 
       await for (final state in hangoutBloc.stream) {
         state.maybeMap(

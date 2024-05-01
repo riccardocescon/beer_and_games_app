@@ -29,7 +29,10 @@ class _StatsRow extends StatelessWidget {
                         ..add(HangoutStatsPageEvent.setup(hangout: hangout)),
                     ),
                     BlocProvider(
-                      create: (_) => context.read<HomepageBloc>(),
+                      create: (_) => sl<ItemsBloc>()
+                        ..add(
+                          const ItemsEvent.download(),
+                        ),
                     ),
                   ],
                   child: const HangoutStatsPage(),

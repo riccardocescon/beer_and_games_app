@@ -53,14 +53,14 @@ class _ItemsStatsList extends StatelessWidget {
   }
 
   Widget _gameList() {
-    return BlocBuilder<HomepageBloc, HomepageState>(
-      buildWhen: (previous, current) => current.maybeMap(
-        gamesLoaded: (value) => true,
-        orElse: () => false,
-      ),
+    return BlocBuilder<ItemsBloc, ItemsState>(
+      // buildWhen: (previous, current) => current.maybeMap(
+      //   update: (value) => true,
+      //   orElse: () => false,
+      // ),
       builder: (context, state) {
         return state.maybeMap(
-          gamesLoaded: (value) {
+          update: (value) {
             return _ItemGroupSection(
               maxWidth: maxWidth,
               title: 'Giochi',
@@ -74,41 +74,23 @@ class _ItemsStatsList extends StatelessWidget {
   }
 
   Widget _beerList() {
-    return _ItemGroupSection(
-      maxWidth: maxWidth,
-      title: 'Birre',
-      items: [
-        Beer(
-          id: 'a',
-          name: 'Leffe',
-          imageBytes: null,
-          ratings: [],
-        ),
-        Beer(
-          id: 'a',
-          name: 'Leffe',
-          imageBytes: null,
-          ratings: [],
-        ),
-        Beer(
-          id: 'a',
-          name: 'Leffe',
-          imageBytes: null,
-          ratings: [],
-        ),
-        Beer(
-          id: 'a',
-          name: 'Leffe',
-          imageBytes: null,
-          ratings: [],
-        ),
-        Beer(
-          id: 'a',
-          name: 'Leffe',
-          imageBytes: null,
-          ratings: [],
-        ),
-      ],
+    return BlocBuilder<ItemsBloc, ItemsState>(
+      // buildWhen: (previous, current) => current.maybeMap(
+      //   update: (value) => true,
+      //   orElse: () => false,
+      // ),
+      builder: (context, state) {
+        return state.maybeMap(
+          update: (value) {
+            return _ItemGroupSection(
+              maxWidth: maxWidth,
+              title: 'Birre',
+              items: value.beers,
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
+      },
     );
   }
 
