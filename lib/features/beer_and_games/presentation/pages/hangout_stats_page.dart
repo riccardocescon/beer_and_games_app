@@ -91,7 +91,6 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
                           hasScrollBody: false,
                           child: _ItemsStatsList(
                             maxWidth: constraints.crossAxisExtent,
-                            onExpand: () {},
                           ),
                         );
                       },
