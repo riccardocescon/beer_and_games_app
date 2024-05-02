@@ -24,7 +24,7 @@ class HangoutStatsPageBloc
       emit(HangoutStatsPageState.hangout(_hangout));
 
       final preUsersPresence =
-          _hangout.allUsers.where((e) => e.precenceCount != null).length;
+          _hangout.allUsers.where((e) => e.presenceCount != null).length;
 
       int updateReceivedCounter = 0;
       int maxUpdateReceivedCounter = 3;
@@ -34,7 +34,7 @@ class HangoutStatsPageBloc
         final completed = state.maybeMap<bool>(
           loaded: (value) {
             final postUsersPresence = value.hangout.allUsers
-                .where((e) => e.precenceCount != null)
+                .where((e) => e.presenceCount != null)
                 .length;
 
             final isNewData = postUsersPresence > preUsersPresence;

@@ -13,7 +13,7 @@ class _VoteButton extends StatefulWidget {
 
 class __VoteButtonState extends State<_VoteButton>
     with SingleTickerProviderStateMixin {
-  User get me => sl<UserBloc>().user;
+  User get me => sl<UserBloc>().user!;
 
   Color get _buttonColor {
     switch (widget.presenceState) {

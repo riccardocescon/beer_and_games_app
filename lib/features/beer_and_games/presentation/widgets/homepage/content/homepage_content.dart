@@ -27,22 +27,37 @@ class HomepageContent extends StatelessWidget {
     return StaticBottomSheet(
       child: Padding(
         padding: const EdgeInsets.all(24.0),
-        child: BlocBuilder<HomepageBloc, HomepageState>(
-          buildWhen: (previous, current) => current.maybeMap(
-            loaded: (value) => true,
-            orElse: () => false,
-          ),
+        child: BlocBuilder<UserBloc, UserState>(
+          buildWhen: (previous, current) {
+            return current.maybeMap(
+              auth: (value) => value.user != null,
+              orElse: () => false,
+            );
+          },
           builder: (context, state) {
             return state.maybeMap(
-              loaded: (value) {
-                return Column(
-                  children: [
-                    _voteArea(value.hangout),
-                    Padding(
-                      padding: const EdgeInsets.symmetric(vertical: 16),
-                      child: _StatsRow(hangout: value.hangout),
-                    ),
-                  ],
+              auth: (userValue) {
+                return BlocBuilder<HomepageBloc, HomepageState>(
+                  buildWhen: (previous, current) => current.maybeMap(
+                    loaded: (value) => true,
+                    orElse: () => false,
+                  ),
+                  builder: (context, state) {
+                    return state.maybeMap(
+                      loaded: (value) {
+                        return Column(
+                          children: [
+                            _voteArea(value.hangout, userValue.user!),
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 16),
+                              child: _StatsRow(hangout: value.hangout),
+                            ),
+                          ],
+                        );
+                      },
+                      orElse: () => const SizedBox.shrink(),
+                    );
+                  },
                 );
               },
               orElse: () => const SizedBox.shrink(),
@@ -53,13 +68,13 @@ class HomepageContent extends StatelessWidget {
     );
   }
 
-  Widget _voteArea(Hangout hangout) {
+  Widget _voteArea(Hangout hangout, User user) {
     return BlocProvider(
       create: (context) => sl<HomepageVoteAreaBloc>()
         ..add(
           HomepageVoteAreaEvent.setup(
             hangout: hangout,
-            user: sl<UserBloc>().user,
+            user: user,
           ),
         ),
       child: const _VoteArea(),

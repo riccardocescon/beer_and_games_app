@@ -16,42 +16,43 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$CloudFailure {
-  String get message => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
     required TResult Function(String message) unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
     TResult? Function(String message)? unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
     TResult Function(String message)? unknown,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(NotFound value) notFound,
     required TResult Function(Unknown value) unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotFound value)? notFound,
     TResult? Function(Unknown value)? unknown,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotFound value)? notFound,
     TResult Function(Unknown value)? unknown,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $CloudFailureCopyWith<CloudFailure> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,8 +61,6 @@ abstract class $CloudFailureCopyWith<$Res> {
   factory $CloudFailureCopyWith(
           CloudFailure value, $Res Function(CloudFailure) then) =
       _$CloudFailureCopyWithImpl<$Res, CloudFailure>;
-  @useResult
-  $Res call({String message});
 }
 
 /// @nodoc
@@ -73,28 +72,102 @@ class _$CloudFailureCopyWithImpl<$Res, $Val extends CloudFailure>
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? message = null,
-  }) {
-    return _then(_value.copyWith(
-      message: null == message
-          ? _value.message
-          : message // ignore: cast_nullable_to_non_nullable
-              as String,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$UnknownImplCopyWith<$Res>
-    implements $CloudFailureCopyWith<$Res> {
+abstract class _$$NotFoundImplCopyWith<$Res> {
+  factory _$$NotFoundImplCopyWith(
+          _$NotFoundImpl value, $Res Function(_$NotFoundImpl) then) =
+      __$$NotFoundImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$NotFoundImplCopyWithImpl<$Res>
+    extends _$CloudFailureCopyWithImpl<$Res, _$NotFoundImpl>
+    implements _$$NotFoundImplCopyWith<$Res> {
+  __$$NotFoundImplCopyWithImpl(
+      _$NotFoundImpl _value, $Res Function(_$NotFoundImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$NotFoundImpl extends NotFound {
+  _$NotFoundImpl() : super._();
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
+    required TResult Function(String message) unknown,
+  }) {
+    return notFound();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
+    TResult? Function(String message)? unknown,
+  }) {
+    return notFound?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
+    TResult Function(String message)? unknown,
+    required TResult orElse(),
+  }) {
+    if (notFound != null) {
+      return notFound();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(NotFound value) notFound,
+    required TResult Function(Unknown value) unknown,
+  }) {
+    return notFound(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotFound value)? notFound,
+    TResult? Function(Unknown value)? unknown,
+  }) {
+    return notFound?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotFound value)? notFound,
+    TResult Function(Unknown value)? unknown,
+    required TResult orElse(),
+  }) {
+    if (notFound != null) {
+      return notFound(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class NotFound extends CloudFailure {
+  factory NotFound() = _$NotFoundImpl;
+  NotFound._() : super._();
+}
+
+/// @nodoc
+abstract class _$$UnknownImplCopyWith<$Res> {
   factory _$$UnknownImplCopyWith(
           _$UnknownImpl value, $Res Function(_$UnknownImpl) then) =
       __$$UnknownImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({String message});
 }
@@ -138,6 +211,7 @@ class _$UnknownImpl extends Unknown {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
+    required TResult Function() notFound,
     required TResult Function(String message) unknown,
   }) {
     return unknown(message);
@@ -146,6 +220,7 @@ class _$UnknownImpl extends Unknown {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? notFound,
     TResult? Function(String message)? unknown,
   }) {
     return unknown?.call(message);
@@ -154,6 +229,7 @@ class _$UnknownImpl extends Unknown {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? notFound,
     TResult Function(String message)? unknown,
     required TResult orElse(),
   }) {
@@ -166,6 +242,7 @@ class _$UnknownImpl extends Unknown {
   @override
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
+    required TResult Function(NotFound value) notFound,
     required TResult Function(Unknown value) unknown,
   }) {
     return unknown(this);
@@ -174,6 +251,7 @@ class _$UnknownImpl extends Unknown {
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(NotFound value)? notFound,
     TResult? Function(Unknown value)? unknown,
   }) {
     return unknown?.call(this);
@@ -182,6 +260,7 @@ class _$UnknownImpl extends Unknown {
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
+    TResult Function(NotFound value)? notFound,
     TResult Function(Unknown value)? unknown,
     required TResult orElse(),
   }) {
@@ -196,9 +275,7 @@ abstract class Unknown extends CloudFailure {
   factory Unknown(final String message) = _$UnknownImpl;
   Unknown._() : super._();
 
-  @override
   String get message;
-  @override
   @JsonKey(ignore: true)
   _$$UnknownImplCopyWith<_$UnknownImpl> get copyWith =>
       throw _privateConstructorUsedError;

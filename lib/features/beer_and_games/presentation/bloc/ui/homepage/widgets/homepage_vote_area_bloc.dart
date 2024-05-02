@@ -81,7 +81,8 @@ class HomepageVoteAreaBloc
             return true;
           },
           error: (value) {
-            emit(HomepageVoteAreaState.error(message: value.failure.message));
+            emit(
+                HomepageVoteAreaState.error(message: value.failure.toString()));
             return true;
           },
           orElse: () => false,

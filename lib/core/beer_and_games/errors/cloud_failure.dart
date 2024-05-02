@@ -8,10 +8,12 @@ part 'cloud_failure.freezed.dart';
 sealed class CloudFailure extends Failure with _$CloudFailure, EquatableMixin {
   CloudFailure._() : super();
 
+  factory CloudFailure.notFound() = NotFound;
   factory CloudFailure.unknown(String message) = Unknown;
 
   @override
   List<Object?> get props => map(
         unknown: (value) => [value.message],
+        notFound: (value) => [],
       );
 }
