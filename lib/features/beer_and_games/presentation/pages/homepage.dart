@@ -67,12 +67,6 @@ class _HomepageState extends State<Homepage> {
             ],
           ),
         ),
-        // body: Column(
-        //   children: [
-        //     TopArea(),
-        //     HomepageContent(),
-        //   ],
-        // ),
       ),
     );
   }

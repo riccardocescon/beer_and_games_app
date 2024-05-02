@@ -6,6 +6,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/edit_hangout/edit_hangout_page_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/bloc/user_bloc.dart/user_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/pages/edit_hangout_date_time_page.dart';
 import 'package:beer_and_games/injection_container.dart';
 import 'package:flutter/material.dart';

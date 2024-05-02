@@ -71,7 +71,7 @@ class HangoutRepositoryImpl extends HangoutRepository {
           final user = users.firstWhere((user) => user.email == presence.email);
           updatedDataUsers.add(
             user.copyWith(
-              precenceCount: presence.presenceCount,
+              presenceCount: presence.presenceCount,
               forcePercenceCountUpdate: true,
             ),
           );

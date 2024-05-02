@@ -19,6 +19,15 @@ extension NavigationShortcut on BuildContext {
     );
   }
 
+  void pushReplacement(Widget page, {bool fullscreenDialog = false}) {
+    Navigator.of(this).pushReplacement(
+      MaterialPageRoute(
+        fullscreenDialog: fullscreenDialog,
+        builder: (context) => page,
+      ),
+    );
+  }
+
   void pop() {
     Navigator.of(this).pop();
   }

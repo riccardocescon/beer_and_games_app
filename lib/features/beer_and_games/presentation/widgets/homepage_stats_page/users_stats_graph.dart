@@ -15,14 +15,14 @@ class _UsersStatsGraphState extends State<_UsersStatsGraph> {
   List<User> get sortedUsers {
     List<User> users = widget.users.toList();
     if (!_showUserData) {
-      users = users.map((e) => e.copyWith(precenceCount: 0)).toList();
+      users = users.map((e) => e.copyWith(presenceCount: 0)).toList();
     }
     return users..sort((a, b) => a.email.compareTo(b.email));
   }
 
   double get _maxUsersPresence {
     return widget.users
-        .map((e) => e.precenceCount ?? 0)
+        .map((e) => e.presenceCount ?? 0)
         .reduce((value, element) => value > element ? value : element)
         .toDouble();
   }
@@ -178,7 +178,7 @@ class _UsersStatsGraphState extends State<_UsersStatsGraph> {
             ),
             children: [
               TextSpan(
-                text: '\n${user.precenceCount}',
+                text: '\n${user.presenceCount}',
                 style: TextStyle(
                   color: textColor,
                   fontWeight: FontWeight.bold,
@@ -224,7 +224,7 @@ class _UsersStatsGraphState extends State<_UsersStatsGraph> {
           x: index,
           barRods: [
             BarChartRodData(
-              toY: sortedUsers[index].precenceCount?.toDouble() ?? 0,
+              toY: sortedUsers[index].presenceCount?.toDouble() ?? 0,
               width: 16,
               color: color.withOpacity(opacity),
             ),
