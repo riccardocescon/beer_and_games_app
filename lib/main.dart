@@ -1,10 +1,9 @@
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/user_bloc.dart/user_bloc.dart';
-import 'package:beer_and_games/features/beer_and_games/presentation/pages/homepage.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/pages/login_page.dart';
 import 'package:beer_and_games/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'injection_container.dart' as di;
@@ -47,14 +46,10 @@ class MyApp extends StatelessWidget {
       home: MultiBlocProvider(
         providers: [
           BlocProvider(
-            create: (context) =>
-                di.sl<HomepageBloc>()..add(const HomepageEvent.setup()),
-          ),
-          BlocProvider(
             create: (context) => di.sl<UserBloc>(),
           ),
         ],
-        child: const Homepage(),
+        child: LoginPage(),
       ),
     );
   }
