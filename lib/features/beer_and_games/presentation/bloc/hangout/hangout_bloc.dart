@@ -218,7 +218,6 @@ class _LocalTimeTracker {
     missingDays = seconds ~/ 86400;
     missingHours = (seconds % 86400) ~/ 3600;
     missingMinutes = (seconds % 3600) ~/ 60;
-    if (missingDays > 0) missingDays--;
   }
 
   void removeMinute() {
