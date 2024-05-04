@@ -16,7 +16,6 @@ import 'package:beer_and_games/features/beer_and_games/domain/repositories/game_
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/hangout_repository.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/user_repository.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/wine_repository.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/usecases/beers/beers_selector.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_selector.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/hangout/hangout_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/user/user_usecases.dart';
@@ -32,6 +31,8 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:get_it/get_it.dart';
 import 'package:google_sign_in/google_sign_in.dart';
+
+import 'features/beer_and_games/domain/usecases/beers/beer_usecases.dart';
 
 GetIt sl = GetIt.instance;
 void init() {
@@ -63,6 +64,7 @@ void init() {
     () => ItemsBloc(
       gamesSelector: sl(),
       beersSelector: sl(),
+      beersRatiningUpdater: sl(),
       winesSelector: sl(),
     ),
   );
@@ -78,6 +80,7 @@ void init() {
   sl.registerFactory(() => UserGetter(userRepository: sl()));
   sl.registerFactory(() => UserSigner(userRepository: sl()));
   sl.registerFactory(() => UserLogout(userRepository: sl()));
+  sl.registerFactory(() => BeersRatiningUpdater(beerRepository: sl()));
 
   // Repository
   sl.registerFactory<HangoutRepository>(

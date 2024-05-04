@@ -1,8 +1,4 @@
-import 'package:beer_and_games/core/beer_and_games/domain/usecases/usecase.dart';
-import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/repositories/beer_repository.dart';
-import 'package:dartz/dartz.dart';
+part of 'beer_usecases.dart';
 
 class BeersSelector extends StreamUseCase<List<Beer>, void> {
   final BeerRepository beerRepository;

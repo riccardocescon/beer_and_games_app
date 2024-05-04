@@ -11,10 +11,11 @@ class UserRatingModel extends DataMapper<UserRating> {
     required this.userEmail,
   });
 
-  factory UserRatingModel.fromMapEntry(MapEntry<String, dynamic> map) {
+  factory UserRatingModel.fromFirebase(String value) {
+    final part = value.split('|');
     return UserRatingModel._(
-      userEmail: map.key,
-      rating: map.value,
+      userEmail: part[0],
+      rating: int.parse(part[1]),
     );
   }
 

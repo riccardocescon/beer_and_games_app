@@ -21,13 +21,7 @@ class _RatableItemBottomSheet extends StatelessWidget {
         children: [
           _titleIcon(context),
           height20,
-          SizedBox(
-            height: _bottomSheetHeigth,
-            child: _BottomSheetRatableBar(
-              ratings: item.ratings,
-              users: _allUsers,
-            ),
-          ),
+          _bottomContent(),
         ],
       ),
     );
@@ -61,6 +55,48 @@ class _RatableItemBottomSheet extends StatelessWidget {
               ? const SizedBox.shrink()
               : Image.memory(item.imageBytes!),
         ],
+      ),
+    );
+  }
+
+  Widget _bottomContent() {
+    return SizedBox(
+      height: _bottomSheetHeigth,
+      child: BlocBuilder<ItemsBloc, ItemsState>(
+        buildWhen: (previous, current) {
+          return current.maybeMap(
+            update: (value) {
+              final prev = previous.maybeMap(
+                update: (value) => value,
+                orElse: () => null,
+              );
+              if (prev == null) return true;
+
+              final prevValues = item is Beer ? prev.beers : prev.wines;
+              final currentValues = item is Beer ? value.beers : value.wines;
+
+              final prevValue = prevValues
+                  .firstWhereOrNull((element) => element.id == item.id);
+              if (prevValue == null) return true;
+
+              final currentValue = currentValues
+                  .firstWhereOrNull((element) => element.id == item.id);
+              return currentValue != prevValue;
+            },
+            orElse: () => false,
+          );
+        },
+        builder: (context, state) {
+          return state.maybeMap(
+            update: (value) {
+              return _BottomSheetRatableBar(
+                item: item,
+                users: _allUsers,
+              );
+            },
+            orElse: () => const SizedBox.shrink(),
+          );
+        },
       ),
     );
   }

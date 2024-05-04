@@ -1,10 +1,15 @@
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/features/beer_and_games/data/models/beer_model.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/user_rating.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class _BeerAPI {
   Stream<Either<CloudFailure, List<BeerModel>>> getBeers();
+  Future<Either<CloudFailure, void>> updateRating({
+    required String beerId,
+    required List<UserRating> ratings,
+  });
 }
 
 class BeerAPI extends _BeerAPI {
@@ -25,5 +30,31 @@ class BeerAPI extends _BeerAPI {
           .toList();
       return Right(beers);
     });
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> updateRating({
+    required String beerId,
+    required List<UserRating> ratings,
+  }) async {
+    try {
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('beers')
+          .doc(beerId)
+          .update(
+        {
+          'ratings': List.generate(
+            ratings.length,
+            (index) =>
+                '${ratings[index].userEmail}|${ratings[index].rating.value}',
+          )
+        },
+      );
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
   }
 }

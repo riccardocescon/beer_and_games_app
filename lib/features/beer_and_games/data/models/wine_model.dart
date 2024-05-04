@@ -1,4 +1,3 @@
-import 'dart:convert';
 import 'package:beer_and_games/features/beer_and_games/data/models/user_rating_model.dart';
 
 class WineModel {
@@ -15,12 +14,10 @@ class WineModel {
   });
 
   factory WineModel.fromJson(Map<String, dynamic> json, {required String id}) {
-    final ratingsData = jsonDecode(json['ratings']) as Map<String, dynamic>;
+    final ratingsData = json['ratings'] as List;
     final ratings = List.generate(
-      ratingsData.entries.length,
-      (index) => UserRatingModel.fromMapEntry(
-        ratingsData.entries.elementAt(index),
-      ),
+      ratingsData.length,
+      (index) => UserRatingModel.fromFirebase(ratingsData.elementAt(index)),
     );
     return WineModel._(
       id: id,

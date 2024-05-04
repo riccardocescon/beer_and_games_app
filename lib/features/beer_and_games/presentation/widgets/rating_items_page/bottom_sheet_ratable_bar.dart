@@ -2,14 +2,12 @@ part of 'package:beer_and_games/features/beer_and_games/presentation/pages/ratin
 
 class _BottomSheetRatableBar extends StatelessWidget {
   const _BottomSheetRatableBar({
-    required this.ratings,
+    required this.item,
     required this.users,
   });
 
-  final List<UserRating> ratings;
+  final RateableItem item;
   final List<User> users;
-
-  User get _me => sl<UserBloc>().user!;
 
   final _avatarSize = 20.0;
   final _avatarSpacing = 2.0;
@@ -19,7 +17,7 @@ class _BottomSheetRatableBar extends StatelessWidget {
     return Column(
       children: [
         _usersArea(context),
-        _bar(),
+        _bar(context),
       ],
     );
   }
@@ -37,7 +35,7 @@ class _BottomSheetRatableBar extends StatelessWidget {
 
   Widget _userVoteAreaItem(BuildContext context, Rating rating) {
     final currentRatings =
-        ratings.where((element) => element.rating == rating).toList();
+        item.ratings.where((element) => element.rating == rating).toList();
     final ratingUsers = users
         .where((element) =>
             currentRatings.any((rat) => rat.userEmail == element.email))
@@ -76,27 +74,35 @@ class _BottomSheetRatableBar extends StatelessWidget {
                 spacing: _avatarSpacing,
                 runSpacing: _avatarSpacing,
                 children: List.generate(
-                  showUsers,
+                  maxUsers,
                   (index) {
+                    final hidden = index >= showUsers;
                     final shouldOverflow = showUsers == maxUsers &&
                         index == maxUsers - 1 &&
                         overflowUsers > 0;
-                    return Container(
-                      height: _avatarSize,
-                      padding: const EdgeInsets.all(4),
-                      decoration: BoxDecoration(
-                        color: rating.backgroundColor,
-                        shape: BoxShape.circle,
-                      ),
-                      child: Text(
-                        shouldOverflow
-                            ? '+$overflowUsers'
-                            : ratingUsers[index].letters,
-                        style: context.textTheme.labelSmall?.copyWith(
-                          color: rating.color,
-                          fontSize: 8,
-                        ),
-                      ),
+                    return AnimatedSwitcher(
+                      duration: const Duration(milliseconds: 300),
+                      switchInCurve: Curves.easeInOutCubic,
+                      switchOutCurve: Curves.easeInOutCubic,
+                      child: hidden
+                          ? SizedBox.fromSize()
+                          : Container(
+                              height: _avatarSize,
+                              padding: const EdgeInsets.all(4),
+                              decoration: BoxDecoration(
+                                color: rating.backgroundColor,
+                                shape: BoxShape.circle,
+                              ),
+                              child: Text(
+                                shouldOverflow
+                                    ? '+$overflowUsers'
+                                    : ratingUsers[index].letters,
+                                style: context.textTheme.labelSmall?.copyWith(
+                                  color: rating.color,
+                                  fontSize: 8,
+                                ),
+                              ),
+                            ),
                     );
                   },
                 ),
@@ -108,40 +114,14 @@ class _BottomSheetRatableBar extends StatelessWidget {
     );
   }
 
-  Widget _bar() {
+  Widget _bar(BuildContext context) {
     return Row(
       children: List.generate(
         Rating.values.length,
-        (index) => _button(Rating.values[index]),
-      ),
-    );
-  }
-
-  Widget _button(Rating rating) {
-    final topLeft = rating == Rating.hate ? 24.0 : 0.0;
-    final bottomLeft = rating == Rating.hate ? 24.0 : 0.0;
-    final topRight = rating == Rating.love ? 24.0 : 0.0;
-    final bottomRight = rating == Rating.love ? 24.0 : 0.0;
-    final votedByMe = ratings.any((element) =>
-        element.userEmail == _me.email && element.rating == rating);
-    return Expanded(
-      child: FilledButton(
-        onPressed: () {},
-        style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(
-              votedByMe ? rating.color : rating.backgroundColor),
-          shape: MaterialStateProperty.all(
-            RoundedRectangleBorder(
-              borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(topLeft),
-                bottomLeft: Radius.circular(bottomLeft),
-                topRight: Radius.circular(topRight),
-                bottomRight: Radius.circular(bottomRight),
-              ),
-            ),
-          ),
+        (index) => _BottomSheetBarButton(
+          item: item,
+          rating: Rating.values[index],
         ),
-        child: Image.asset(rating.iconPath),
       ),
     );
   }

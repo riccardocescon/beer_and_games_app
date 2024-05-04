@@ -24,7 +24,10 @@ class _RatableItemState<T extends RateableItem> extends State<_RatableItem<T>> {
         onPressed: () {
           showModalBottomSheet(
             context: context,
-            builder: (context) => _RatableItemBottomSheet(item: updatedItem),
+            builder: (_) => BlocProvider.value(
+              value: context.read<ItemsBloc>(),
+              child: _RatableItemBottomSheet(item: updatedItem),
+            ),
             backgroundColor: MaterialTheme.darkScheme().surfaceContainer,
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
@@ -35,8 +38,11 @@ class _RatableItemState<T extends RateableItem> extends State<_RatableItem<T>> {
           padding: MaterialStateProperty.all(
             const EdgeInsets.all(0),
           ),
-          backgroundColor: MaterialStateProperty.all(
-            Colors.transparent,
+          backgroundColor: MaterialStateProperty.all(Colors.transparent),
+          shape: MaterialStateProperty.all(
+            RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16),
+            ),
           ),
         ),
         child: Column(

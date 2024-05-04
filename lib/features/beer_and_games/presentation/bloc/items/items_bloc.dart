@@ -2,10 +2,13 @@ import 'dart:developer';
 
 import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
+import 'package:beer_and_games/core/enums/rating.dart';
+import 'package:beer_and_games/core/extentions/either_extensions.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/ratable_item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/usecases/beers/beers_selector.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/usecases/beers/beer_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_selector.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/wines/wines_selector.dart';
 import 'package:equatable/equatable.dart';
@@ -19,11 +22,13 @@ part 'items_state.dart';
 class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final GamesSelector gamesSelector;
   final BeersSelector beersSelector;
+  final BeersRatiningUpdater beersRatiningUpdater;
   final WinesSelector winesSelector;
 
   ItemsBloc({
     required this.gamesSelector,
     required this.beersSelector,
+    required this.beersRatiningUpdater,
     required this.winesSelector,
   }) : super(const ItemsState.init()) {
     on<Download>((event, emit) async {
@@ -97,6 +102,24 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
           wineSubscription.asFuture(),
         ],
       );
+    });
+    on<UpdateRating>((event, emit) async {
+      final item = event.item;
+      final rating = event.rating;
+      final userEmail = event.userEmail;
+
+      if (item is Beer) {
+        final result = await beersRatiningUpdater.call(
+          BeerRatingUpdatedParams(
+            item: item,
+            rating: rating,
+            userEmail: userEmail,
+          ),
+        );
+        if (result.isLeft()) {
+          emit(ItemsState.error(result.left));
+        }
+      }
     });
   }
 }
