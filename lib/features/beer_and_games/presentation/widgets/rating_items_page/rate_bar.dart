@@ -24,7 +24,9 @@ class _RateBar extends StatelessWidget {
             borderRadius: BorderRadius.circular(8),
           ),
         ),
-        Container(
+        AnimatedContainer(
+          duration: const Duration(milliseconds: 300),
+          curve: Curves.easeInOutCubic,
           width: votes / maxVotes * 100,
           height: 16,
           decoration: BoxDecoration(

@@ -79,9 +79,19 @@ class _ItemGroupSection extends StatelessWidget {
         GestureDetector(
           onTap: () {
             if (items is List<Beer>) {
-              context.push(RatingItemsPage(items: items as List<Beer>));
+              context.push(
+                BlocProvider.value(
+                  value: context.read<ItemsBloc>(),
+                  child: RatingItemsPage(items: items as List<Beer>),
+                ),
+              );
             } else if (items is List<Wine>) {
-              context.push(RatingItemsPage(items: items as List<Wine>));
+              context.push(
+                BlocProvider.value(
+                  value: context.read<ItemsBloc>(),
+                  child: RatingItemsPage(items: items as List<Wine>),
+                ),
+              );
             } else {
               context.warningSnackbar('Work in progress', 'Coming soon!');
             }

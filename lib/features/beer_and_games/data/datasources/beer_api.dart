@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class _BeerAPI {
-  Future<Either<CloudFailure, List<BeerModel>>> getBeers();
+  Stream<Either<CloudFailure, List<BeerModel>>> getBeers();
 }
 
 class BeerAPI extends _BeerAPI {
@@ -13,15 +13,17 @@ class BeerAPI extends _BeerAPI {
   BeerAPI({required this.firestore});
 
   @override
-  Future<Either<CloudFailure, List<BeerModel>>> getBeers() async {
-    final games = await firestore
+  Stream<Either<CloudFailure, List<BeerModel>>> getBeers() async* {
+    yield* firestore
         .collection('hangout')
         .doc('cespuglio')
         .collection('beers')
-        .get();
-
-    return Right(
-      games.docs.map((e) => BeerModel.fromJson(e.data(), id: e.id)).toList(),
-    );
+        .snapshots()
+        .map((snapshot) {
+      final beers = snapshot.docs
+          .map((doc) => BeerModel.fromJson(doc.data(), id: doc.id))
+          .toList();
+      return Right(beers);
+    });
   }
 }

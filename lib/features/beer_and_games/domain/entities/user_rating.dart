@@ -1,6 +1,7 @@
 import 'package:beer_and_games/core/enums/rating.dart';
+import 'package:equatable/equatable.dart';
 
-class UserRating {
+class UserRating with EquatableMixin {
   final Rating rating;
   final String userEmail;
 
@@ -18,4 +19,7 @@ class UserRating {
       userEmail: userEmail ?? this.userEmail,
     );
   }
+
+  @override
+  List<Object?> get props => [rating, userEmail];
 }

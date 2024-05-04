@@ -22,52 +22,54 @@ class WineRepositoryImpl extends WineRepository with ImageSelectorApiHelper {
 
   @override
   Stream<Either<Failure, List<Wine>>> select() async* {
-    final foWines = await wineAPI.getWines();
+    final foWinesStream = wineAPI.getWines();
 
-    if (foWines.isLeft()) {
-      yield Left(foWines.left);
-      return;
-    }
-    final wineModels = foWines.right;
-    final wines = wineModels
-        .map(
-          (e) => Wine(
-            id: e.id,
-            name: e.name,
-            ratings: e.ratings.map((e) => e.toEntity).toList(),
-          ),
-        )
-        .toList();
+    await for (final foWines in foWinesStream) {
+      if (foWines.isLeft()) {
+        yield Left(foWines.left);
+        return;
+      }
+      final wineModels = foWines.right;
+      final wines = wineModels
+          .map(
+            (e) => Wine(
+              id: e.id,
+              name: e.name,
+              ratings: e.ratings.map((e) => e.toEntity).toList(),
+            ),
+          )
+          .toList();
 
-    yield Right(wines);
+      yield Right(wines);
 
-    final winesModelsWithImage =
-        wineModels.where((element) => element.imageUrl != null);
-    final winesWithImage = wines
-        .where((element) =>
-            winesModelsWithImage.any((model) => element.name == model.name))
-        .toList();
-    for (final currentWine in winesWithImage) {
-      final imagePath = _getImagePath(
-        gameId: currentWine.id,
-        wineModels: wineModels,
-      );
+      final winesModelsWithImage =
+          wineModels.where((element) => element.imageUrl != null);
+      final winesWithImage = wines
+          .where((element) =>
+              winesModelsWithImage.any((model) => element.name == model.name))
+          .toList();
+      for (final currentWine in winesWithImage) {
+        final imagePath = _getImagePath(
+          gameId: currentWine.id,
+          wineModels: wineModels,
+        );
 
-      final foImage = await getImageBytes(
-        id: currentWine.id,
-        name: currentWine.name,
-        imagePath: imagePath,
-        localImageStorageAPI: localImageStorageAPI,
-        cloudImageStorageAPI: cloudImageStorageAPI,
-      );
+        final foImage = await getImageBytes(
+          id: currentWine.id,
+          name: currentWine.name,
+          imagePath: imagePath,
+          localImageStorageAPI: localImageStorageAPI,
+          cloudImageStorageAPI: cloudImageStorageAPI,
+        );
 
-      yield foImage.fold(
-        (l) => Left(l),
-        (r) {
-          currentWine.imageBytes = r;
-          return Right(wines);
-        },
-      );
+        yield foImage.fold(
+          (l) => Left(l),
+          (r) {
+            currentWine.imageBytes = r;
+            return Right(wines);
+          },
+        );
+      }
     }
   }
 

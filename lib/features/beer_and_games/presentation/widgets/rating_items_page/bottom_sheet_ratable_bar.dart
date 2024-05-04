@@ -9,6 +9,8 @@ class _BottomSheetRatableBar extends StatelessWidget {
   final List<UserRating> ratings;
   final List<User> users;
 
+  User get _me => sl<UserBloc>().user!;
+
   final _avatarSize = 20.0;
   final _avatarSpacing = 2.0;
 
@@ -24,12 +26,10 @@ class _BottomSheetRatableBar extends StatelessWidget {
 
   Widget _usersArea(BuildContext context) {
     return Expanded(
-      child: Container(
-        child: Row(
-          children: List.generate(
-            Rating.values.length,
-            (index) => _userVoteAreaItem(context, Rating.values[index]),
-          ),
+      child: Row(
+        children: List.generate(
+          Rating.values.length,
+          (index) => _userVoteAreaItem(context, Rating.values[index]),
         ),
       ),
     );
@@ -122,11 +122,14 @@ class _BottomSheetRatableBar extends StatelessWidget {
     final bottomLeft = rating == Rating.hate ? 24.0 : 0.0;
     final topRight = rating == Rating.love ? 24.0 : 0.0;
     final bottomRight = rating == Rating.love ? 24.0 : 0.0;
+    final votedByMe = ratings.any((element) =>
+        element.userEmail == _me.email && element.rating == rating);
     return Expanded(
       child: FilledButton(
         onPressed: () {},
         style: ButtonStyle(
-          backgroundColor: MaterialStateProperty.all(rating.backgroundColor),
+          backgroundColor: MaterialStateProperty.all(
+              votedByMe ? rating.color : rating.backgroundColor),
           shape: MaterialStateProperty.all(
             RoundedRectangleBorder(
               borderRadius: BorderRadius.only(

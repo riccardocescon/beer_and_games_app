@@ -22,52 +22,54 @@ class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
 
   @override
   Stream<Either<Failure, List<Beer>>> select() async* {
-    final foBeers = await beerAPI.getBeers();
+    final foBeersStream = beerAPI.getBeers();
 
-    if (foBeers.isLeft()) {
-      yield Left(foBeers.left);
-      return;
-    }
-    final beerModels = foBeers.right;
-    final beers = beerModels
-        .map(
-          (e) => Beer(
-            id: e.id,
-            name: e.name,
-            ratings: e.ratings.map((e) => e.toEntity).toList(),
-          ),
-        )
-        .toList();
+    await for (final foBeers in foBeersStream) {
+      if (foBeers.isLeft()) {
+        yield Left(foBeers.left);
+        return;
+      }
+      final beerModels = foBeers.right;
+      final beers = beerModels
+          .map(
+            (e) => Beer(
+              id: e.id,
+              name: e.name,
+              ratings: e.ratings.map((e) => e.toEntity).toList(),
+            ),
+          )
+          .toList();
 
-    yield Right(beers);
+      yield Right(beers);
 
-    final beersModelsWithImage =
-        beerModels.where((element) => element.imageUrl != null);
-    final beersWithImage = beers
-        .where((element) =>
-            beersModelsWithImage.any((model) => element.name == model.name))
-        .toList();
-    for (final currentBeer in beersWithImage) {
-      final imagePath = _getImagePath(
-        gameId: currentBeer.id,
-        beerModels: beerModels,
-      );
+      final beersModelsWithImage =
+          beerModels.where((element) => element.imageUrl != null);
+      final beersWithImage = beers
+          .where((element) =>
+              beersModelsWithImage.any((model) => element.name == model.name))
+          .toList();
+      for (final currentBeer in beersWithImage) {
+        final imagePath = _getImagePath(
+          gameId: currentBeer.id,
+          beerModels: beerModels,
+        );
 
-      final foImage = await getImageBytes(
-        id: currentBeer.id,
-        name: currentBeer.name,
-        imagePath: imagePath,
-        localImageStorageAPI: localImageStorageAPI,
-        cloudImageStorageAPI: cloudImageStorageAPI,
-      );
+        final foImage = await getImageBytes(
+          id: currentBeer.id,
+          name: currentBeer.name,
+          imagePath: imagePath,
+          localImageStorageAPI: localImageStorageAPI,
+          cloudImageStorageAPI: cloudImageStorageAPI,
+        );
 
-      yield foImage.fold(
-        (l) => Left(l),
-        (r) {
-          currentBeer.imageBytes = r;
-          return Right(beers);
-        },
-      );
+        yield foImage.fold(
+          (l) => Left(l),
+          (r) {
+            currentBeer.imageBytes = r;
+            return Right(beers);
+          },
+        );
+      }
     }
   }
 
