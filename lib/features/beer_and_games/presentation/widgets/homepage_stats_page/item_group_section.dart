@@ -63,10 +63,13 @@ class _ItemGroupSection extends StatelessWidget {
       paddingBuilder: (context, index, maxItems) =>
           index == 0 ? EdgeInsets.zero : EdgeInsets.only(left: _itemPadding),
       builder: (context, index, maxItems) {
-        return StatsItem(
-          itemWidth: _itemLength,
-          itemHeight: _itemHeight,
-          item: items[index],
+        return GestureDetector(
+          onTap: () => _showMore(context),
+          child: StatsItem(
+            itemWidth: _itemLength,
+            itemHeight: _itemHeight,
+            item: items[index],
+          ),
         );
       },
     );
@@ -77,25 +80,7 @@ class _ItemGroupSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         GestureDetector(
-          onTap: () {
-            if (items is List<Beer>) {
-              context.push(
-                BlocProvider.value(
-                  value: context.read<ItemsBloc>(),
-                  child: RatingItemsPage(items: items as List<Beer>),
-                ),
-              );
-            } else if (items is List<Wine>) {
-              context.push(
-                BlocProvider.value(
-                  value: context.read<ItemsBloc>(),
-                  child: RatingItemsPage(items: items as List<Wine>),
-                ),
-              );
-            } else {
-              context.warningSnackbar('Work in progress', 'Coming soon!');
-            }
-          },
+          onTap: () => _showMore(context),
           child: Text(
             'Vedi di più',
             style: context.textTheme.labelMedium?.copyWith(
@@ -105,5 +90,25 @@ class _ItemGroupSection extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _showMore(BuildContext context) {
+    if (items is List<Beer>) {
+      context.push(
+        BlocProvider.value(
+          value: context.read<ItemsBloc>(),
+          child: RatingItemsPage(items: items as List<Beer>),
+        ),
+      );
+    } else if (items is List<Wine>) {
+      context.push(
+        BlocProvider.value(
+          value: context.read<ItemsBloc>(),
+          child: RatingItemsPage(items: items as List<Wine>),
+        ),
+      );
+    } else {
+      context.warningSnackbar('Work in progress', 'Coming soon!');
+    }
   }
 }
