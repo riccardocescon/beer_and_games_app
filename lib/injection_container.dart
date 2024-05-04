@@ -19,7 +19,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/repositories/wine_
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_selector.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/hangout/hangout_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/user/user_usecases.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/usecases/wines/wines_selector.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/usecases/wines/wine_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/edit_hangout/edit_hangout_page_bloc.dart';
@@ -66,6 +66,7 @@ void init() {
       beersSelector: sl(),
       beersRatiningUpdater: sl(),
       winesSelector: sl(),
+      wineRatingUpdates: sl(),
     ),
   );
 
@@ -81,6 +82,7 @@ void init() {
   sl.registerFactory(() => UserSigner(userRepository: sl()));
   sl.registerFactory(() => UserLogout(userRepository: sl()));
   sl.registerFactory(() => BeersRatiningUpdater(beerRepository: sl()));
+  sl.registerFactory(() => WineRatingUpdates(wineRepository: sl()));
 
   // Repository
   sl.registerFactory<HangoutRepository>(

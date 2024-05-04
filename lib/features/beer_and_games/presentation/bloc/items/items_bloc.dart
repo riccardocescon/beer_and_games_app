@@ -10,7 +10,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart
 import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/beers/beer_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_selector.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/usecases/wines/wines_selector.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/usecases/wines/wine_usecases.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -24,12 +24,14 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final BeersSelector beersSelector;
   final BeersRatiningUpdater beersRatiningUpdater;
   final WinesSelector winesSelector;
+  final WineRatingUpdates wineRatingUpdates;
 
   ItemsBloc({
     required this.gamesSelector,
     required this.beersSelector,
     required this.beersRatiningUpdater,
     required this.winesSelector,
+    required this.wineRatingUpdates,
   }) : super(const ItemsState.init()) {
     on<Download>((event, emit) async {
       List<Game> games = [];
@@ -111,6 +113,17 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
       if (item is Beer) {
         final result = await beersRatiningUpdater.call(
           BeerRatingUpdatedParams(
+            item: item,
+            rating: rating,
+            userEmail: userEmail,
+          ),
+        );
+        if (result.isLeft()) {
+          emit(ItemsState.error(result.left));
+        }
+      } else if (item is Wine) {
+        final result = await wineRatingUpdates.call(
+          WineRatingUpdatedParams(
             item: item,
             rating: rating,
             userEmail: userEmail,

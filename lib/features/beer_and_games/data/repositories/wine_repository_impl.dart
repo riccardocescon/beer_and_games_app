@@ -1,10 +1,15 @@
+import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
+import 'package:beer_and_games/core/enums/rating.dart';
 import 'package:beer_and_games/core/extentions/either_extensions.dart';
+import 'package:beer_and_games/core/extentions/list_extensions.dart';
 import 'package:beer_and_games/core/mixin/image_selector_api_helper.dart';
 import 'package:beer_and_games/features/beer_and_games/data/datasources/cloud_image_storage_api.dart';
 import 'package:beer_and_games/features/beer_and_games/data/datasources/local_image_storage_api.dart';
 import 'package:beer_and_games/features/beer_and_games/data/datasources/wine_api.dart';
 import 'package:beer_and_games/features/beer_and_games/data/models/wine_model.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/ratable_item.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/user_rating.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/wine_repository.dart';
 import 'package:dartz/dartz.dart';
@@ -78,4 +83,24 @@ class WineRepositoryImpl extends WineRepository with ImageSelectorApiHelper {
     required List<WineModel> wineModels,
   }) =>
       wineModels.firstWhere((element) => element.id == gameId).imageUrl!;
+
+  @override
+  Future<Either<CloudFailure, void>> updateRating({
+    required String userEmail,
+    required Rating rating,
+    required RateableItem item,
+  }) async {
+    final foVote =
+        item.ratings.firstWhereOrNull((e) => e.userEmail == userEmail);
+    if (foVote != null) {
+      final index = item.ratings.indexOf(foVote);
+      item.ratings[index] = foVote.copyWith(rating: rating);
+    } else {
+      item.ratings.add(UserRating(userEmail: userEmail, rating: rating));
+    }
+    return await wineAPI.updateRating(
+      beerId: item.id,
+      ratings: item.ratings,
+    );
+  }
 }
