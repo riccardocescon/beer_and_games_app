@@ -16,8 +16,36 @@ class CloudImageStorageAPI extends ImageStorageAPI {
   ) async {
     try {
       final bytes = await storage.ref().child(imagePath).getData();
-      //TODO: handle null case
-      return Right(Uint8List.fromList(bytes!));
+      if (bytes == null) return Left(CloudFailure.notFound());
+
+      return Right(Uint8List.fromList(bytes));
+    } on FirebaseException catch (e) {
+      if (e.code == 'object-not-found') return Left(CloudFailure.notFound());
+      return Left(CloudFailure.unknown(e.toString()));
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> uploadImage(
+    String imagePath,
+    Uint8List bytes,
+  ) async {
+    try {
+      await storage.ref().child(imagePath).putData(bytes);
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> deleteImage(String imagePath) async {
+    try {
+      final ref = storage.ref().child(imagePath);
+      await ref.delete();
+      return const Right(null);
     } catch (e) {
       return Left(CloudFailure.unknown(e.toString()));
     }

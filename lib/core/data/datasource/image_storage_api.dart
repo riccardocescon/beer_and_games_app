@@ -4,15 +4,10 @@ import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class ImageStorageAPI {
-  // Future<String> uploadImage(
-  //   String path,
-  //   String imageName,
-  //   String imageExtension,
-  // );
+  Future<Either<Failure, void>> uploadImage(
+    String imagePath,
+    Uint8List bytes,
+  );
   Future<Either<Failure, Uint8List>> downloadImage(String imagePath);
-  // Future<void> deleteImage(
-  //   String path,
-  //   String imageName,
-  //   String imageExtension,
-  // );
+  Future<Either<Failure, void>> deleteImage(String imagePath);
 }

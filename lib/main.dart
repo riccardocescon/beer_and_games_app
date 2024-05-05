@@ -43,7 +43,7 @@ class MyApp extends StatelessWidget {
       darkTheme: _theme.dark().copyWith(
             popupMenuTheme: PopupMenuThemeData(
               shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(64),
+                borderRadius: BorderRadius.circular(32),
               ),
             ),
           ),

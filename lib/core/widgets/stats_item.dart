@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
 import 'package:beer_and_games/theme.dart';
@@ -41,7 +43,10 @@ class StatsItem extends StatelessWidget {
         color: MaterialTheme.darkScheme().surfaceContainerHigh,
         child: item.imageBytes == null
             ? const SizedBox.shrink()
-            : Image.memory(item.imageBytes!, fit: BoxFit.cover),
+            : Image.memory(
+                Uint8List.fromList(item.imageBytes!),
+                fit: BoxFit.cover,
+              ),
       ),
     );
   }

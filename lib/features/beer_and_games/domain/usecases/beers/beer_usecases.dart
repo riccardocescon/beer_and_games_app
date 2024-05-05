@@ -8,3 +8,4 @@ import 'package:dartz/dartz.dart';
 
 part 'beers_selector.dart';
 part 'beer_rating_updater.dart';
+part 'beer_info_updater.dart';

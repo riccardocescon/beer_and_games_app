@@ -12,4 +12,5 @@ abstract class BeerRepository {
     required Rating rating,
     required RateableItem item,
   });
+  Future<Either<CloudFailure, void>> updateInfo({required Beer beer});
 }

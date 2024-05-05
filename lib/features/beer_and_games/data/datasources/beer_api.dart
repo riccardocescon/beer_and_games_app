@@ -10,6 +10,12 @@ abstract class _BeerAPI {
     required String beerId,
     required List<UserRating> ratings,
   });
+  Future<Either<CloudFailure, void>> updateInfo({
+    required String beerId,
+    required String name,
+    required String imagePath,
+    required String imageHash,
+  });
 }
 
 class BeerAPI extends _BeerAPI {
@@ -52,6 +58,41 @@ class BeerAPI extends _BeerAPI {
           )
         },
       );
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> updateInfo({
+    required String beerId,
+    required String name,
+    required String? imagePath,
+    required String? imageHash,
+  }) async {
+    try {
+      final data = <String, dynamic>{
+        'name': name,
+      };
+      if (imagePath == null) {
+        data.addAll({
+          'img': FieldValue.delete(),
+          'imgHash': FieldValue.delete(),
+        });
+      } else {
+        data.addAll({
+          'img': imagePath,
+          'imgHash': imageHash,
+        });
+      }
+
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('beers')
+          .doc(beerId)
+          .update(data);
       return const Right(null);
     } catch (e) {
       return Left(CloudFailure.unknown(e.toString()));

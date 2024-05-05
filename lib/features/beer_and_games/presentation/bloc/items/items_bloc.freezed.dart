@@ -22,6 +22,7 @@ mixin _$ItemsEvent {
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
+    required TResult Function(RateableItem item) updateInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -29,6 +30,7 @@ mixin _$ItemsEvent {
     TResult? Function()? download,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -36,6 +38,7 @@ mixin _$ItemsEvent {
     TResult Function()? download,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
+    TResult Function(RateableItem item)? updateInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -43,18 +46,21 @@ mixin _$ItemsEvent {
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
     required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
     TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
     TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -106,6 +112,7 @@ class _$DownloadImpl extends Download {
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
+    required TResult Function(RateableItem item) updateInfo,
   }) {
     return download();
   }
@@ -116,6 +123,7 @@ class _$DownloadImpl extends Download {
     TResult? Function()? download,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
   }) {
     return download?.call();
   }
@@ -126,6 +134,7 @@ class _$DownloadImpl extends Download {
     TResult Function()? download,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
+    TResult Function(RateableItem item)? updateInfo,
     required TResult orElse(),
   }) {
     if (download != null) {
@@ -139,6 +148,7 @@ class _$DownloadImpl extends Download {
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
     required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
   }) {
     return download(this);
   }
@@ -148,6 +158,7 @@ class _$DownloadImpl extends Download {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
     TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
   }) {
     return download?.call(this);
   }
@@ -157,6 +168,7 @@ class _$DownloadImpl extends Download {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
     TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
     required TResult orElse(),
   }) {
     if (download != null) {
@@ -239,6 +251,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
+    required TResult Function(RateableItem item) updateInfo,
   }) {
     return updateRating(item, userEmail, rating);
   }
@@ -249,6 +262,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     TResult? Function()? download,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
   }) {
     return updateRating?.call(item, userEmail, rating);
   }
@@ -259,6 +273,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     TResult Function()? download,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
+    TResult Function(RateableItem item)? updateInfo,
     required TResult orElse(),
   }) {
     if (updateRating != null) {
@@ -272,6 +287,7 @@ class _$UpdateRatingImpl extends UpdateRating {
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
     required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
   }) {
     return updateRating(this);
   }
@@ -281,6 +297,7 @@ class _$UpdateRatingImpl extends UpdateRating {
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
     TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
   }) {
     return updateRating?.call(this);
   }
@@ -290,6 +307,7 @@ class _$UpdateRatingImpl extends UpdateRating {
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
     TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
     required TResult orElse(),
   }) {
     if (updateRating != null) {
@@ -311,6 +329,135 @@ abstract class UpdateRating extends ItemsEvent {
   Rating get rating;
   @JsonKey(ignore: true)
   _$$UpdateRatingImplCopyWith<_$UpdateRatingImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateInfoImplCopyWith<$Res> {
+  factory _$$UpdateInfoImplCopyWith(
+          _$UpdateInfoImpl value, $Res Function(_$UpdateInfoImpl) then) =
+      __$$UpdateInfoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({RateableItem item});
+}
+
+/// @nodoc
+class __$$UpdateInfoImplCopyWithImpl<$Res>
+    extends _$ItemsEventCopyWithImpl<$Res, _$UpdateInfoImpl>
+    implements _$$UpdateInfoImplCopyWith<$Res> {
+  __$$UpdateInfoImplCopyWithImpl(
+      _$UpdateInfoImpl _value, $Res Function(_$UpdateInfoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? item = null,
+  }) {
+    return _then(_$UpdateInfoImpl(
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as RateableItem,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateInfoImpl extends UpdateInfo {
+  const _$UpdateInfoImpl({required this.item}) : super._();
+
+  @override
+  final RateableItem item;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateInfoImplCopyWith<_$UpdateInfoImpl> get copyWith =>
+      __$$UpdateInfoImplCopyWithImpl<_$UpdateInfoImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() download,
+    required TResult Function(
+            RateableItem item, String userEmail, Rating rating)
+        updateRating,
+    required TResult Function(RateableItem item) updateInfo,
+  }) {
+    return updateInfo(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? download,
+    TResult? Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
+  }) {
+    return updateInfo?.call(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? download,
+    TResult Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult Function(RateableItem item)? updateInfo,
+    required TResult orElse(),
+  }) {
+    if (updateInfo != null) {
+      return updateInfo(item);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Download value) download,
+    required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
+  }) {
+    return updateInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Download value)? download,
+    TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
+  }) {
+    return updateInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Download value)? download,
+    TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
+    required TResult orElse(),
+  }) {
+    if (updateInfo != null) {
+      return updateInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateInfo extends ItemsEvent {
+  const factory UpdateInfo({required final RateableItem item}) =
+      _$UpdateInfoImpl;
+  const UpdateInfo._() : super._();
+
+  RateableItem get item;
+  @JsonKey(ignore: true)
+  _$$UpdateInfoImplCopyWith<_$UpdateInfoImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

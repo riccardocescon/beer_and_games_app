@@ -53,7 +53,10 @@ class _RatableItemBottomSheet extends StatelessWidget {
           ),
           item.imageBytes == null
               ? const SizedBox.shrink()
-              : Image.memory(item.imageBytes!),
+              : Image.memory(
+                  Uint8List.fromList(item.imageBytes!),
+                  fit: BoxFit.cover,
+                ),
         ],
       ),
     );

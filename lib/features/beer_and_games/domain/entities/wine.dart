@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/ratable_item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/user_rating.dart';
 import 'package:equatable/equatable.dart';
@@ -16,7 +14,7 @@ class Wine extends RateableItem with EquatableMixin {
     String? id,
     String? name,
     List<UserRating>? ratings,
-    Uint8List? imageBytes,
+    List<int>? imageBytes,
   }) {
     return Wine(
       id: id ?? this.id,

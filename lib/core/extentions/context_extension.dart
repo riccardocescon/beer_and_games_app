@@ -96,3 +96,66 @@ extension SnackBarShortcut on BuildContext {
     );
   }
 }
+
+extension DialogShotcut on BuildContext {
+  void showOkDialog(String title, String message, {String action = 'Ok'}) {
+    showDialog(
+      context: this,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            title,
+            style: textTheme.titleLarge?.copyWith(
+              color: colorScheme.primary,
+            ),
+          ),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop();
+              },
+              child: Text(action),
+            ),
+          ],
+        );
+      },
+    );
+  }
+
+  Future<bool?> showSimpleChoiceDialog(
+    String title,
+    String message, {
+    String positiveAction = 'Yes',
+    String negativeAction = 'No',
+  }) async {
+    return await showDialog<bool>(
+      context: this,
+      builder: (context) {
+        return AlertDialog(
+          title: Text(
+            title,
+            style: textTheme.titleLarge?.copyWith(
+              color: colorScheme.primary,
+            ),
+          ),
+          content: Text(message),
+          actions: [
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(true);
+              },
+              child: Text(positiveAction),
+            ),
+            TextButton(
+              onPressed: () {
+                Navigator.of(context).pop(false);
+              },
+              child: Text(negativeAction),
+            ),
+          ],
+        );
+      },
+    );
+  }
+}

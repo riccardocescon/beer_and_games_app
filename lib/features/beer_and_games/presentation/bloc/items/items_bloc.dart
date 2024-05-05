@@ -23,6 +23,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final GamesSelector gamesSelector;
   final BeersSelector beersSelector;
   final BeersRatiningUpdater beersRatiningUpdater;
+  final BeerInfoUpdater beerInfoUpdater;
   final WinesSelector winesSelector;
   final WineRatingUpdates wineRatingUpdates;
 
@@ -30,6 +31,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     required this.gamesSelector,
     required this.beersSelector,
     required this.beersRatiningUpdater,
+    required this.beerInfoUpdater,
     required this.winesSelector,
     required this.wineRatingUpdates,
   }) : super(const ItemsState.init()) {
@@ -131,6 +133,17 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
         );
         if (result.isLeft()) {
           emit(ItemsState.error(result.left));
+        }
+      }
+    });
+    on<UpdateInfo>((event, emit) async {
+      if (event.item is Beer) {
+        final foUpdate = await beerInfoUpdater.call(
+          BeerInfoUpdaterParams(beer: event.item as Beer),
+        );
+        if (foUpdate.isLeft()) {
+          emit(ItemsState.error(foUpdate.left));
+          return;
         }
       }
     });

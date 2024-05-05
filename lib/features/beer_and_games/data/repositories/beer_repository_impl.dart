@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:typed_data';
+
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
 import 'package:beer_and_games/core/enums/rating.dart';
@@ -13,6 +16,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart
 import 'package:beer_and_games/features/beer_and_games/domain/entities/user_rating.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/beer_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:crypto/crypto.dart' as crypto;
 
 class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
   final BeerAPI beerAPI;
@@ -68,7 +72,11 @@ class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
         );
 
         yield foImage.fold(
-          (l) => Left(l),
+          (l) {
+            if (l is NotFound) return Right(beers);
+
+            return Left(l);
+          },
           (r) {
             currentBeer.imageBytes = r;
             return Right(beers);
@@ -101,6 +109,41 @@ class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
     return await beerAPI.updateRating(
       beerId: item.id,
       ratings: item.ratings,
+    );
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> updateInfo({required Beer beer}) async {
+    final path = '/cespuglio/beers/${beer.id}.png';
+    final hash = beer.imageBytes == null || beer.imageBytes!.isEmpty
+        ? null
+        : crypto.md5.convert(beer.imageBytes!).toString();
+
+    if (hash == null) {
+      final foCloudDelete = await cloudImageStorageAPI.deleteImage(path);
+      if (foCloudDelete.isLeft()) log(foCloudDelete.left.toString());
+
+      final foLocalDelete = await localImageStorageAPI.deleteImage(path);
+      if (foLocalDelete.isLeft()) log(foLocalDelete.left.toString());
+    } else {
+      final foCloudUpdate = await cloudImageStorageAPI.uploadImage(
+        path,
+        Uint8List.fromList(beer.imageBytes!),
+      );
+      if (foCloudUpdate.isLeft()) log(foCloudUpdate.left.toString());
+
+      final foLocalUpdate = await localImageStorageAPI.uploadImage(
+        path,
+        Uint8List.fromList(beer.imageBytes!),
+      );
+      if (foLocalUpdate.isLeft()) log(foLocalUpdate.left.toString());
+    }
+
+    return await beerAPI.updateInfo(
+      beerId: beer.id,
+      name: beer.name,
+      imagePath: path,
+      imageHash: hash,
     );
   }
 }

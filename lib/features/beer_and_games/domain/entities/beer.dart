@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/ratable_item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/user_rating.dart';
 import 'package:equatable/equatable.dart';
@@ -16,13 +14,27 @@ class Beer extends RateableItem with EquatableMixin {
     String? id,
     String? name,
     List<UserRating>? ratings,
-    Uint8List? imageBytes,
+    List<int>? imageBytes,
   }) {
     return Beer(
       id: id ?? this.id,
       name: name ?? this.name,
       ratings: ratings ?? this.ratings.map((e) => e.copyWith()).toList(),
       imageBytes: imageBytes ?? this.imageBytes,
+    );
+  }
+
+  Beer copyWithDontOverrideNullable({
+    String? id,
+    String? name,
+    List<UserRating>? ratings,
+    List<int>? imageBytes,
+  }) {
+    return Beer(
+      id: id ?? this.id,
+      name: name ?? this.name,
+      ratings: ratings ?? this.ratings,
+      imageBytes: imageBytes,
     );
   }
 
