@@ -68,6 +68,7 @@ void init() {
       winesSelector: sl(),
       wineRatingUpdates: sl(),
       beerInfoUpdater: sl(),
+      beerDeleter: sl(),
     ),
   );
 
@@ -85,6 +86,7 @@ void init() {
   sl.registerFactory(() => BeersRatiningUpdater(beerRepository: sl()));
   sl.registerFactory(() => WineRatingUpdates(wineRepository: sl()));
   sl.registerFactory(() => BeerInfoUpdater(beerRepository: sl()));
+  sl.registerFactory(() => BeerDeleter(beerRepository: sl()));
 
   // Repository
   sl.registerFactory<HangoutRepository>(

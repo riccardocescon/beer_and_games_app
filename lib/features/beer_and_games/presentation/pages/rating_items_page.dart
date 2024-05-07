@@ -34,22 +34,58 @@ part '../widgets/rating_items_page/bottom_sheet_bar_button.dart';
 part '../widgets/rating_items_page/user_vote_dialog.dart';
 part '../widgets/rating_items_page/edit_ratable_item_bottom_sheet.dart';
 
-class RatingItemsPage extends StatelessWidget {
+class RatingItemsPage extends StatefulWidget {
   const RatingItemsPage({super.key, required this.items});
 
   final List<RateableItem> items;
-  String get _title => items is List<Beer> ? 'Birre' : 'Vini';
 
   @override
+  State<RatingItemsPage> createState() => _RatingItemsPageState();
+}
+
+class _RatingItemsPageState extends State<RatingItemsPage> {
+  String get _title => widget.items is List<Beer> ? 'Birre' : 'Vini';
+
+  _ItemsList<dynamic> get _getBody {
+    return updatedItems is List<Beer>
+        ? _ItemsList<Beer>(items: updatedItems)
+        : updatedItems is List<Wine>
+            ? _ItemsList<Wine>(items: updatedItems)
+            : _ItemsList<Game>(items: updatedItems);
+  }
+
+  late final updatedItems = widget.items.toList();
+  @override
   Widget build(BuildContext context) {
-    final body = items is List<Beer>
-        ? _ItemsList<Beer>(items: items)
-        : items is List<Wine>
-            ? _ItemsList<Wine>(items: items)
-            : _ItemsList<Game>(items: items);
     return Scaffold(
       appBar: hangoutAppBar(context, title: _title),
-      body: body,
+      body: BlocBuilder<ItemsBloc, ItemsState>(
+        buildWhen: (previous, current) {
+          return current.maybeMap(
+            update: (value) {
+              final beers = value.beers;
+
+              final newBeers = beers.where((element) {
+                return !updatedItems.map((e) => e.id).contains(element.id);
+              }).toList();
+              updatedItems.addAll(newBeers);
+
+              final removedBeers = updatedItems
+                  .where(
+                      (element) => !beers.map((e) => e.id).contains(element.id))
+                  .toList();
+              updatedItems.removeWhere((element) =>
+                  removedBeers.map((e) => e.id).contains(element.id));
+
+              return true;
+            },
+            orElse: () => false,
+          );
+        },
+        builder: (context, state) {
+          return _getBody;
+        },
+      ),
     );
   }
 }

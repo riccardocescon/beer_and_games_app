@@ -1,14 +1,18 @@
 part of 'package:beer_and_games/features/beer_and_games/presentation/pages/hangout_stats_page.dart';
 
 class _ItemsStatsList extends StatelessWidget {
-  const _ItemsStatsList({
-    required this.maxWidth,
-  });
+  const _ItemsStatsList({required this.maxWidth});
 
   final double maxWidth;
 
   @override
   Widget build(BuildContext context) {
+    // Dimensions in logical pixels (dp)
+    final bodyHeigth = MediaQuery.of(context).size.height -
+        (MediaQuery.of(context).padding.top +
+            kToolbarHeight +
+            kBottomNavigationBarHeight);
+
     return StaticBottomSheet(
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
@@ -17,18 +21,21 @@ class _ItemsStatsList extends StatelessWidget {
         ),
         child: Padding(
           padding: const EdgeInsets.symmetric(horizontal: 24),
-          child: Column(
-            children: [
-              height20,
-              height5,
-              _gameList(),
-              height10,
-              _beerList(),
-              height10,
-              _wineList(),
-              height20,
-              height5,
-            ],
+          child: SizedBox(
+            height: bodyHeigth,
+            child: Column(
+              children: [
+                height20,
+                height5,
+                _gameList(),
+                height10,
+                _beerList(),
+                height10,
+                _wineList(),
+                height20,
+                height5,
+              ],
+            ),
           ),
         ),
       ),

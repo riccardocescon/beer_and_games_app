@@ -24,6 +24,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final BeersSelector beersSelector;
   final BeersRatiningUpdater beersRatiningUpdater;
   final BeerInfoUpdater beerInfoUpdater;
+  final BeerDeleter beerDeleter;
   final WinesSelector winesSelector;
   final WineRatingUpdates wineRatingUpdates;
 
@@ -32,6 +33,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     required this.beersSelector,
     required this.beersRatiningUpdater,
     required this.beerInfoUpdater,
+    required this.beerDeleter,
     required this.winesSelector,
     required this.wineRatingUpdates,
   }) : super(const ItemsState.init()) {
@@ -86,7 +88,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
             log('Error downloading wines: ${l.toString()}');
           },
           (w) {
-            log('Downlaoded wines: ${beers.map((e) => e.name).toList()}');
+            log('Downlaoded wines: ${wines.map((e) => e.name).toList()}');
             wines = w.toList();
             emit(
               ItemsState.update(
@@ -143,6 +145,17 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
         );
         if (foUpdate.isLeft()) {
           emit(ItemsState.error(foUpdate.left));
+          return;
+        }
+      }
+    });
+    on<Delete>((event, emit) async {
+      if (event.item is Beer) {
+        final foDelete = await beerDeleter.call(
+          BeerInfoUpdaterParams(beer: event.item as Beer),
+        );
+        if (foDelete.isLeft()) {
+          emit(ItemsState.error(foDelete.left));
           return;
         }
       }

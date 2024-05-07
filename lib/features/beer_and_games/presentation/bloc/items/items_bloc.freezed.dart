@@ -23,6 +23,7 @@ mixin _$ItemsEvent {
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(RateableItem item) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -31,6 +32,7 @@ mixin _$ItemsEvent {
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(RateableItem item)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -39,6 +41,7 @@ mixin _$ItemsEvent {
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
+    TResult Function(RateableItem item)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -47,6 +50,7 @@ mixin _$ItemsEvent {
     required TResult Function(Download value) download,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(Delete value) delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -54,6 +58,7 @@ mixin _$ItemsEvent {
     TResult? Function(Download value)? download,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(Delete value)? delete,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -61,6 +66,7 @@ mixin _$ItemsEvent {
     TResult Function(Download value)? download,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(Delete value)? delete,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -113,6 +119,7 @@ class _$DownloadImpl extends Download {
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(RateableItem item) delete,
   }) {
     return download();
   }
@@ -124,6 +131,7 @@ class _$DownloadImpl extends Download {
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(RateableItem item)? delete,
   }) {
     return download?.call();
   }
@@ -135,6 +143,7 @@ class _$DownloadImpl extends Download {
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
+    TResult Function(RateableItem item)? delete,
     required TResult orElse(),
   }) {
     if (download != null) {
@@ -149,6 +158,7 @@ class _$DownloadImpl extends Download {
     required TResult Function(Download value) download,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(Delete value) delete,
   }) {
     return download(this);
   }
@@ -159,6 +169,7 @@ class _$DownloadImpl extends Download {
     TResult? Function(Download value)? download,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(Delete value)? delete,
   }) {
     return download?.call(this);
   }
@@ -169,6 +180,7 @@ class _$DownloadImpl extends Download {
     TResult Function(Download value)? download,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(Delete value)? delete,
     required TResult orElse(),
   }) {
     if (download != null) {
@@ -252,6 +264,7 @@ class _$UpdateRatingImpl extends UpdateRating {
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(RateableItem item) delete,
   }) {
     return updateRating(item, userEmail, rating);
   }
@@ -263,6 +276,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(RateableItem item)? delete,
   }) {
     return updateRating?.call(item, userEmail, rating);
   }
@@ -274,6 +288,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
+    TResult Function(RateableItem item)? delete,
     required TResult orElse(),
   }) {
     if (updateRating != null) {
@@ -288,6 +303,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     required TResult Function(Download value) download,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(Delete value) delete,
   }) {
     return updateRating(this);
   }
@@ -298,6 +314,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     TResult? Function(Download value)? download,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(Delete value)? delete,
   }) {
     return updateRating?.call(this);
   }
@@ -308,6 +325,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     TResult Function(Download value)? download,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(Delete value)? delete,
     required TResult orElse(),
   }) {
     if (updateRating != null) {
@@ -385,6 +403,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(RateableItem item) delete,
   }) {
     return updateInfo(item);
   }
@@ -396,6 +415,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(RateableItem item)? delete,
   }) {
     return updateInfo?.call(item);
   }
@@ -407,6 +427,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
+    TResult Function(RateableItem item)? delete,
     required TResult orElse(),
   }) {
     if (updateInfo != null) {
@@ -421,6 +442,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
     required TResult Function(Download value) download,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(Delete value) delete,
   }) {
     return updateInfo(this);
   }
@@ -431,6 +453,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
     TResult? Function(Download value)? download,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(Delete value)? delete,
   }) {
     return updateInfo?.call(this);
   }
@@ -441,6 +464,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
     TResult Function(Download value)? download,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(Delete value)? delete,
     required TResult orElse(),
   }) {
     if (updateInfo != null) {
@@ -458,6 +482,140 @@ abstract class UpdateInfo extends ItemsEvent {
   RateableItem get item;
   @JsonKey(ignore: true)
   _$$UpdateInfoImplCopyWith<_$UpdateInfoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$DeleteImplCopyWith<$Res> {
+  factory _$$DeleteImplCopyWith(
+          _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
+      __$$DeleteImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({RateableItem item});
+}
+
+/// @nodoc
+class __$$DeleteImplCopyWithImpl<$Res>
+    extends _$ItemsEventCopyWithImpl<$Res, _$DeleteImpl>
+    implements _$$DeleteImplCopyWith<$Res> {
+  __$$DeleteImplCopyWithImpl(
+      _$DeleteImpl _value, $Res Function(_$DeleteImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? item = null,
+  }) {
+    return _then(_$DeleteImpl(
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as RateableItem,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$DeleteImpl extends Delete {
+  const _$DeleteImpl({required this.item}) : super._();
+
+  @override
+  final RateableItem item;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      __$$DeleteImplCopyWithImpl<_$DeleteImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() download,
+    required TResult Function(
+            RateableItem item, String userEmail, Rating rating)
+        updateRating,
+    required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(RateableItem item) delete,
+  }) {
+    return delete(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? download,
+    TResult? Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(RateableItem item)? delete,
+  }) {
+    return delete?.call(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? download,
+    TResult Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult Function(RateableItem item)? updateInfo,
+    TResult Function(RateableItem item)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(item);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Download value) download,
+    required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(Delete value) delete,
+  }) {
+    return delete(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Download value)? download,
+    TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(Delete value)? delete,
+  }) {
+    return delete?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Download value)? download,
+    TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (delete != null) {
+      return delete(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class Delete extends ItemsEvent {
+  const factory Delete({required final RateableItem item}) = _$DeleteImpl;
+  const Delete._() : super._();
+
+  RateableItem get item;
+  @JsonKey(ignore: true)
+  _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

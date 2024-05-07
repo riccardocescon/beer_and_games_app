@@ -16,6 +16,7 @@ abstract class _BeerAPI {
     required String imagePath,
     required String imageHash,
   });
+  Future<Either<CloudFailure, void>> delete({required String beerId});
 }
 
 class BeerAPI extends _BeerAPI {
@@ -93,6 +94,21 @@ class BeerAPI extends _BeerAPI {
           .collection('beers')
           .doc(beerId)
           .update(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> delete({required String beerId}) async {
+    try {
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('beers')
+          .doc(beerId)
+          .delete();
       return const Right(null);
     } catch (e) {
       return Left(CloudFailure.unknown(e.toString()));

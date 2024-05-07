@@ -13,4 +13,5 @@ abstract class BeerRepository {
     required RateableItem item,
   });
   Future<Either<CloudFailure, void>> updateInfo({required Beer beer});
+  Future<Either<CloudFailure, void>> delete({required Beer beer});
 }

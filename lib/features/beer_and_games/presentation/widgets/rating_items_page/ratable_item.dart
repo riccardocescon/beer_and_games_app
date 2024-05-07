@@ -77,10 +77,12 @@ class _RatableItemState<T extends RateableItem> extends State<_RatableItem<T>> {
                       final currentValues =
                           T == Beer ? value.beers : value.wines;
 
-                      final prevValue = prevValues.firstWhere(
+                      final prevValue = prevValues.firstWhereOrNull(
                           (element) => element.id == widget.item.id);
-                      final currValue = currentValues.firstWhere(
+                      final currValue = currentValues.firstWhereOrNull(
                           (element) => element.id == widget.item.id);
+
+                      if (prevValue == null || currValue == null) return true;
 
                       if (currValue != prevValue) {
                         updatedItem = currValue;
@@ -214,7 +216,26 @@ class _RatableItemState<T extends RateableItem> extends State<_RatableItem<T>> {
         PopupMenuItem(
           value: 2,
           height: 32,
-          onTap: () {},
+          onTap: () {
+            context
+                .showSimpleChoiceDialog(
+              'Eliminazione',
+              'Sei sicuro di voler eliminare questo elemento?\n'
+                  'Questa azione è irreversibile.',
+              positiveAction: 'Elimina',
+              negativeAction: 'Annulla',
+              titleColor: context.colorScheme.tertiary,
+              positiveActionColor: context.colorScheme.tertiary,
+              negativeActionColor: context.colorScheme.primary,
+            )
+                .then((decision) {
+              if (decision != true) return;
+
+              context
+                  .read<ItemsBloc>()
+                  .add(ItemsEvent.delete(item: updatedItem));
+            });
+          },
           child: Row(
             children: [
               Icon(

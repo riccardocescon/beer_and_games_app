@@ -146,4 +146,20 @@ class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
       imageHash: hash,
     );
   }
+
+  @override
+  Future<Either<CloudFailure, void>> delete({required Beer beer}) async {
+    final path = '/cespuglio/beers/${beer.id}.png';
+    final hasImage = beer.imageBytes != null;
+
+    if (hasImage) {
+      final foCloudDelete = await cloudImageStorageAPI.deleteImage(path);
+      if (foCloudDelete.isLeft()) log(foCloudDelete.left.toString());
+
+      final foLocalDelete = await localImageStorageAPI.deleteImage(path);
+      if (foLocalDelete.isLeft()) log(foLocalDelete.left.toString());
+    }
+
+    return await beerAPI.delete(beerId: beer.id);
+  }
 }

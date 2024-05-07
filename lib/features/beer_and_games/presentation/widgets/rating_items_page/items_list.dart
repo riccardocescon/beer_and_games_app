@@ -16,7 +16,7 @@ class _ItemsList<T extends Item> extends StatelessWidget {
         padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 16),
         child: Wrap(
           runSpacing: 40,
-          alignment: WrapAlignment.spaceBetween,
+          spacing: 15,
           children: children,
         ),
       ),

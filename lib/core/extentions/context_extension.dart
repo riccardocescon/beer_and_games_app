@@ -126,8 +126,11 @@ extension DialogShotcut on BuildContext {
   Future<bool?> showSimpleChoiceDialog(
     String title,
     String message, {
-    String positiveAction = 'Yes',
+    String positiveAction = 'Si',
     String negativeAction = 'No',
+    Color? titleColor,
+    Color? positiveActionColor,
+    Color? negativeActionColor,
   }) async {
     return await showDialog<bool>(
       context: this,
@@ -136,7 +139,7 @@ extension DialogShotcut on BuildContext {
           title: Text(
             title,
             style: textTheme.titleLarge?.copyWith(
-              color: colorScheme.primary,
+              color: titleColor ?? colorScheme.primary,
             ),
           ),
           content: Text(message),
@@ -145,13 +148,23 @@ extension DialogShotcut on BuildContext {
               onPressed: () {
                 Navigator.of(context).pop(true);
               },
-              child: Text(positiveAction),
+              child: Text(
+                positiveAction,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: positiveActionColor ?? colorScheme.primary,
+                ),
+              ),
             ),
             TextButton(
               onPressed: () {
                 Navigator.of(context).pop(false);
               },
-              child: Text(negativeAction),
+              child: Text(
+                negativeAction,
+                style: textTheme.bodyMedium?.copyWith(
+                  color: negativeActionColor ?? colorScheme.tertiary,
+                ),
+              ),
             ),
           ],
         );

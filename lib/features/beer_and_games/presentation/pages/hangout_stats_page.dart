@@ -83,18 +83,42 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
                 },
                 body: CustomScrollView(
                   slivers: [
-                    SliverLayoutBuilder(
-                      builder: (context, constraints) {
-                        return SliverFillRemaining(
-                          hasScrollBody: false,
-                          child: _ItemsStatsList(
-                            maxWidth: constraints.crossAxisExtent,
-                          ),
-                        );
-                      },
+                    SliverToBoxAdapter(
+                      child: LayoutBuilder(
+                        builder: (x, constraints) {
+                          return _ItemsStatsList(
+                            maxWidth: constraints.maxWidth,
+                          );
+                        },
+                      ),
                     ),
                   ],
                 ),
+                // body: LayoutBuilder(builder: (context, constraints) {
+                //   return _ItemsStatsList(
+                //     maxWidth: constraints.maxWidth,
+                //   );
+                // }),
+                /* */
+                // body: CustomScrollView(
+                //   slivers: [
+                //     SliverToBoxAdapter(
+                //       child: LayoutBuilder(builder: (c, n) {
+                //         return Container();
+                //       }),
+                //     ),
+                //     SliverLayoutBuilder(
+                //       builder: (context, constraints) {
+                //         return SliverFillRemaining(
+                //           hasScrollBody: false,
+                //           child: _ItemsStatsList(
+                //             maxWidth: constraints.crossAxisExtent,
+                //           ),
+                //         );
+                //       },
+                //     ),
+                //   ],
+                // ),
               );
             },
             orElse: () => const SizedBox.shrink(),

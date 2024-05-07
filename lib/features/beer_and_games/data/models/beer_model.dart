@@ -14,11 +14,17 @@ class BeerModel {
   });
 
   factory BeerModel.fromJson(Map<String, dynamic> json, {required String id}) {
-    final ratingsData = json['ratings'] as List;
-    final ratings = List.generate(
-      ratingsData.length,
-      (index) => UserRatingModel.fromFirebase(ratingsData[index]),
-    );
+    final ratingsData = json['ratings'] as List?;
+    final noRatings = ratingsData == null ||
+        ratingsData.isEmpty ||
+        (ratingsData.first as String).isEmpty;
+
+    final ratings = noRatings
+        ? <UserRatingModel>[]
+        : List.generate(
+            ratingsData.length,
+            (index) => UserRatingModel.fromFirebase(ratingsData[index]),
+          );
     return BeerModel._(
       id: id,
       name: json['name'],

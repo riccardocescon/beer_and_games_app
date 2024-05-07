@@ -221,6 +221,7 @@ class __EditRatableItemBottomSheetState
       'Stai per selezionare una foto, da dove vuoi prenderla?',
       positiveAction: 'Fotocamera',
       negativeAction: 'Galleria',
+      negativeActionColor: context.colorScheme.primary,
     );
     if (photoMode == null) return;
 

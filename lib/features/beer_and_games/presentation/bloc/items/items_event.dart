@@ -12,11 +12,13 @@ sealed class ItemsEvent extends AppEvent with _$ItemsEvent, EquatableMixin {
   }) = UpdateRating;
   const factory ItemsEvent.updateInfo({required RateableItem item}) =
       UpdateInfo;
+  const factory ItemsEvent.delete({required RateableItem item}) = Delete;
 
   @override
   List<Object?> get props => map(
         download: (value) => [],
         updateRating: (value) => [value.item, value.userEmail, value.rating],
         updateInfo: (value) => [value.item],
+        delete: (value) => [value.item],
       );
 }
