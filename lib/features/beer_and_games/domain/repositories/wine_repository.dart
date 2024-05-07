@@ -12,4 +12,6 @@ abstract class WineRepository {
     required Rating rating,
     required RateableItem item,
   });
+  Future<Either<CloudFailure, void>> updateInfo({required Wine wine});
+  Future<Either<CloudFailure, void>> delete({required Wine wine});
 }

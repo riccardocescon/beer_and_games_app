@@ -8,3 +8,5 @@ import 'package:dartz/dartz.dart';
 
 part 'wines_selector.dart';
 part 'wine_rating_updated.dart';
+part 'wine_info_updater.dart';
+part 'wine_deleter.dart';

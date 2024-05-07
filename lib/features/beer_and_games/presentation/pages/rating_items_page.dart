@@ -63,16 +63,17 @@ class _RatingItemsPageState extends State<RatingItemsPage> {
         buildWhen: (previous, current) {
           return current.maybeMap(
             update: (value) {
-              final beers = value.beers;
+              final receivedItems =
+                  updatedItems is List<Beer> ? value.beers : value.wines;
 
-              final newBeers = beers.where((element) {
+              final newBeers = receivedItems.where((element) {
                 return !updatedItems.map((e) => e.id).contains(element.id);
               }).toList();
               updatedItems.addAll(newBeers);
 
               final removedBeers = updatedItems
-                  .where(
-                      (element) => !beers.map((e) => e.id).contains(element.id))
+                  .where((element) =>
+                      !receivedItems.map((e) => e.id).contains(element.id))
                   .toList();
               updatedItems.removeWhere((element) =>
                   removedBeers.map((e) => e.id).contains(element.id));

@@ -27,6 +27,8 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final BeerDeleter beerDeleter;
   final WinesSelector winesSelector;
   final WineRatingUpdates wineRatingUpdates;
+  final WineInfoUpdater wineInfoUpdater;
+  final WineDeleter wineDeleter;
 
   ItemsBloc({
     required this.gamesSelector,
@@ -36,6 +38,8 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     required this.beerDeleter,
     required this.winesSelector,
     required this.wineRatingUpdates,
+    required this.wineInfoUpdater,
+    required this.wineDeleter,
   }) : super(const ItemsState.init()) {
     on<Download>((event, emit) async {
       List<Game> games = [];
@@ -147,12 +151,28 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
           emit(ItemsState.error(foUpdate.left));
           return;
         }
+      } else if (event.item is Wine) {
+        final foUpdate = await wineInfoUpdater.call(
+          WineInfoUpdaterParams(wine: event.item as Wine),
+        );
+        if (foUpdate.isLeft()) {
+          emit(ItemsState.error(foUpdate.left));
+          return;
+        }
       }
     });
     on<Delete>((event, emit) async {
       if (event.item is Beer) {
         final foDelete = await beerDeleter.call(
           BeerInfoUpdaterParams(beer: event.item as Beer),
+        );
+        if (foDelete.isLeft()) {
+          emit(ItemsState.error(foDelete.left));
+          return;
+        }
+      } else if (event.item is Wine) {
+        final foDelete = await wineDeleter.call(
+          WineInfoUpdaterParams(wine: event.item as Wine),
         );
         if (foDelete.isLeft()) {
           emit(ItemsState.error(foDelete.left));

@@ -14,11 +14,18 @@ class WineModel {
   });
 
   factory WineModel.fromJson(Map<String, dynamic> json, {required String id}) {
-    final ratingsData = json['ratings'] as List;
-    final ratings = List.generate(
-      ratingsData.length,
-      (index) => UserRatingModel.fromFirebase(ratingsData.elementAt(index)),
-    );
+    final ratingsData = json['ratings'] as List?;
+    final noRating = ratingsData == null ||
+        ratingsData.isEmpty ||
+        (ratingsData.first as String).isEmpty;
+
+    final ratings = noRating
+        ? <UserRatingModel>[]
+        : List.generate(
+            ratingsData.length,
+            (index) =>
+                UserRatingModel.fromFirebase(ratingsData.elementAt(index)),
+          );
     return WineModel._(
       id: id,
       name: json['name'],

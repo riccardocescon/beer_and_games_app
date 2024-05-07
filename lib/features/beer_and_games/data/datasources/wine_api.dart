@@ -10,6 +10,13 @@ abstract class _WineAPI {
     required String beerId,
     required List<UserRating> ratings,
   });
+  Future<Either<CloudFailure, void>> updateInfo({
+    required String wineId,
+    required String name,
+    required String imagePath,
+    required String imageHash,
+  });
+  Future<Either<CloudFailure, void>> delete({required String wineId});
 }
 
 class WineAPI extends _WineAPI {
@@ -52,6 +59,56 @@ class WineAPI extends _WineAPI {
           )
         },
       );
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> updateInfo({
+    required String wineId,
+    required String name,
+    required String? imagePath,
+    required String? imageHash,
+  }) async {
+    try {
+      final data = <String, dynamic>{
+        'name': name,
+      };
+      if (imagePath == null) {
+        data.addAll({
+          'img': FieldValue.delete(),
+          'imgHash': FieldValue.delete(),
+        });
+      } else {
+        data.addAll({
+          'img': imagePath,
+          'imgHash': imageHash,
+        });
+      }
+
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('wines')
+          .doc(wineId)
+          .update(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> delete({required String wineId}) async {
+    try {
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('wines')
+          .doc(wineId)
+          .delete();
       return const Right(null);
     } catch (e) {
       return Left(CloudFailure.unknown(e.toString()));

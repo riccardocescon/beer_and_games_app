@@ -1,3 +1,6 @@
+import 'dart:developer';
+import 'dart:typed_data';
+
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
 import 'package:beer_and_games/core/enums/rating.dart';
@@ -13,6 +16,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/user_rati
 import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/wine_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:crypto/crypto.dart' as crypto;
 
 class WineRepositoryImpl extends WineRepository with ImageSelectorApiHelper {
   final WineAPI wineAPI;
@@ -102,5 +106,56 @@ class WineRepositoryImpl extends WineRepository with ImageSelectorApiHelper {
       beerId: item.id,
       ratings: item.ratings,
     );
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> updateInfo({required Wine wine}) async {
+    final path = '/cespuglio/wines/${wine.id}.png';
+    final hash = wine.imageBytes == null || wine.imageBytes!.isEmpty
+        ? null
+        : crypto.md5.convert(wine.imageBytes!).toString();
+
+    if (hash == null) {
+      final foCloudDelete = await cloudImageStorageAPI.deleteImage(path);
+      if (foCloudDelete.isLeft()) log(foCloudDelete.left.toString());
+
+      final foLocalDelete = await localImageStorageAPI.deleteImage(path);
+      if (foLocalDelete.isLeft()) log(foLocalDelete.left.toString());
+    } else {
+      final foCloudUpdate = await cloudImageStorageAPI.uploadImage(
+        path,
+        Uint8List.fromList(wine.imageBytes!),
+      );
+      if (foCloudUpdate.isLeft()) log(foCloudUpdate.left.toString());
+
+      final foLocalUpdate = await localImageStorageAPI.uploadImage(
+        path,
+        Uint8List.fromList(wine.imageBytes!),
+      );
+      if (foLocalUpdate.isLeft()) log(foLocalUpdate.left.toString());
+    }
+
+    return await wineAPI.updateInfo(
+      wineId: wine.id,
+      name: wine.name,
+      imagePath: path,
+      imageHash: hash,
+    );
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> delete({required Wine wine}) async {
+    final path = '/cespuglio/wines/${wine.id}.png';
+    final hasImage = wine.imageBytes != null;
+
+    if (hasImage) {
+      final foCloudDelete = await cloudImageStorageAPI.deleteImage(path);
+      if (foCloudDelete.isLeft()) log(foCloudDelete.left.toString());
+
+      final foLocalDelete = await localImageStorageAPI.deleteImage(path);
+      if (foLocalDelete.isLeft()) log(foLocalDelete.left.toString());
+    }
+
+    return await wineAPI.delete(wineId: wine.id);
   }
 }
