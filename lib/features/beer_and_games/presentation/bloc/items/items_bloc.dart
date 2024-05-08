@@ -22,6 +22,7 @@ part 'items_state.dart';
 class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final GamesSelector gamesSelector;
   final BeersSelector beersSelector;
+  final BeerInserter beerInserter;
   final BeersRatiningUpdater beersRatiningUpdater;
   final BeerInfoUpdater beerInfoUpdater;
   final BeerDeleter beerDeleter;
@@ -33,6 +34,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   ItemsBloc({
     required this.gamesSelector,
     required this.beersSelector,
+    required this.beerInserter,
     required this.beersRatiningUpdater,
     required this.beerInfoUpdater,
     required this.beerDeleter,
@@ -112,6 +114,17 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
           wineSubscription.asFuture(),
         ],
       );
+    });
+    on<InsertBeer>((event, emit) async {
+      final result = await beerInserter.call(
+        BeerInserterParams(
+          name: event.name,
+          imageBytes: event.imageBytes,
+        ),
+      );
+      if (result.isLeft()) {
+        emit(ItemsState.error(result.left));
+      }
     });
     on<UpdateRating>((event, emit) async {
       final item = event.item;

@@ -37,7 +37,13 @@ class _ItemGroupSection extends StatelessWidget {
           dimension: 20,
           child: FilledButton(
             onPressed: () {
-              context.warningSnackbar('Work in progress', 'Coming soon!');
+              if (items is List<Beer> || items is List<Wine>) {
+                context
+                    .read<HangoutStatsPageBloc>()
+                    .add(const HangoutStatsPageEvent.addItem());
+              } else {
+                context.warningSnackbar('Work in progress', 'Coming soon!');
+              }
             },
             style: ButtonStyle(
               padding: MaterialStateProperty.all(EdgeInsets.zero),

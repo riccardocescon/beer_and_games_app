@@ -183,7 +183,7 @@ class _RatableItemState<T extends RateableItem> extends State<_RatableItem<T>> {
                                 (element) => element.id == widget.item.id)
                             : value.wines.firstWhere(
                                 (element) => element.id == widget.item.id);
-                        return _EditRatableItemBottomSheet(item: item);
+                        return EditRatableItemBottomSheet(item: item);
                       },
                       orElse: () => const SizedBox(),
                     );

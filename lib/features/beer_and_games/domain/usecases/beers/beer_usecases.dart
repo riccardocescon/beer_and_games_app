@@ -7,6 +7,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/repositories/beer_
 import 'package:dartz/dartz.dart';
 
 part 'beers_selector.dart';
+part 'beer_inserter.dart';
 part 'beer_rating_updater.dart';
 part 'beer_info_updater.dart';
 part 'beer_deleter.dart';

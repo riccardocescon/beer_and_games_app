@@ -30,6 +30,49 @@ class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
   });
 
   @override
+  Future<Either<CloudFailure, void>> insert({
+    required String name,
+    required List<int>? imageBytes,
+  }) async {
+    final foInsert = await beerAPI.insert(name: name);
+    if (foInsert.isLeft()) return foInsert;
+
+    if (imageBytes == null) return const Right(null);
+
+    final id = foInsert.right;
+    final path = '/cespuglio/beers/$id.png';
+    final hash = crypto.md5.convert(imageBytes).toString();
+
+    final foCloudUpload = await cloudImageStorageAPI.uploadImage(
+      path,
+      Uint8List.fromList(imageBytes),
+    );
+    if (foCloudUpload.isLeft()) log(foCloudUpload.left.toString());
+
+    final foLocalUpload = await localImageStorageAPI.uploadImage(
+      path,
+      Uint8List.fromList(imageBytes),
+    );
+    if (foLocalUpload.isLeft()) log(foLocalUpload.left.toString());
+
+    final foUpdate = await beerAPI.updateInfo(
+      beerId: id,
+      name: name,
+      imagePath: path,
+      imageHash: hash,
+    );
+
+    return foUpdate.fold(
+      (l) {
+        if (l is NotFound) return const Right(null);
+
+        return Left(l);
+      },
+      (r) => const Right(null),
+    );
+  }
+
+  @override
   Stream<Either<Failure, List<Beer>>> select() async* {
     final foBeersStream = beerAPI.getBeers();
 

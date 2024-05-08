@@ -16,42 +16,55 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$HangoutStatsPageEvent {
-  Hangout get hangout => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Hangout hangout) setup,
+    required TResult Function() addItem,
+    required TResult Function(Item item) saveItem,
+    required TResult Function() closeItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Hangout hangout)? setup,
+    TResult? Function()? addItem,
+    TResult? Function(Item item)? saveItem,
+    TResult? Function()? closeItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Hangout hangout)? setup,
+    TResult Function()? addItem,
+    TResult Function(Item item)? saveItem,
+    TResult Function()? closeItem,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
+    required TResult Function(AddItem value) addItem,
+    required TResult Function(SaveItem value) saveItem,
+    required TResult Function(CloseItem value) closeItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
+    TResult? Function(AddItem value)? addItem,
+    TResult? Function(SaveItem value)? saveItem,
+    TResult? Function(CloseItem value)? closeItem,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
+    TResult Function(AddItem value)? addItem,
+    TResult Function(SaveItem value)? saveItem,
+    TResult Function(CloseItem value)? closeItem,
     required TResult orElse(),
   }) =>
-      throw _privateConstructorUsedError;
-
-  @JsonKey(ignore: true)
-  $HangoutStatsPageEventCopyWith<HangoutStatsPageEvent> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -60,8 +73,6 @@ abstract class $HangoutStatsPageEventCopyWith<$Res> {
   factory $HangoutStatsPageEventCopyWith(HangoutStatsPageEvent value,
           $Res Function(HangoutStatsPageEvent) then) =
       _$HangoutStatsPageEventCopyWithImpl<$Res, HangoutStatsPageEvent>;
-  @useResult
-  $Res call({Hangout hangout});
 }
 
 /// @nodoc
@@ -74,28 +85,13 @@ class _$HangoutStatsPageEventCopyWithImpl<$Res,
   final $Val _value;
   // ignore: unused_field
   final $Res Function($Val) _then;
-
-  @pragma('vm:prefer-inline')
-  @override
-  $Res call({
-    Object? hangout = null,
-  }) {
-    return _then(_value.copyWith(
-      hangout: null == hangout
-          ? _value.hangout
-          : hangout // ignore: cast_nullable_to_non_nullable
-              as Hangout,
-    ) as $Val);
-  }
 }
 
 /// @nodoc
-abstract class _$$SetupImplCopyWith<$Res>
-    implements $HangoutStatsPageEventCopyWith<$Res> {
+abstract class _$$SetupImplCopyWith<$Res> {
   factory _$$SetupImplCopyWith(
           _$SetupImpl value, $Res Function(_$SetupImpl) then) =
       __$$SetupImplCopyWithImpl<$Res>;
-  @override
   @useResult
   $Res call({Hangout hangout});
 }
@@ -140,6 +136,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Hangout hangout) setup,
+    required TResult Function() addItem,
+    required TResult Function(Item item) saveItem,
+    required TResult Function() closeItem,
   }) {
     return setup(hangout);
   }
@@ -148,6 +147,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Hangout hangout)? setup,
+    TResult? Function()? addItem,
+    TResult? Function(Item item)? saveItem,
+    TResult? Function()? closeItem,
   }) {
     return setup?.call(hangout);
   }
@@ -156,6 +158,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Hangout hangout)? setup,
+    TResult Function()? addItem,
+    TResult Function(Item item)? saveItem,
+    TResult Function()? closeItem,
     required TResult orElse(),
   }) {
     if (setup != null) {
@@ -168,6 +173,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
+    required TResult Function(AddItem value) addItem,
+    required TResult Function(SaveItem value) saveItem,
+    required TResult Function(CloseItem value) closeItem,
   }) {
     return setup(this);
   }
@@ -176,6 +184,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
+    TResult? Function(AddItem value)? addItem,
+    TResult? Function(SaveItem value)? saveItem,
+    TResult? Function(CloseItem value)? closeItem,
   }) {
     return setup?.call(this);
   }
@@ -184,6 +195,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
+    TResult Function(AddItem value)? addItem,
+    TResult Function(SaveItem value)? saveItem,
+    TResult Function(CloseItem value)? closeItem,
     required TResult orElse(),
   }) {
     if (setup != null) {
@@ -197,12 +211,342 @@ abstract class Setup extends HangoutStatsPageEvent {
   const factory Setup({required final Hangout hangout}) = _$SetupImpl;
   const Setup._() : super._();
 
-  @override
   Hangout get hangout;
-  @override
   @JsonKey(ignore: true)
   _$$SetupImplCopyWith<_$SetupImpl> get copyWith =>
       throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$AddItemImplCopyWith<$Res> {
+  factory _$$AddItemImplCopyWith(
+          _$AddItemImpl value, $Res Function(_$AddItemImpl) then) =
+      __$$AddItemImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AddItemImplCopyWithImpl<$Res>
+    extends _$HangoutStatsPageEventCopyWithImpl<$Res, _$AddItemImpl>
+    implements _$$AddItemImplCopyWith<$Res> {
+  __$$AddItemImplCopyWithImpl(
+      _$AddItemImpl _value, $Res Function(_$AddItemImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AddItemImpl extends AddItem {
+  const _$AddItemImpl() : super._();
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Hangout hangout) setup,
+    required TResult Function() addItem,
+    required TResult Function(Item item) saveItem,
+    required TResult Function() closeItem,
+  }) {
+    return addItem();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Hangout hangout)? setup,
+    TResult? Function()? addItem,
+    TResult? Function(Item item)? saveItem,
+    TResult? Function()? closeItem,
+  }) {
+    return addItem?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Hangout hangout)? setup,
+    TResult Function()? addItem,
+    TResult Function(Item item)? saveItem,
+    TResult Function()? closeItem,
+    required TResult orElse(),
+  }) {
+    if (addItem != null) {
+      return addItem();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Setup value) setup,
+    required TResult Function(AddItem value) addItem,
+    required TResult Function(SaveItem value) saveItem,
+    required TResult Function(CloseItem value) closeItem,
+  }) {
+    return addItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Setup value)? setup,
+    TResult? Function(AddItem value)? addItem,
+    TResult? Function(SaveItem value)? saveItem,
+    TResult? Function(CloseItem value)? closeItem,
+  }) {
+    return addItem?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Setup value)? setup,
+    TResult Function(AddItem value)? addItem,
+    TResult Function(SaveItem value)? saveItem,
+    TResult Function(CloseItem value)? closeItem,
+    required TResult orElse(),
+  }) {
+    if (addItem != null) {
+      return addItem(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddItem extends HangoutStatsPageEvent {
+  const factory AddItem() = _$AddItemImpl;
+  const AddItem._() : super._();
+}
+
+/// @nodoc
+abstract class _$$SaveItemImplCopyWith<$Res> {
+  factory _$$SaveItemImplCopyWith(
+          _$SaveItemImpl value, $Res Function(_$SaveItemImpl) then) =
+      __$$SaveItemImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Item item});
+}
+
+/// @nodoc
+class __$$SaveItemImplCopyWithImpl<$Res>
+    extends _$HangoutStatsPageEventCopyWithImpl<$Res, _$SaveItemImpl>
+    implements _$$SaveItemImplCopyWith<$Res> {
+  __$$SaveItemImplCopyWithImpl(
+      _$SaveItemImpl _value, $Res Function(_$SaveItemImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? item = null,
+  }) {
+    return _then(_$SaveItemImpl(
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as Item,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SaveItemImpl extends SaveItem {
+  const _$SaveItemImpl({required this.item}) : super._();
+
+  @override
+  final Item item;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SaveItemImplCopyWith<_$SaveItemImpl> get copyWith =>
+      __$$SaveItemImplCopyWithImpl<_$SaveItemImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Hangout hangout) setup,
+    required TResult Function() addItem,
+    required TResult Function(Item item) saveItem,
+    required TResult Function() closeItem,
+  }) {
+    return saveItem(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Hangout hangout)? setup,
+    TResult? Function()? addItem,
+    TResult? Function(Item item)? saveItem,
+    TResult? Function()? closeItem,
+  }) {
+    return saveItem?.call(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Hangout hangout)? setup,
+    TResult Function()? addItem,
+    TResult Function(Item item)? saveItem,
+    TResult Function()? closeItem,
+    required TResult orElse(),
+  }) {
+    if (saveItem != null) {
+      return saveItem(item);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Setup value) setup,
+    required TResult Function(AddItem value) addItem,
+    required TResult Function(SaveItem value) saveItem,
+    required TResult Function(CloseItem value) closeItem,
+  }) {
+    return saveItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Setup value)? setup,
+    TResult? Function(AddItem value)? addItem,
+    TResult? Function(SaveItem value)? saveItem,
+    TResult? Function(CloseItem value)? closeItem,
+  }) {
+    return saveItem?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Setup value)? setup,
+    TResult Function(AddItem value)? addItem,
+    TResult Function(SaveItem value)? saveItem,
+    TResult Function(CloseItem value)? closeItem,
+    required TResult orElse(),
+  }) {
+    if (saveItem != null) {
+      return saveItem(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SaveItem extends HangoutStatsPageEvent {
+  const factory SaveItem({required final Item item}) = _$SaveItemImpl;
+  const SaveItem._() : super._();
+
+  Item get item;
+  @JsonKey(ignore: true)
+  _$$SaveItemImplCopyWith<_$SaveItemImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$CloseItemImplCopyWith<$Res> {
+  factory _$$CloseItemImplCopyWith(
+          _$CloseItemImpl value, $Res Function(_$CloseItemImpl) then) =
+      __$$CloseItemImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$CloseItemImplCopyWithImpl<$Res>
+    extends _$HangoutStatsPageEventCopyWithImpl<$Res, _$CloseItemImpl>
+    implements _$$CloseItemImplCopyWith<$Res> {
+  __$$CloseItemImplCopyWithImpl(
+      _$CloseItemImpl _value, $Res Function(_$CloseItemImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$CloseItemImpl extends CloseItem {
+  const _$CloseItemImpl() : super._();
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Hangout hangout) setup,
+    required TResult Function() addItem,
+    required TResult Function(Item item) saveItem,
+    required TResult Function() closeItem,
+  }) {
+    return closeItem();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Hangout hangout)? setup,
+    TResult? Function()? addItem,
+    TResult? Function(Item item)? saveItem,
+    TResult? Function()? closeItem,
+  }) {
+    return closeItem?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Hangout hangout)? setup,
+    TResult Function()? addItem,
+    TResult Function(Item item)? saveItem,
+    TResult Function()? closeItem,
+    required TResult orElse(),
+  }) {
+    if (closeItem != null) {
+      return closeItem();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Setup value) setup,
+    required TResult Function(AddItem value) addItem,
+    required TResult Function(SaveItem value) saveItem,
+    required TResult Function(CloseItem value) closeItem,
+  }) {
+    return closeItem(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Setup value)? setup,
+    TResult? Function(AddItem value)? addItem,
+    TResult? Function(SaveItem value)? saveItem,
+    TResult? Function(CloseItem value)? closeItem,
+  }) {
+    return closeItem?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Setup value)? setup,
+    TResult Function(AddItem value)? addItem,
+    TResult Function(SaveItem value)? saveItem,
+    TResult Function(CloseItem value)? closeItem,
+    required TResult orElse(),
+  }) {
+    if (closeItem != null) {
+      return closeItem(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class CloseItem extends HangoutStatsPageEvent {
+  const factory CloseItem() = _$CloseItemImpl;
+  const CloseItem._() : super._();
 }
 
 /// @nodoc
@@ -212,6 +556,7 @@ mixin _$HangoutStatsPageState {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
+    required TResult Function(bool addItem) updateUI,
     required TResult Function(CloudFailure failure) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -220,6 +565,7 @@ mixin _$HangoutStatsPageState {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
+    TResult? Function(bool addItem)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -228,6 +574,7 @@ mixin _$HangoutStatsPageState {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
+    TResult Function(bool addItem)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) =>
@@ -237,6 +584,7 @@ mixin _$HangoutStatsPageState {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) hangout,
+    required TResult Function(UpdateUI value) updateUI,
     required TResult Function(Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -245,6 +593,7 @@ mixin _$HangoutStatsPageState {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? hangout,
+    TResult? Function(UpdateUI value)? updateUI,
     TResult? Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -253,6 +602,7 @@ mixin _$HangoutStatsPageState {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? hangout,
+    TResult Function(UpdateUI value)? updateUI,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) =>
@@ -304,6 +654,7 @@ class _$InitImpl extends Init {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
+    required TResult Function(bool addItem) updateUI,
     required TResult Function(CloudFailure failure) error,
   }) {
     return init();
@@ -315,6 +666,7 @@ class _$InitImpl extends Init {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
+    TResult? Function(bool addItem)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return init?.call();
@@ -326,6 +678,7 @@ class _$InitImpl extends Init {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
+    TResult Function(bool addItem)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -341,6 +694,7 @@ class _$InitImpl extends Init {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) hangout,
+    required TResult Function(UpdateUI value) updateUI,
     required TResult Function(Error value) error,
   }) {
     return init(this);
@@ -352,6 +706,7 @@ class _$InitImpl extends Init {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? hangout,
+    TResult? Function(UpdateUI value)? updateUI,
     TResult? Function(Error value)? error,
   }) {
     return init?.call(this);
@@ -363,6 +718,7 @@ class _$InitImpl extends Init {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? hangout,
+    TResult Function(UpdateUI value)? updateUI,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -405,6 +761,7 @@ class _$LoadingImpl extends Loading {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
+    required TResult Function(bool addItem) updateUI,
     required TResult Function(CloudFailure failure) error,
   }) {
     return loading();
@@ -416,6 +773,7 @@ class _$LoadingImpl extends Loading {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
+    TResult? Function(bool addItem)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return loading?.call();
@@ -427,6 +785,7 @@ class _$LoadingImpl extends Loading {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
+    TResult Function(bool addItem)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -442,6 +801,7 @@ class _$LoadingImpl extends Loading {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) hangout,
+    required TResult Function(UpdateUI value) updateUI,
     required TResult Function(Error value) error,
   }) {
     return loading(this);
@@ -453,6 +813,7 @@ class _$LoadingImpl extends Loading {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? hangout,
+    TResult? Function(UpdateUI value)? updateUI,
     TResult? Function(Error value)? error,
   }) {
     return loading?.call(this);
@@ -464,6 +825,7 @@ class _$LoadingImpl extends Loading {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? hangout,
+    TResult Function(UpdateUI value)? updateUI,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -530,6 +892,7 @@ class _$LoadedImpl extends Loaded {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
+    required TResult Function(bool addItem) updateUI,
     required TResult Function(CloudFailure failure) error,
   }) {
     return hangout(this.hangout);
@@ -541,6 +904,7 @@ class _$LoadedImpl extends Loaded {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
+    TResult? Function(bool addItem)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return hangout?.call(this.hangout);
@@ -552,6 +916,7 @@ class _$LoadedImpl extends Loaded {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
+    TResult Function(bool addItem)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -567,6 +932,7 @@ class _$LoadedImpl extends Loaded {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) hangout,
+    required TResult Function(UpdateUI value) updateUI,
     required TResult Function(Error value) error,
   }) {
     return hangout(this);
@@ -578,6 +944,7 @@ class _$LoadedImpl extends Loaded {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? hangout,
+    TResult? Function(UpdateUI value)? updateUI,
     TResult? Function(Error value)? error,
   }) {
     return hangout?.call(this);
@@ -589,6 +956,7 @@ class _$LoadedImpl extends Loaded {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? hangout,
+    TResult Function(UpdateUI value)? updateUI,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -606,6 +974,142 @@ abstract class Loaded extends HangoutStatsPageState {
   Hangout get hangout;
   @JsonKey(ignore: true)
   _$$LoadedImplCopyWith<_$LoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateUIImplCopyWith<$Res> {
+  factory _$$UpdateUIImplCopyWith(
+          _$UpdateUIImpl value, $Res Function(_$UpdateUIImpl) then) =
+      __$$UpdateUIImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool addItem});
+}
+
+/// @nodoc
+class __$$UpdateUIImplCopyWithImpl<$Res>
+    extends _$HangoutStatsPageStateCopyWithImpl<$Res, _$UpdateUIImpl>
+    implements _$$UpdateUIImplCopyWith<$Res> {
+  __$$UpdateUIImplCopyWithImpl(
+      _$UpdateUIImpl _value, $Res Function(_$UpdateUIImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? addItem = null,
+  }) {
+    return _then(_$UpdateUIImpl(
+      addItem: null == addItem
+          ? _value.addItem
+          : addItem // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateUIImpl extends UpdateUI {
+  const _$UpdateUIImpl({required this.addItem}) : super._();
+
+  @override
+  final bool addItem;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateUIImplCopyWith<_$UpdateUIImpl> get copyWith =>
+      __$$UpdateUIImplCopyWithImpl<_$UpdateUIImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function(Hangout hangout) hangout,
+    required TResult Function(bool addItem) updateUI,
+    required TResult Function(CloudFailure failure) error,
+  }) {
+    return updateUI(addItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? loading,
+    TResult? Function(Hangout hangout)? hangout,
+    TResult? Function(bool addItem)? updateUI,
+    TResult? Function(CloudFailure failure)? error,
+  }) {
+    return updateUI?.call(addItem);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Hangout hangout)? hangout,
+    TResult Function(bool addItem)? updateUI,
+    TResult Function(CloudFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (updateUI != null) {
+      return updateUI(addItem);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) hangout,
+    required TResult Function(UpdateUI value) updateUI,
+    required TResult Function(Error value) error,
+  }) {
+    return updateUI(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Init value)? init,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? hangout,
+    TResult? Function(UpdateUI value)? updateUI,
+    TResult? Function(Error value)? error,
+  }) {
+    return updateUI?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? hangout,
+    TResult Function(UpdateUI value)? updateUI,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (updateUI != null) {
+      return updateUI(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateUI extends HangoutStatsPageState {
+  const factory UpdateUI({required final bool addItem}) = _$UpdateUIImpl;
+  const UpdateUI._() : super._();
+
+  bool get addItem;
+  @JsonKey(ignore: true)
+  _$$UpdateUIImplCopyWith<_$UpdateUIImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -670,6 +1174,7 @@ class _$ErrorImpl extends Error {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
+    required TResult Function(bool addItem) updateUI,
     required TResult Function(CloudFailure failure) error,
   }) {
     return error(failure);
@@ -681,6 +1186,7 @@ class _$ErrorImpl extends Error {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
+    TResult? Function(bool addItem)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return error?.call(failure);
@@ -692,6 +1198,7 @@ class _$ErrorImpl extends Error {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
+    TResult Function(bool addItem)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -707,6 +1214,7 @@ class _$ErrorImpl extends Error {
     required TResult Function(Init value) init,
     required TResult Function(Loading value) loading,
     required TResult Function(Loaded value) hangout,
+    required TResult Function(UpdateUI value) updateUI,
     required TResult Function(Error value) error,
   }) {
     return error(this);
@@ -718,6 +1226,7 @@ class _$ErrorImpl extends Error {
     TResult? Function(Init value)? init,
     TResult? Function(Loading value)? loading,
     TResult? Function(Loaded value)? hangout,
+    TResult? Function(UpdateUI value)? updateUI,
     TResult? Function(Error value)? error,
   }) {
     return error?.call(this);
@@ -729,6 +1238,7 @@ class _$ErrorImpl extends Error {
     TResult Function(Init value)? init,
     TResult Function(Loading value)? loading,
     TResult Function(Loaded value)? hangout,
+    TResult Function(UpdateUI value)? updateUI,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {

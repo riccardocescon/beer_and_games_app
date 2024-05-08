@@ -6,6 +6,9 @@ import 'package:dartz/dartz.dart';
 
 abstract class _BeerAPI {
   Stream<Either<CloudFailure, List<BeerModel>>> getBeers();
+  Future<Either<CloudFailure, String>> insert({
+    required String name,
+  });
   Future<Either<CloudFailure, void>> updateRating({
     required String beerId,
     required List<UserRating> ratings,
@@ -37,6 +40,26 @@ class BeerAPI extends _BeerAPI {
           .toList();
       return Right(beers);
     });
+  }
+
+  @override
+  Future<Either<CloudFailure, String>> insert({
+    required String name,
+  }) async {
+    final data = <String, dynamic>{
+      'name': name,
+    };
+
+    try {
+      final doc = await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('beers')
+          .add(data);
+      return Right(doc.id);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
   }
 
   @override

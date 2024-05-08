@@ -19,6 +19,7 @@ mixin _$ItemsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
@@ -29,6 +30,7 @@ mixin _$ItemsEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
@@ -38,6 +40,7 @@ mixin _$ItemsEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
@@ -48,6 +51,7 @@ mixin _$ItemsEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertBeer value) insertBeer,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
@@ -56,6 +60,7 @@ mixin _$ItemsEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertBeer value)? insertBeer,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
@@ -64,6 +69,7 @@ mixin _$ItemsEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertBeer value)? insertBeer,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
@@ -115,6 +121,7 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
@@ -128,6 +135,7 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
@@ -140,6 +148,7 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
@@ -156,6 +165,7 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertBeer value) insertBeer,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
@@ -167,6 +177,7 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertBeer value)? insertBeer,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
@@ -178,6 +189,7 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertBeer value)? insertBeer,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
@@ -193,6 +205,166 @@ class _$DownloadImpl extends Download {
 abstract class Download extends ItemsEvent {
   const factory Download() = _$DownloadImpl;
   const Download._() : super._();
+}
+
+/// @nodoc
+abstract class _$$InsertBeerImplCopyWith<$Res> {
+  factory _$$InsertBeerImplCopyWith(
+          _$InsertBeerImpl value, $Res Function(_$InsertBeerImpl) then) =
+      __$$InsertBeerImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String name, List<int>? imageBytes});
+}
+
+/// @nodoc
+class __$$InsertBeerImplCopyWithImpl<$Res>
+    extends _$ItemsEventCopyWithImpl<$Res, _$InsertBeerImpl>
+    implements _$$InsertBeerImplCopyWith<$Res> {
+  __$$InsertBeerImplCopyWithImpl(
+      _$InsertBeerImpl _value, $Res Function(_$InsertBeerImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? imageBytes = freezed,
+  }) {
+    return _then(_$InsertBeerImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageBytes: freezed == imageBytes
+          ? _value._imageBytes
+          : imageBytes // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InsertBeerImpl extends InsertBeer {
+  const _$InsertBeerImpl(
+      {required this.name, required final List<int>? imageBytes})
+      : _imageBytes = imageBytes,
+        super._();
+
+  @override
+  final String name;
+  final List<int>? _imageBytes;
+  @override
+  List<int>? get imageBytes {
+    final value = _imageBytes;
+    if (value == null) return null;
+    if (_imageBytes is EqualUnmodifiableListView) return _imageBytes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InsertBeerImplCopyWith<_$InsertBeerImpl> get copyWith =>
+      __$$InsertBeerImplCopyWithImpl<_$InsertBeerImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(
+            RateableItem item, String userEmail, Rating rating)
+        updateRating,
+    required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(RateableItem item) delete,
+  }) {
+    return insertBeer(name, imageBytes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(RateableItem item)? delete,
+  }) {
+    return insertBeer?.call(name, imageBytes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult Function(RateableItem item)? updateInfo,
+    TResult Function(RateableItem item)? delete,
+    required TResult orElse(),
+  }) {
+    if (insertBeer != null) {
+      return insertBeer(name, imageBytes);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Download value) download,
+    required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(Delete value) delete,
+  }) {
+    return insertBeer(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Download value)? download,
+    TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(Delete value)? delete,
+  }) {
+    return insertBeer?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Download value)? download,
+    TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(Delete value)? delete,
+    required TResult orElse(),
+  }) {
+    if (insertBeer != null) {
+      return insertBeer(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InsertBeer extends ItemsEvent {
+  const factory InsertBeer(
+      {required final String name,
+      required final List<int>? imageBytes}) = _$InsertBeerImpl;
+  const InsertBeer._() : super._();
+
+  String get name;
+  List<int>? get imageBytes;
+  @JsonKey(ignore: true)
+  _$$InsertBeerImplCopyWith<_$InsertBeerImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -260,6 +432,7 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
@@ -273,6 +446,7 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
@@ -285,6 +459,7 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
@@ -301,6 +476,7 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertBeer value) insertBeer,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
@@ -312,6 +488,7 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertBeer value)? insertBeer,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
@@ -323,6 +500,7 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertBeer value)? insertBeer,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
@@ -399,6 +577,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
@@ -412,6 +591,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
@@ -424,6 +604,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
@@ -440,6 +621,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertBeer value) insertBeer,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
@@ -451,6 +633,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertBeer value)? insertBeer,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
@@ -462,6 +645,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertBeer value)? insertBeer,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
@@ -534,6 +718,7 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
@@ -547,6 +732,7 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
@@ -559,6 +745,7 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
@@ -575,6 +762,7 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertBeer value) insertBeer,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
@@ -586,6 +774,7 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertBeer value)? insertBeer,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
@@ -597,6 +786,7 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertBeer value)? insertBeer,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,

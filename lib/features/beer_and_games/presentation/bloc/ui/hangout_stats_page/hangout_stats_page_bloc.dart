@@ -1,5 +1,6 @@
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:equatable/equatable.dart';
@@ -15,6 +16,7 @@ class HangoutStatsPageBloc
   final HangoutBloc hangoutBloc;
 
   late Hangout _hangout;
+  bool _addItem = false;
 
   HangoutStatsPageBloc({
     required this.hangoutBloc,
@@ -58,6 +60,17 @@ class HangoutStatsPageBloc
 
         if (completed) break;
       }
+    });
+    on<AddItem>((event, emit) {
+      _addItem = true;
+      emit(HangoutStatsPageState.updateUI(addItem: _addItem));
+    });
+    on<SaveItem>((event, emit) {
+      // final item = event.item;
+    });
+    on<CloseItem>((event, emit) {
+      _addItem = false;
+      emit(HangoutStatsPageState.updateUI(addItem: _addItem));
     });
   }
 }

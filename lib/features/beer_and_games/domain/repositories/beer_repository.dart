@@ -7,6 +7,10 @@ import 'package:dartz/dartz.dart';
 
 abstract class BeerRepository {
   Stream<Either<Failure, List<Beer>>> select();
+  Future<Either<CloudFailure, void>> insert({
+    required String name,
+    required List<int>? imageBytes,
+  });
   Future<Either<CloudFailure, void>> updateRating({
     required String userEmail,
     required Rating rating,

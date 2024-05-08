@@ -64,6 +64,7 @@ void init() {
     () => ItemsBloc(
       gamesSelector: sl(),
       beersSelector: sl(),
+      beerInserter: sl(),
       beersRatiningUpdater: sl(),
       beerInfoUpdater: sl(),
       beerDeleter: sl(),
@@ -91,6 +92,7 @@ void init() {
   sl.registerFactory(() => BeerDeleter(beerRepository: sl()));
   sl.registerFactory(() => WineInfoUpdater(wineRepository: sl()));
   sl.registerFactory(() => WineDeleter(wineRepository: sl()));
+  sl.registerFactory(() => BeerInserter(beerRepository: sl()));
 
   // Repository
   sl.registerFactory<HangoutRepository>(

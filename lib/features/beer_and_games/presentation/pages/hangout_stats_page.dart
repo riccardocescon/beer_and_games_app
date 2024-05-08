@@ -12,8 +12,11 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/hangout_stats_page/hangout_stats_page_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/pages/rating_items_page.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/widgets/homepage_stats_page/new_item_body.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/widgets/rating_items_page/edit_ratable_item_bottom_sheet.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part '../widgets/homepage_stats_page/users_stats_graph.dart';
@@ -48,83 +51,123 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
         builder: (context, state) {
           return state.maybeMap(
             hangout: (value) {
-              return NestedScrollView(
-                controller: _scrollController,
-                physics: const BouncingScrollPhysics(),
-                headerSliverBuilder: (context, innerBoxIsScrolled) {
-                  return [
-                    SliverLayoutBuilder(
-                      builder: (context, constraints) {
-                        final x = _scrollController.offset;
-                        final maxHeight = constraints.crossAxisExtent * 0.6;
-                        final scale = linearDecrease(x: x, maxValue: maxHeight)
-                            .clamp(0.01, 1.0);
-                        final opacity =
-                            linearDecrease(x: x, maxValue: maxHeight)
-                                .clamp(0.01, 1.0);
-                        return SliverToBoxAdapter(
-                          child: Transform.scale(
-                            scale: scale,
-                            alignment: Alignment.bottomCenter,
-                            child: Opacity(
-                              opacity: opacity,
-                              child: SizedBox(
-                                height: maxHeight,
-                                child: _UsersStatsGraph(
-                                  users: value.hangout.allUsers,
+              return BlocBuilder<HangoutStatsPageBloc, HangoutStatsPageState>(
+                buildWhen: (previous, current) => current.maybeMap(
+                  updateUI: (value) {
+                    final prevState = previous.maybeMap(
+                      updateUI: (value) => value,
+                      orElse: () => null,
+                    );
+                    if (prevState == null) return true;
+
+                    return prevState.addItem != value.addItem;
+                  },
+                  orElse: () => false,
+                ),
+                builder: (context, state) {
+                  final isAdd = state.maybeMap(
+                    updateUI: (value) => value.addItem,
+                    orElse: () => false,
+                  );
+                  return NestedScrollView(
+                    controller: _scrollController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    headerSliverBuilder: (context, innerBoxIsScrolled) {
+                      return [
+                        SliverLayoutBuilder(
+                          builder: (context, constraints) {
+                            final x = _scrollController.offset;
+                            final maxHeight = constraints.crossAxisExtent * 0.6;
+                            final scale =
+                                linearDecrease(x: x, maxValue: maxHeight)
+                                    .clamp(0.01, 1.0);
+                            final opacity =
+                                linearDecrease(x: x, maxValue: maxHeight)
+                                    .clamp(0.01, 1.0);
+                            return SliverToBoxAdapter(
+                              child: Transform.scale(
+                                scale: scale,
+                                alignment: Alignment.bottomCenter,
+                                child: Opacity(
+                                  opacity: opacity,
+                                  child: SizedBox(
+                                    height: maxHeight,
+                                    child: _UsersStatsGraph(
+                                      users: value.hangout.allUsers,
+                                    ),
+                                  ),
                                 ),
                               ),
-                            ),
-                          ),
+                            );
+                          },
+                        ),
+                      ];
+                    },
+                    body: BlocBuilder<HangoutStatsPageBloc,
+                        HangoutStatsPageState>(
+                      buildWhen: (previous, current) {
+                        return current.maybeMap(
+                          updateUI: (value) => true,
+                          orElse: () => false,
+                        );
+                      },
+                      builder: (context, state) {
+                        return state.maybeMap(
+                          updateUI: (value) {
+                            return AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              switchInCurve: Curves.easeInOutCubic,
+                              switchOutCurve: Curves.easeInOutCubic,
+                              child: value.addItem
+                                  ? _addItem()
+                                  : _categoriesList(),
+                            );
+                          },
+                          orElse: () => _categoriesList(),
                         );
                       },
                     ),
-                  ];
+                  );
                 },
-                body: CustomScrollView(
-                  slivers: [
-                    SliverToBoxAdapter(
-                      child: LayoutBuilder(
-                        builder: (x, constraints) {
-                          return _ItemsStatsList(
-                            maxWidth: constraints.maxWidth,
-                          );
-                        },
-                      ),
-                    ),
-                  ],
-                ),
-                // body: LayoutBuilder(builder: (context, constraints) {
-                //   return _ItemsStatsList(
-                //     maxWidth: constraints.maxWidth,
-                //   );
-                // }),
-                /* */
-                // body: CustomScrollView(
-                //   slivers: [
-                //     SliverToBoxAdapter(
-                //       child: LayoutBuilder(builder: (c, n) {
-                //         return Container();
-                //       }),
-                //     ),
-                //     SliverLayoutBuilder(
-                //       builder: (context, constraints) {
-                //         return SliverFillRemaining(
-                //           hasScrollBody: false,
-                //           child: _ItemsStatsList(
-                //             maxWidth: constraints.crossAxisExtent,
-                //           ),
-                //         );
-                //       },
-                //     ),
-                //   ],
-                // ),
               );
             },
             orElse: () => const SizedBox.shrink(),
           );
         },
       ),
+    );
+  }
+
+  Widget _categoriesList() {
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: LayoutBuilder(
+            builder: (x, constraints) {
+              return _ItemsStatsList(
+                maxWidth: constraints.maxWidth,
+              );
+            },
+          ),
+        ),
+      ],
+    );
+  }
+
+  Widget _addItem() {
+    return Column(
+      children: [
+        Expanded(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => context.read<HangoutStatsPageBloc>().add(
+                  const HangoutStatsPageEvent.closeItem(),
+                ),
+            child: Container(),
+          ),
+        ),
+        const NewRatableItemBody<Beer>(),
+      ],
     );
   }
 }

@@ -17,14 +17,11 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/user_bloc.dart/user_bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/widgets/rating_items_page/edit_ratable_item_bottom_sheet.dart';
 import 'package:beer_and_games/injection_container.dart';
 import 'package:beer_and_games/theme.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:image_picker/image_picker.dart';
-import 'package:image_cropper/image_cropper.dart';
-import 'package:collection/collection.dart';
-
 part '../widgets/rating_items_page/items_list.dart';
 part '../widgets/rating_items_page/ratable_item.dart';
 part '../widgets/rating_items_page/rate_bar.dart';
@@ -32,7 +29,6 @@ part '../widgets/rating_items_page/ratable_item_bottom_sheet.dart';
 part '../widgets/rating_items_page/bottom_sheet_ratable_bar.dart';
 part '../widgets/rating_items_page/bottom_sheet_bar_button.dart';
 part '../widgets/rating_items_page/user_vote_dialog.dart';
-part '../widgets/rating_items_page/edit_ratable_item_bottom_sheet.dart';
 
 class RatingItemsPage extends StatefulWidget {
   const RatingItemsPage({super.key, required this.items});
