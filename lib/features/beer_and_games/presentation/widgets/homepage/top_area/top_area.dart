@@ -44,7 +44,9 @@ class TopArea extends StatelessWidget {
               width10,
               Expanded(
                 child: Image.asset(
-                  'assets/images/table.png',
+                  'assets/images/beer.png',
+                  height: 100,
+                  alignment: Alignment.centerRight,
                 ),
               ),
             ],
