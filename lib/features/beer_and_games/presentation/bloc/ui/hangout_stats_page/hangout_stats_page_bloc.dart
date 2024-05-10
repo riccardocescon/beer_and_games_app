@@ -1,6 +1,7 @@
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -15,6 +16,7 @@ class HangoutStatsPageBloc
   final HangoutBloc hangoutBloc;
 
   late Hangout _hangout;
+  bool _addItem = false;
 
   HangoutStatsPageBloc({
     required this.hangoutBloc,
@@ -24,7 +26,7 @@ class HangoutStatsPageBloc
       emit(HangoutStatsPageState.hangout(_hangout));
 
       final preUsersPresence =
-          _hangout.allUsers.where((e) => e.precenceCount != null).length;
+          _hangout.allUsers.where((e) => e.presenceCount != null).length;
 
       int updateReceivedCounter = 0;
       int maxUpdateReceivedCounter = 3;
@@ -34,7 +36,7 @@ class HangoutStatsPageBloc
         final completed = state.maybeMap<bool>(
           loaded: (value) {
             final postUsersPresence = value.hangout.allUsers
-                .where((e) => e.precenceCount != null)
+                .where((e) => e.presenceCount != null)
                 .length;
 
             final isNewData = postUsersPresence > preUsersPresence;
@@ -58,6 +60,17 @@ class HangoutStatsPageBloc
 
         if (completed) break;
       }
+    });
+    on<AddItem>((event, emit) {
+      _addItem = true;
+      emit(HangoutStatsPageState.updateUI(addItem: _addItem));
+    });
+    on<SaveItem>((event, emit) {
+      // final item = event.item;
+    });
+    on<CloseItem>((event, emit) {
+      _addItem = false;
+      emit(HangoutStatsPageState.updateUI(addItem: _addItem));
     });
   }
 }

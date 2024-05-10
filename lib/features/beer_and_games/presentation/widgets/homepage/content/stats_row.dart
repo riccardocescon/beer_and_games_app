@@ -22,9 +22,19 @@ class _StatsRow extends StatelessWidget {
             context,
             () {
               context.push(
-                BlocProvider(
-                  create: (context) => sl<HangoutStatsPageBloc>()
-                    ..add(HangoutStatsPageEvent.setup(hangout: hangout)),
+                MultiBlocProvider(
+                  providers: [
+                    BlocProvider(
+                      create: (context) => sl<HangoutStatsPageBloc>()
+                        ..add(HangoutStatsPageEvent.setup(hangout: hangout)),
+                    ),
+                    BlocProvider(
+                      create: (_) => sl<ItemsBloc>()
+                        ..add(
+                          const ItemsEvent.download(),
+                        ),
+                    ),
+                  ],
                   child: const HangoutStatsPage(),
                 ),
               );

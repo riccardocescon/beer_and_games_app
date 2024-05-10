@@ -1,7 +1,7 @@
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
 import 'package:beer_and_games/core/enums/presence_state.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -81,7 +81,8 @@ class HomepageVoteAreaBloc
             return true;
           },
           error: (value) {
-            emit(HomepageVoteAreaState.error(message: value.failure.message));
+            emit(
+                HomepageVoteAreaState.error(message: value.failure.toString()));
             return true;
           },
           orElse: () => false,

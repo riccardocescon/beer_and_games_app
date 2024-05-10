@@ -9,9 +9,18 @@ sealed class HangoutStatsPageEvent extends AppEvent
     required Hangout hangout,
   }) = Setup;
 
+  // UI Interactions
+  const factory HangoutStatsPageEvent.addItem() = AddItem;
+  const factory HangoutStatsPageEvent.saveItem({
+    required Item item,
+  }) = SaveItem;
+  const factory HangoutStatsPageEvent.closeItem() = CloseItem;
+
   @override
   List<Object?> get props => map(
         setup: (value) => [value.hangout],
-        getUsersPresence: (value) => [],
+        addItem: (value) => [],
+        saveItem: (value) => [value.item],
+        closeItem: (value) => [],
       );
 }

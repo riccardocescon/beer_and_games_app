@@ -1,23 +1,27 @@
+import 'package:beer_and_games/core/animations/formula.dart';
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/fill_horizontal_row.dart';
 import 'package:beer_and_games/core/widgets/hangout_app_bar.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/core/widgets/static_bottom_sheet.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/abstractions/item.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/beer.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/game.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/wine.dart';
+import 'package:beer_and_games/core/widgets/stats_item.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/hangout_stats_page/hangout_stats_page_bloc.dart';
-import 'package:beer_and_games/theme.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/pages/rating_items_page.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/widgets/homepage_stats_page/new_item_body.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/widgets/rating_items_page/edit_ratable_item_bottom_sheet.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part '../widgets/homepage_stats_page/users_stats_graph.dart';
 part '../widgets/homepage_stats_page/items_stats_list.dart';
 part '../widgets/homepage_stats_page/item_group_section.dart';
-part '../widgets/homepage_stats_page/stats_item.dart';
 
 class HangoutStatsPage extends StatefulWidget {
   const HangoutStatsPage({super.key});
@@ -27,10 +31,13 @@ class HangoutStatsPage extends StatefulWidget {
 }
 
 class _HangoutStatsPageState extends State<HangoutStatsPage> {
-  bool _expandContent = false;
+  final ScrollController _scrollController = ScrollController();
 
-  final _animationDuration = const Duration(milliseconds: 200);
-  final _animationCurve = Curves.easeInOutCubic;
+  @override
+  void dispose() {
+    _scrollController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,28 +51,82 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
         builder: (context, state) {
           return state.maybeMap(
             hangout: (value) {
-              return LayoutBuilder(
-                builder: (context, constraints) {
-                  return Column(
-                    children: [
-                      height20,
-                      _appearDisappearAnimator(
-                        maxHeight: constraints.maxHeight,
-                        child: _UsersStatsGraph(
-                          users: value.hangout.allUsers,
-                        ),
-                      ),
-                      height20,
-                      Expanded(
-                        child: _ItemsStatsList(
-                          onExpand: () {
-                            setState(() {
-                              _expandContent = !_expandContent;
-                            });
+              return BlocBuilder<HangoutStatsPageBloc, HangoutStatsPageState>(
+                buildWhen: (previous, current) => current.maybeMap(
+                  updateUI: (value) {
+                    final prevState = previous.maybeMap(
+                      updateUI: (value) => value,
+                      orElse: () => null,
+                    );
+                    if (prevState == null) return true;
+
+                    return prevState.addItem != value.addItem;
+                  },
+                  orElse: () => false,
+                ),
+                builder: (context, state) {
+                  final isAdd = state.maybeMap(
+                    updateUI: (value) => value.addItem,
+                    orElse: () => false,
+                  );
+                  return NestedScrollView(
+                    controller: _scrollController,
+                    physics: const NeverScrollableScrollPhysics(),
+                    headerSliverBuilder: (context, innerBoxIsScrolled) {
+                      return [
+                        SliverLayoutBuilder(
+                          builder: (context, constraints) {
+                            final x = _scrollController.offset;
+                            final maxHeight = constraints.crossAxisExtent * 0.6;
+                            final scale =
+                                linearDecrease(x: x, maxValue: maxHeight)
+                                    .clamp(0.01, 1.0);
+                            final opacity =
+                                linearDecrease(x: x, maxValue: maxHeight)
+                                    .clamp(0.01, 1.0);
+                            return SliverToBoxAdapter(
+                              child: Transform.scale(
+                                scale: scale,
+                                alignment: Alignment.bottomCenter,
+                                child: Opacity(
+                                  opacity: opacity,
+                                  child: SizedBox(
+                                    height: maxHeight,
+                                    child: _UsersStatsGraph(
+                                      users: value.hangout.allUsers,
+                                    ),
+                                  ),
+                                ),
+                              ),
+                            );
                           },
                         ),
-                      ),
-                    ],
+                      ];
+                    },
+                    body: BlocBuilder<HangoutStatsPageBloc,
+                        HangoutStatsPageState>(
+                      buildWhen: (previous, current) {
+                        return current.maybeMap(
+                          updateUI: (value) => true,
+                          orElse: () => false,
+                        );
+                      },
+                      builder: (context, state) {
+                        return state.maybeMap(
+                          updateUI: (value) {
+                            return AnimatedSwitcher(
+                              duration: const Duration(milliseconds: 300),
+                              switchInCurve: Curves.easeInOutCubic,
+                              switchOutCurve: Curves.easeInOutCubic,
+                              child: value.addItem
+                                  ? _addItem()
+                                  : _categoriesList(),
+                            );
+                          },
+                          orElse: () => _categoriesList(),
+                        );
+                      },
+                    ),
                   );
                 },
               );
@@ -77,25 +138,36 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
     );
   }
 
-  Widget _appearDisappearAnimator({
-    required double maxHeight,
-    required Widget child,
-  }) {
-    return AnimatedSize(
-      duration: _animationDuration,
-      curve: _animationCurve,
-      child: SizedBox(
-        height: _expandContent ? 0 : maxHeight * 0.28,
-        child: AnimatedOpacity(
-          duration: _animationDuration,
-          curve: _animationCurve,
-          opacity: _expandContent ? 0 : 1,
-          child: Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: child,
+  Widget _categoriesList() {
+    return CustomScrollView(
+      slivers: [
+        SliverToBoxAdapter(
+          child: LayoutBuilder(
+            builder: (x, constraints) {
+              return _ItemsStatsList(
+                maxWidth: constraints.maxWidth,
+              );
+            },
           ),
         ),
-      ),
+      ],
+    );
+  }
+
+  Widget _addItem() {
+    return Column(
+      children: [
+        Expanded(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => context.read<HangoutStatsPageBloc>().add(
+                  const HangoutStatsPageEvent.closeItem(),
+                ),
+            child: Container(),
+          ),
+        ),
+        const NewRatableItemBody<Beer>(),
+      ],
     );
   }
 }

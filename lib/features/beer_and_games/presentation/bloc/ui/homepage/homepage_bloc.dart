@@ -1,6 +1,9 @@
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/hangout.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';

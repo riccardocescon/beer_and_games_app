@@ -1,12 +1,12 @@
 import 'dart:math';
 
 import 'package:beer_and_games/core/extentions/context_extension.dart';
-import 'package:beer_and_games/core/widgets/fill_horizontal_row.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
-import 'package:beer_and_games/features/beer_and_games/data/entities/user.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/edit_hangout/edit_hangout_page_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/bloc/user_bloc.dart/user_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/pages/edit_hangout_date_time_page.dart';
 import 'package:beer_and_games/injection_container.dart';
 import 'package:flutter/material.dart';
@@ -20,7 +20,9 @@ part 'users_votes_area.dart';
 part 'user_vote_item.dart';
 
 class TopArea extends StatelessWidget {
-  const TopArea({super.key});
+  const TopArea({super.key, required this.maxWidth});
+
+  final double maxWidth;
 
   @override
   Widget build(BuildContext context) {
@@ -42,14 +44,16 @@ class TopArea extends StatelessWidget {
               width10,
               Expanded(
                 child: Image.asset(
-                  'assets/images/table.png',
+                  'assets/images/beer.png',
+                  height: 100,
+                  alignment: Alignment.centerRight,
                 ),
               ),
             ],
           ),
           Padding(
-            padding: EdgeInsets.symmetric(vertical: 8),
-            child: _UsersVotesArea(),
+            padding: const EdgeInsets.symmetric(vertical: 8),
+            child: _UsersVotesArea(maxWidth: maxWidth),
           ),
         ],
       ),

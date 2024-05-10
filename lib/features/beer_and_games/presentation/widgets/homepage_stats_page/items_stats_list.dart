@@ -1,37 +1,29 @@
 part of 'package:beer_and_games/features/beer_and_games/presentation/pages/hangout_stats_page.dart';
 
 class _ItemsStatsList extends StatelessWidget {
-  const _ItemsStatsList({
-    required this.onExpand,
-  });
+  const _ItemsStatsList({required this.maxWidth});
 
-  final VoidCallback onExpand;
+  final double maxWidth;
 
   @override
   Widget build(BuildContext context) {
+    // Dimensions in logical pixels (dp)
+    final bodyHeigth = MediaQuery.of(context).size.height -
+        (MediaQuery.of(context).padding.top +
+            kToolbarHeight +
+            kBottomNavigationBarHeight);
+
     return StaticBottomSheet(
       child: ClipRRect(
         borderRadius: const BorderRadius.only(
           topLeft: Radius.circular(24 * 2),
           topRight: Radius.circular(24 * 2),
         ),
-        child: FilledButton(
-          onPressed: onExpand,
-          style: ButtonStyle(
-            padding: MaterialStateProperty.all(EdgeInsets.zero),
-            backgroundColor: MaterialStateProperty.all(Colors.transparent),
-            shape: MaterialStateProperty.all(
-              const RoundedRectangleBorder(
-                borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(24 * 2),
-                  topRight: Radius.circular(24 * 2),
-                ),
-              ),
-            ),
-          ),
-          child: Padding(
-            padding: const EdgeInsets.symmetric(horizontal: 24),
-            child: ListView(
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 24),
+          child: SizedBox(
+            height: bodyHeigth,
+            child: Column(
               children: [
                 height20,
                 height5,
@@ -51,106 +43,65 @@ class _ItemsStatsList extends StatelessWidget {
   }
 
   Widget _gameList() {
-    return _ItemGroupSection(
-      title: 'Giochi',
-      items: [
-        Game(
-          name: 'Unstable Unicorns',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        ),
-        Game(
-          name: 'War Chest',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        ),
-        Game(
-          name: 'War Chest',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        ),
-        Game(
-          name: 'War Chest',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        ),
-        Game(
-          name: 'War Chest',
-          minplayers: 2,
-          maxplayers: 4,
-          onlyMinMaxPlayers: true,
-        )
-      ],
+    return BlocBuilder<ItemsBloc, ItemsState>(
+      buildWhen: (previous, current) => current.maybeMap(
+        update: (value) => true,
+        orElse: () => false,
+      ),
+      builder: (context, state) {
+        return state.maybeMap(
+          update: (value) {
+            return _ItemGroupSection(
+              maxWidth: maxWidth,
+              title: 'Giochi',
+              items: value.games,
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
+      },
     );
   }
 
   Widget _beerList() {
-    return _ItemGroupSection(
-      title: 'Birre',
-      items: [
-        Beer(
-          name: 'Leffe',
-          imageUrl: null,
-          ratings: [],
-        ),
-        Beer(
-          name: 'Leffe',
-          imageUrl: null,
-          ratings: [],
-        ),
-        Beer(
-          name: 'Leffe',
-          imageUrl: null,
-          ratings: [],
-        ),
-        Beer(
-          name: 'Leffe',
-          imageUrl: null,
-          ratings: [],
-        ),
-        Beer(
-          name: 'Leffe',
-          imageUrl: null,
-          ratings: [],
-        ),
-      ],
+    return BlocBuilder<ItemsBloc, ItemsState>(
+      buildWhen: (previous, current) => current.maybeMap(
+        update: (value) => true,
+        orElse: () => false,
+      ),
+      builder: (context, state) {
+        return state.maybeMap(
+          update: (value) {
+            return _ItemGroupSection(
+              maxWidth: maxWidth,
+              title: 'Birre',
+              items: value.beers,
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
+      },
     );
   }
 
   Widget _wineList() {
-    return _ItemGroupSection(
-      title: 'Vino',
-      items: [
-        Wine(
-          name: 'Merlot',
-          imageUrl: null,
-          ratings: [],
-        ),
-        Wine(
-          name: 'Merlot',
-          imageUrl: null,
-          ratings: [],
-        ),
-        Wine(
-          name: 'Merlot',
-          imageUrl: null,
-          ratings: [],
-        ),
-        Wine(
-          name: 'Merlot',
-          imageUrl: null,
-          ratings: [],
-        ),
-        Wine(
-          name: 'Merlot',
-          imageUrl: null,
-          ratings: [],
-        ),
-      ],
+    return BlocBuilder<ItemsBloc, ItemsState>(
+      buildWhen: (previous, current) => current.maybeMap(
+        update: (value) => true,
+        orElse: () => false,
+      ),
+      builder: (context, state) {
+        return state.maybeMap(
+          update: (value) {
+            return _ItemGroupSection(
+              maxWidth: maxWidth,
+              title: 'Vino',
+              items: value.wines,
+            );
+          },
+          orElse: () => const SizedBox.shrink(),
+        );
+      },
     );
   }
 }

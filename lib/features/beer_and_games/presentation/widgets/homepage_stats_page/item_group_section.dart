@@ -4,8 +4,10 @@ class _ItemGroupSection extends StatelessWidget {
   const _ItemGroupSection({
     required this.title,
     required this.items,
+    required this.maxWidth,
   });
 
+  final double maxWidth;
   final String title;
   final List<Item> items;
 
@@ -35,7 +37,13 @@ class _ItemGroupSection extends StatelessWidget {
           dimension: 20,
           child: FilledButton(
             onPressed: () {
-              context.warningSnackbar('Work in progress', 'Coming soon!');
+              if (items is List<Beer> || items is List<Wine>) {
+                context
+                    .read<HangoutStatsPageBloc>()
+                    .add(const HangoutStatsPageEvent.addItem());
+              } else {
+                context.warningSnackbar('Work in progress', 'Coming soon!');
+              }
             },
             style: ButtonStyle(
               padding: MaterialStateProperty.all(EdgeInsets.zero),
@@ -54,16 +62,20 @@ class _ItemGroupSection extends StatelessWidget {
 
   Widget _itemsRow(BuildContext context) {
     return FillHorizontalRow(
+      maxWidth: maxWidth,
       itemWidth: _itemLength,
       padding: _itemPadding,
       itemsCount: items.length,
       paddingBuilder: (context, index, maxItems) =>
           index == 0 ? EdgeInsets.zero : EdgeInsets.only(left: _itemPadding),
       builder: (context, index, maxItems) {
-        return _StatsItem(
-          itemWidth: _itemLength,
-          itemHeight: _itemHeight,
-          item: items[index],
+        return GestureDetector(
+          onTap: () => _showMore(context),
+          child: StatsItem(
+            itemWidth: _itemLength,
+            itemHeight: _itemHeight,
+            item: items[index],
+          ),
         );
       },
     );
@@ -74,9 +86,7 @@ class _ItemGroupSection extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.end,
       children: [
         GestureDetector(
-          onTap: () {
-            context.warningSnackbar('Work in progress', 'Coming soon!');
-          },
+          onTap: () => _showMore(context),
           child: Text(
             'Vedi di più',
             style: context.textTheme.labelMedium?.copyWith(
@@ -86,5 +96,25 @@ class _ItemGroupSection extends StatelessWidget {
         ),
       ],
     );
+  }
+
+  void _showMore(BuildContext context) {
+    if (items is List<Beer>) {
+      context.push(
+        BlocProvider.value(
+          value: context.read<ItemsBloc>(),
+          child: RatingItemsPage(items: items as List<Beer>),
+        ),
+      );
+    } else if (items is List<Wine>) {
+      context.push(
+        BlocProvider.value(
+          value: context.read<ItemsBloc>(),
+          child: RatingItemsPage(items: items as List<Wine>),
+        ),
+      );
+    } else {
+      context.warningSnackbar('Work in progress', 'Coming soon!');
+    }
   }
 }

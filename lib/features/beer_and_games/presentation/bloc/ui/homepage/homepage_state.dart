@@ -16,6 +16,18 @@ sealed class HomepageState extends AppState
     required String timeLeft,
   }) = DateTimeUpdate;
 
+  const factory HomepageState.gamesLoaded({
+    required List<Game> games,
+  }) = GamesLoaded;
+
+  const factory HomepageState.beersLoaded({
+    required List<Beer> beers,
+  }) = BeersLoaded;
+
+  const factory HomepageState.winesLoaded({
+    required List<Wine> wines,
+  }) = WinesLoaded;
+
   const factory HomepageState.error(CloudFailure failure) = Error;
 
   @override
@@ -25,6 +37,9 @@ sealed class HomepageState extends AppState
         loaded: (value) => [value.hangout],
         dateTimeUpdate: (nextHangout) =>
             [nextHangout.date, nextHangout.timeLeft],
+        gamesLoaded: (value) => [value.games],
+        beersLoaded: (value) => [value.beers],
+        winesLoaded: (value) => [value.wines],
         error: (value) => [value.failure],
       );
 }
