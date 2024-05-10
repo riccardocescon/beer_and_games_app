@@ -27,6 +27,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final BeerInfoUpdater beerInfoUpdater;
   final BeerDeleter beerDeleter;
   final WinesSelector winesSelector;
+  final WineInserter wineInserter;
   final WineRatingUpdates wineRatingUpdates;
   final WineInfoUpdater wineInfoUpdater;
   final WineDeleter wineDeleter;
@@ -39,6 +40,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     required this.beerInfoUpdater,
     required this.beerDeleter,
     required this.winesSelector,
+    required this.wineInserter,
     required this.wineRatingUpdates,
     required this.wineInfoUpdater,
     required this.wineDeleter,
@@ -126,6 +128,18 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
         emit(ItemsState.error(result.left));
       }
     });
+    on<InsertWine>((event, emit) async {
+      final result = await wineInserter.call(
+        WineInserterParams(
+          name: event.name,
+          imageBytes: event.imageBytes,
+        ),
+      );
+      if (result.isLeft()) {
+        emit(ItemsState.error(result.left));
+      }
+    });
+
     on<UpdateRating>((event, emit) async {
       final item = event.item;
       final rating = event.rating;

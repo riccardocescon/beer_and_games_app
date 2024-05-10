@@ -57,6 +57,11 @@ class _NewRatableItemBodyState<T extends RateableItem>
             context
                 .read<ItemsBloc>()
                 .add(ItemsEvent.insertBeer(name: name, imageBytes: bytes));
+          } else if (T == Wine) {
+            this.name = name;
+            context
+                .read<ItemsBloc>()
+                .add(ItemsEvent.insertWine(name: name, imageBytes: bytes));
           }
         },
       ),

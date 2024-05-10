@@ -12,7 +12,8 @@ sealed class HangoutStatsPageState extends AppState
   const factory HangoutStatsPageState.hangout(Hangout hangout) = Loaded;
 
   const factory HangoutStatsPageState.updateUI({
-    required bool addItem,
+    required bool addBeer,
+    required bool addWine,
   }) = UpdateUI;
 
   const factory HangoutStatsPageState.error(CloudFailure failure) = Error;
@@ -22,7 +23,7 @@ sealed class HangoutStatsPageState extends AppState
         init: (value) => [],
         loading: (value) => [],
         hangout: (value) => [value.hangout],
-        updateUI: (value) => [value.addItem],
+        updateUI: (value) => [value.addBeer, value.addWine],
         error: (value) => [value.failure],
       );
 }

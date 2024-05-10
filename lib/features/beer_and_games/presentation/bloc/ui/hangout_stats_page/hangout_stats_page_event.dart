@@ -10,7 +10,8 @@ sealed class HangoutStatsPageEvent extends AppEvent
   }) = Setup;
 
   // UI Interactions
-  const factory HangoutStatsPageEvent.addItem() = AddItem;
+  const factory HangoutStatsPageEvent.addBeer() = AddBeer;
+  const factory HangoutStatsPageEvent.addWine() = AddWine;
   const factory HangoutStatsPageEvent.saveItem({
     required Item item,
   }) = SaveItem;
@@ -19,7 +20,8 @@ sealed class HangoutStatsPageEvent extends AppEvent
   @override
   List<Object?> get props => map(
         setup: (value) => [value.hangout],
-        addItem: (value) => [],
+        addBeer: (value) => [],
+        addWine: (value) => [],
         saveItem: (value) => [value.item],
         closeItem: (value) => [],
       );
