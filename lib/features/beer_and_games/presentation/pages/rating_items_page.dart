@@ -1,5 +1,4 @@
 import 'dart:math';
-import 'dart:typed_data';
 
 import 'package:beer_and_games/core/enums/rating.dart';
 import 'package:beer_and_games/core/extentions/context_extension.dart';
@@ -71,7 +70,7 @@ class _RatingItemsPageState extends State<RatingItemsPage> {
               updatedItems.removeWhere((element) =>
                   removedBeers.map((e) => e.id).contains(element.id));
 
-              return true;
+              return newBeers.isNotEmpty || removedBeers.isNotEmpty;
             },
             orElse: () => false,
           );

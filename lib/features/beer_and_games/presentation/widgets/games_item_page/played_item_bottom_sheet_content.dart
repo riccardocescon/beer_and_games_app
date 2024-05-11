@@ -22,12 +22,30 @@ class __PlayedItemBottomSheetContentState
           'È stato giocato ',
           style: context.textTheme.titleMedium,
         ),
-        Text(
-          widget.game.timesPlayed.toString(),
-          style: context.textTheme.titleMedium?.copyWith(
-            color: context.colorScheme.primary,
-            fontWeight: FontWeight.bold,
-          ),
+        BlocBuilder<ItemsBloc, ItemsState>(
+          buildWhen: (previous, current) {
+            return current.maybeMap(
+              update: (value) => value.games.any(
+                (element) => element.id == widget.game.id,
+              ),
+              orElse: () => false,
+            );
+          },
+          builder: (context, state) {
+            final item = state.maybeMap(
+              update: (value) => value.games.firstWhere(
+                (element) => element.id == widget.game.id,
+              ),
+              orElse: () => widget.game,
+            );
+            return Text(
+              item.timesPlayed.toString(),
+              style: context.textTheme.titleMedium?.copyWith(
+                color: context.colorScheme.primary,
+                fontWeight: FontWeight.bold,
+              ),
+            );
+          },
         ),
         Text(
           ' volte',

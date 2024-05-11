@@ -22,55 +22,57 @@ class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
 
   @override
   Stream<Either<Failure, List<Game>>> select() async* {
-    final foGames = await gameAPI.getGames();
+    final foGamesStream = gameAPI.getGames();
 
-    if (foGames.isLeft()) {
-      yield Left(foGames.left);
-      return;
-    }
-    final gameModels = foGames.right;
-    final games = gameModels
-        .map(
-          (e) => Game(
-            id: e.id,
-            name: e.name,
-            minplayers: e.minPlayers,
-            maxplayers: e.maxPlayers,
-            onlyMinMaxPlayers: e.onlyMinMaxPlayers,
-            timesPlayed: e.timesPlayed,
-          ),
-        )
-        .toList();
+    await for (final foGames in foGamesStream) {
+      if (foGames.isLeft()) {
+        yield Left(foGames.left);
+        return;
+      }
+      final gameModels = foGames.right;
+      final games = gameModels
+          .map(
+            (e) => Game(
+              id: e.id,
+              name: e.name,
+              minplayers: e.minPlayers,
+              maxplayers: e.maxPlayers,
+              onlyMinMaxPlayers: e.onlyMinMaxPlayers,
+              timesPlayed: e.timesPlayed,
+            ),
+          )
+          .toList();
 
-    yield Right(games);
+      yield Right(games);
 
-    final gamesModelsWithImage =
-        gameModels.where((element) => element.imageUrl != null);
-    final gamesWithImage = games
-        .where((element) =>
-            gamesModelsWithImage.any((model) => element.name == model.name))
-        .toList();
-    for (final currentGame in gamesWithImage) {
-      final imagePath = _getImagePath(
-        gameId: currentGame.id,
-        gameModels: gameModels,
-      );
+      final gamesModelsWithImage =
+          gameModels.where((element) => element.imageUrl != null);
+      final gamesWithImage = games
+          .where((element) =>
+              gamesModelsWithImage.any((model) => element.name == model.name))
+          .toList();
+      for (final currentGame in gamesWithImage) {
+        final imagePath = _getImagePath(
+          gameId: currentGame.id,
+          gameModels: gameModels,
+        );
 
-      final foImage = await getImageBytes(
-        id: currentGame.id,
-        name: currentGame.name,
-        imagePath: imagePath,
-        localImageStorageAPI: localImageStorageAPI,
-        cloudImageStorageAPI: cloudImageStorageAPI,
-      );
+        final foImage = await getImageBytes(
+          id: currentGame.id,
+          name: currentGame.name,
+          imagePath: imagePath,
+          localImageStorageAPI: localImageStorageAPI,
+          cloudImageStorageAPI: cloudImageStorageAPI,
+        );
 
-      yield foImage.fold(
-        (l) => Left(l),
-        (r) {
-          currentGame.imageBytes = r;
-          return Right(games);
-        },
-      );
+        yield foImage.fold(
+          (l) => Left(l),
+          (r) {
+            currentGame.imageBytes = r;
+            return Right(games);
+          },
+        );
+      }
     }
   }
 

@@ -1,5 +1,3 @@
-import 'dart:typed_data';
-
 import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
 import 'package:equatable/equatable.dart';
 
@@ -24,7 +22,7 @@ class Game extends Item with EquatableMixin {
     int? minplayers,
     int? maxplayers,
     bool? onlyMinMaxPlayers,
-    Uint8List? imageBytes,
+    List<int>? imageBytes,
     int? timesPlayed,
   }) {
     return Game(

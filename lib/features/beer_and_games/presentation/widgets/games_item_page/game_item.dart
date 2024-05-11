@@ -12,6 +12,8 @@ class _GameItem extends StatefulWidget {
 class _GameItemState extends State<_GameItem> {
   final _itemWidth = 100.0;
 
+  late Game updatedItem = widget.game;
+
   @override
   Widget build(BuildContext context) {
     return SizedBox(
@@ -31,19 +33,50 @@ class _GameItemState extends State<_GameItem> {
         ),
         child: Column(
           children: [
-            StatsItem(
-              item: widget.game,
-              additionalWidget: Padding(
-                padding: const EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  children: [
-                    _playersNumberRow(),
-                    height5,
-                    _playedNumberRow(),
-                    height10,
-                  ],
-                ),
+            BlocBuilder<ItemsBloc, ItemsState>(
+              buildWhen: (previous, current) => current.maybeMap(
+                update: (value) {
+                  final prevState = previous.maybeMap(
+                    update: (value) => value.games,
+                    orElse: () => null,
+                  );
+                  if (prevState == null) return true;
+
+                  final currItem = value.games.firstWhereOrNull(
+                    (element) => element.id == widget.game.id,
+                  );
+                  final prevItem = prevState.firstWhereOrNull(
+                    (element) => element.id == widget.game.id,
+                  );
+
+                  return currItem != prevItem;
+                },
+                orElse: () => false,
               ),
+              builder: (context, state) {
+                return state.maybeMap(
+                  update: (value) {
+                    updatedItem = value.games.firstWhere(
+                      (element) => element.id == widget.game.id,
+                    );
+                    return StatsItem(
+                      item: updatedItem,
+                      additionalWidget: Padding(
+                        padding: const EdgeInsets.symmetric(horizontal: 12),
+                        child: Column(
+                          children: [
+                            _playersNumberRow(),
+                            height5,
+                            _playedNumberRow(),
+                            height10,
+                          ],
+                        ),
+                      ),
+                    );
+                  },
+                  orElse: () => const SizedBox.shrink(),
+                );
+              },
             ),
           ],
         ),
@@ -52,9 +85,9 @@ class _GameItemState extends State<_GameItem> {
   }
 
   Widget _playersNumberRow() {
-    final minPlayers = widget.game.minplayers;
-    final maxPlayers = widget.game.maxplayers;
-    final number = widget.game.onlyMinMaxPlayers
+    final minPlayers = updatedItem.minplayers;
+    final maxPlayers = updatedItem.maxplayers;
+    final number = updatedItem.onlyMinMaxPlayers
         ? minPlayers == maxPlayers
             ? '$minPlayers'
             : '$minPlayers / $maxPlayers'
@@ -89,7 +122,7 @@ class _GameItemState extends State<_GameItem> {
         ),
         Expanded(
           child: Text(
-            widget.game.timesPlayed.toString(),
+            updatedItem.timesPlayed.toString(),
             style: context.textTheme.labelSmall?.copyWith(
               color: context.colorScheme.onSurface,
             ),
@@ -105,7 +138,7 @@ class _GameItemState extends State<_GameItem> {
       context: context,
       builder: (_) => BlocProvider.value(
         value: context.read<ItemsBloc>(),
-        child: _PlayedItemBottomSheet(game: widget.game),
+        child: _PlayedItemBottomSheet(game: updatedItem),
       ),
       backgroundColor: MaterialTheme.darkScheme().surfaceContainer,
       shape: const RoundedRectangleBorder(

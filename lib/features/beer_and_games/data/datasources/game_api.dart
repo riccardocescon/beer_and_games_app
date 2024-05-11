@@ -4,7 +4,7 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class _GameAPI {
-  Future<Either<CloudFailure, List<GameModel>>> getGames();
+  Stream<Either<CloudFailure, List<GameModel>>> getGames();
   Future<Either<CloudFailure, void>> markAddPlayed({required String gameId});
   Future<Either<CloudFailure, void>> markRemovePlayed({required String gameId});
 }
@@ -15,16 +15,18 @@ class GameAPI extends _GameAPI {
   GameAPI({required this.firestore});
 
   @override
-  Future<Either<CloudFailure, List<GameModel>>> getGames() async {
-    final games = await firestore
+  Stream<Either<CloudFailure, List<GameModel>>> getGames() async* {
+    yield* firestore
         .collection('hangout')
         .doc('cespuglio')
         .collection('games')
-        .get();
-
-    return Right(
-      games.docs.map((e) => GameModel.fromJson(e.data(), id: e.id)).toList(),
-    );
+        .snapshots()
+        .map((snapshot) {
+      final games = snapshot.docs
+          .map((doc) => GameModel.fromJson(doc.data(), id: doc.id))
+          .toList();
+      return Right(games);
+    });
   }
 
   @override
