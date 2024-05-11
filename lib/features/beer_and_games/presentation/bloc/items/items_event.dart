@@ -21,6 +21,10 @@ sealed class ItemsEvent extends AppEvent with _$ItemsEvent, EquatableMixin {
   const factory ItemsEvent.updateInfo({required RateableItem item}) =
       UpdateInfo;
   const factory ItemsEvent.delete({required RateableItem item}) = Delete;
+  const factory ItemsEvent.updateGamePlay({
+    required bool increment,
+    required String gameId,
+  }) = UpdateGamePlay;
 
   @override
   List<Object?> get props => map(
@@ -29,6 +33,7 @@ sealed class ItemsEvent extends AppEvent with _$ItemsEvent, EquatableMixin {
         insertWine: (value) => [value.name, value.imageBytes],
         updateRating: (value) => [value.item, value.userEmail, value.rating],
         updateInfo: (value) => [value.item],
+        updateGamePlay: (value) => [value.increment, value.gameId],
         delete: (value) => [value.item],
       );
 }

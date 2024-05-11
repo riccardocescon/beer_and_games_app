@@ -5,60 +5,18 @@ class _RatableItemBottomSheet extends StatelessWidget {
 
   final RateableItem item;
 
-  final _titleHeigth = 80.0;
   final _bottomSheetHeigth = 100.0;
-  final _padding = 32.0;
 
   List<User> get _allUsers => sl<HangoutBloc>().hangout!.allUsers;
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: double.maxFinite,
-      height: _titleHeigth + _bottomSheetHeigth + 20 + _padding * 2,
-      padding: EdgeInsets.all(_padding),
-      child: Column(
-        children: [
-          _titleIcon(context),
-          height20,
-          _bottomContent(),
-        ],
-      ),
-    );
-  }
-
-  Widget _titleIcon(BuildContext context) {
-    return SizedBox(
-      height: _titleHeigth,
-      child: Row(
-        children: [
-          Expanded(
-            child: Column(
-              mainAxisSize: MainAxisSize.min,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  item.name,
-                  style: context.textTheme.titleLarge?.copyWith(
-                    color: context.colorScheme.primary,
-                  ),
-                ),
-                Text(
-                  'Assegna un voto per dire quanti ti è piaciuta\n'
-                  'Puoi cambiare il tuo voto in momento qualsiasi',
-                  style: context.textTheme.labelSmall,
-                )
-              ],
-            ),
-          ),
-          item.imageBytes == null
-              ? const SizedBox.shrink()
-              : Image.memory(
-                  Uint8List.fromList(item.imageBytes!),
-                  fit: BoxFit.cover,
-                ),
-        ],
-      ),
+    return ItemBottomSheet(
+      item: item,
+      description: 'Assegna un voto per dire quanti ti è piaciuta\n'
+          'Puoi cambiare il tuo voto in momento qualsiasi',
+      bottomSheetHeigth: _bottomSheetHeigth,
+      child: _bottomContent(),
     );
   }
 

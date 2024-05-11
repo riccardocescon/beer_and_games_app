@@ -4,4 +4,6 @@ import 'package:dartz/dartz.dart';
 
 abstract class GameRepository {
   Stream<Either<Failure, List<Game>>> select();
+  Future<Either<Failure, void>> markAddPlayed({required String gameId});
+  Future<Either<Failure, void>> markRemovePlayed({required String gameId});
 }

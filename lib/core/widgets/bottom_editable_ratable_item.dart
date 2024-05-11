@@ -3,11 +3,9 @@ import 'dart:typed_data';
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/core/widgets/static_bottom_sheet.dart';
-import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
 import 'package:beer_and_games/theme.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -48,59 +46,21 @@ class _BottomEditableRatableItemState extends State<BottomEditableRatableItem> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<ItemsBloc, ItemsState>(
-      // listenWhen: (previous, current) => current.maybeMap(
-      // update: (value) {
-      //   final prevValue = previous.maybeMap(
-      //     update: (value) => value,
-      //     orElse: () => null,
-      //   );
-      //   if (prevValue == null) return true;
-
-      //   if (widget.item is Beer) {
-      //     final prevBeer = prevValue.beers
-      //         .firstWhere((element) => element.id == widget.item.id);
-      //     final beer = value.beers
-      //         .firstWhere((element) => element.id == widget.item.id);
-      //     return beer != prevBeer && beer == _backupItem;
-      //   } else {
-      //     final prevWine = prevValue.wines
-      //         .firstWhere((element) => element.id == widget.item.id);
-      //     final wine = value.wines
-      //         .firstWhere((element) => element.id == widget.item.id);
-      //     return wine != prevWine && wine == _backupItem;
-      //   }
-      // },
-      // orElse: () => false,
-      // ),
-      listener: (context, state) {
-        // state.maybeMap(
-        //   update: (value) {
-        //     context.pop();
-        //     context.successSnackbar(
-        //       'Modifica effettuata',
-        //       'Le modifiche sono state apportate con successo',
-        //     );
-        //   },
-        //   orElse: () {},
-        // );
-      },
-      child: StaticBottomSheet(
-        child: Padding(
-          padding:
-              EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-          child: Container(
-            width: double.maxFinite,
-            height: _titleHeigth + _bottomSheetHeigth + 20 + _padding * 2,
-            padding: EdgeInsets.all(_padding),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                _nameArea(),
-                height50,
-                _imageArea(),
-              ],
-            ),
+    return StaticBottomSheet(
+      child: Padding(
+        padding:
+            EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+        child: Container(
+          width: double.maxFinite,
+          height: _titleHeigth + _bottomSheetHeigth + 20 + _padding * 2,
+          padding: EdgeInsets.all(_padding),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              _nameArea(),
+              height50,
+              _imageArea(),
+            ],
           ),
         ),
       ),

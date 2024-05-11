@@ -26,6 +26,7 @@ mixin _$ItemsEvent {
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
     required TResult Function(RateableItem item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -37,6 +38,7 @@ mixin _$ItemsEvent {
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
     TResult? Function(RateableItem item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -48,6 +50,7 @@ mixin _$ItemsEvent {
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
     TResult Function(RateableItem item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -59,6 +62,7 @@ mixin _$ItemsEvent {
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -69,6 +73,7 @@ mixin _$ItemsEvent {
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -79,6 +84,7 @@ mixin _$ItemsEvent {
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -134,6 +140,7 @@ class _$DownloadImpl extends Download {
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
     required TResult Function(RateableItem item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return download();
   }
@@ -148,6 +155,7 @@ class _$DownloadImpl extends Download {
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
     TResult? Function(RateableItem item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return download?.call();
   }
@@ -162,6 +170,7 @@ class _$DownloadImpl extends Download {
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
     TResult Function(RateableItem item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (download != null) {
@@ -179,6 +188,7 @@ class _$DownloadImpl extends Download {
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return download(this);
   }
@@ -192,6 +202,7 @@ class _$DownloadImpl extends Download {
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return download?.call(this);
   }
@@ -205,6 +216,7 @@ class _$DownloadImpl extends Download {
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (download != null) {
@@ -292,6 +304,7 @@ class _$InsertBeerImpl extends InsertBeer {
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
     required TResult Function(RateableItem item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return insertBeer(name, imageBytes);
   }
@@ -306,6 +319,7 @@ class _$InsertBeerImpl extends InsertBeer {
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
     TResult? Function(RateableItem item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return insertBeer?.call(name, imageBytes);
   }
@@ -320,6 +334,7 @@ class _$InsertBeerImpl extends InsertBeer {
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
     TResult Function(RateableItem item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (insertBeer != null) {
@@ -337,6 +352,7 @@ class _$InsertBeerImpl extends InsertBeer {
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return insertBeer(this);
   }
@@ -350,6 +366,7 @@ class _$InsertBeerImpl extends InsertBeer {
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return insertBeer?.call(this);
   }
@@ -363,6 +380,7 @@ class _$InsertBeerImpl extends InsertBeer {
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (insertBeer != null) {
@@ -458,6 +476,7 @@ class _$InsertWineImpl extends InsertWine {
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
     required TResult Function(RateableItem item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return insertWine(name, imageBytes);
   }
@@ -472,6 +491,7 @@ class _$InsertWineImpl extends InsertWine {
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
     TResult? Function(RateableItem item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return insertWine?.call(name, imageBytes);
   }
@@ -486,6 +506,7 @@ class _$InsertWineImpl extends InsertWine {
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
     TResult Function(RateableItem item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (insertWine != null) {
@@ -503,6 +524,7 @@ class _$InsertWineImpl extends InsertWine {
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return insertWine(this);
   }
@@ -516,6 +538,7 @@ class _$InsertWineImpl extends InsertWine {
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return insertWine?.call(this);
   }
@@ -529,6 +552,7 @@ class _$InsertWineImpl extends InsertWine {
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (insertWine != null) {
@@ -623,6 +647,7 @@ class _$UpdateRatingImpl extends UpdateRating {
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
     required TResult Function(RateableItem item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return updateRating(item, userEmail, rating);
   }
@@ -637,6 +662,7 @@ class _$UpdateRatingImpl extends UpdateRating {
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
     TResult? Function(RateableItem item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return updateRating?.call(item, userEmail, rating);
   }
@@ -651,6 +677,7 @@ class _$UpdateRatingImpl extends UpdateRating {
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
     TResult Function(RateableItem item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (updateRating != null) {
@@ -668,6 +695,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return updateRating(this);
   }
@@ -681,6 +709,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return updateRating?.call(this);
   }
@@ -694,6 +723,7 @@ class _$UpdateRatingImpl extends UpdateRating {
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (updateRating != null) {
@@ -774,6 +804,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
     required TResult Function(RateableItem item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return updateInfo(item);
   }
@@ -788,6 +819,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
     TResult? Function(RateableItem item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return updateInfo?.call(item);
   }
@@ -802,6 +834,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
     TResult Function(RateableItem item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (updateInfo != null) {
@@ -819,6 +852,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return updateInfo(this);
   }
@@ -832,6 +866,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return updateInfo?.call(this);
   }
@@ -845,6 +880,7 @@ class _$UpdateInfoImpl extends UpdateInfo {
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (updateInfo != null) {
@@ -921,6 +957,7 @@ class _$DeleteImpl extends Delete {
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
     required TResult Function(RateableItem item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return delete(item);
   }
@@ -935,6 +972,7 @@ class _$DeleteImpl extends Delete {
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
     TResult? Function(RateableItem item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return delete?.call(item);
   }
@@ -949,6 +987,7 @@ class _$DeleteImpl extends Delete {
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
     TResult Function(RateableItem item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -966,6 +1005,7 @@ class _$DeleteImpl extends Delete {
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return delete(this);
   }
@@ -979,6 +1019,7 @@ class _$DeleteImpl extends Delete {
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return delete?.call(this);
   }
@@ -992,6 +1033,7 @@ class _$DeleteImpl extends Delete {
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -1008,6 +1050,170 @@ abstract class Delete extends ItemsEvent {
   RateableItem get item;
   @JsonKey(ignore: true)
   _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateGamePlayImplCopyWith<$Res> {
+  factory _$$UpdateGamePlayImplCopyWith(_$UpdateGamePlayImpl value,
+          $Res Function(_$UpdateGamePlayImpl) then) =
+      __$$UpdateGamePlayImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool increment, String gameId});
+}
+
+/// @nodoc
+class __$$UpdateGamePlayImplCopyWithImpl<$Res>
+    extends _$ItemsEventCopyWithImpl<$Res, _$UpdateGamePlayImpl>
+    implements _$$UpdateGamePlayImplCopyWith<$Res> {
+  __$$UpdateGamePlayImplCopyWithImpl(
+      _$UpdateGamePlayImpl _value, $Res Function(_$UpdateGamePlayImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? increment = null,
+    Object? gameId = null,
+  }) {
+    return _then(_$UpdateGamePlayImpl(
+      increment: null == increment
+          ? _value.increment
+          : increment // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gameId: null == gameId
+          ? _value.gameId
+          : gameId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateGamePlayImpl extends UpdateGamePlay {
+  const _$UpdateGamePlayImpl({required this.increment, required this.gameId})
+      : super._();
+
+  @override
+  final bool increment;
+  @override
+  final String gameId;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateGamePlayImplCopyWith<_$UpdateGamePlayImpl> get copyWith =>
+      __$$UpdateGamePlayImplCopyWithImpl<_$UpdateGamePlayImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
+    required TResult Function(
+            RateableItem item, String userEmail, Rating rating)
+        updateRating,
+    required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(RateableItem item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
+  }) {
+    return updateGamePlay(increment, gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
+    TResult? Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(RateableItem item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
+  }) {
+    return updateGamePlay?.call(increment, gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
+    TResult Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult Function(RateableItem item)? updateInfo,
+    TResult Function(RateableItem item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (updateGamePlay != null) {
+      return updateGamePlay(increment, gameId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Download value) download,
+    required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
+    required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
+  }) {
+    return updateGamePlay(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Download value)? download,
+    TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
+    TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
+  }) {
+    return updateGamePlay?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Download value)? download,
+    TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
+    TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (updateGamePlay != null) {
+      return updateGamePlay(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateGamePlay extends ItemsEvent {
+  const factory UpdateGamePlay(
+      {required final bool increment,
+      required final String gameId}) = _$UpdateGamePlayImpl;
+  const UpdateGamePlay._() : super._();
+
+  bool get increment;
+  String get gameId;
+  @JsonKey(ignore: true)
+  _$$UpdateGamePlayImplCopyWith<_$UpdateGamePlayImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

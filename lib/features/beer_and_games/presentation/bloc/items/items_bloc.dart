@@ -9,7 +9,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart
 import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/beers/beer_usecases.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_selector.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/wines/wine_usecases.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -21,6 +21,8 @@ part 'items_state.dart';
 
 class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final GamesSelector gamesSelector;
+  final GamePlayIncrementor gamePlayIncrementor;
+  final GamePlayDecrementor gamePlayDecrementor;
   final BeersSelector beersSelector;
   final BeerInserter beerInserter;
   final BeersRatiningUpdater beersRatiningUpdater;
@@ -34,6 +36,8 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
 
   ItemsBloc({
     required this.gamesSelector,
+    required this.gamePlayIncrementor,
+    required this.gamePlayDecrementor,
     required this.beersSelector,
     required this.beerInserter,
     required this.beersRatiningUpdater,
@@ -188,6 +192,26 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
         }
       }
     });
+    on<UpdateGamePlay>((event, emit) async {
+      if (event.increment) {
+        final foIncrement = await gamePlayIncrementor.call(
+          GamePlayIncrementorParams(gameId: event.gameId),
+        );
+        if (foIncrement.isLeft()) {
+          emit(ItemsState.error(foIncrement.left));
+          return;
+        }
+      } else {
+        final foDecrement = await gamePlayDecrementor.call(
+          GamePlayDecrementorParams(gameId: event.gameId),
+        );
+        if (foDecrement.isLeft()) {
+          emit(ItemsState.error(foDecrement.left));
+          return;
+        }
+      }
+    });
+
     on<Delete>((event, emit) async {
       if (event.item is Beer) {
         final foDelete = await beerDeleter.call(

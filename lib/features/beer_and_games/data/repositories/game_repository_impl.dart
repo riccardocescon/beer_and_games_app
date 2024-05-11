@@ -37,6 +37,7 @@ class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
             minplayers: e.minPlayers,
             maxplayers: e.maxPlayers,
             onlyMinMaxPlayers: e.onlyMinMaxPlayers,
+            timesPlayed: e.timesPlayed,
           ),
         )
         .toList();
@@ -78,4 +79,20 @@ class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
     required List<GameModel> gameModels,
   }) =>
       gameModels.firstWhere((element) => element.id == gameId).imageUrl!;
+
+  @override
+  Future<Either<Failure, void>> markAddPlayed({
+    required String gameId,
+  }) async {
+    final foResult = await gameAPI.markAddPlayed(gameId: gameId);
+    return foResult;
+  }
+
+  @override
+  Future<Either<Failure, void>> markRemovePlayed({
+    required String gameId,
+  }) async {
+    final foResult = await gameAPI.markRemovePlayed(gameId: gameId);
+    return foResult;
+  }
 }

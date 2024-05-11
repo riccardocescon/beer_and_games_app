@@ -5,6 +5,8 @@ import 'package:dartz/dartz.dart';
 
 abstract class _GameAPI {
   Future<Either<CloudFailure, List<GameModel>>> getGames();
+  Future<Either<CloudFailure, void>> markAddPlayed({required String gameId});
+  Future<Either<CloudFailure, void>> markRemovePlayed({required String gameId});
 }
 
 class GameAPI extends _GameAPI {
@@ -23,5 +25,45 @@ class GameAPI extends _GameAPI {
     return Right(
       games.docs.map((e) => GameModel.fromJson(e.data(), id: e.id)).toList(),
     );
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> markAddPlayed({
+    required String gameId,
+  }) async {
+    try {
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('games')
+          .doc(gameId)
+          .update({
+        'times': FieldValue.increment(1),
+      });
+
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> markRemovePlayed({
+    required String gameId,
+  }) async {
+    try {
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('games')
+          .doc(gameId)
+          .update({
+        'times': FieldValue.increment(-1),
+      });
+
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
   }
 }

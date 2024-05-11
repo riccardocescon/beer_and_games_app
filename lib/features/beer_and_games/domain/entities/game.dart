@@ -6,6 +6,7 @@ import 'package:equatable/equatable.dart';
 class Game extends Item with EquatableMixin {
   final int minplayers, maxplayers;
   final bool onlyMinMaxPlayers;
+  final int timesPlayed;
 
   Game({
     required super.id,
@@ -13,6 +14,7 @@ class Game extends Item with EquatableMixin {
     required this.minplayers,
     required this.maxplayers,
     required this.onlyMinMaxPlayers,
+    required this.timesPlayed,
     super.imageBytes,
   });
 
@@ -23,6 +25,7 @@ class Game extends Item with EquatableMixin {
     int? maxplayers,
     bool? onlyMinMaxPlayers,
     Uint8List? imageBytes,
+    int? timesPlayed,
   }) {
     return Game(
       id: id ?? this.id,
@@ -31,10 +34,17 @@ class Game extends Item with EquatableMixin {
       maxplayers: maxplayers ?? this.maxplayers,
       onlyMinMaxPlayers: onlyMinMaxPlayers ?? this.onlyMinMaxPlayers,
       imageBytes: imageBytes ?? this.imageBytes,
+      timesPlayed: timesPlayed ?? this.timesPlayed,
     );
   }
 
   @override
-  List<Object?> get props =>
-      [name, minplayers, maxplayers, onlyMinMaxPlayers, imageBytes];
+  List<Object?> get props => [
+        name,
+        minplayers,
+        maxplayers,
+        onlyMinMaxPlayers,
+        imageBytes,
+        timesPlayed,
+      ];
 }

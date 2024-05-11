@@ -118,7 +118,12 @@ class _ItemGroupSection extends StatelessWidget {
         ),
       );
     } else {
-      context.warningSnackbar('Work in progress', 'Coming soon!');
+      context.push(
+        BlocProvider.value(
+          value: context.read<ItemsBloc>(),
+          child: GamesItemPage(games: items as List<Game>),
+        ),
+      );
     }
   }
 }
