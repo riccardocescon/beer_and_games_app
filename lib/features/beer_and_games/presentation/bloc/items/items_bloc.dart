@@ -25,6 +25,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final GamePlayIncrementor gamePlayIncrementor;
   final GamePlayDecrementor gamePlayDecrementor;
   final GameInfoUpdater gameInfoUpdater;
+  final GameDeleter gameDeleter;
   final BeersSelector beersSelector;
   final BeerInserter beerInserter;
   final BeersRatiningUpdater beersRatiningUpdater;
@@ -41,6 +42,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     required this.gamePlayIncrementor,
     required this.gamePlayDecrementor,
     required this.gameInfoUpdater,
+    required this.gameDeleter,
     required this.beersSelector,
     required this.beerInserter,
     required this.beersRatiningUpdater,
@@ -235,6 +237,14 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
       } else if (event.item is Wine) {
         final foDelete = await wineDeleter.call(
           WineInfoUpdaterParams(wine: event.item as Wine),
+        );
+        if (foDelete.isLeft()) {
+          emit(ItemsState.error(foDelete.left));
+          return;
+        }
+      } else if (event.item is Game) {
+        final foDelete = await gameDeleter.call(
+          GameDeleterParams(game: event.item as Game),
         );
         if (foDelete.isLeft()) {
           emit(ItemsState.error(foDelete.left));

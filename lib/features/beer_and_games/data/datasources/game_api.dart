@@ -16,6 +16,7 @@ abstract class _GameAPI {
     required int maxPlayers,
     required bool onlyMinMax,
   });
+  Future<Either<CloudFailure, void>> delete({required String gameId});
 }
 
 class GameAPI extends _GameAPI {
@@ -116,6 +117,21 @@ class GameAPI extends _GameAPI {
           .collection('games')
           .doc(beerId)
           .update(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> delete({required String gameId}) async {
+    try {
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('games')
+          .doc(gameId)
+          .delete();
       return const Right(null);
     } catch (e) {
       return Left(CloudFailure.unknown(e.toString()));

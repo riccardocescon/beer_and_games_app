@@ -8,4 +8,5 @@ abstract class GameRepository {
   Future<Either<CloudFailure, void>> markAddPlayed({required String gameId});
   Future<Either<CloudFailure, void>> markRemovePlayed({required String gameId});
   Future<Either<CloudFailure, void>> updateInfo({required Game game});
+  Future<Either<CloudFailure, void>> delete({required Game game});
 }

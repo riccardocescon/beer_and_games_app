@@ -140,4 +140,20 @@ class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
       onlyMinMax: game.onlyMinMaxPlayers,
     );
   }
+
+  @override
+  Future<Either<CloudFailure, void>> delete({required Game game}) async {
+    final path = '/cespuglio/games/${game.id}.png';
+    final hasImage = game.imageBytes != null;
+
+    if (hasImage) {
+      final foCloudDelete = await cloudImageStorageAPI.deleteImage(path);
+      if (foCloudDelete.isLeft()) log(foCloudDelete.left.toString());
+
+      final foLocalDelete = await localImageStorageAPI.deleteImage(path);
+      if (foLocalDelete.isLeft()) log(foLocalDelete.left.toString());
+    }
+
+    return await gameAPI.delete(gameId: game.id);
+  }
 }
