@@ -1,46 +1,77 @@
-import 'dart:typed_data';
-
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/core/widgets/static_bottom_sheet.dart';
 import 'package:beer_and_games/theme.dart';
 import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:image_cropper/image_cropper.dart';
 import 'package:image_picker/image_picker.dart';
 
-class BottomEditableItem extends StatefulWidget {
-  const BottomEditableItem({
+class BottomEditableGameItem extends StatefulWidget {
+  const BottomEditableGameItem({
     super.key,
     required this.onSave,
     this.initName,
     this.initImageBytes,
+    this.initMinPlayers,
+    this.initMaxPlayers,
+    this.initOnlyMinMax = false,
   });
 
   final String? initName;
   final List<int>? initImageBytes;
-  final void Function(String name, List<int>? imageBytes) onSave;
+  final int? initMinPlayers;
+  final int? initMaxPlayers;
+  final bool initOnlyMinMax;
+  final void Function(
+    String name,
+    List<int>? imageBytes,
+    int minPlayers,
+    int maxPlayers,
+    bool onlyMinMax,
+  ) onSave;
 
   @override
-  State<BottomEditableItem> createState() => _BottomEditableItemState();
+  State<BottomEditableGameItem> createState() => _BottomEditableGameItemState();
 }
 
-class _BottomEditableItemState extends State<BottomEditableItem> {
+class _BottomEditableGameItemState extends State<BottomEditableGameItem> {
   final _titleHeigth = 80.0;
-  final _bottomSheetHeigth = 250.0;
+  final _bottomSheetHeigth = 450.0;
   final _padding = 32.0;
 
   late final TextEditingController _nameController = TextEditingController(
     text: widget.initName,
   );
+  late final TextEditingController _minPlayersController =
+      TextEditingController(
+    text: widget.initMinPlayers?.toString(),
+  );
+  int? get _minPlayers => int.tryParse(_minPlayersController.text);
+  int? get _maxPlayers => int.tryParse(_maxPlayersController.text);
+  late final TextEditingController _maxPlayersController =
+      TextEditingController(
+    text: widget.initMaxPlayers?.toString(),
+  );
+  late bool _onlyMinMax = widget.initOnlyMinMax;
   late final List<int> _imageBytes = widget.initImageBytes ?? <int>[];
 
   Offset? _tapPosition;
 
   bool get _canSave {
-    return (widget.initName != _nameController.text &&
+    if (_minPlayers == null || _maxPlayers == null) return false;
+    if (_minPlayers! > _maxPlayers!) return false;
+
+    final nameImageDataChanged = (widget.initName != _nameController.text &&
             _nameController.text.isNotEmpty) ||
         !(const ListEquality().equals(widget.initImageBytes, _imageBytes));
+
+    final playersDataChanged = widget.initMinPlayers != _minPlayers ||
+        widget.initMaxPlayers != _maxPlayers ||
+        widget.initOnlyMinMax != _onlyMinMax;
+
+    return nameImageDataChanged || playersDataChanged;
   }
 
   @override
@@ -57,6 +88,8 @@ class _BottomEditableItemState extends State<BottomEditableItem> {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               _nameArea(),
+              height50,
+              _minMaxPlayersArea(),
               height50,
               _imageArea(),
             ],
@@ -89,6 +122,9 @@ class _BottomEditableItemState extends State<BottomEditableItem> {
                 widget.onSave.call(
                   _nameController.text,
                   _imageBytes.isEmpty ? null : _imageBytes,
+                  _minPlayers!,
+                  _maxPlayers!,
+                  _onlyMinMax,
                 );
               },
               icon: Icon(
@@ -115,6 +151,90 @@ class _BottomEditableItemState extends State<BottomEditableItem> {
             contentPadding: const EdgeInsets.symmetric(horizontal: 16),
           ),
         ),
+      ],
+    );
+  }
+
+  Widget _minMaxPlayersArea() {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Giocatori',
+          style: context.textTheme.titleLarge
+              ?.copyWith(color: context.colorScheme.primary),
+        ),
+        height10,
+        Wrap(
+          spacing: 40,
+          runSpacing: 0,
+          children: [
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Min: '),
+                width10,
+                SizedBox(
+                  width: 60,
+                  height: 30,
+                  child: _minMaxInputField(_minPlayersController),
+                ),
+              ],
+            ),
+            Row(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                const Text('Max: '),
+                width10,
+                SizedBox(
+                  width: 60,
+                  height: 30,
+                  child: _minMaxInputField(_maxPlayersController),
+                ),
+              ],
+            ),
+            Row(
+              children: [
+                const Text('Only MinMax: '),
+                width10,
+                Checkbox(
+                  value: _onlyMinMax,
+                  onChanged: (value) {
+                    setState(() {
+                      _onlyMinMax = value ?? false;
+                    });
+                  },
+                ),
+              ],
+            )
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _minMaxInputField(TextEditingController controller) {
+    return TextFormField(
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      controller: controller,
+      decoration: InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(32),
+        ),
+        focusedBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(16),
+          borderSide: BorderSide(
+            color: context.colorScheme.primary,
+          ),
+        ),
+        contentPadding: const EdgeInsets.symmetric(horizontal: 16),
+      ),
+      textAlign: TextAlign.center,
+      style: context.textTheme.bodyMedium
+          ?.copyWith(color: context.colorScheme.onSurface),
+      keyboardType: TextInputType.number,
+      inputFormatters: [
+        FilteringTextInputFormatter.digitsOnly,
       ],
     );
   }

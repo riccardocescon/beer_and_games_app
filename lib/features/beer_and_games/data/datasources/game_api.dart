@@ -7,6 +7,15 @@ abstract class _GameAPI {
   Stream<Either<CloudFailure, List<GameModel>>> getGames();
   Future<Either<CloudFailure, void>> markAddPlayed({required String gameId});
   Future<Either<CloudFailure, void>> markRemovePlayed({required String gameId});
+  Future<Either<CloudFailure, void>> updateInfo({
+    required String beerId,
+    required String name,
+    required String? imagePath,
+    required String? imageHash,
+    required int minPlayers,
+    required int maxPlayers,
+    required bool onlyMinMax,
+  });
 }
 
 class GameAPI extends _GameAPI {
@@ -63,6 +72,50 @@ class GameAPI extends _GameAPI {
         'times': FieldValue.increment(-1),
       });
 
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> updateInfo({
+    required String beerId,
+    required String name,
+    required String? imagePath,
+    required String? imageHash,
+    required int minPlayers,
+    required int maxPlayers,
+    required bool onlyMinMax,
+  }) async {
+    try {
+      final data = <String, dynamic>{
+        'name': name,
+        'min_p': minPlayers,
+        'max_p': maxPlayers,
+      };
+      if (imagePath == null) {
+        data.addAll({
+          'img': FieldValue.delete(),
+          'imgHash': FieldValue.delete(),
+        });
+      } else {
+        data.addAll({
+          'img': imagePath,
+          'imgHash': imageHash,
+        });
+      }
+
+      data.addAll({
+        'only_mm': onlyMinMax,
+      });
+
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('games')
+          .doc(beerId)
+          .update(data);
       return const Right(null);
     } catch (e) {
       return Left(CloudFailure.unknown(e.toString()));

@@ -7,3 +7,4 @@ import 'package:dartz/dartz.dart';
 part 'games_selector.dart';
 part 'game_play_incrementor.dart';
 part 'game_play_decrementor.dart';
+part 'game_info_updater.dart';

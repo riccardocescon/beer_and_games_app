@@ -2,15 +2,15 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/abstracti
 import 'package:equatable/equatable.dart';
 
 class Game extends Item with EquatableMixin {
-  final int minplayers, maxplayers;
+  final int minPlayers, maxPlayers;
   final bool onlyMinMaxPlayers;
   final int timesPlayed;
 
   Game({
     required super.id,
     required super.name,
-    required this.minplayers,
-    required this.maxplayers,
+    required this.minPlayers,
+    required this.maxPlayers,
     required this.onlyMinMaxPlayers,
     required this.timesPlayed,
     super.imageBytes,
@@ -19,8 +19,8 @@ class Game extends Item with EquatableMixin {
   Game copyWith({
     String? id,
     String? name,
-    int? minplayers,
-    int? maxplayers,
+    int? minPlayers,
+    int? maxPlayers,
     bool? onlyMinMaxPlayers,
     List<int>? imageBytes,
     int? timesPlayed,
@@ -28,8 +28,8 @@ class Game extends Item with EquatableMixin {
     return Game(
       id: id ?? this.id,
       name: name ?? this.name,
-      minplayers: minplayers ?? this.minplayers,
-      maxplayers: maxplayers ?? this.maxplayers,
+      minPlayers: minPlayers ?? this.minPlayers,
+      maxPlayers: maxPlayers ?? this.maxPlayers,
       onlyMinMaxPlayers: onlyMinMaxPlayers ?? this.onlyMinMaxPlayers,
       imageBytes: imageBytes ?? this.imageBytes,
       timesPlayed: timesPlayed ?? this.timesPlayed,
@@ -39,8 +39,8 @@ class Game extends Item with EquatableMixin {
   @override
   List<Object?> get props => [
         name,
-        minplayers,
-        maxplayers,
+        minPlayers,
+        maxPlayers,
         onlyMinMaxPlayers,
         imageBytes,
         timesPlayed,

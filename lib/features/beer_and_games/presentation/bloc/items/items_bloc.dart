@@ -4,6 +4,7 @@ import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
 import 'package:beer_and_games/core/enums/rating.dart';
 import 'package:beer_and_games/core/extentions/either_extensions.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/ratable_item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart';
@@ -23,6 +24,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final GamesSelector gamesSelector;
   final GamePlayIncrementor gamePlayIncrementor;
   final GamePlayDecrementor gamePlayDecrementor;
+  final GameInfoUpdater gameInfoUpdater;
   final BeersSelector beersSelector;
   final BeerInserter beerInserter;
   final BeersRatiningUpdater beersRatiningUpdater;
@@ -38,6 +40,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     required this.gamesSelector,
     required this.gamePlayIncrementor,
     required this.gamePlayDecrementor,
+    required this.gameInfoUpdater,
     required this.beersSelector,
     required this.beerInserter,
     required this.beersRatiningUpdater,
@@ -144,6 +147,14 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
       }
     });
 
+    on<UpdateGameInfo>((event, emit) async {
+      final result = await gameInfoUpdater.call(
+        GameInfoUpdaterParams(game: event.item),
+      );
+      if (result.isLeft()) {
+        emit(ItemsState.error(result.left));
+      }
+    });
     on<UpdateRating>((event, emit) async {
       final item = event.item;
       final rating = event.rating;

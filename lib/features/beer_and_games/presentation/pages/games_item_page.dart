@@ -1,4 +1,6 @@
 import 'package:beer_and_games/core/extentions/context_extension.dart';
+import 'package:beer_and_games/core/mixin/edit_delete_item_menu_poppable.dart';
+import 'package:beer_and_games/core/widgets/bottom_editable_game_item.dart';
 import 'package:beer_and_games/core/widgets/hangout_app_bar.dart';
 import 'package:beer_and_games/core/widgets/item_bottom_sheet.dart';
 import 'package:beer_and_games/core/widgets/items_list.dart';
@@ -14,6 +16,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part '../widgets/games_item_page/game_item.dart';
 part '../widgets/games_item_page/played_item_bottom_sheet.dart';
 part '../widgets/games_item_page/played_item_bottom_sheet_content.dart';
+part '../widgets/games_item_page/edit_game_bottom_sheet.dart';
 
 class GamesItemPage extends StatefulWidget {
   const GamesItemPage({super.key, required this.games});

@@ -20,7 +20,9 @@ sealed class ItemsEvent extends AppEvent with _$ItemsEvent, EquatableMixin {
   }) = UpdateRating;
   const factory ItemsEvent.updateInfo({required RateableItem item}) =
       UpdateInfo;
-  const factory ItemsEvent.delete({required RateableItem item}) = Delete;
+  const factory ItemsEvent.updateGameInfo({required Game item}) =
+      UpdateGameInfo;
+  const factory ItemsEvent.delete({required Item item}) = Delete;
   const factory ItemsEvent.updateGamePlay({
     required bool increment,
     required String gameId,
@@ -33,6 +35,7 @@ sealed class ItemsEvent extends AppEvent with _$ItemsEvent, EquatableMixin {
         insertWine: (value) => [value.name, value.imageBytes],
         updateRating: (value) => [value.item, value.userEmail, value.rating],
         updateInfo: (value) => [value.item],
+        updateGameInfo: (value) => [value.item],
         updateGamePlay: (value) => [value.increment, value.gameId],
         delete: (value) => [value.item],
       );

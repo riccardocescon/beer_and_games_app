@@ -50,7 +50,7 @@ class _NewRatableItemBodyState<T extends RateableItem>
           orElse: () {},
         );
       },
-      child: BottomEditableRatableItem(
+      child: BottomEditableItem(
         onSave: (name, bytes) {
           if (T == Beer) {
             this.name = name;

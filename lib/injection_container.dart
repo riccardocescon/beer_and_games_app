@@ -65,6 +65,7 @@ void init() {
       gamesSelector: sl(),
       gamePlayIncrementor: sl(),
       gamePlayDecrementor: sl(),
+      gameInfoUpdater: sl(),
       beersSelector: sl(),
       beerInserter: sl(),
       beersRatiningUpdater: sl(),
@@ -86,6 +87,7 @@ void init() {
   sl.registerFactory(() => GamesSelector(gameRepository: sl()));
   sl.registerFactory(() => GamePlayIncrementor(gameRepository: sl()));
   sl.registerFactory(() => GamePlayDecrementor(gameRepository: sl()));
+  sl.registerFactory(() => GameInfoUpdater(gameRepository: sl()));
   sl.registerFactory(() => BeersSelector(beerRepository: sl()));
   sl.registerFactory(() => WinesSelector(wineRepository: sl()));
   sl.registerFactory(() => UserGetter(userRepository: sl()));

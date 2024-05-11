@@ -74,7 +74,7 @@ class _EditRatableItemBottomSheetState
           orElse: () {},
         );
       },
-      child: BottomEditableRatableItem(
+      child: BottomEditableItem(
         initName: widget.item.name,
         initImageBytes: widget.item.imageBytes?.toList(),
         onSave: (name, bytes) {

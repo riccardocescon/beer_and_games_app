@@ -1,3 +1,7 @@
+import 'dart:developer';
+import 'dart:typed_data';
+
+import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
 import 'package:beer_and_games/core/extentions/either_extensions.dart';
 import 'package:beer_and_games/core/mixin/image_selector_api_helper.dart';
@@ -8,6 +12,7 @@ import 'package:beer_and_games/features/beer_and_games/data/models/game_model.da
 import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/game_repository.dart';
 import 'package:dartz/dartz.dart';
+import 'package:crypto/crypto.dart' as crypto;
 
 class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
   final GameAPI gameAPI;
@@ -35,8 +40,8 @@ class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
             (e) => Game(
               id: e.id,
               name: e.name,
-              minplayers: e.minPlayers,
-              maxplayers: e.maxPlayers,
+              minPlayers: e.minPlayers,
+              maxPlayers: e.maxPlayers,
               onlyMinMaxPlayers: e.onlyMinMaxPlayers,
               timesPlayed: e.timesPlayed,
             ),
@@ -83,7 +88,7 @@ class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
       gameModels.firstWhere((element) => element.id == gameId).imageUrl!;
 
   @override
-  Future<Either<Failure, void>> markAddPlayed({
+  Future<Either<CloudFailure, void>> markAddPlayed({
     required String gameId,
   }) async {
     final foResult = await gameAPI.markAddPlayed(gameId: gameId);
@@ -91,10 +96,48 @@ class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
   }
 
   @override
-  Future<Either<Failure, void>> markRemovePlayed({
+  Future<Either<CloudFailure, void>> markRemovePlayed({
     required String gameId,
   }) async {
     final foResult = await gameAPI.markRemovePlayed(gameId: gameId);
     return foResult;
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> updateInfo({required Game game}) async {
+    final path = '/cespuglio/games/${game.id}.png';
+    final hash = game.imageBytes == null || game.imageBytes!.isEmpty
+        ? null
+        : crypto.md5.convert(game.imageBytes!).toString();
+
+    if (hash == null) {
+      final foCloudDelete = await cloudImageStorageAPI.deleteImage(path);
+      if (foCloudDelete.isLeft()) log(foCloudDelete.left.toString());
+
+      final foLocalDelete = await localImageStorageAPI.deleteImage(path);
+      if (foLocalDelete.isLeft()) log(foLocalDelete.left.toString());
+    } else {
+      final foCloudUpdate = await cloudImageStorageAPI.uploadImage(
+        path,
+        Uint8List.fromList(game.imageBytes!),
+      );
+      if (foCloudUpdate.isLeft()) log(foCloudUpdate.left.toString());
+
+      final foLocalUpdate = await localImageStorageAPI.uploadImage(
+        path,
+        Uint8List.fromList(game.imageBytes!),
+      );
+      if (foLocalUpdate.isLeft()) log(foLocalUpdate.left.toString());
+    }
+
+    return await gameAPI.updateInfo(
+      beerId: game.id,
+      name: game.name,
+      imagePath: path,
+      imageHash: hash,
+      minPlayers: game.minPlayers,
+      maxPlayers: game.maxPlayers,
+      onlyMinMax: game.onlyMinMaxPlayers,
+    );
   }
 }
