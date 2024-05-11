@@ -5,6 +5,13 @@ sealed class ItemsEvent extends AppEvent with _$ItemsEvent, EquatableMixin {
   const ItemsEvent._();
 
   const factory ItemsEvent.download() = Download;
+  const factory ItemsEvent.insertGame({
+    required String name,
+    required List<int>? imageBytes,
+    required int minPlayers,
+    required int maxPlayers,
+    required bool onlyMinMaxPlayers,
+  }) = InsertGame;
   const factory ItemsEvent.insertBeer({
     required String name,
     required List<int>? imageBytes,
@@ -31,6 +38,13 @@ sealed class ItemsEvent extends AppEvent with _$ItemsEvent, EquatableMixin {
   @override
   List<Object?> get props => map(
         download: (value) => [],
+        insertGame: (value) => [
+          value.name,
+          value.imageBytes,
+          value.minPlayers,
+          value.maxPlayers,
+          value.onlyMinMaxPlayers,
+        ],
         insertBeer: (value) => [value.name, value.imageBytes],
         insertWine: (value) => [value.name, value.imageBytes],
         updateRating: (value) => [value.item, value.userEmail, value.rating],

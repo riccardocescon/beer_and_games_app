@@ -12,6 +12,7 @@ sealed class HangoutStatsPageEvent extends AppEvent
   // UI Interactions
   const factory HangoutStatsPageEvent.addBeer() = AddBeer;
   const factory HangoutStatsPageEvent.addWine() = AddWine;
+  const factory HangoutStatsPageEvent.addGame() = AddGame;
   const factory HangoutStatsPageEvent.saveItem({
     required Item item,
   }) = SaveItem;
@@ -22,6 +23,7 @@ sealed class HangoutStatsPageEvent extends AppEvent
         setup: (value) => [value.hangout],
         addBeer: (value) => [],
         addWine: (value) => [],
+        addGame: (value) => [],
         saveItem: (value) => [value.item],
         closeItem: (value) => [],
       );

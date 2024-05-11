@@ -24,6 +24,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
   final GamesSelector gamesSelector;
   final GamePlayIncrementor gamePlayIncrementor;
   final GamePlayDecrementor gamePlayDecrementor;
+  final GameInserter gameInserter;
   final GameInfoUpdater gameInfoUpdater;
   final GameDeleter gameDeleter;
   final BeersSelector beersSelector;
@@ -41,6 +42,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
     required this.gamesSelector,
     required this.gamePlayIncrementor,
     required this.gamePlayDecrementor,
+    required this.gameInserter,
     required this.gameInfoUpdater,
     required this.gameDeleter,
     required this.beersSelector,
@@ -125,6 +127,21 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
           wineSubscription.asFuture(),
         ],
       );
+    });
+
+    on<InsertGame>((event, emit) async {
+      final result = await gameInserter.call(
+        GameInserterParams(
+          name: event.name,
+          imageBytes: event.imageBytes,
+          minPlayers: event.minPlayers,
+          maxPlayers: event.maxPlayers,
+          onlyMinMaxPlayers: event.onlyMinMaxPlayers,
+        ),
+      );
+      if (result.isLeft()) {
+        emit(ItemsState.error(result.left));
+      }
     });
     on<InsertBeer>((event, emit) async {
       final result = await beerInserter.call(

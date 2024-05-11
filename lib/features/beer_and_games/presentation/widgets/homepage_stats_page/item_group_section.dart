@@ -46,7 +46,9 @@ class _ItemGroupSection extends StatelessWidget {
                     .read<HangoutStatsPageBloc>()
                     .add(const HangoutStatsPageEvent.addWine());
               } else {
-                context.warningSnackbar('Work in progress', 'Coming soon!');
+                context
+                    .read<HangoutStatsPageBloc>()
+                    .add(const HangoutStatsPageEvent.addGame());
               }
             },
             style: ButtonStyle(

@@ -7,6 +7,13 @@ abstract class GameRepository {
   Stream<Either<Failure, List<Game>>> select();
   Future<Either<CloudFailure, void>> markAddPlayed({required String gameId});
   Future<Either<CloudFailure, void>> markRemovePlayed({required String gameId});
+  Future<Either<CloudFailure, void>> insert({
+    required String name,
+    required List<int>? imageBytes,
+    required int minPlayers,
+    required int maxPlayers,
+    required bool onlyMinMaxPlayers,
+  });
   Future<Either<CloudFailure, void>> updateInfo({required Game game});
   Future<Either<CloudFailure, void>> delete({required Game game});
 }

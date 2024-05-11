@@ -15,6 +15,7 @@ import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/i
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/hangout_stats_page/hangout_stats_page_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/pages/games_item_page.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/pages/rating_items_page.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/widgets/homepage_stats_page/new_game_item_body.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/widgets/homepage_stats_page/new_item_body.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
@@ -62,13 +63,15 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
                     if (prevState == null) return true;
 
                     return prevState.addWine != value.addWine ||
-                        prevState.addBeer != value.addBeer;
+                        prevState.addBeer != value.addBeer ||
+                        prevState.addGame != value.addGame;
                   },
                   orElse: () => false,
                 ),
                 builder: (context, state) {
                   final isAdd = state.maybeMap(
-                    updateUI: (value) => value.addBeer || value.addWine,
+                    updateUI: (value) =>
+                        value.addBeer || value.addWine || value.addGame,
                     orElse: () => false,
                   );
                   return NestedScrollView(
@@ -110,7 +113,9 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
                         final itemChild = isAdd
                             ? value.addBeer
                                 ? _addItem<Beer>()
-                                : _addItem<Wine>()
+                                : value.addWine
+                                    ? _addItem<Wine>()
+                                    : _addGame()
                             : _categoriesList();
                         return AnimatedSwitcher(
                           duration: const Duration(milliseconds: 300),
@@ -161,6 +166,23 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
           ),
         ),
         NewRatableItemBody<T>(),
+      ],
+    );
+  }
+
+  Widget _addGame() {
+    return Column(
+      children: [
+        Expanded(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => context.read<HangoutStatsPageBloc>().add(
+                  const HangoutStatsPageEvent.closeItem(),
+                ),
+            child: Container(),
+          ),
+        ),
+        const NewGameItemBody(),
       ],
     );
   }

@@ -61,17 +61,36 @@ class HangoutStatsPageBloc
       }
     });
     on<AddBeer>((event, emit) {
-      emit(const HangoutStatsPageState.updateUI(addBeer: true, addWine: false));
+      emit(const HangoutStatsPageState.updateUI(
+        addBeer: true,
+        addWine: false,
+        addGame: false,
+      ));
     });
     on<AddWine>((event, emit) {
-      emit(const HangoutStatsPageState.updateUI(addBeer: false, addWine: true));
+      emit(const HangoutStatsPageState.updateUI(
+        addBeer: false,
+        addWine: true,
+        addGame: false,
+      ));
+    });
+    on<AddGame>((event, emit) {
+      emit(const HangoutStatsPageState.updateUI(
+        addBeer: false,
+        addWine: false,
+        addGame: true,
+      ));
     });
     on<SaveItem>((event, emit) {
       // final item = event.item;
     });
     on<CloseItem>((event, emit) {
       emit(
-        const HangoutStatsPageState.updateUI(addBeer: false, addWine: false),
+        const HangoutStatsPageState.updateUI(
+          addBeer: false,
+          addWine: false,
+          addGame: false,
+        ),
       );
     });
   }
