@@ -5,6 +5,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart
 import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -16,6 +17,25 @@ part 'homepage_state.dart';
 
 class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
   final HangoutBloc hangoutBloc;
+  late ItemsBloc itemsBloc;
+  bool _showingGames = false;
+
+  List<Game>? _games;
+
+  List<Game> get _filteredGames {
+    if (_games == null || _games!.isEmpty) return [];
+    if (hangoutBloc.hangout == null ||
+        hangoutBloc.hangout!.presentUsers.isEmpty) return [];
+
+    final presenceUsers = hangoutBloc.hangout!.presentUsers.length;
+    final filtered = _games!
+        .where((element) =>
+            presenceUsers >= element.minPlayers &&
+            presenceUsers <= element.maxPlayers)
+        .toList();
+
+    return filtered;
+  }
 
   HomepageBloc({
     required this.hangoutBloc,
@@ -58,6 +78,51 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
           orElse: () {},
         );
       }
+    });
+    on<SetupGameStream>((event, emit) async {
+      itemsBloc = event.itemsBloc;
+      await for (final state in itemsBloc.stream) {
+        final foGames = state.maybeMap(
+          update: (value) => value.games,
+          orElse: () => null,
+        );
+        if (foGames == null) continue;
+
+        _games = foGames;
+      }
+    });
+    on<ShowGames>((event, emit) async {
+      if (event.onlyRefresh && !_showingGames) return;
+
+      if (_showingGames && !event.onlyRefresh) {
+        _showingGames = false;
+
+        emit(const HomepageState.showGames(games: null, isDownloading: false));
+        return;
+      }
+
+      _showingGames = true;
+
+      if (_games == null) {
+        emit(const HomepageState.showGames(games: [], isDownloading: true));
+        itemsBloc.add(const ItemsEvent.download());
+        await for (final state in itemsBloc.stream) {
+          final foGames = state.maybeMap(
+            update: (value) => value.games,
+            orElse: () => null,
+          );
+          if (foGames == null) continue;
+
+          _games = foGames;
+          break;
+        }
+      }
+
+      final filteredGames = _filteredGames;
+
+      emit(
+        HomepageState.showGames(games: filteredGames, isDownloading: false),
+      );
     });
   }
 }

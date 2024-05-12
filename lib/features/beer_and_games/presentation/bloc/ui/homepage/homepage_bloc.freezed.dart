@@ -19,32 +19,44 @@ mixin _$HomepageEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() setup,
+    required TResult Function(ItemsBloc itemsBloc) setupGameStream,
+    required TResult Function(bool onlyRefresh) showGames,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? setup,
+    TResult? Function(ItemsBloc itemsBloc)? setupGameStream,
+    TResult? Function(bool onlyRefresh)? showGames,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? setup,
+    TResult Function(ItemsBloc itemsBloc)? setupGameStream,
+    TResult Function(bool onlyRefresh)? showGames,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
+    required TResult Function(SetupGameStream value) setupGameStream,
+    required TResult Function(ShowGames value) showGames,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
+    TResult? Function(SetupGameStream value)? setupGameStream,
+    TResult? Function(ShowGames value)? showGames,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
+    TResult Function(SetupGameStream value)? setupGameStream,
+    TResult Function(ShowGames value)? showGames,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -93,6 +105,8 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() setup,
+    required TResult Function(ItemsBloc itemsBloc) setupGameStream,
+    required TResult Function(bool onlyRefresh) showGames,
   }) {
     return setup();
   }
@@ -101,6 +115,8 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? setup,
+    TResult? Function(ItemsBloc itemsBloc)? setupGameStream,
+    TResult? Function(bool onlyRefresh)? showGames,
   }) {
     return setup?.call();
   }
@@ -109,6 +125,8 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? setup,
+    TResult Function(ItemsBloc itemsBloc)? setupGameStream,
+    TResult Function(bool onlyRefresh)? showGames,
     required TResult orElse(),
   }) {
     if (setup != null) {
@@ -121,6 +139,8 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
+    required TResult Function(SetupGameStream value) setupGameStream,
+    required TResult Function(ShowGames value) showGames,
   }) {
     return setup(this);
   }
@@ -129,6 +149,8 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
+    TResult? Function(SetupGameStream value)? setupGameStream,
+    TResult? Function(ShowGames value)? showGames,
   }) {
     return setup?.call(this);
   }
@@ -137,6 +159,8 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
+    TResult Function(SetupGameStream value)? setupGameStream,
+    TResult Function(ShowGames value)? showGames,
     required TResult orElse(),
   }) {
     if (setup != null) {
@@ -152,6 +176,257 @@ abstract class Setup extends HomepageEvent {
 }
 
 /// @nodoc
+abstract class _$$SetupGameStreamImplCopyWith<$Res> {
+  factory _$$SetupGameStreamImplCopyWith(_$SetupGameStreamImpl value,
+          $Res Function(_$SetupGameStreamImpl) then) =
+      __$$SetupGameStreamImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({ItemsBloc itemsBloc});
+}
+
+/// @nodoc
+class __$$SetupGameStreamImplCopyWithImpl<$Res>
+    extends _$HomepageEventCopyWithImpl<$Res, _$SetupGameStreamImpl>
+    implements _$$SetupGameStreamImplCopyWith<$Res> {
+  __$$SetupGameStreamImplCopyWithImpl(
+      _$SetupGameStreamImpl _value, $Res Function(_$SetupGameStreamImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? itemsBloc = null,
+  }) {
+    return _then(_$SetupGameStreamImpl(
+      itemsBloc: null == itemsBloc
+          ? _value.itemsBloc
+          : itemsBloc // ignore: cast_nullable_to_non_nullable
+              as ItemsBloc,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$SetupGameStreamImpl extends SetupGameStream {
+  const _$SetupGameStreamImpl({required this.itemsBloc}) : super._();
+
+  @override
+  final ItemsBloc itemsBloc;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$SetupGameStreamImplCopyWith<_$SetupGameStreamImpl> get copyWith =>
+      __$$SetupGameStreamImplCopyWithImpl<_$SetupGameStreamImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() setup,
+    required TResult Function(ItemsBloc itemsBloc) setupGameStream,
+    required TResult Function(bool onlyRefresh) showGames,
+  }) {
+    return setupGameStream(itemsBloc);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? setup,
+    TResult? Function(ItemsBloc itemsBloc)? setupGameStream,
+    TResult? Function(bool onlyRefresh)? showGames,
+  }) {
+    return setupGameStream?.call(itemsBloc);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? setup,
+    TResult Function(ItemsBloc itemsBloc)? setupGameStream,
+    TResult Function(bool onlyRefresh)? showGames,
+    required TResult orElse(),
+  }) {
+    if (setupGameStream != null) {
+      return setupGameStream(itemsBloc);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Setup value) setup,
+    required TResult Function(SetupGameStream value) setupGameStream,
+    required TResult Function(ShowGames value) showGames,
+  }) {
+    return setupGameStream(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Setup value)? setup,
+    TResult? Function(SetupGameStream value)? setupGameStream,
+    TResult? Function(ShowGames value)? showGames,
+  }) {
+    return setupGameStream?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Setup value)? setup,
+    TResult Function(SetupGameStream value)? setupGameStream,
+    TResult Function(ShowGames value)? showGames,
+    required TResult orElse(),
+  }) {
+    if (setupGameStream != null) {
+      return setupGameStream(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class SetupGameStream extends HomepageEvent {
+  const factory SetupGameStream({required final ItemsBloc itemsBloc}) =
+      _$SetupGameStreamImpl;
+  const SetupGameStream._() : super._();
+
+  ItemsBloc get itemsBloc;
+  @JsonKey(ignore: true)
+  _$$SetupGameStreamImplCopyWith<_$SetupGameStreamImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$ShowGamesImplCopyWith<$Res> {
+  factory _$$ShowGamesImplCopyWith(
+          _$ShowGamesImpl value, $Res Function(_$ShowGamesImpl) then) =
+      __$$ShowGamesImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool onlyRefresh});
+}
+
+/// @nodoc
+class __$$ShowGamesImplCopyWithImpl<$Res>
+    extends _$HomepageEventCopyWithImpl<$Res, _$ShowGamesImpl>
+    implements _$$ShowGamesImplCopyWith<$Res> {
+  __$$ShowGamesImplCopyWithImpl(
+      _$ShowGamesImpl _value, $Res Function(_$ShowGamesImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? onlyRefresh = null,
+  }) {
+    return _then(_$ShowGamesImpl(
+      onlyRefresh: null == onlyRefresh
+          ? _value.onlyRefresh
+          : onlyRefresh // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$ShowGamesImpl extends ShowGames {
+  const _$ShowGamesImpl({this.onlyRefresh = false}) : super._();
+
+  @override
+  @JsonKey()
+  final bool onlyRefresh;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$ShowGamesImplCopyWith<_$ShowGamesImpl> get copyWith =>
+      __$$ShowGamesImplCopyWithImpl<_$ShowGamesImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() setup,
+    required TResult Function(ItemsBloc itemsBloc) setupGameStream,
+    required TResult Function(bool onlyRefresh) showGames,
+  }) {
+    return showGames(onlyRefresh);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? setup,
+    TResult? Function(ItemsBloc itemsBloc)? setupGameStream,
+    TResult? Function(bool onlyRefresh)? showGames,
+  }) {
+    return showGames?.call(onlyRefresh);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? setup,
+    TResult Function(ItemsBloc itemsBloc)? setupGameStream,
+    TResult Function(bool onlyRefresh)? showGames,
+    required TResult orElse(),
+  }) {
+    if (showGames != null) {
+      return showGames(onlyRefresh);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Setup value) setup,
+    required TResult Function(SetupGameStream value) setupGameStream,
+    required TResult Function(ShowGames value) showGames,
+  }) {
+    return showGames(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Setup value)? setup,
+    TResult? Function(SetupGameStream value)? setupGameStream,
+    TResult? Function(ShowGames value)? showGames,
+  }) {
+    return showGames?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Setup value)? setup,
+    TResult Function(SetupGameStream value)? setupGameStream,
+    TResult Function(ShowGames value)? showGames,
+    required TResult orElse(),
+  }) {
+    if (showGames != null) {
+      return showGames(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class ShowGames extends HomepageEvent {
+  const factory ShowGames({final bool onlyRefresh}) = _$ShowGamesImpl;
+  const ShowGames._() : super._();
+
+  bool get onlyRefresh;
+  @JsonKey(ignore: true)
+  _$$ShowGamesImplCopyWith<_$ShowGamesImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 mixin _$HomepageState {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
@@ -162,6 +437,7 @@ mixin _$HomepageState {
     required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(List<Beer> beers) beersLoaded,
     required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
     required TResult Function(CloudFailure failure) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -174,6 +450,7 @@ mixin _$HomepageState {
     TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(List<Beer> beers)? beersLoaded,
     TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
     TResult? Function(CloudFailure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -186,6 +463,7 @@ mixin _$HomepageState {
     TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(List<Beer> beers)? beersLoaded,
     TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) =>
@@ -199,6 +477,7 @@ mixin _$HomepageState {
     required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(BeersLoaded value) beersLoaded,
     required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
     required TResult Function(Error value) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -211,6 +490,7 @@ mixin _$HomepageState {
     TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(BeersLoaded value)? beersLoaded,
     TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
     TResult? Function(Error value)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -223,6 +503,7 @@ mixin _$HomepageState {
     TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(BeersLoaded value)? beersLoaded,
     TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) =>
@@ -277,6 +558,7 @@ class _$InitImpl extends Init {
     required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(List<Beer> beers) beersLoaded,
     required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
     required TResult Function(CloudFailure failure) error,
   }) {
     return init();
@@ -292,6 +574,7 @@ class _$InitImpl extends Init {
     TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(List<Beer> beers)? beersLoaded,
     TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return init?.call();
@@ -307,6 +590,7 @@ class _$InitImpl extends Init {
     TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(List<Beer> beers)? beersLoaded,
     TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -326,6 +610,7 @@ class _$InitImpl extends Init {
     required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(BeersLoaded value) beersLoaded,
     required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
     required TResult Function(Error value) error,
   }) {
     return init(this);
@@ -341,6 +626,7 @@ class _$InitImpl extends Init {
     TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(BeersLoaded value)? beersLoaded,
     TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
     TResult? Function(Error value)? error,
   }) {
     return init?.call(this);
@@ -356,6 +642,7 @@ class _$InitImpl extends Init {
     TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(BeersLoaded value)? beersLoaded,
     TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -402,6 +689,7 @@ class _$LoadingImpl extends Loading {
     required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(List<Beer> beers) beersLoaded,
     required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
     required TResult Function(CloudFailure failure) error,
   }) {
     return loading();
@@ -417,6 +705,7 @@ class _$LoadingImpl extends Loading {
     TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(List<Beer> beers)? beersLoaded,
     TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return loading?.call();
@@ -432,6 +721,7 @@ class _$LoadingImpl extends Loading {
     TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(List<Beer> beers)? beersLoaded,
     TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -451,6 +741,7 @@ class _$LoadingImpl extends Loading {
     required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(BeersLoaded value) beersLoaded,
     required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
     required TResult Function(Error value) error,
   }) {
     return loading(this);
@@ -466,6 +757,7 @@ class _$LoadingImpl extends Loading {
     TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(BeersLoaded value)? beersLoaded,
     TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
     TResult? Function(Error value)? error,
   }) {
     return loading?.call(this);
@@ -481,6 +773,7 @@ class _$LoadingImpl extends Loading {
     TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(BeersLoaded value)? beersLoaded,
     TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -551,6 +844,7 @@ class _$LoadedImpl extends Loaded {
     required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(List<Beer> beers) beersLoaded,
     required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
     required TResult Function(CloudFailure failure) error,
   }) {
     return loaded(hangout);
@@ -566,6 +860,7 @@ class _$LoadedImpl extends Loaded {
     TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(List<Beer> beers)? beersLoaded,
     TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return loaded?.call(hangout);
@@ -581,6 +876,7 @@ class _$LoadedImpl extends Loaded {
     TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(List<Beer> beers)? beersLoaded,
     TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -600,6 +896,7 @@ class _$LoadedImpl extends Loaded {
     required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(BeersLoaded value) beersLoaded,
     required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
     required TResult Function(Error value) error,
   }) {
     return loaded(this);
@@ -615,6 +912,7 @@ class _$LoadedImpl extends Loaded {
     TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(BeersLoaded value)? beersLoaded,
     TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
     TResult? Function(Error value)? error,
   }) {
     return loaded?.call(this);
@@ -630,6 +928,7 @@ class _$LoadedImpl extends Loaded {
     TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(BeersLoaded value)? beersLoaded,
     TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -714,6 +1013,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(List<Beer> beers) beersLoaded,
     required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
     required TResult Function(CloudFailure failure) error,
   }) {
     return dateTimeUpdate(date, timeLeft);
@@ -729,6 +1029,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(List<Beer> beers)? beersLoaded,
     TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return dateTimeUpdate?.call(date, timeLeft);
@@ -744,6 +1045,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(List<Beer> beers)? beersLoaded,
     TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -763,6 +1065,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(BeersLoaded value) beersLoaded,
     required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
     required TResult Function(Error value) error,
   }) {
     return dateTimeUpdate(this);
@@ -778,6 +1081,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(BeersLoaded value)? beersLoaded,
     TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
     TResult? Function(Error value)? error,
   }) {
     return dateTimeUpdate?.call(this);
@@ -793,6 +1097,7 @@ class _$DateTimeUpdateImpl extends DateTimeUpdate {
     TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(BeersLoaded value)? beersLoaded,
     TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -878,6 +1183,7 @@ class _$GamesLoadedImpl extends GamesLoaded {
     required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(List<Beer> beers) beersLoaded,
     required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
     required TResult Function(CloudFailure failure) error,
   }) {
     return gamesLoaded(games);
@@ -893,6 +1199,7 @@ class _$GamesLoadedImpl extends GamesLoaded {
     TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(List<Beer> beers)? beersLoaded,
     TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return gamesLoaded?.call(games);
@@ -908,6 +1215,7 @@ class _$GamesLoadedImpl extends GamesLoaded {
     TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(List<Beer> beers)? beersLoaded,
     TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -927,6 +1235,7 @@ class _$GamesLoadedImpl extends GamesLoaded {
     required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(BeersLoaded value) beersLoaded,
     required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
     required TResult Function(Error value) error,
   }) {
     return gamesLoaded(this);
@@ -942,6 +1251,7 @@ class _$GamesLoadedImpl extends GamesLoaded {
     TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(BeersLoaded value)? beersLoaded,
     TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
     TResult? Function(Error value)? error,
   }) {
     return gamesLoaded?.call(this);
@@ -957,6 +1267,7 @@ class _$GamesLoadedImpl extends GamesLoaded {
     TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(BeersLoaded value)? beersLoaded,
     TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -1040,6 +1351,7 @@ class _$BeersLoadedImpl extends BeersLoaded {
     required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(List<Beer> beers) beersLoaded,
     required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
     required TResult Function(CloudFailure failure) error,
   }) {
     return beersLoaded(beers);
@@ -1055,6 +1367,7 @@ class _$BeersLoadedImpl extends BeersLoaded {
     TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(List<Beer> beers)? beersLoaded,
     TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return beersLoaded?.call(beers);
@@ -1070,6 +1383,7 @@ class _$BeersLoadedImpl extends BeersLoaded {
     TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(List<Beer> beers)? beersLoaded,
     TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1089,6 +1403,7 @@ class _$BeersLoadedImpl extends BeersLoaded {
     required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(BeersLoaded value) beersLoaded,
     required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
     required TResult Function(Error value) error,
   }) {
     return beersLoaded(this);
@@ -1104,6 +1419,7 @@ class _$BeersLoadedImpl extends BeersLoaded {
     TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(BeersLoaded value)? beersLoaded,
     TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
     TResult? Function(Error value)? error,
   }) {
     return beersLoaded?.call(this);
@@ -1119,6 +1435,7 @@ class _$BeersLoadedImpl extends BeersLoaded {
     TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(BeersLoaded value)? beersLoaded,
     TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -1202,6 +1519,7 @@ class _$WinesLoadedImpl extends WinesLoaded {
     required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(List<Beer> beers) beersLoaded,
     required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
     required TResult Function(CloudFailure failure) error,
   }) {
     return winesLoaded(wines);
@@ -1217,6 +1535,7 @@ class _$WinesLoadedImpl extends WinesLoaded {
     TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(List<Beer> beers)? beersLoaded,
     TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return winesLoaded?.call(wines);
@@ -1232,6 +1551,7 @@ class _$WinesLoadedImpl extends WinesLoaded {
     TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(List<Beer> beers)? beersLoaded,
     TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1251,6 +1571,7 @@ class _$WinesLoadedImpl extends WinesLoaded {
     required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(BeersLoaded value) beersLoaded,
     required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
     required TResult Function(Error value) error,
   }) {
     return winesLoaded(this);
@@ -1266,6 +1587,7 @@ class _$WinesLoadedImpl extends WinesLoaded {
     TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(BeersLoaded value)? beersLoaded,
     TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
     TResult? Function(Error value)? error,
   }) {
     return winesLoaded?.call(this);
@@ -1281,6 +1603,7 @@ class _$WinesLoadedImpl extends WinesLoaded {
     TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(BeersLoaded value)? beersLoaded,
     TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {
@@ -1299,6 +1622,187 @@ abstract class WinesLoaded extends HomepageState {
   List<Wine> get wines;
   @JsonKey(ignore: true)
   _$$WinesLoadedImplCopyWith<_$WinesLoadedImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$GamesShowedImplCopyWith<$Res> {
+  factory _$$GamesShowedImplCopyWith(
+          _$GamesShowedImpl value, $Res Function(_$GamesShowedImpl) then) =
+      __$$GamesShowedImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({List<Game>? games, bool isDownloading});
+}
+
+/// @nodoc
+class __$$GamesShowedImplCopyWithImpl<$Res>
+    extends _$HomepageStateCopyWithImpl<$Res, _$GamesShowedImpl>
+    implements _$$GamesShowedImplCopyWith<$Res> {
+  __$$GamesShowedImplCopyWithImpl(
+      _$GamesShowedImpl _value, $Res Function(_$GamesShowedImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? games = freezed,
+    Object? isDownloading = null,
+  }) {
+    return _then(_$GamesShowedImpl(
+      games: freezed == games
+          ? _value._games
+          : games // ignore: cast_nullable_to_non_nullable
+              as List<Game>?,
+      isDownloading: null == isDownloading
+          ? _value.isDownloading
+          : isDownloading // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$GamesShowedImpl extends GamesShowed {
+  const _$GamesShowedImpl(
+      {required final List<Game>? games, required this.isDownloading})
+      : _games = games,
+        super._();
+
+  final List<Game>? _games;
+  @override
+  List<Game>? get games {
+    final value = _games;
+    if (value == null) return null;
+    if (_games is EqualUnmodifiableListView) return _games;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final bool isDownloading;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$GamesShowedImplCopyWith<_$GamesShowedImpl> get copyWith =>
+      __$$GamesShowedImplCopyWithImpl<_$GamesShowedImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() init,
+    required TResult Function() loading,
+    required TResult Function(Hangout hangout) loaded,
+    required TResult Function(String date, String timeLeft) dateTimeUpdate,
+    required TResult Function(List<Game> games) gamesLoaded,
+    required TResult Function(List<Beer> beers) beersLoaded,
+    required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
+    required TResult Function(CloudFailure failure) error,
+  }) {
+    return showGames(games, isDownloading);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? init,
+    TResult? Function()? loading,
+    TResult? Function(Hangout hangout)? loaded,
+    TResult? Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult? Function(List<Game> games)? gamesLoaded,
+    TResult? Function(List<Beer> beers)? beersLoaded,
+    TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
+    TResult? Function(CloudFailure failure)? error,
+  }) {
+    return showGames?.call(games, isDownloading);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? init,
+    TResult Function()? loading,
+    TResult Function(Hangout hangout)? loaded,
+    TResult Function(String date, String timeLeft)? dateTimeUpdate,
+    TResult Function(List<Game> games)? gamesLoaded,
+    TResult Function(List<Beer> beers)? beersLoaded,
+    TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
+    TResult Function(CloudFailure failure)? error,
+    required TResult orElse(),
+  }) {
+    if (showGames != null) {
+      return showGames(games, isDownloading);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Init value) init,
+    required TResult Function(Loading value) loading,
+    required TResult Function(Loaded value) loaded,
+    required TResult Function(DateTimeUpdate value) dateTimeUpdate,
+    required TResult Function(GamesLoaded value) gamesLoaded,
+    required TResult Function(BeersLoaded value) beersLoaded,
+    required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
+    required TResult Function(Error value) error,
+  }) {
+    return showGames(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Init value)? init,
+    TResult? Function(Loading value)? loading,
+    TResult? Function(Loaded value)? loaded,
+    TResult? Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult? Function(GamesLoaded value)? gamesLoaded,
+    TResult? Function(BeersLoaded value)? beersLoaded,
+    TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
+    TResult? Function(Error value)? error,
+  }) {
+    return showGames?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Init value)? init,
+    TResult Function(Loading value)? loading,
+    TResult Function(Loaded value)? loaded,
+    TResult Function(DateTimeUpdate value)? dateTimeUpdate,
+    TResult Function(GamesLoaded value)? gamesLoaded,
+    TResult Function(BeersLoaded value)? beersLoaded,
+    TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
+    TResult Function(Error value)? error,
+    required TResult orElse(),
+  }) {
+    if (showGames != null) {
+      return showGames(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class GamesShowed extends HomepageState {
+  const factory GamesShowed(
+      {required final List<Game>? games,
+      required final bool isDownloading}) = _$GamesShowedImpl;
+  const GamesShowed._() : super._();
+
+  List<Game>? get games;
+  bool get isDownloading;
+  @JsonKey(ignore: true)
+  _$$GamesShowedImplCopyWith<_$GamesShowedImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -1367,6 +1871,7 @@ class _$ErrorImpl extends Error {
     required TResult Function(List<Game> games) gamesLoaded,
     required TResult Function(List<Beer> beers) beersLoaded,
     required TResult Function(List<Wine> wines) winesLoaded,
+    required TResult Function(List<Game>? games, bool isDownloading) showGames,
     required TResult Function(CloudFailure failure) error,
   }) {
     return error(failure);
@@ -1382,6 +1887,7 @@ class _$ErrorImpl extends Error {
     TResult? Function(List<Game> games)? gamesLoaded,
     TResult? Function(List<Beer> beers)? beersLoaded,
     TResult? Function(List<Wine> wines)? winesLoaded,
+    TResult? Function(List<Game>? games, bool isDownloading)? showGames,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return error?.call(failure);
@@ -1397,6 +1903,7 @@ class _$ErrorImpl extends Error {
     TResult Function(List<Game> games)? gamesLoaded,
     TResult Function(List<Beer> beers)? beersLoaded,
     TResult Function(List<Wine> wines)? winesLoaded,
+    TResult Function(List<Game>? games, bool isDownloading)? showGames,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -1416,6 +1923,7 @@ class _$ErrorImpl extends Error {
     required TResult Function(GamesLoaded value) gamesLoaded,
     required TResult Function(BeersLoaded value) beersLoaded,
     required TResult Function(WinesLoaded value) winesLoaded,
+    required TResult Function(GamesShowed value) showGames,
     required TResult Function(Error value) error,
   }) {
     return error(this);
@@ -1431,6 +1939,7 @@ class _$ErrorImpl extends Error {
     TResult? Function(GamesLoaded value)? gamesLoaded,
     TResult? Function(BeersLoaded value)? beersLoaded,
     TResult? Function(WinesLoaded value)? winesLoaded,
+    TResult? Function(GamesShowed value)? showGames,
     TResult? Function(Error value)? error,
   }) {
     return error?.call(this);
@@ -1446,6 +1955,7 @@ class _$ErrorImpl extends Error {
     TResult Function(GamesLoaded value)? gamesLoaded,
     TResult Function(BeersLoaded value)? beersLoaded,
     TResult Function(WinesLoaded value)? winesLoaded,
+    TResult Function(GamesShowed value)? showGames,
     TResult Function(Error value)? error,
     required TResult orElse(),
   }) {

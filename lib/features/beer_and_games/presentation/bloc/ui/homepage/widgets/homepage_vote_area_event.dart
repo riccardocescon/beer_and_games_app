@@ -6,6 +6,7 @@ sealed class HomepageVoteAreaEvent extends AppEvent
   const HomepageVoteAreaEvent._();
 
   const factory HomepageVoteAreaEvent.setup({
+    required HomepageBloc homepageBloc,
     required Hangout hangout,
     required User user,
   }) = Setup;

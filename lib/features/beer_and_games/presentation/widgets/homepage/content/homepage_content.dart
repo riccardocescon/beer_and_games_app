@@ -1,5 +1,6 @@
 import 'package:beer_and_games/core/enums/presence_state.dart';
 import 'package:beer_and_games/core/extentions/context_extension.dart';
+import 'package:beer_and_games/core/widgets/game_item_card.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/core/widgets/static_bottom_sheet.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
@@ -18,6 +19,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 part 'vote_area.dart';
 part 'vote_button.dart';
 part 'stats_row.dart';
+part 'games_row.dart';
 
 class HomepageContent extends StatelessWidget {
   const HomepageContent({super.key});
@@ -26,7 +28,7 @@ class HomepageContent extends StatelessWidget {
   Widget build(BuildContext context) {
     return StaticBottomSheet(
       child: Padding(
-        padding: const EdgeInsets.all(24.0),
+        padding: const EdgeInsets.only(top: 24),
         child: BlocBuilder<UserBloc, UserState>(
           buildWhen: (previous, current) {
             return current.maybeMap(
@@ -47,10 +49,32 @@ class HomepageContent extends StatelessWidget {
                       loaded: (value) {
                         return Column(
                           children: [
-                            _voteArea(value.hangout, userValue.user!),
                             Padding(
-                              padding: const EdgeInsets.symmetric(vertical: 16),
-                              child: _StatsRow(hangout: value.hangout),
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 24),
+                              child: Column(
+                                children: [
+                                  _voteArea(value.hangout, userValue.user!),
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                        vertical: 16),
+                                    child: _StatsRow(hangout: value.hangout),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            const _GamesRow(),
+                            Expanded(
+                              child: Container(
+                                decoration: BoxDecoration(
+                                  borderRadius: const BorderRadius.only(
+                                    topLeft: Radius.circular(24 * 2),
+                                    topRight: Radius.circular(24 * 2),
+                                  ),
+                                  color: MaterialTheme.darkScheme()
+                                      .surfaceContainerHigh,
+                                ),
+                              ),
                             ),
                           ],
                         );
@@ -73,6 +97,7 @@ class HomepageContent extends StatelessWidget {
       create: (context) => sl<HomepageVoteAreaBloc>()
         ..add(
           HomepageVoteAreaEvent.setup(
+            homepageBloc: context.read<HomepageBloc>(),
             hangout: hangout,
             user: user,
           ),

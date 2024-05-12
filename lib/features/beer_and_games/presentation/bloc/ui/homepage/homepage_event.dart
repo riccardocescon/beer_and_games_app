@@ -7,8 +7,17 @@ sealed class HomepageEvent extends AppEvent
 
   const factory HomepageEvent.setup() = Setup;
 
+  const factory HomepageEvent.setupGameStream({
+    required ItemsBloc itemsBloc,
+  }) = SetupGameStream;
+
+  const factory HomepageEvent.showGames({@Default(false) bool onlyRefresh}) =
+      ShowGames;
+
   @override
   List<Object?> get props => map(
         setup: (value) => [],
+        setupGameStream: (value) => [value.itemsBloc],
+        showGames: (value) => [],
       );
 }

@@ -28,6 +28,11 @@ sealed class HomepageState extends AppState
     required List<Wine> wines,
   }) = WinesLoaded;
 
+  const factory HomepageState.showGames({
+    required List<Game>? games,
+    required bool isDownloading,
+  }) = GamesShowed;
+
   const factory HomepageState.error(CloudFailure failure) = Error;
 
   @override
@@ -40,6 +45,7 @@ sealed class HomepageState extends AppState
         gamesLoaded: (value) => [value.games],
         beersLoaded: (value) => [value.beers],
         winesLoaded: (value) => [value.wines],
+        showGames: (value) => [value.games],
         error: (value) => [value.failure],
       );
 }
