@@ -3,6 +3,7 @@ import 'package:beer_and_games/core/enums/presence_state.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/hangout/hangout_bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
 import 'package:equatable/equatable.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
@@ -14,6 +15,7 @@ part 'homepage_vote_area_state.dart';
 class HomepageVoteAreaBloc
     extends Bloc<HomepageVoteAreaEvent, HomepageVoteAreaState> {
   final HangoutBloc hangoutBloc;
+  late final HomepageBloc homepageBloc;
 
   late PresenceState _presenceState;
   late User user;
@@ -22,6 +24,7 @@ class HomepageVoteAreaBloc
     required this.hangoutBloc,
   }) : super(const HomepageVoteAreaState.init()) {
     on<Setup>((event, emit) {
+      homepageBloc = event.homepageBloc;
       user = event.user;
 
       final isPresent = event.hangout.presentUsers.contains(event.user);
@@ -90,6 +93,8 @@ class HomepageVoteAreaBloc
 
         if (completed) break;
       }
+
+      homepageBloc.add(const HomepageEvent.showGames(onlyRefresh: true));
     });
   }
 }

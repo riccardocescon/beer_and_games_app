@@ -9,21 +9,22 @@ class _RatableItem<T extends RateableItem> extends StatefulWidget {
   State<_RatableItem<T>> createState() => _RatableItemState<T>();
 }
 
-class _RatableItemState<T extends RateableItem> extends State<_RatableItem<T>> {
+class _RatableItemState<T extends RateableItem> extends State<_RatableItem<T>>
+    with EditDeleteItemMenuPoppable {
   final _itemWidth = 100.0;
 
   late RateableItem updatedItem = widget.item;
 
   List<User> get _allUsers => sl<HangoutBloc>().hangout!.allUsers;
 
-  Offset? _tapPosition;
+  // Offset? _tapPosition;
 
   @override
   Widget build(BuildContext context) {
     return SizedBox(
       width: _itemWidth,
       child: GestureDetector(
-        onTapDown: _storePosition,
+        onTapDown: storePosition,
         child: FilledButton(
           onPressed: _handlePress,
           onLongPress: _handleLongPress,
@@ -129,10 +130,6 @@ class _RatableItemState<T extends RateableItem> extends State<_RatableItem<T>> {
     );
   }
 
-  void _storePosition(TapDownDetails details) {
-    _tapPosition = details.globalPosition;
-  }
-
   void _handlePress() {
     showModalBottomSheet(
       context: context,
@@ -148,112 +145,15 @@ class _RatableItemState<T extends RateableItem> extends State<_RatableItem<T>> {
   }
 
   void _handleLongPress() {
-    final overlay =
-        Overlay.of(context).context.findRenderObject()! as RenderBox;
-
-    showMenu(
+    return handleLongPress(
       context: context,
-      position: RelativeRect.fromRect(
-        // smaller rect, the touch area
-        _tapPosition! & const Size(40, 40),
-
-        // Bigger rect, the entire screen
-        Offset.zero & overlay.size,
-      ),
-      items: [
-        PopupMenuItem(
-          value: 1,
-          height: 32,
-          onTap: () {
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (_) => BlocProvider.value(
-                value: context.read<ItemsBloc>(),
-                child: BlocBuilder<ItemsBloc, ItemsState>(
-                  buildWhen: (previous, current) => current.maybeMap(
-                    update: (value) => true,
-                    orElse: () => false,
-                  ),
-                  builder: (_, state) {
-                    return state.maybeMap(
-                      update: (value) {
-                        final item = T == Beer
-                            ? value.beers.firstWhere(
-                                (element) => element.id == widget.item.id)
-                            : value.wines.firstWhere(
-                                (element) => element.id == widget.item.id);
-                        return EditRatableItemBottomSheet(item: item);
-                      },
-                      orElse: () => const SizedBox(),
-                    );
-                  },
-                ),
-              ),
-              backgroundColor: MaterialTheme.darkScheme().surfaceContainer,
-              shape: const RoundedRectangleBorder(
-                borderRadius: BorderRadius.vertical(top: Radius.circular(32)),
-              ),
-            );
-          },
-          child: Row(
-            children: [
-              Icon(
-                Icons.edit_rounded,
-                color: context.colorScheme.onSurface,
-                size: context.textTheme.bodyLarge?.fontSize,
-              ),
-              width10,
-              Text(
-                'Modifica',
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.colorScheme.onSurface,
-                ),
-              ),
-            ],
-          ),
-        ),
-        PopupMenuItem(
-          value: 2,
-          height: 32,
-          onTap: () {
-            context
-                .showSimpleChoiceDialog(
-              'Eliminazione',
-              'Sei sicuro di voler eliminare questo elemento?\n'
-                  'Questa azione è irreversibile.',
-              positiveAction: 'Elimina',
-              negativeAction: 'Annulla',
-              titleColor: context.colorScheme.tertiary,
-              positiveActionColor: context.colorScheme.tertiary,
-              negativeActionColor: context.colorScheme.primary,
-            )
-                .then((decision) {
-              if (decision != true) return;
-
-              context
-                  .read<ItemsBloc>()
-                  .add(ItemsEvent.delete(item: updatedItem));
-            });
-          },
-          child: Row(
-            children: [
-              Icon(
-                Icons.delete_rounded,
-                color: context.colorScheme.tertiary,
-                size: context.textTheme.bodyLarge?.fontSize,
-              ),
-              width10,
-              Text(
-                'Elimina',
-                style: context.textTheme.bodyMedium?.copyWith(
-                  color: context.colorScheme.tertiary,
-                ),
-              ),
-            ],
-          ),
-        ),
-      ],
+      updatedItem: updatedItem,
+      onShowModalBottomSheet: (value) {
+        final item = T == Beer
+            ? value.beers.firstWhere((element) => element.id == widget.item.id)
+            : value.wines.firstWhere((element) => element.id == widget.item.id);
+        return EditRatableItemBottomSheet(item: item);
+      },
     );
   }
 }

@@ -1,4 +1,5 @@
 import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/homepage/homepage_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/user_bloc.dart/user_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/pages/homepage.dart';
@@ -100,13 +101,19 @@ class MyApp extends StatelessWidget {
   }
 
   Widget _homePage(BuildContext context, String email) {
+    final homepageItemsBloc = di.sl<ItemsBloc>();
     return MultiBlocProvider(
       providers: [
         BlocProvider.value(
-          value: context.read<HomepageBloc>()..add(const HomepageEvent.setup()),
+          value: context.read<HomepageBloc>()
+            ..add(const HomepageEvent.setup())
+            ..add(HomepageEvent.setupGameStream(itemsBloc: homepageItemsBloc)),
         ),
         BlocProvider.value(
           value: context.read<UserBloc>()..add(UserEvent.get(email)),
+        ),
+        BlocProvider(
+          create: (context) => homepageItemsBloc,
         ),
       ],
       child: const Homepage(),

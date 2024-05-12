@@ -19,60 +19,90 @@ mixin _$ItemsEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
     required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
-    required TResult Function(RateableItem item) delete,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
-    TResult? Function(RateableItem item)? delete,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
-    TResult Function(RateableItem item)? delete,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
     required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
     TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
     TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -121,12 +151,18 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
     required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
-    required TResult Function(RateableItem item) delete,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return download();
   }
@@ -135,11 +171,17 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
-    TResult? Function(RateableItem item)? delete,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return download?.call();
   }
@@ -148,11 +190,17 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
-    TResult Function(RateableItem item)? delete,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (download != null) {
@@ -165,10 +213,14 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
     required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return download(this);
   }
@@ -177,10 +229,14 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
     TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return download?.call(this);
   }
@@ -189,10 +245,14 @@ class _$DownloadImpl extends Download {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
     TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (download != null) {
@@ -205,6 +265,236 @@ class _$DownloadImpl extends Download {
 abstract class Download extends ItemsEvent {
   const factory Download() = _$DownloadImpl;
   const Download._() : super._();
+}
+
+/// @nodoc
+abstract class _$$InsertGameImplCopyWith<$Res> {
+  factory _$$InsertGameImplCopyWith(
+          _$InsertGameImpl value, $Res Function(_$InsertGameImpl) then) =
+      __$$InsertGameImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call(
+      {String name,
+      List<int>? imageBytes,
+      int minPlayers,
+      int maxPlayers,
+      bool onlyMinMaxPlayers});
+}
+
+/// @nodoc
+class __$$InsertGameImplCopyWithImpl<$Res>
+    extends _$ItemsEventCopyWithImpl<$Res, _$InsertGameImpl>
+    implements _$$InsertGameImplCopyWith<$Res> {
+  __$$InsertGameImplCopyWithImpl(
+      _$InsertGameImpl _value, $Res Function(_$InsertGameImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? imageBytes = freezed,
+    Object? minPlayers = null,
+    Object? maxPlayers = null,
+    Object? onlyMinMaxPlayers = null,
+  }) {
+    return _then(_$InsertGameImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageBytes: freezed == imageBytes
+          ? _value._imageBytes
+          : imageBytes // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
+      minPlayers: null == minPlayers
+          ? _value.minPlayers
+          : minPlayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      maxPlayers: null == maxPlayers
+          ? _value.maxPlayers
+          : maxPlayers // ignore: cast_nullable_to_non_nullable
+              as int,
+      onlyMinMaxPlayers: null == onlyMinMaxPlayers
+          ? _value.onlyMinMaxPlayers
+          : onlyMinMaxPlayers // ignore: cast_nullable_to_non_nullable
+              as bool,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InsertGameImpl extends InsertGame {
+  const _$InsertGameImpl(
+      {required this.name,
+      required final List<int>? imageBytes,
+      required this.minPlayers,
+      required this.maxPlayers,
+      required this.onlyMinMaxPlayers})
+      : _imageBytes = imageBytes,
+        super._();
+
+  @override
+  final String name;
+  final List<int>? _imageBytes;
+  @override
+  List<int>? get imageBytes {
+    final value = _imageBytes;
+    if (value == null) return null;
+    if (_imageBytes is EqualUnmodifiableListView) return _imageBytes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @override
+  final int minPlayers;
+  @override
+  final int maxPlayers;
+  @override
+  final bool onlyMinMaxPlayers;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InsertGameImplCopyWith<_$InsertGameImpl> get copyWith =>
+      __$$InsertGameImplCopyWithImpl<_$InsertGameImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
+    required TResult Function(
+            RateableItem item, String userEmail, Rating rating)
+        updateRating,
+    required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
+  }) {
+    return insertGame(
+        name, imageBytes, minPlayers, maxPlayers, onlyMinMaxPlayers);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
+    TResult? Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
+  }) {
+    return insertGame?.call(
+        name, imageBytes, minPlayers, maxPlayers, onlyMinMaxPlayers);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
+    TResult Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult Function(RateableItem item)? updateInfo,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (insertGame != null) {
+      return insertGame(
+          name, imageBytes, minPlayers, maxPlayers, onlyMinMaxPlayers);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
+    required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
+    required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
+    required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
+  }) {
+    return insertGame(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
+    TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
+    TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
+    TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
+  }) {
+    return insertGame?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
+    TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
+    TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
+    TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (insertGame != null) {
+      return insertGame(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InsertGame extends ItemsEvent {
+  const factory InsertGame(
+      {required final String name,
+      required final List<int>? imageBytes,
+      required final int minPlayers,
+      required final int maxPlayers,
+      required final bool onlyMinMaxPlayers}) = _$InsertGameImpl;
+  const InsertGame._() : super._();
+
+  String get name;
+  List<int>? get imageBytes;
+  int get minPlayers;
+  int get maxPlayers;
+  bool get onlyMinMaxPlayers;
+  @JsonKey(ignore: true)
+  _$$InsertGameImplCopyWith<_$InsertGameImpl> get copyWith =>
+      throw _privateConstructorUsedError;
 }
 
 /// @nodoc
@@ -273,12 +563,18 @@ class _$InsertBeerImpl extends InsertBeer {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
     required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
-    required TResult Function(RateableItem item) delete,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return insertBeer(name, imageBytes);
   }
@@ -287,11 +583,17 @@ class _$InsertBeerImpl extends InsertBeer {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
-    TResult? Function(RateableItem item)? delete,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return insertBeer?.call(name, imageBytes);
   }
@@ -300,11 +602,17 @@ class _$InsertBeerImpl extends InsertBeer {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
-    TResult Function(RateableItem item)? delete,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (insertBeer != null) {
@@ -317,10 +625,14 @@ class _$InsertBeerImpl extends InsertBeer {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
     required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return insertBeer(this);
   }
@@ -329,10 +641,14 @@ class _$InsertBeerImpl extends InsertBeer {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
     TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return insertBeer?.call(this);
   }
@@ -341,10 +657,14 @@ class _$InsertBeerImpl extends InsertBeer {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
     TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (insertBeer != null) {
@@ -364,6 +684,196 @@ abstract class InsertBeer extends ItemsEvent {
   List<int>? get imageBytes;
   @JsonKey(ignore: true)
   _$$InsertBeerImplCopyWith<_$InsertBeerImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$InsertWineImplCopyWith<$Res> {
+  factory _$$InsertWineImplCopyWith(
+          _$InsertWineImpl value, $Res Function(_$InsertWineImpl) then) =
+      __$$InsertWineImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({String name, List<int>? imageBytes});
+}
+
+/// @nodoc
+class __$$InsertWineImplCopyWithImpl<$Res>
+    extends _$ItemsEventCopyWithImpl<$Res, _$InsertWineImpl>
+    implements _$$InsertWineImplCopyWith<$Res> {
+  __$$InsertWineImplCopyWithImpl(
+      _$InsertWineImpl _value, $Res Function(_$InsertWineImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? name = null,
+    Object? imageBytes = freezed,
+  }) {
+    return _then(_$InsertWineImpl(
+      name: null == name
+          ? _value.name
+          : name // ignore: cast_nullable_to_non_nullable
+              as String,
+      imageBytes: freezed == imageBytes
+          ? _value._imageBytes
+          : imageBytes // ignore: cast_nullable_to_non_nullable
+              as List<int>?,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$InsertWineImpl extends InsertWine {
+  const _$InsertWineImpl(
+      {required this.name, required final List<int>? imageBytes})
+      : _imageBytes = imageBytes,
+        super._();
+
+  @override
+  final String name;
+  final List<int>? _imageBytes;
+  @override
+  List<int>? get imageBytes {
+    final value = _imageBytes;
+    if (value == null) return null;
+    if (_imageBytes is EqualUnmodifiableListView) return _imageBytes;
+    // ignore: implicit_dynamic_type
+    return EqualUnmodifiableListView(value);
+  }
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$InsertWineImplCopyWith<_$InsertWineImpl> get copyWith =>
+      __$$InsertWineImplCopyWithImpl<_$InsertWineImpl>(this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
+    required TResult Function(
+            RateableItem item, String userEmail, Rating rating)
+        updateRating,
+    required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
+  }) {
+    return insertWine(name, imageBytes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
+    TResult? Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
+  }) {
+    return insertWine?.call(name, imageBytes);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
+    TResult Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult Function(RateableItem item)? updateInfo,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (insertWine != null) {
+      return insertWine(name, imageBytes);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
+    required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
+    required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
+    required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
+  }) {
+    return insertWine(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
+    TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
+    TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
+    TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
+  }) {
+    return insertWine?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
+    TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
+    TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
+    TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (insertWine != null) {
+      return insertWine(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class InsertWine extends ItemsEvent {
+  const factory InsertWine(
+      {required final String name,
+      required final List<int>? imageBytes}) = _$InsertWineImpl;
+  const InsertWine._() : super._();
+
+  String get name;
+  List<int>? get imageBytes;
+  @JsonKey(ignore: true)
+  _$$InsertWineImplCopyWith<_$InsertWineImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 
@@ -432,12 +942,18 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
     required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
-    required TResult Function(RateableItem item) delete,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return updateRating(item, userEmail, rating);
   }
@@ -446,11 +962,17 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
-    TResult? Function(RateableItem item)? delete,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return updateRating?.call(item, userEmail, rating);
   }
@@ -459,11 +981,17 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
-    TResult Function(RateableItem item)? delete,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (updateRating != null) {
@@ -476,10 +1004,14 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
     required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return updateRating(this);
   }
@@ -488,10 +1020,14 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
     TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return updateRating?.call(this);
   }
@@ -500,10 +1036,14 @@ class _$UpdateRatingImpl extends UpdateRating {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
     TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (updateRating != null) {
@@ -577,12 +1117,18 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
     required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
-    required TResult Function(RateableItem item) delete,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return updateInfo(item);
   }
@@ -591,11 +1137,17 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
-    TResult? Function(RateableItem item)? delete,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return updateInfo?.call(item);
   }
@@ -604,11 +1156,17 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
-    TResult Function(RateableItem item)? delete,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (updateInfo != null) {
@@ -621,10 +1179,14 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
     required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return updateInfo(this);
   }
@@ -633,10 +1195,14 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
     TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return updateInfo?.call(this);
   }
@@ -645,10 +1211,14 @@ class _$UpdateInfoImpl extends UpdateInfo {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
     TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (updateInfo != null) {
@@ -670,12 +1240,184 @@ abstract class UpdateInfo extends ItemsEvent {
 }
 
 /// @nodoc
+abstract class _$$UpdateGameInfoImplCopyWith<$Res> {
+  factory _$$UpdateGameInfoImplCopyWith(_$UpdateGameInfoImpl value,
+          $Res Function(_$UpdateGameInfoImpl) then) =
+      __$$UpdateGameInfoImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({Game item});
+}
+
+/// @nodoc
+class __$$UpdateGameInfoImplCopyWithImpl<$Res>
+    extends _$ItemsEventCopyWithImpl<$Res, _$UpdateGameInfoImpl>
+    implements _$$UpdateGameInfoImplCopyWith<$Res> {
+  __$$UpdateGameInfoImplCopyWithImpl(
+      _$UpdateGameInfoImpl _value, $Res Function(_$UpdateGameInfoImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? item = null,
+  }) {
+    return _then(_$UpdateGameInfoImpl(
+      item: null == item
+          ? _value.item
+          : item // ignore: cast_nullable_to_non_nullable
+              as Game,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateGameInfoImpl extends UpdateGameInfo {
+  const _$UpdateGameInfoImpl({required this.item}) : super._();
+
+  @override
+  final Game item;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateGameInfoImplCopyWith<_$UpdateGameInfoImpl> get copyWith =>
+      __$$UpdateGameInfoImplCopyWithImpl<_$UpdateGameInfoImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
+    required TResult Function(
+            RateableItem item, String userEmail, Rating rating)
+        updateRating,
+    required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
+  }) {
+    return updateGameInfo(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
+    TResult? Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
+  }) {
+    return updateGameInfo?.call(item);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
+    TResult Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult Function(RateableItem item)? updateInfo,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (updateGameInfo != null) {
+      return updateGameInfo(item);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
+    required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
+    required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
+    required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
+  }) {
+    return updateGameInfo(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
+    TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
+    TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
+    TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
+  }) {
+    return updateGameInfo?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
+    TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
+    TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
+    TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (updateGameInfo != null) {
+      return updateGameInfo(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateGameInfo extends ItemsEvent {
+  const factory UpdateGameInfo({required final Game item}) =
+      _$UpdateGameInfoImpl;
+  const UpdateGameInfo._() : super._();
+
+  Game get item;
+  @JsonKey(ignore: true)
+  _$$UpdateGameInfoImplCopyWith<_$UpdateGameInfoImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
 abstract class _$$DeleteImplCopyWith<$Res> {
   factory _$$DeleteImplCopyWith(
           _$DeleteImpl value, $Res Function(_$DeleteImpl) then) =
       __$$DeleteImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({RateableItem item});
+  $Res call({Item item});
 }
 
 /// @nodoc
@@ -695,7 +1437,7 @@ class __$$DeleteImplCopyWithImpl<$Res>
       item: null == item
           ? _value.item
           : item // ignore: cast_nullable_to_non_nullable
-              as RateableItem,
+              as Item,
     ));
   }
 }
@@ -706,7 +1448,7 @@ class _$DeleteImpl extends Delete {
   const _$DeleteImpl({required this.item}) : super._();
 
   @override
-  final RateableItem item;
+  final Item item;
 
   @JsonKey(ignore: true)
   @override
@@ -718,12 +1460,18 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
     required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
     required TResult Function(
             RateableItem item, String userEmail, Rating rating)
         updateRating,
     required TResult Function(RateableItem item) updateInfo,
-    required TResult Function(RateableItem item) delete,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
   }) {
     return delete(item);
   }
@@ -732,11 +1480,17 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
     TResult? Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult? Function(RateableItem item)? updateInfo,
-    TResult? Function(RateableItem item)? delete,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
   }) {
     return delete?.call(item);
   }
@@ -745,11 +1499,17 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
     TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
     TResult Function(RateableItem item, String userEmail, Rating rating)?
         updateRating,
     TResult Function(RateableItem item)? updateInfo,
-    TResult Function(RateableItem item)? delete,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -762,10 +1522,14 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
     required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
     required TResult Function(UpdateRating value) updateRating,
     required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
     required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
   }) {
     return delete(this);
   }
@@ -774,10 +1538,14 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
     TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
     TResult? Function(UpdateRating value)? updateRating,
     TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
     TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
   }) {
     return delete?.call(this);
   }
@@ -786,10 +1554,14 @@ class _$DeleteImpl extends Delete {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
     TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
     TResult Function(UpdateRating value)? updateRating,
     TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
     TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
     required TResult orElse(),
   }) {
     if (delete != null) {
@@ -800,12 +1572,194 @@ class _$DeleteImpl extends Delete {
 }
 
 abstract class Delete extends ItemsEvent {
-  const factory Delete({required final RateableItem item}) = _$DeleteImpl;
+  const factory Delete({required final Item item}) = _$DeleteImpl;
   const Delete._() : super._();
 
-  RateableItem get item;
+  Item get item;
   @JsonKey(ignore: true)
   _$$DeleteImplCopyWith<_$DeleteImpl> get copyWith =>
+      throw _privateConstructorUsedError;
+}
+
+/// @nodoc
+abstract class _$$UpdateGamePlayImplCopyWith<$Res> {
+  factory _$$UpdateGamePlayImplCopyWith(_$UpdateGamePlayImpl value,
+          $Res Function(_$UpdateGamePlayImpl) then) =
+      __$$UpdateGamePlayImplCopyWithImpl<$Res>;
+  @useResult
+  $Res call({bool increment, String gameId});
+}
+
+/// @nodoc
+class __$$UpdateGamePlayImplCopyWithImpl<$Res>
+    extends _$ItemsEventCopyWithImpl<$Res, _$UpdateGamePlayImpl>
+    implements _$$UpdateGamePlayImplCopyWith<$Res> {
+  __$$UpdateGamePlayImplCopyWithImpl(
+      _$UpdateGamePlayImpl _value, $Res Function(_$UpdateGamePlayImpl) _then)
+      : super(_value, _then);
+
+  @pragma('vm:prefer-inline')
+  @override
+  $Res call({
+    Object? increment = null,
+    Object? gameId = null,
+  }) {
+    return _then(_$UpdateGamePlayImpl(
+      increment: null == increment
+          ? _value.increment
+          : increment // ignore: cast_nullable_to_non_nullable
+              as bool,
+      gameId: null == gameId
+          ? _value.gameId
+          : gameId // ignore: cast_nullable_to_non_nullable
+              as String,
+    ));
+  }
+}
+
+/// @nodoc
+
+class _$UpdateGamePlayImpl extends UpdateGamePlay {
+  const _$UpdateGamePlayImpl({required this.increment, required this.gameId})
+      : super._();
+
+  @override
+  final bool increment;
+  @override
+  final String gameId;
+
+  @JsonKey(ignore: true)
+  @override
+  @pragma('vm:prefer-inline')
+  _$$UpdateGamePlayImplCopyWith<_$UpdateGamePlayImpl> get copyWith =>
+      __$$UpdateGamePlayImplCopyWithImpl<_$UpdateGamePlayImpl>(
+          this, _$identity);
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function() download,
+    required TResult Function(String name, List<int>? imageBytes,
+            int minPlayers, int maxPlayers, bool onlyMinMaxPlayers)
+        insertGame,
+    required TResult Function(String name, List<int>? imageBytes) insertBeer,
+    required TResult Function(String name, List<int>? imageBytes) insertWine,
+    required TResult Function(
+            RateableItem item, String userEmail, Rating rating)
+        updateRating,
+    required TResult Function(RateableItem item) updateInfo,
+    required TResult Function(Game item) updateGameInfo,
+    required TResult Function(Item item) delete,
+    required TResult Function(bool increment, String gameId) updateGamePlay,
+  }) {
+    return updateGamePlay(increment, gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function()? download,
+    TResult? Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
+    TResult? Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult? Function(String name, List<int>? imageBytes)? insertWine,
+    TResult? Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult? Function(RateableItem item)? updateInfo,
+    TResult? Function(Game item)? updateGameInfo,
+    TResult? Function(Item item)? delete,
+    TResult? Function(bool increment, String gameId)? updateGamePlay,
+  }) {
+    return updateGamePlay?.call(increment, gameId);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function()? download,
+    TResult Function(String name, List<int>? imageBytes, int minPlayers,
+            int maxPlayers, bool onlyMinMaxPlayers)?
+        insertGame,
+    TResult Function(String name, List<int>? imageBytes)? insertBeer,
+    TResult Function(String name, List<int>? imageBytes)? insertWine,
+    TResult Function(RateableItem item, String userEmail, Rating rating)?
+        updateRating,
+    TResult Function(RateableItem item)? updateInfo,
+    TResult Function(Game item)? updateGameInfo,
+    TResult Function(Item item)? delete,
+    TResult Function(bool increment, String gameId)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (updateGamePlay != null) {
+      return updateGamePlay(increment, gameId);
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Download value) download,
+    required TResult Function(InsertGame value) insertGame,
+    required TResult Function(InsertBeer value) insertBeer,
+    required TResult Function(InsertWine value) insertWine,
+    required TResult Function(UpdateRating value) updateRating,
+    required TResult Function(UpdateInfo value) updateInfo,
+    required TResult Function(UpdateGameInfo value) updateGameInfo,
+    required TResult Function(Delete value) delete,
+    required TResult Function(UpdateGamePlay value) updateGamePlay,
+  }) {
+    return updateGamePlay(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Download value)? download,
+    TResult? Function(InsertGame value)? insertGame,
+    TResult? Function(InsertBeer value)? insertBeer,
+    TResult? Function(InsertWine value)? insertWine,
+    TResult? Function(UpdateRating value)? updateRating,
+    TResult? Function(UpdateInfo value)? updateInfo,
+    TResult? Function(UpdateGameInfo value)? updateGameInfo,
+    TResult? Function(Delete value)? delete,
+    TResult? Function(UpdateGamePlay value)? updateGamePlay,
+  }) {
+    return updateGamePlay?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Download value)? download,
+    TResult Function(InsertGame value)? insertGame,
+    TResult Function(InsertBeer value)? insertBeer,
+    TResult Function(InsertWine value)? insertWine,
+    TResult Function(UpdateRating value)? updateRating,
+    TResult Function(UpdateInfo value)? updateInfo,
+    TResult Function(UpdateGameInfo value)? updateGameInfo,
+    TResult Function(Delete value)? delete,
+    TResult Function(UpdateGamePlay value)? updateGamePlay,
+    required TResult orElse(),
+  }) {
+    if (updateGamePlay != null) {
+      return updateGamePlay(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class UpdateGamePlay extends ItemsEvent {
+  const factory UpdateGamePlay(
+      {required final bool increment,
+      required final String gameId}) = _$UpdateGamePlayImpl;
+  const UpdateGamePlay._() : super._();
+
+  bool get increment;
+  String get gameId;
+  @JsonKey(ignore: true)
+  _$$UpdateGamePlayImplCopyWith<_$UpdateGamePlayImpl> get copyWith =>
       throw _privateConstructorUsedError;
 }
 

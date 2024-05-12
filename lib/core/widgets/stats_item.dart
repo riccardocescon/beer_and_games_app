@@ -11,10 +11,12 @@ class StatsItem extends StatelessWidget {
     required this.item,
     this.itemWidth = 80,
     this.itemHeight = 110,
+    this.additionalWidget,
   });
 
   final Item item;
   final double itemWidth, itemHeight;
+  final Widget? additionalWidget;
 
   @override
   Widget build(BuildContext context) {
@@ -29,6 +31,7 @@ class StatsItem extends StatelessWidget {
         children: [
           _image(),
           _name(context),
+          if (additionalWidget != null) additionalWidget!,
         ],
       ),
     );

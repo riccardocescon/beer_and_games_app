@@ -37,12 +37,18 @@ class _ItemGroupSection extends StatelessWidget {
           dimension: 20,
           child: FilledButton(
             onPressed: () {
-              if (items is List<Beer> || items is List<Wine>) {
+              if (items is List<Beer>) {
                 context
                     .read<HangoutStatsPageBloc>()
-                    .add(const HangoutStatsPageEvent.addItem());
+                    .add(const HangoutStatsPageEvent.addBeer());
+              } else if (items is List<Wine>) {
+                context
+                    .read<HangoutStatsPageBloc>()
+                    .add(const HangoutStatsPageEvent.addWine());
               } else {
-                context.warningSnackbar('Work in progress', 'Coming soon!');
+                context
+                    .read<HangoutStatsPageBloc>()
+                    .add(const HangoutStatsPageEvent.addGame());
               }
             },
             style: ButtonStyle(
@@ -114,7 +120,12 @@ class _ItemGroupSection extends StatelessWidget {
         ),
       );
     } else {
-      context.warningSnackbar('Work in progress', 'Coming soon!');
+      context.push(
+        BlocProvider.value(
+          value: context.read<ItemsBloc>(),
+          child: GamesItemPage(games: items as List<Game>),
+        ),
+      );
     }
   }
 }

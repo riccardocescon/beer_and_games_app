@@ -50,13 +50,18 @@ class _NewRatableItemBodyState<T extends RateableItem>
           orElse: () {},
         );
       },
-      child: BottomEditableRatableItem(
+      child: BottomEditableItem(
         onSave: (name, bytes) {
           if (T == Beer) {
             this.name = name;
             context
                 .read<ItemsBloc>()
                 .add(ItemsEvent.insertBeer(name: name, imageBytes: bytes));
+          } else if (T == Wine) {
+            this.name = name;
+            context
+                .read<ItemsBloc>()
+                .add(ItemsEvent.insertWine(name: name, imageBytes: bytes));
           }
         },
       ),

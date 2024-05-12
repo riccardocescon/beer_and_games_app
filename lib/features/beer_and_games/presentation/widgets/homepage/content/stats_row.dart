@@ -12,7 +12,9 @@ class _StatsRow extends StatelessWidget {
         Expanded(
           child: _button(
             context,
-            () {},
+            () {
+              context.read<HomepageBloc>().add(const HomepageEvent.showGames());
+            },
             'Disponibilità',
           ),
         ),
@@ -29,10 +31,8 @@ class _StatsRow extends StatelessWidget {
                         ..add(HangoutStatsPageEvent.setup(hangout: hangout)),
                     ),
                     BlocProvider(
-                      create: (_) => sl<ItemsBloc>()
-                        ..add(
-                          const ItemsEvent.download(),
-                        ),
+                      create: (_) =>
+                          sl<ItemsBloc>()..add(const ItemsEvent.download()),
                     ),
                   ],
                   child: const HangoutStatsPage(),

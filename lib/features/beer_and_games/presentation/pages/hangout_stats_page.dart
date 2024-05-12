@@ -6,17 +6,19 @@ import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/core/widgets/static_bottom_sheet.dart';
 import 'package:beer_and_games/core/widgets/stats_item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/item.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/ratable_item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/beer.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/wine.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/ui/hangout_stats_page/hangout_stats_page_bloc.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/pages/games_item_page.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/pages/rating_items_page.dart';
+import 'package:beer_and_games/features/beer_and_games/presentation/widgets/homepage_stats_page/new_game_item_body.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/widgets/homepage_stats_page/new_item_body.dart';
-import 'package:beer_and_games/features/beer_and_games/presentation/widgets/rating_items_page/edit_ratable_item_bottom_sheet.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 part '../widgets/homepage_stats_page/users_stats_graph.dart';
@@ -60,13 +62,16 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
                     );
                     if (prevState == null) return true;
 
-                    return prevState.addItem != value.addItem;
+                    return prevState.addWine != value.addWine ||
+                        prevState.addBeer != value.addBeer ||
+                        prevState.addGame != value.addGame;
                   },
                   orElse: () => false,
                 ),
                 builder: (context, state) {
                   final isAdd = state.maybeMap(
-                    updateUI: (value) => value.addItem,
+                    updateUI: (value) =>
+                        value.addBeer || value.addWine || value.addGame,
                     orElse: () => false,
                   );
                   return NestedScrollView(
@@ -103,29 +108,23 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
                         ),
                       ];
                     },
-                    body: BlocBuilder<HangoutStatsPageBloc,
-                        HangoutStatsPageState>(
-                      buildWhen: (previous, current) {
-                        return current.maybeMap(
-                          updateUI: (value) => true,
-                          orElse: () => false,
+                    body: state.maybeMap(
+                      updateUI: (value) {
+                        final itemChild = isAdd
+                            ? value.addBeer
+                                ? _addItem<Beer>()
+                                : value.addWine
+                                    ? _addItem<Wine>()
+                                    : _addGame()
+                            : _categoriesList();
+                        return AnimatedSwitcher(
+                          duration: const Duration(milliseconds: 300),
+                          switchInCurve: Curves.easeInOutCubic,
+                          switchOutCurve: Curves.easeInOutCubic,
+                          child: itemChild,
                         );
                       },
-                      builder: (context, state) {
-                        return state.maybeMap(
-                          updateUI: (value) {
-                            return AnimatedSwitcher(
-                              duration: const Duration(milliseconds: 300),
-                              switchInCurve: Curves.easeInOutCubic,
-                              switchOutCurve: Curves.easeInOutCubic,
-                              child: value.addItem
-                                  ? _addItem()
-                                  : _categoriesList(),
-                            );
-                          },
-                          orElse: () => _categoriesList(),
-                        );
-                      },
+                      orElse: () => _categoriesList(),
                     ),
                   );
                 },
@@ -154,7 +153,7 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
     );
   }
 
-  Widget _addItem() {
+  Widget _addItem<T extends RateableItem>() {
     return Column(
       children: [
         Expanded(
@@ -166,7 +165,24 @@ class _HangoutStatsPageState extends State<HangoutStatsPage> {
             child: Container(),
           ),
         ),
-        const NewRatableItemBody<Beer>(),
+        NewRatableItemBody<T>(),
+      ],
+    );
+  }
+
+  Widget _addGame() {
+    return Column(
+      children: [
+        Expanded(
+          child: GestureDetector(
+            behavior: HitTestBehavior.opaque,
+            onTap: () => context.read<HangoutStatsPageBloc>().add(
+                  const HangoutStatsPageEvent.closeItem(),
+                ),
+            child: Container(),
+          ),
+        ),
+        const NewGameItemBody(),
       ],
     );
   }

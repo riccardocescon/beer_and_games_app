@@ -16,7 +16,6 @@ class HangoutStatsPageBloc
   final HangoutBloc hangoutBloc;
 
   late Hangout _hangout;
-  bool _addItem = false;
 
   HangoutStatsPageBloc({
     required this.hangoutBloc,
@@ -61,16 +60,38 @@ class HangoutStatsPageBloc
         if (completed) break;
       }
     });
-    on<AddItem>((event, emit) {
-      _addItem = true;
-      emit(HangoutStatsPageState.updateUI(addItem: _addItem));
+    on<AddBeer>((event, emit) {
+      emit(const HangoutStatsPageState.updateUI(
+        addBeer: true,
+        addWine: false,
+        addGame: false,
+      ));
+    });
+    on<AddWine>((event, emit) {
+      emit(const HangoutStatsPageState.updateUI(
+        addBeer: false,
+        addWine: true,
+        addGame: false,
+      ));
+    });
+    on<AddGame>((event, emit) {
+      emit(const HangoutStatsPageState.updateUI(
+        addBeer: false,
+        addWine: false,
+        addGame: true,
+      ));
     });
     on<SaveItem>((event, emit) {
       // final item = event.item;
     });
     on<CloseItem>((event, emit) {
-      _addItem = false;
-      emit(HangoutStatsPageState.updateUI(addItem: _addItem));
+      emit(
+        const HangoutStatsPageState.updateUI(
+          addBeer: false,
+          addWine: false,
+          addGame: false,
+        ),
+      );
     });
   }
 }

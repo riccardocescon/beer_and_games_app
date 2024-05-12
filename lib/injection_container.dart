@@ -16,7 +16,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/repositories/game_
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/hangout_repository.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/user_repository.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/repositories/wine_repository.dart';
-import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_selector.dart';
+import 'package:beer_and_games/features/beer_and_games/domain/usecases/games/games_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/hangout/hangout_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/user/user_usecases.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/wines/wine_usecases.dart';
@@ -63,12 +63,18 @@ void init() {
   sl.registerFactory(
     () => ItemsBloc(
       gamesSelector: sl(),
+      gamePlayIncrementor: sl(),
+      gamePlayDecrementor: sl(),
+      gameInserter: sl(),
+      gameInfoUpdater: sl(),
+      gameDeleter: sl(),
       beersSelector: sl(),
       beerInserter: sl(),
       beersRatiningUpdater: sl(),
       beerInfoUpdater: sl(),
       beerDeleter: sl(),
       winesSelector: sl(),
+      wineInserter: sl(),
       wineRatingUpdates: sl(),
       wineInfoUpdater: sl(),
       wineDeleter: sl(),
@@ -81,6 +87,11 @@ void init() {
   sl.registerFactory(() => HangoutUpdateVote(repository: sl()));
   sl.registerFactory(() => HangoutGetUsersPresence(repository: sl()));
   sl.registerFactory(() => GamesSelector(gameRepository: sl()));
+  sl.registerFactory(() => GamePlayIncrementor(gameRepository: sl()));
+  sl.registerFactory(() => GamePlayDecrementor(gameRepository: sl()));
+  sl.registerFactory(() => GameInserter(gameRepository: sl()));
+  sl.registerFactory(() => GameInfoUpdater(gameRepository: sl()));
+  sl.registerFactory(() => GameDeleter(gameRepository: sl()));
   sl.registerFactory(() => BeersSelector(beerRepository: sl()));
   sl.registerFactory(() => WinesSelector(wineRepository: sl()));
   sl.registerFactory(() => UserGetter(userRepository: sl()));
@@ -93,6 +104,7 @@ void init() {
   sl.registerFactory(() => WineInfoUpdater(wineRepository: sl()));
   sl.registerFactory(() => WineDeleter(wineRepository: sl()));
   sl.registerFactory(() => BeerInserter(beerRepository: sl()));
+  sl.registerFactory(() => WineInserter(wineRepository: sl()));
 
   // Repository
   sl.registerFactory<HangoutRepository>(

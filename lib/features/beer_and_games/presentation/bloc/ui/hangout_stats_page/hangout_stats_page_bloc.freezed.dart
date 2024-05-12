@@ -19,7 +19,9 @@ mixin _$HangoutStatsPageEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Hangout hangout) setup,
-    required TResult Function() addItem,
+    required TResult Function() addBeer,
+    required TResult Function() addWine,
+    required TResult Function() addGame,
     required TResult Function(Item item) saveItem,
     required TResult Function() closeItem,
   }) =>
@@ -27,7 +29,9 @@ mixin _$HangoutStatsPageEvent {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Hangout hangout)? setup,
-    TResult? Function()? addItem,
+    TResult? Function()? addBeer,
+    TResult? Function()? addWine,
+    TResult? Function()? addGame,
     TResult? Function(Item item)? saveItem,
     TResult? Function()? closeItem,
   }) =>
@@ -35,7 +39,9 @@ mixin _$HangoutStatsPageEvent {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Hangout hangout)? setup,
-    TResult Function()? addItem,
+    TResult Function()? addBeer,
+    TResult Function()? addWine,
+    TResult Function()? addGame,
     TResult Function(Item item)? saveItem,
     TResult Function()? closeItem,
     required TResult orElse(),
@@ -44,7 +50,9 @@ mixin _$HangoutStatsPageEvent {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
-    required TResult Function(AddItem value) addItem,
+    required TResult Function(AddBeer value) addBeer,
+    required TResult Function(AddWine value) addWine,
+    required TResult Function(AddGame value) addGame,
     required TResult Function(SaveItem value) saveItem,
     required TResult Function(CloseItem value) closeItem,
   }) =>
@@ -52,7 +60,9 @@ mixin _$HangoutStatsPageEvent {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
-    TResult? Function(AddItem value)? addItem,
+    TResult? Function(AddBeer value)? addBeer,
+    TResult? Function(AddWine value)? addWine,
+    TResult? Function(AddGame value)? addGame,
     TResult? Function(SaveItem value)? saveItem,
     TResult? Function(CloseItem value)? closeItem,
   }) =>
@@ -60,7 +70,9 @@ mixin _$HangoutStatsPageEvent {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
-    TResult Function(AddItem value)? addItem,
+    TResult Function(AddBeer value)? addBeer,
+    TResult Function(AddWine value)? addWine,
+    TResult Function(AddGame value)? addGame,
     TResult Function(SaveItem value)? saveItem,
     TResult Function(CloseItem value)? closeItem,
     required TResult orElse(),
@@ -136,7 +148,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Hangout hangout) setup,
-    required TResult Function() addItem,
+    required TResult Function() addBeer,
+    required TResult Function() addWine,
+    required TResult Function() addGame,
     required TResult Function(Item item) saveItem,
     required TResult Function() closeItem,
   }) {
@@ -147,7 +161,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Hangout hangout)? setup,
-    TResult? Function()? addItem,
+    TResult? Function()? addBeer,
+    TResult? Function()? addWine,
+    TResult? Function()? addGame,
     TResult? Function(Item item)? saveItem,
     TResult? Function()? closeItem,
   }) {
@@ -158,7 +174,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Hangout hangout)? setup,
-    TResult Function()? addItem,
+    TResult Function()? addBeer,
+    TResult Function()? addWine,
+    TResult Function()? addGame,
     TResult Function(Item item)? saveItem,
     TResult Function()? closeItem,
     required TResult orElse(),
@@ -173,7 +191,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
-    required TResult Function(AddItem value) addItem,
+    required TResult Function(AddBeer value) addBeer,
+    required TResult Function(AddWine value) addWine,
+    required TResult Function(AddGame value) addGame,
     required TResult Function(SaveItem value) saveItem,
     required TResult Function(CloseItem value) closeItem,
   }) {
@@ -184,7 +204,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
-    TResult? Function(AddItem value)? addItem,
+    TResult? Function(AddBeer value)? addBeer,
+    TResult? Function(AddWine value)? addWine,
+    TResult? Function(AddGame value)? addGame,
     TResult? Function(SaveItem value)? saveItem,
     TResult? Function(CloseItem value)? closeItem,
   }) {
@@ -195,7 +217,9 @@ class _$SetupImpl extends Setup {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
-    TResult Function(AddItem value)? addItem,
+    TResult Function(AddBeer value)? addBeer,
+    TResult Function(AddWine value)? addWine,
+    TResult Function(AddGame value)? addGame,
     TResult Function(SaveItem value)? saveItem,
     TResult Function(CloseItem value)? closeItem,
     required TResult orElse(),
@@ -218,59 +242,65 @@ abstract class Setup extends HangoutStatsPageEvent {
 }
 
 /// @nodoc
-abstract class _$$AddItemImplCopyWith<$Res> {
-  factory _$$AddItemImplCopyWith(
-          _$AddItemImpl value, $Res Function(_$AddItemImpl) then) =
-      __$$AddItemImplCopyWithImpl<$Res>;
+abstract class _$$AddBeerImplCopyWith<$Res> {
+  factory _$$AddBeerImplCopyWith(
+          _$AddBeerImpl value, $Res Function(_$AddBeerImpl) then) =
+      __$$AddBeerImplCopyWithImpl<$Res>;
 }
 
 /// @nodoc
-class __$$AddItemImplCopyWithImpl<$Res>
-    extends _$HangoutStatsPageEventCopyWithImpl<$Res, _$AddItemImpl>
-    implements _$$AddItemImplCopyWith<$Res> {
-  __$$AddItemImplCopyWithImpl(
-      _$AddItemImpl _value, $Res Function(_$AddItemImpl) _then)
+class __$$AddBeerImplCopyWithImpl<$Res>
+    extends _$HangoutStatsPageEventCopyWithImpl<$Res, _$AddBeerImpl>
+    implements _$$AddBeerImplCopyWith<$Res> {
+  __$$AddBeerImplCopyWithImpl(
+      _$AddBeerImpl _value, $Res Function(_$AddBeerImpl) _then)
       : super(_value, _then);
 }
 
 /// @nodoc
 
-class _$AddItemImpl extends AddItem {
-  const _$AddItemImpl() : super._();
+class _$AddBeerImpl extends AddBeer {
+  const _$AddBeerImpl() : super._();
 
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Hangout hangout) setup,
-    required TResult Function() addItem,
+    required TResult Function() addBeer,
+    required TResult Function() addWine,
+    required TResult Function() addGame,
     required TResult Function(Item item) saveItem,
     required TResult Function() closeItem,
   }) {
-    return addItem();
+    return addBeer();
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Hangout hangout)? setup,
-    TResult? Function()? addItem,
+    TResult? Function()? addBeer,
+    TResult? Function()? addWine,
+    TResult? Function()? addGame,
     TResult? Function(Item item)? saveItem,
     TResult? Function()? closeItem,
   }) {
-    return addItem?.call();
+    return addBeer?.call();
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Hangout hangout)? setup,
-    TResult Function()? addItem,
+    TResult Function()? addBeer,
+    TResult Function()? addWine,
+    TResult Function()? addGame,
     TResult Function(Item item)? saveItem,
     TResult Function()? closeItem,
     required TResult orElse(),
   }) {
-    if (addItem != null) {
-      return addItem();
+    if (addBeer != null) {
+      return addBeer();
     }
     return orElse();
   }
@@ -279,43 +309,275 @@ class _$AddItemImpl extends AddItem {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
-    required TResult Function(AddItem value) addItem,
+    required TResult Function(AddBeer value) addBeer,
+    required TResult Function(AddWine value) addWine,
+    required TResult Function(AddGame value) addGame,
     required TResult Function(SaveItem value) saveItem,
     required TResult Function(CloseItem value) closeItem,
   }) {
-    return addItem(this);
+    return addBeer(this);
   }
 
   @override
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
-    TResult? Function(AddItem value)? addItem,
+    TResult? Function(AddBeer value)? addBeer,
+    TResult? Function(AddWine value)? addWine,
+    TResult? Function(AddGame value)? addGame,
     TResult? Function(SaveItem value)? saveItem,
     TResult? Function(CloseItem value)? closeItem,
   }) {
-    return addItem?.call(this);
+    return addBeer?.call(this);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
-    TResult Function(AddItem value)? addItem,
+    TResult Function(AddBeer value)? addBeer,
+    TResult Function(AddWine value)? addWine,
+    TResult Function(AddGame value)? addGame,
     TResult Function(SaveItem value)? saveItem,
     TResult Function(CloseItem value)? closeItem,
     required TResult orElse(),
   }) {
-    if (addItem != null) {
-      return addItem(this);
+    if (addBeer != null) {
+      return addBeer(this);
     }
     return orElse();
   }
 }
 
-abstract class AddItem extends HangoutStatsPageEvent {
-  const factory AddItem() = _$AddItemImpl;
-  const AddItem._() : super._();
+abstract class AddBeer extends HangoutStatsPageEvent {
+  const factory AddBeer() = _$AddBeerImpl;
+  const AddBeer._() : super._();
+}
+
+/// @nodoc
+abstract class _$$AddWineImplCopyWith<$Res> {
+  factory _$$AddWineImplCopyWith(
+          _$AddWineImpl value, $Res Function(_$AddWineImpl) then) =
+      __$$AddWineImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AddWineImplCopyWithImpl<$Res>
+    extends _$HangoutStatsPageEventCopyWithImpl<$Res, _$AddWineImpl>
+    implements _$$AddWineImplCopyWith<$Res> {
+  __$$AddWineImplCopyWithImpl(
+      _$AddWineImpl _value, $Res Function(_$AddWineImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AddWineImpl extends AddWine {
+  const _$AddWineImpl() : super._();
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Hangout hangout) setup,
+    required TResult Function() addBeer,
+    required TResult Function() addWine,
+    required TResult Function() addGame,
+    required TResult Function(Item item) saveItem,
+    required TResult Function() closeItem,
+  }) {
+    return addWine();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Hangout hangout)? setup,
+    TResult? Function()? addBeer,
+    TResult? Function()? addWine,
+    TResult? Function()? addGame,
+    TResult? Function(Item item)? saveItem,
+    TResult? Function()? closeItem,
+  }) {
+    return addWine?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Hangout hangout)? setup,
+    TResult Function()? addBeer,
+    TResult Function()? addWine,
+    TResult Function()? addGame,
+    TResult Function(Item item)? saveItem,
+    TResult Function()? closeItem,
+    required TResult orElse(),
+  }) {
+    if (addWine != null) {
+      return addWine();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Setup value) setup,
+    required TResult Function(AddBeer value) addBeer,
+    required TResult Function(AddWine value) addWine,
+    required TResult Function(AddGame value) addGame,
+    required TResult Function(SaveItem value) saveItem,
+    required TResult Function(CloseItem value) closeItem,
+  }) {
+    return addWine(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Setup value)? setup,
+    TResult? Function(AddBeer value)? addBeer,
+    TResult? Function(AddWine value)? addWine,
+    TResult? Function(AddGame value)? addGame,
+    TResult? Function(SaveItem value)? saveItem,
+    TResult? Function(CloseItem value)? closeItem,
+  }) {
+    return addWine?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Setup value)? setup,
+    TResult Function(AddBeer value)? addBeer,
+    TResult Function(AddWine value)? addWine,
+    TResult Function(AddGame value)? addGame,
+    TResult Function(SaveItem value)? saveItem,
+    TResult Function(CloseItem value)? closeItem,
+    required TResult orElse(),
+  }) {
+    if (addWine != null) {
+      return addWine(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddWine extends HangoutStatsPageEvent {
+  const factory AddWine() = _$AddWineImpl;
+  const AddWine._() : super._();
+}
+
+/// @nodoc
+abstract class _$$AddGameImplCopyWith<$Res> {
+  factory _$$AddGameImplCopyWith(
+          _$AddGameImpl value, $Res Function(_$AddGameImpl) then) =
+      __$$AddGameImplCopyWithImpl<$Res>;
+}
+
+/// @nodoc
+class __$$AddGameImplCopyWithImpl<$Res>
+    extends _$HangoutStatsPageEventCopyWithImpl<$Res, _$AddGameImpl>
+    implements _$$AddGameImplCopyWith<$Res> {
+  __$$AddGameImplCopyWithImpl(
+      _$AddGameImpl _value, $Res Function(_$AddGameImpl) _then)
+      : super(_value, _then);
+}
+
+/// @nodoc
+
+class _$AddGameImpl extends AddGame {
+  const _$AddGameImpl() : super._();
+
+  @override
+  @optionalTypeArgs
+  TResult when<TResult extends Object?>({
+    required TResult Function(Hangout hangout) setup,
+    required TResult Function() addBeer,
+    required TResult Function() addWine,
+    required TResult Function() addGame,
+    required TResult Function(Item item) saveItem,
+    required TResult Function() closeItem,
+  }) {
+    return addGame();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? whenOrNull<TResult extends Object?>({
+    TResult? Function(Hangout hangout)? setup,
+    TResult? Function()? addBeer,
+    TResult? Function()? addWine,
+    TResult? Function()? addGame,
+    TResult? Function(Item item)? saveItem,
+    TResult? Function()? closeItem,
+  }) {
+    return addGame?.call();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeWhen<TResult extends Object?>({
+    TResult Function(Hangout hangout)? setup,
+    TResult Function()? addBeer,
+    TResult Function()? addWine,
+    TResult Function()? addGame,
+    TResult Function(Item item)? saveItem,
+    TResult Function()? closeItem,
+    required TResult orElse(),
+  }) {
+    if (addGame != null) {
+      return addGame();
+    }
+    return orElse();
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult map<TResult extends Object?>({
+    required TResult Function(Setup value) setup,
+    required TResult Function(AddBeer value) addBeer,
+    required TResult Function(AddWine value) addWine,
+    required TResult Function(AddGame value) addGame,
+    required TResult Function(SaveItem value) saveItem,
+    required TResult Function(CloseItem value) closeItem,
+  }) {
+    return addGame(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult? mapOrNull<TResult extends Object?>({
+    TResult? Function(Setup value)? setup,
+    TResult? Function(AddBeer value)? addBeer,
+    TResult? Function(AddWine value)? addWine,
+    TResult? Function(AddGame value)? addGame,
+    TResult? Function(SaveItem value)? saveItem,
+    TResult? Function(CloseItem value)? closeItem,
+  }) {
+    return addGame?.call(this);
+  }
+
+  @override
+  @optionalTypeArgs
+  TResult maybeMap<TResult extends Object?>({
+    TResult Function(Setup value)? setup,
+    TResult Function(AddBeer value)? addBeer,
+    TResult Function(AddWine value)? addWine,
+    TResult Function(AddGame value)? addGame,
+    TResult Function(SaveItem value)? saveItem,
+    TResult Function(CloseItem value)? closeItem,
+    required TResult orElse(),
+  }) {
+    if (addGame != null) {
+      return addGame(this);
+    }
+    return orElse();
+  }
+}
+
+abstract class AddGame extends HangoutStatsPageEvent {
+  const factory AddGame() = _$AddGameImpl;
+  const AddGame._() : super._();
 }
 
 /// @nodoc
@@ -367,7 +629,9 @@ class _$SaveItemImpl extends SaveItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Hangout hangout) setup,
-    required TResult Function() addItem,
+    required TResult Function() addBeer,
+    required TResult Function() addWine,
+    required TResult Function() addGame,
     required TResult Function(Item item) saveItem,
     required TResult Function() closeItem,
   }) {
@@ -378,7 +642,9 @@ class _$SaveItemImpl extends SaveItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Hangout hangout)? setup,
-    TResult? Function()? addItem,
+    TResult? Function()? addBeer,
+    TResult? Function()? addWine,
+    TResult? Function()? addGame,
     TResult? Function(Item item)? saveItem,
     TResult? Function()? closeItem,
   }) {
@@ -389,7 +655,9 @@ class _$SaveItemImpl extends SaveItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Hangout hangout)? setup,
-    TResult Function()? addItem,
+    TResult Function()? addBeer,
+    TResult Function()? addWine,
+    TResult Function()? addGame,
     TResult Function(Item item)? saveItem,
     TResult Function()? closeItem,
     required TResult orElse(),
@@ -404,7 +672,9 @@ class _$SaveItemImpl extends SaveItem {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
-    required TResult Function(AddItem value) addItem,
+    required TResult Function(AddBeer value) addBeer,
+    required TResult Function(AddWine value) addWine,
+    required TResult Function(AddGame value) addGame,
     required TResult Function(SaveItem value) saveItem,
     required TResult Function(CloseItem value) closeItem,
   }) {
@@ -415,7 +685,9 @@ class _$SaveItemImpl extends SaveItem {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
-    TResult? Function(AddItem value)? addItem,
+    TResult? Function(AddBeer value)? addBeer,
+    TResult? Function(AddWine value)? addWine,
+    TResult? Function(AddGame value)? addGame,
     TResult? Function(SaveItem value)? saveItem,
     TResult? Function(CloseItem value)? closeItem,
   }) {
@@ -426,7 +698,9 @@ class _$SaveItemImpl extends SaveItem {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
-    TResult Function(AddItem value)? addItem,
+    TResult Function(AddBeer value)? addBeer,
+    TResult Function(AddWine value)? addWine,
+    TResult Function(AddGame value)? addGame,
     TResult Function(SaveItem value)? saveItem,
     TResult Function(CloseItem value)? closeItem,
     required TResult orElse(),
@@ -473,7 +747,9 @@ class _$CloseItemImpl extends CloseItem {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
     required TResult Function(Hangout hangout) setup,
-    required TResult Function() addItem,
+    required TResult Function() addBeer,
+    required TResult Function() addWine,
+    required TResult Function() addGame,
     required TResult Function(Item item) saveItem,
     required TResult Function() closeItem,
   }) {
@@ -484,7 +760,9 @@ class _$CloseItemImpl extends CloseItem {
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
     TResult? Function(Hangout hangout)? setup,
-    TResult? Function()? addItem,
+    TResult? Function()? addBeer,
+    TResult? Function()? addWine,
+    TResult? Function()? addGame,
     TResult? Function(Item item)? saveItem,
     TResult? Function()? closeItem,
   }) {
@@ -495,7 +773,9 @@ class _$CloseItemImpl extends CloseItem {
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
     TResult Function(Hangout hangout)? setup,
-    TResult Function()? addItem,
+    TResult Function()? addBeer,
+    TResult Function()? addWine,
+    TResult Function()? addGame,
     TResult Function(Item item)? saveItem,
     TResult Function()? closeItem,
     required TResult orElse(),
@@ -510,7 +790,9 @@ class _$CloseItemImpl extends CloseItem {
   @optionalTypeArgs
   TResult map<TResult extends Object?>({
     required TResult Function(Setup value) setup,
-    required TResult Function(AddItem value) addItem,
+    required TResult Function(AddBeer value) addBeer,
+    required TResult Function(AddWine value) addWine,
+    required TResult Function(AddGame value) addGame,
     required TResult Function(SaveItem value) saveItem,
     required TResult Function(CloseItem value) closeItem,
   }) {
@@ -521,7 +803,9 @@ class _$CloseItemImpl extends CloseItem {
   @optionalTypeArgs
   TResult? mapOrNull<TResult extends Object?>({
     TResult? Function(Setup value)? setup,
-    TResult? Function(AddItem value)? addItem,
+    TResult? Function(AddBeer value)? addBeer,
+    TResult? Function(AddWine value)? addWine,
+    TResult? Function(AddGame value)? addGame,
     TResult? Function(SaveItem value)? saveItem,
     TResult? Function(CloseItem value)? closeItem,
   }) {
@@ -532,7 +816,9 @@ class _$CloseItemImpl extends CloseItem {
   @optionalTypeArgs
   TResult maybeMap<TResult extends Object?>({
     TResult Function(Setup value)? setup,
-    TResult Function(AddItem value)? addItem,
+    TResult Function(AddBeer value)? addBeer,
+    TResult Function(AddWine value)? addWine,
+    TResult Function(AddGame value)? addGame,
     TResult Function(SaveItem value)? saveItem,
     TResult Function(CloseItem value)? closeItem,
     required TResult orElse(),
@@ -556,7 +842,8 @@ mixin _$HangoutStatsPageState {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
-    required TResult Function(bool addItem) updateUI,
+    required TResult Function(bool addBeer, bool addWine, bool addGame)
+        updateUI,
     required TResult Function(CloudFailure failure) error,
   }) =>
       throw _privateConstructorUsedError;
@@ -565,7 +852,7 @@ mixin _$HangoutStatsPageState {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
-    TResult? Function(bool addItem)? updateUI,
+    TResult? Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
@@ -574,7 +861,7 @@ mixin _$HangoutStatsPageState {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
-    TResult Function(bool addItem)? updateUI,
+    TResult Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) =>
@@ -654,7 +941,8 @@ class _$InitImpl extends Init {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
-    required TResult Function(bool addItem) updateUI,
+    required TResult Function(bool addBeer, bool addWine, bool addGame)
+        updateUI,
     required TResult Function(CloudFailure failure) error,
   }) {
     return init();
@@ -666,7 +954,7 @@ class _$InitImpl extends Init {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
-    TResult? Function(bool addItem)? updateUI,
+    TResult? Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return init?.call();
@@ -678,7 +966,7 @@ class _$InitImpl extends Init {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
-    TResult Function(bool addItem)? updateUI,
+    TResult Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -761,7 +1049,8 @@ class _$LoadingImpl extends Loading {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
-    required TResult Function(bool addItem) updateUI,
+    required TResult Function(bool addBeer, bool addWine, bool addGame)
+        updateUI,
     required TResult Function(CloudFailure failure) error,
   }) {
     return loading();
@@ -773,7 +1062,7 @@ class _$LoadingImpl extends Loading {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
-    TResult? Function(bool addItem)? updateUI,
+    TResult? Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return loading?.call();
@@ -785,7 +1074,7 @@ class _$LoadingImpl extends Loading {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
-    TResult Function(bool addItem)? updateUI,
+    TResult Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -892,7 +1181,8 @@ class _$LoadedImpl extends Loaded {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
-    required TResult Function(bool addItem) updateUI,
+    required TResult Function(bool addBeer, bool addWine, bool addGame)
+        updateUI,
     required TResult Function(CloudFailure failure) error,
   }) {
     return hangout(this.hangout);
@@ -904,7 +1194,7 @@ class _$LoadedImpl extends Loaded {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
-    TResult? Function(bool addItem)? updateUI,
+    TResult? Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return hangout?.call(this.hangout);
@@ -916,7 +1206,7 @@ class _$LoadedImpl extends Loaded {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
-    TResult Function(bool addItem)? updateUI,
+    TResult Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
@@ -983,7 +1273,7 @@ abstract class _$$UpdateUIImplCopyWith<$Res> {
           _$UpdateUIImpl value, $Res Function(_$UpdateUIImpl) then) =
       __$$UpdateUIImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({bool addItem});
+  $Res call({bool addBeer, bool addWine, bool addGame});
 }
 
 /// @nodoc
@@ -997,12 +1287,22 @@ class __$$UpdateUIImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? addItem = null,
+    Object? addBeer = null,
+    Object? addWine = null,
+    Object? addGame = null,
   }) {
     return _then(_$UpdateUIImpl(
-      addItem: null == addItem
-          ? _value.addItem
-          : addItem // ignore: cast_nullable_to_non_nullable
+      addBeer: null == addBeer
+          ? _value.addBeer
+          : addBeer // ignore: cast_nullable_to_non_nullable
+              as bool,
+      addWine: null == addWine
+          ? _value.addWine
+          : addWine // ignore: cast_nullable_to_non_nullable
+              as bool,
+      addGame: null == addGame
+          ? _value.addGame
+          : addGame // ignore: cast_nullable_to_non_nullable
               as bool,
     ));
   }
@@ -1011,10 +1311,16 @@ class __$$UpdateUIImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$UpdateUIImpl extends UpdateUI {
-  const _$UpdateUIImpl({required this.addItem}) : super._();
+  const _$UpdateUIImpl(
+      {required this.addBeer, required this.addWine, required this.addGame})
+      : super._();
 
   @override
-  final bool addItem;
+  final bool addBeer;
+  @override
+  final bool addWine;
+  @override
+  final bool addGame;
 
   @JsonKey(ignore: true)
   @override
@@ -1028,10 +1334,11 @@ class _$UpdateUIImpl extends UpdateUI {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
-    required TResult Function(bool addItem) updateUI,
+    required TResult Function(bool addBeer, bool addWine, bool addGame)
+        updateUI,
     required TResult Function(CloudFailure failure) error,
   }) {
-    return updateUI(addItem);
+    return updateUI(addBeer, addWine, addGame);
   }
 
   @override
@@ -1040,10 +1347,10 @@ class _$UpdateUIImpl extends UpdateUI {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
-    TResult? Function(bool addItem)? updateUI,
+    TResult? Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) {
-    return updateUI?.call(addItem);
+    return updateUI?.call(addBeer, addWine, addGame);
   }
 
   @override
@@ -1052,12 +1359,12 @@ class _$UpdateUIImpl extends UpdateUI {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
-    TResult Function(bool addItem)? updateUI,
+    TResult Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {
     if (updateUI != null) {
-      return updateUI(addItem);
+      return updateUI(addBeer, addWine, addGame);
     }
     return orElse();
   }
@@ -1104,10 +1411,15 @@ class _$UpdateUIImpl extends UpdateUI {
 }
 
 abstract class UpdateUI extends HangoutStatsPageState {
-  const factory UpdateUI({required final bool addItem}) = _$UpdateUIImpl;
+  const factory UpdateUI(
+      {required final bool addBeer,
+      required final bool addWine,
+      required final bool addGame}) = _$UpdateUIImpl;
   const UpdateUI._() : super._();
 
-  bool get addItem;
+  bool get addBeer;
+  bool get addWine;
+  bool get addGame;
   @JsonKey(ignore: true)
   _$$UpdateUIImplCopyWith<_$UpdateUIImpl> get copyWith =>
       throw _privateConstructorUsedError;
@@ -1174,7 +1486,8 @@ class _$ErrorImpl extends Error {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(Hangout hangout) hangout,
-    required TResult Function(bool addItem) updateUI,
+    required TResult Function(bool addBeer, bool addWine, bool addGame)
+        updateUI,
     required TResult Function(CloudFailure failure) error,
   }) {
     return error(failure);
@@ -1186,7 +1499,7 @@ class _$ErrorImpl extends Error {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(Hangout hangout)? hangout,
-    TResult? Function(bool addItem)? updateUI,
+    TResult? Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult? Function(CloudFailure failure)? error,
   }) {
     return error?.call(failure);
@@ -1198,7 +1511,7 @@ class _$ErrorImpl extends Error {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(Hangout hangout)? hangout,
-    TResult Function(bool addItem)? updateUI,
+    TResult Function(bool addBeer, bool addWine, bool addGame)? updateUI,
     TResult Function(CloudFailure failure)? error,
     required TResult orElse(),
   }) {

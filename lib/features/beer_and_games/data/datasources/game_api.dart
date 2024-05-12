@@ -4,7 +4,25 @@ import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:dartz/dartz.dart';
 
 abstract class _GameAPI {
-  Future<Either<CloudFailure, List<GameModel>>> getGames();
+  Stream<Either<CloudFailure, List<GameModel>>> getGames();
+  Future<Either<CloudFailure, void>> markAddPlayed({required String gameId});
+  Future<Either<CloudFailure, void>> markRemovePlayed({required String gameId});
+  Future<Either<CloudFailure, String>> insert({
+    required String name,
+    required int minPlayers,
+    required int maxPlayers,
+    required bool onlyMinMax,
+  });
+  Future<Either<CloudFailure, void>> updateInfo({
+    required String beerId,
+    required String name,
+    required String? imagePath,
+    required String? imageHash,
+    required int minPlayers,
+    required int maxPlayers,
+    required bool onlyMinMax,
+  });
+  Future<Either<CloudFailure, void>> delete({required String gameId});
 }
 
 class GameAPI extends _GameAPI {
@@ -13,15 +31,139 @@ class GameAPI extends _GameAPI {
   GameAPI({required this.firestore});
 
   @override
-  Future<Either<CloudFailure, List<GameModel>>> getGames() async {
-    final games = await firestore
+  Stream<Either<CloudFailure, List<GameModel>>> getGames() async* {
+    yield* firestore
         .collection('hangout')
         .doc('cespuglio')
         .collection('games')
-        .get();
+        .snapshots()
+        .map((snapshot) {
+      final games = snapshot.docs
+          .map((doc) => GameModel.fromJson(doc.data(), id: doc.id))
+          .toList();
+      return Right(games);
+    });
+  }
 
-    return Right(
-      games.docs.map((e) => GameModel.fromJson(e.data(), id: e.id)).toList(),
-    );
+  @override
+  Future<Either<CloudFailure, void>> markAddPlayed({
+    required String gameId,
+  }) async {
+    try {
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('games')
+          .doc(gameId)
+          .update({
+        'times': FieldValue.increment(1),
+      });
+
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> markRemovePlayed({
+    required String gameId,
+  }) async {
+    try {
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('games')
+          .doc(gameId)
+          .update({
+        'times': FieldValue.increment(-1),
+      });
+
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, String>> insert({
+    required String name,
+    required int minPlayers,
+    required int maxPlayers,
+    required bool onlyMinMax,
+  }) async {
+    final data = <String, dynamic>{
+      'name': name,
+      'min_p': minPlayers,
+      'max_p': maxPlayers,
+      'only_mm': onlyMinMax,
+    };
+
+    try {
+      final doc = await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('games')
+          .add(data);
+      return Right(doc.id);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> updateInfo({
+    required String beerId,
+    required String name,
+    required String? imagePath,
+    required String? imageHash,
+    required int minPlayers,
+    required int maxPlayers,
+    required bool onlyMinMax,
+  }) async {
+    try {
+      final data = <String, dynamic>{
+        'name': name,
+        'min_p': minPlayers,
+        'max_p': maxPlayers,
+        'only_mm': onlyMinMax,
+      };
+      if (imagePath == null) {
+        data.addAll({
+          'img': FieldValue.delete(),
+          'imgHash': FieldValue.delete(),
+        });
+      } else {
+        data.addAll({
+          'img': imagePath,
+          'imgHash': imageHash,
+        });
+      }
+
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('games')
+          .doc(beerId)
+          .update(data);
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
+  }
+
+  @override
+  Future<Either<CloudFailure, void>> delete({required String gameId}) async {
+    try {
+      await firestore
+          .collection('hangout')
+          .doc('cespuglio')
+          .collection('games')
+          .doc(gameId)
+          .delete();
+      return const Right(null);
+    } catch (e) {
+      return Left(CloudFailure.unknown(e.toString()));
+    }
   }
 }

@@ -18,19 +18,23 @@ final _privateConstructorUsedError = UnsupportedError(
 mixin _$HomepageVoteAreaEvent {
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Hangout hangout, User user) setup,
+    required TResult Function(
+            HomepageBloc homepageBloc, Hangout hangout, User user)
+        setup,
     required TResult Function(PresenceState presence) setPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Hangout hangout, User user)? setup,
+    TResult? Function(HomepageBloc homepageBloc, Hangout hangout, User user)?
+        setup,
     TResult? Function(PresenceState presence)? setPresence,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Hangout hangout, User user)? setup,
+    TResult Function(HomepageBloc homepageBloc, Hangout hangout, User user)?
+        setup,
     TResult Function(PresenceState presence)? setPresence,
     required TResult orElse(),
   }) =>
@@ -81,7 +85,7 @@ abstract class _$$SetupImplCopyWith<$Res> {
           _$SetupImpl value, $Res Function(_$SetupImpl) then) =
       __$$SetupImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({Hangout hangout, User user});
+  $Res call({HomepageBloc homepageBloc, Hangout hangout, User user});
 }
 
 /// @nodoc
@@ -95,10 +99,15 @@ class __$$SetupImplCopyWithImpl<$Res>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
+    Object? homepageBloc = freezed,
     Object? hangout = null,
     Object? user = null,
   }) {
     return _then(_$SetupImpl(
+      homepageBloc: freezed == homepageBloc
+          ? _value.homepageBloc
+          : homepageBloc // ignore: cast_nullable_to_non_nullable
+              as HomepageBloc,
       hangout: null == hangout
           ? _value.hangout
           : hangout // ignore: cast_nullable_to_non_nullable
@@ -114,8 +123,12 @@ class __$$SetupImplCopyWithImpl<$Res>
 /// @nodoc
 
 class _$SetupImpl extends Setup {
-  const _$SetupImpl({required this.hangout, required this.user}) : super._();
+  const _$SetupImpl(
+      {required this.homepageBloc, required this.hangout, required this.user})
+      : super._();
 
+  @override
+  final HomepageBloc homepageBloc;
   @override
   final Hangout hangout;
   @override
@@ -130,30 +143,34 @@ class _$SetupImpl extends Setup {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Hangout hangout, User user) setup,
+    required TResult Function(
+            HomepageBloc homepageBloc, Hangout hangout, User user)
+        setup,
     required TResult Function(PresenceState presence) setPresence,
   }) {
-    return setup(hangout, user);
+    return setup(homepageBloc, hangout, user);
   }
 
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Hangout hangout, User user)? setup,
+    TResult? Function(HomepageBloc homepageBloc, Hangout hangout, User user)?
+        setup,
     TResult? Function(PresenceState presence)? setPresence,
   }) {
-    return setup?.call(hangout, user);
+    return setup?.call(homepageBloc, hangout, user);
   }
 
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Hangout hangout, User user)? setup,
+    TResult Function(HomepageBloc homepageBloc, Hangout hangout, User user)?
+        setup,
     TResult Function(PresenceState presence)? setPresence,
     required TResult orElse(),
   }) {
     if (setup != null) {
-      return setup(hangout, user);
+      return setup(homepageBloc, hangout, user);
     }
     return orElse();
   }
@@ -192,9 +209,12 @@ class _$SetupImpl extends Setup {
 
 abstract class Setup extends HomepageVoteAreaEvent {
   const factory Setup(
-      {required final Hangout hangout, required final User user}) = _$SetupImpl;
+      {required final HomepageBloc homepageBloc,
+      required final Hangout hangout,
+      required final User user}) = _$SetupImpl;
   const Setup._() : super._();
 
+  HomepageBloc get homepageBloc;
   Hangout get hangout;
   User get user;
   @JsonKey(ignore: true)
@@ -250,7 +270,9 @@ class _$SetPresenceImpl extends SetPresence {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(Hangout hangout, User user) setup,
+    required TResult Function(
+            HomepageBloc homepageBloc, Hangout hangout, User user)
+        setup,
     required TResult Function(PresenceState presence) setPresence,
   }) {
     return setPresence(presence);
@@ -259,7 +281,8 @@ class _$SetPresenceImpl extends SetPresence {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(Hangout hangout, User user)? setup,
+    TResult? Function(HomepageBloc homepageBloc, Hangout hangout, User user)?
+        setup,
     TResult? Function(PresenceState presence)? setPresence,
   }) {
     return setPresence?.call(presence);
@@ -268,7 +291,8 @@ class _$SetPresenceImpl extends SetPresence {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(Hangout hangout, User user)? setup,
+    TResult Function(HomepageBloc homepageBloc, Hangout hangout, User user)?
+        setup,
     TResult Function(PresenceState presence)? setPresence,
     required TResult orElse(),
   }) {

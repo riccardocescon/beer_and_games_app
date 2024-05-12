@@ -4,6 +4,7 @@ class GameModel {
   final int minPlayers, maxPlayers;
   final bool onlyMinMaxPlayers;
   final String? imageUrl;
+  final int timesPlayed;
 
   GameModel._({
     required this.id,
@@ -11,6 +12,7 @@ class GameModel {
     required this.minPlayers,
     required this.maxPlayers,
     required this.onlyMinMaxPlayers,
+    required this.timesPlayed,
     this.imageUrl,
   });
 
@@ -20,8 +22,9 @@ class GameModel {
       name: json['name'],
       minPlayers: json['min_p'],
       maxPlayers: json['max_p'],
-      onlyMinMaxPlayers: json['only_mm'],
+      onlyMinMaxPlayers: json.containsKey('only_mm') ? json['only_mm'] : false,
       imageUrl: json['img'],
+      timesPlayed: json.containsKey('times') ? json['times'] : 0,
     );
   }
 }

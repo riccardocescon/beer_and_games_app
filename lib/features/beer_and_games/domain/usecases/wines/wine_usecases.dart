@@ -7,6 +7,7 @@ import 'package:beer_and_games/features/beer_and_games/domain/repositories/wine_
 import 'package:dartz/dartz.dart';
 
 part 'wines_selector.dart';
+part 'wine_inserter.dart';
 part 'wine_rating_updated.dart';
 part 'wine_info_updater.dart';
 part 'wine_deleter.dart';
