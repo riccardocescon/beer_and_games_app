@@ -24,6 +24,7 @@ sealed class ItemsEvent extends AppEvent with _$ItemsEvent, EquatableMixin {
     required RateableItem item,
     required String userEmail,
     required Rating rating,
+    @Default(false) bool removeVote,
   }) = UpdateRating;
   const factory ItemsEvent.updateInfo({required RateableItem item}) =
       UpdateInfo;

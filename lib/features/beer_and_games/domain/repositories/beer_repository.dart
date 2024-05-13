@@ -15,6 +15,7 @@ abstract class BeerRepository {
     required String userEmail,
     required Rating rating,
     required RateableItem item,
+    required bool remove,
   });
   Future<Either<CloudFailure, void>> updateInfo({required Beer beer});
   Future<Either<CloudFailure, void>> delete({required Beer beer});
