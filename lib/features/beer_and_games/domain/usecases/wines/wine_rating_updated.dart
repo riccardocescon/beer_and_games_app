@@ -11,6 +11,7 @@ class WineRatingUpdates extends UseCase<void, WineRatingUpdatedParams> {
       userEmail: params.userEmail,
       rating: params.rating,
       item: params.item,
+      remove: params.remove,
     );
   }
 }
@@ -19,10 +20,12 @@ class WineRatingUpdatedParams {
   final String userEmail;
   final Rating rating;
   final RateableItem item;
+  final bool remove;
 
   WineRatingUpdatedParams({
     required this.userEmail,
     required this.rating,
     required this.item,
+    required this.remove,
   });
 }

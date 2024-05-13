@@ -35,21 +35,36 @@ class _GamesRow extends StatelessWidget {
             physics: const BouncingScrollPhysics(),
             itemCount: itemCount,
             itemBuilder: (context, index) {
-              final game = games![index];
               return Padding(
                 padding:
                     EdgeInsets.only(right: index == itemCount - 1 ? 0 : 16),
-                child: GameItemCard(
-                  game: game,
-                  onTapDown: null,
-                  onPress: null,
-                  onLongPress: null,
-                ),
+                child: showGames!.isDownloading
+                    ? _loading()
+                    : GameItemCard(
+                        game: games![index],
+                        onTapDown: null,
+                        onPress: null,
+                        onLongPress: null,
+                      ),
               );
             },
           ),
         );
       },
+    );
+  }
+
+  Widget _loading() {
+    return Center(
+      child: Container(
+        width: 100,
+        height: 100,
+        alignment: Alignment.center,
+        child: const SizedBox.square(
+          dimension: 32,
+          child: CircularProgressIndicator(),
+        ),
+      ),
     );
   }
 }

@@ -73,11 +73,16 @@ class __BottomSheetBarButtonState extends State<_BottomSheetBarButton>
           builder: (context, child) {
             return FilledButton(
               onPressed: () {
+                final myLastVote = widget.item.ratings.firstWhereOrNull(
+                  (element) => element.userEmail == _me.email,
+                );
+                final removeVote = myLastVote?.rating == widget.rating;
                 context.read<ItemsBloc>().add(
                       ItemsEvent.updateRating(
                         item: widget.item,
                         userEmail: _me.email,
                         rating: widget.rating,
+                        removeVote: removeVote,
                       ),
                     );
               },

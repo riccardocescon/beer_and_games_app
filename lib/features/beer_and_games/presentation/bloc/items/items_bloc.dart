@@ -178,6 +178,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
       final item = event.item;
       final rating = event.rating;
       final userEmail = event.userEmail;
+      final remove = event.removeVote;
 
       if (item is Beer) {
         final result = await beersRatiningUpdater.call(
@@ -185,6 +186,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
             item: item,
             rating: rating,
             userEmail: userEmail,
+            remove: remove,
           ),
         );
         if (result.isLeft()) {
@@ -196,6 +198,7 @@ class ItemsBloc extends Bloc<ItemsEvent, ItemsState> {
             item: item,
             rating: rating,
             userEmail: userEmail,
+            remove: remove,
           ),
         );
         if (result.isLeft()) {

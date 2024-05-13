@@ -2,10 +2,7 @@ import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/core/widgets/stats_item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart';
-import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
-import 'package:collection/collection.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 
 class GameItemCard extends StatefulWidget {
   const GameItemCard({
@@ -51,51 +48,20 @@ class _GameItemCardState extends State<GameItemCard> {
         child: SizedBox(
           child: Column(
             children: [
-              BlocBuilder<ItemsBloc, ItemsState>(
-                buildWhen: (previous, current) => current.maybeMap(
-                  update: (value) {
-                    final prevState = previous.maybeMap(
-                      update: (value) => value.games,
-                      orElse: () => null,
-                    );
-                    if (prevState == null) return true;
-
-                    final currItem = value.games.firstWhereOrNull(
-                      (element) => element.id == widget.game.id,
-                    );
-                    final prevItem = prevState.firstWhereOrNull(
-                      (element) => element.id == widget.game.id,
-                    );
-
-                    return currItem != prevItem;
-                  },
-                  orElse: () => false,
+              StatsItem(
+                itemWidth: _itemWidth,
+                item: updatedItem,
+                additionalWidget: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 12),
+                  child: Column(
+                    children: [
+                      _playersNumberRow(),
+                      height5,
+                      _playedNumberRow(),
+                      height10,
+                    ],
+                  ),
                 ),
-                builder: (context, state) {
-                  return state.maybeMap(
-                    update: (value) {
-                      updatedItem = value.games.firstWhere(
-                        (element) => element.id == widget.game.id,
-                      );
-                      return StatsItem(
-                        itemWidth: _itemWidth,
-                        item: updatedItem,
-                        additionalWidget: Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 12),
-                          child: Column(
-                            children: [
-                              _playersNumberRow(),
-                              height5,
-                              _playedNumberRow(),
-                              height10,
-                            ],
-                          ),
-                        ),
-                      );
-                    },
-                    orElse: () => const SizedBox.shrink(),
-                  );
-                },
               ),
             ],
           ),

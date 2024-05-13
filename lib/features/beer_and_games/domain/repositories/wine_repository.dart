@@ -15,6 +15,7 @@ abstract class WineRepository {
     required String userEmail,
     required Rating rating,
     required RateableItem item,
+    required bool remove,
   });
   Future<Either<CloudFailure, void>> updateInfo({required Wine wine});
   Future<Either<CloudFailure, void>> delete({required Wine wine});

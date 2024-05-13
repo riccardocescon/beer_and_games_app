@@ -140,13 +140,19 @@ class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
     required String userEmail,
     required Rating rating,
     required RateableItem item,
+    required bool remove,
   }) async {
     final foVote =
         item.ratings.firstWhereOrNull((e) => e.userEmail == userEmail);
     if (foVote != null) {
-      final index = item.ratings.indexOf(foVote);
-      item.ratings[index] = foVote.copyWith(rating: rating);
+      if (remove) {
+        item.ratings.remove(foVote);
+      } else {
+        final index = item.ratings.indexOf(foVote);
+        item.ratings[index] = foVote.copyWith(rating: rating);
+      }
     } else {
+      if (remove) return const Right(null);
       item.ratings.add(UserRating(userEmail: userEmail, rating: rating));
     }
     return await beerAPI.updateRating(
