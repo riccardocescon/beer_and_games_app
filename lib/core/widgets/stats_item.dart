@@ -41,16 +41,24 @@ class StatsItem extends StatelessWidget {
     return ClipRRect(
       borderRadius: BorderRadius.circular(16),
       child: Container(
-        width: itemWidth,
-        height: itemWidth,
-        color: MaterialTheme.darkScheme().surfaceContainerHigh,
-        child: item.imageBytes == null
-            ? const SizedBox.shrink()
-            : Image.memory(
-                Uint8List.fromList(item.imageBytes!),
-                fit: BoxFit.cover,
-              ),
-      ),
+          width: itemWidth,
+          height: itemWidth,
+          color: MaterialTheme.darkScheme().surfaceContainerHigh,
+          child: AnimatedSwitcher(
+            duration: const Duration(milliseconds: 600),
+            switchInCurve: Curves.easeInOutCubic,
+            switchOutCurve: Curves.easeInOutCubic,
+            transitionBuilder: (child, animation) => FadeTransition(
+              opacity: animation,
+              child: child,
+            ),
+            child: item.imageBytes == null
+                ? const SizedBox.shrink()
+                : Image.memory(
+                    Uint8List.fromList(item.imageBytes!),
+                    fit: BoxFit.cover,
+                  ),
+          )),
     );
   }
 
