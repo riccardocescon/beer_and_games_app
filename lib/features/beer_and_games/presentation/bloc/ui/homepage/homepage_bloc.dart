@@ -104,6 +104,8 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
       _showingGames = true;
 
       if (_games == null) {
+        // If this is the first download, start an illimited download
+        // that streams the updates to the UI
         emit(const HomepageState.showGames(games: [], isDownloading: true));
         itemsBloc.add(const ItemsEvent.download());
         await for (final state in itemsBloc.stream) {
@@ -114,10 +116,17 @@ class HomepageBloc extends Bloc<HomepageEvent, HomepageState> {
           if (foGames == null) continue;
 
           _games = foGames;
-          break;
+          final filteredGames = _filteredGames;
+
+          emit(
+            HomepageState.showGames(games: filteredGames, isDownloading: false),
+          );
         }
       }
 
+      // If the games are already downloaded, just show them
+      // If something changes, the UI will be updated with the
+      // illimitated stream downlaod already opened
       final filteredGames = _filteredGames;
 
       emit(

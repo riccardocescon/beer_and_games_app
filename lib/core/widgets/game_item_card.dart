@@ -25,7 +25,7 @@ class GameItemCard extends StatefulWidget {
 class _GameItemCardState extends State<GameItemCard> {
   final _itemWidth = 100.0;
 
-  late Game updatedItem = widget.game;
+  Game get updatedItem => widget.game;
 
   @override
   Widget build(BuildContext context) {
