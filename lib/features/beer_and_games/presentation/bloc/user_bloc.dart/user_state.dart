@@ -10,7 +10,7 @@ sealed class UserState extends AppState with _$UserState, EquatableMixin {
 
   const factory UserState.auth(User? user) = Auth;
 
-  const factory UserState.error(CloudFailure failure) = Error;
+  const factory UserState.error(Failure failure) = Error;
 
   @override
   List<Object?> get props => map(

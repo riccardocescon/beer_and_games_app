@@ -135,6 +135,7 @@ void init() {
     () => UserRepositoryImpl(
       authAPI: sl(),
       userAPI: sl(),
+      localImageStorageAPI: sl(),
     ),
   );
 
