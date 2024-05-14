@@ -40,11 +40,14 @@ class _GamesRow extends StatelessWidget {
                     EdgeInsets.only(right: index == itemCount - 1 ? 0 : 16),
                 child: showGames!.isDownloading
                     ? _loading()
-                    : GameItemCard(
-                        game: games![index],
-                        onTapDown: null,
-                        onPress: null,
-                        onLongPress: null,
+                    : ScaleAnimator(
+                        delay: Duration(milliseconds: index * 100 + 100),
+                        child: GameItemCard(
+                          game: games![index],
+                          onTapDown: null,
+                          onPress: null,
+                          onLongPress: null,
+                        ),
                       ),
               );
             },

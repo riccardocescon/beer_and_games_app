@@ -5,6 +5,7 @@ import 'package:beer_and_games/core/widgets/game_item_card.dart';
 import 'package:beer_and_games/core/widgets/hangout_app_bar.dart';
 import 'package:beer_and_games/core/widgets/item_bottom_sheet.dart';
 import 'package:beer_and_games/core/widgets/items_list.dart';
+import 'package:beer_and_games/core/widgets/scale_animator.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/game.dart';
 import 'package:beer_and_games/features/beer_and_games/presentation/bloc/items/items_bloc.dart';
@@ -64,8 +65,16 @@ class _GamesItemPageState extends State<GamesItemPage> {
         },
         builder: (context, state) {
           return ItemsList(
-            children:
-                updatedItems.map((game) => _GameItem(game: game)).toList(),
+            children: updatedItems
+                .map(
+                  (game) => _GameItem(
+                    game: game,
+                    animationDelay: Duration(
+                      milliseconds: (updatedItems.indexOf(game) * 100) + 100,
+                    ),
+                  ),
+                )
+                .toList(),
           );
         },
       ),

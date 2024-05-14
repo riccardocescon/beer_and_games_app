@@ -8,6 +8,7 @@ import 'package:beer_and_games/core/mixin/edit_delete_item_menu_poppable.dart';
 import 'package:beer_and_games/core/widgets/hangout_app_bar.dart';
 import 'package:beer_and_games/core/widgets/item_bottom_sheet.dart';
 import 'package:beer_and_games/core/widgets/items_list.dart';
+import 'package:beer_and_games/core/widgets/scale_animator.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/core/widgets/stats_item.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/abstractions/ratable_item.dart';
@@ -43,8 +44,20 @@ class _RatingItemsPageState extends State<RatingItemsPage> {
 
   List<Widget> get items {
     return updatedItems is List<Beer>
-        ? updatedItems.map((item) => _RatableItem<Beer>(item: item)).toList()
-        : updatedItems.map((item) => _RatableItem<Wine>(item: item)).toList();
+        ? updatedItems
+            .map((item) => _RatableItem<Beer>(
+                  item: item,
+                  animationDelay: Duration(
+                      milliseconds: (updatedItems.indexOf(item) * 100) + 100),
+                ))
+            .toList()
+        : updatedItems
+            .map((item) => _RatableItem<Wine>(
+                  item: item,
+                  animationDelay: Duration(
+                      milliseconds: (updatedItems.indexOf(item) * 100) + 100),
+                ))
+            .toList();
   }
 
   late final updatedItems = widget.items.toList();

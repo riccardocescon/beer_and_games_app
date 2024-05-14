@@ -77,10 +77,13 @@ class _ItemGroupSection extends StatelessWidget {
       builder: (context, index, maxItems) {
         return GestureDetector(
           onTap: () => _showMore(context),
-          child: StatsItem(
-            itemWidth: _itemLength,
-            itemHeight: _itemHeight,
-            item: items[index],
+          child: ScaleAnimator(
+            delay: Duration(milliseconds: index * 100 + 100),
+            child: StatsItem(
+              itemWidth: _itemLength,
+              itemHeight: _itemHeight,
+              item: items[index],
+            ),
           ),
         );
       },

@@ -1,6 +1,7 @@
 import 'package:beer_and_games/core/enums/presence_state.dart';
 import 'package:beer_and_games/core/extentions/context_extension.dart';
 import 'package:beer_and_games/core/widgets/game_item_card.dart';
+import 'package:beer_and_games/core/widgets/scale_animator.dart';
 import 'package:beer_and_games/core/widgets/spacers.dart';
 import 'package:beer_and_games/core/widgets/static_bottom_sheet.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/hangout.dart';
