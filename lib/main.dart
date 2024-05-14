@@ -8,6 +8,7 @@ import 'package:beer_and_games/theme.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart' hide User;
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:intl/date_symbol_data_local.dart';
 import 'injection_container.dart' as di;
@@ -37,6 +38,10 @@ class MyApp extends StatelessWidget {
     final currentUser = FirebaseAuth.instance.currentUser;
     bool started = false;
     User? lastUser;
+
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp,
+    ]);
 
     return MaterialApp(
       title: 'Beer & Games',
