@@ -71,4 +71,21 @@ class LocalImageStorageAPI extends ImageStorageAPI {
       return Left(LocalFailure.unknown(e.toString()));
     }
   }
+
+  Future<Either<Failure, void>> deleteAll() async {
+    try {
+      final dir = await _appDocumentsDir;
+      final files = dir.listSync();
+      for (final file in files) {
+        if (file is File) {
+          await file.delete();
+        } else if (file is Directory) {
+          await file.delete(recursive: true);
+        }
+      }
+      return const Right(null);
+    } catch (e) {
+      return Left(LocalFailure.unknown(e.toString()));
+    }
+  }
 }

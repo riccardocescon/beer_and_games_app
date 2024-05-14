@@ -1,4 +1,5 @@
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
+import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
 import 'package:beer_and_games/core/beer_and_games/presentation/bloc/bloc.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/entities/user.dart';
 import 'package:beer_and_games/features/beer_and_games/domain/usecases/user/user_usecases.dart';

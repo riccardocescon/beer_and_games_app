@@ -4,6 +4,7 @@ import 'dart:typed_data';
 import 'package:beer_and_games/core/beer_and_games/errors/cloud_failure.dart';
 import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
 import 'package:beer_and_games/core/extentions/either_extensions.dart';
+import 'package:beer_and_games/core/mixin/image_item_entity_model_getter.dart';
 import 'package:beer_and_games/core/mixin/image_selector_api_helper.dart';
 import 'package:beer_and_games/features/beer_and_games/data/datasources/cloud_image_storage_api.dart';
 import 'package:beer_and_games/features/beer_and_games/data/datasources/game_api.dart';
@@ -14,7 +15,8 @@ import 'package:beer_and_games/features/beer_and_games/domain/repositories/game_
 import 'package:dartz/dartz.dart';
 import 'package:crypto/crypto.dart' as crypto;
 
-class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
+class GameRepositoryImpl extends GameRepository
+    with ImageSelectorApiHelper, ImageItemEntityModelGetter<GameModel> {
   final GameAPI gameAPI;
   final CloudImageStorageAPI cloudImageStorageAPI;
   final LocalImageStorageAPI localImageStorageAPI;
@@ -111,15 +113,16 @@ class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
               gamesModelsWithImage.any((model) => element.name == model.name))
           .toList();
       for (final currentGame in gamesWithImage) {
-        final imagePath = _getImagePath(
-          gameId: currentGame.id,
-          gameModels: gameModels,
+        final gameModel = searchModel(
+          id: currentGame.id,
+          models: gameModels,
         );
 
         final foImage = await getImageBytes(
           id: currentGame.id,
           name: currentGame.name,
-          imagePath: imagePath,
+          imagePath: gameModel.imageUrl!,
+          cloudHash: gameModel.imageHash!,
           localImageStorageAPI: localImageStorageAPI,
           cloudImageStorageAPI: cloudImageStorageAPI,
         );
@@ -134,12 +137,6 @@ class GameRepositoryImpl extends GameRepository with ImageSelectorApiHelper {
       }
     }
   }
-
-  String _getImagePath({
-    required String gameId,
-    required List<GameModel> gameModels,
-  }) =>
-      gameModels.firstWhere((element) => element.id == gameId).imageUrl!;
 
   @override
   Future<Either<CloudFailure, void>> markAddPlayed({

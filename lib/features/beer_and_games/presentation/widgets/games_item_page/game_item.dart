@@ -1,8 +1,12 @@
 part of 'package:beer_and_games/features/beer_and_games/presentation/pages/games_item_page.dart';
 
 class _GameItem extends StatefulWidget {
-  const _GameItem({required this.game});
+  const _GameItem({
+    required this.game,
+    required this.animationDelay,
+  });
 
+  final Duration animationDelay;
   final Game game;
 
   @override
@@ -14,11 +18,14 @@ class _GameItemState extends State<_GameItem> with EditDeleteItemMenuPoppable {
 
   @override
   Widget build(BuildContext context) {
-    return GameItemCard(
-      game: widget.game,
-      onTapDown: storePosition,
-      onPress: _handlePress,
-      onLongPress: _handleLongPress,
+    return ScaleAnimator(
+      delay: widget.animationDelay,
+      child: GameItemCard(
+        game: widget.game,
+        onTapDown: storePosition,
+        onPress: _handlePress,
+        onLongPress: _handleLongPress,
+      ),
     );
   }
 

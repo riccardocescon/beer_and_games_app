@@ -398,7 +398,7 @@ mixin _$UserState {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(User? user) auth,
-    required TResult Function(CloudFailure failure) error,
+    required TResult Function(Failure failure) error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -406,7 +406,7 @@ mixin _$UserState {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(User? user)? auth,
-    TResult? Function(CloudFailure failure)? error,
+    TResult? Function(Failure failure)? error,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
@@ -414,7 +414,7 @@ mixin _$UserState {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(User? user)? auth,
-    TResult Function(CloudFailure failure)? error,
+    TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -488,7 +488,7 @@ class _$InitImpl extends Init {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(User? user) auth,
-    required TResult Function(CloudFailure failure) error,
+    required TResult Function(Failure failure) error,
   }) {
     return init();
   }
@@ -499,7 +499,7 @@ class _$InitImpl extends Init {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(User? user)? auth,
-    TResult? Function(CloudFailure failure)? error,
+    TResult? Function(Failure failure)? error,
   }) {
     return init?.call();
   }
@@ -510,7 +510,7 @@ class _$InitImpl extends Init {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(User? user)? auth,
-    TResult Function(CloudFailure failure)? error,
+    TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (init != null) {
@@ -589,7 +589,7 @@ class _$LoadingImpl extends Loading {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(User? user) auth,
-    required TResult Function(CloudFailure failure) error,
+    required TResult Function(Failure failure) error,
   }) {
     return loading();
   }
@@ -600,7 +600,7 @@ class _$LoadingImpl extends Loading {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(User? user)? auth,
-    TResult? Function(CloudFailure failure)? error,
+    TResult? Function(Failure failure)? error,
   }) {
     return loading?.call();
   }
@@ -611,7 +611,7 @@ class _$LoadingImpl extends Loading {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(User? user)? auth,
-    TResult Function(CloudFailure failure)? error,
+    TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (loading != null) {
@@ -713,7 +713,7 @@ class _$AuthImpl extends Auth {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(User? user) auth,
-    required TResult Function(CloudFailure failure) error,
+    required TResult Function(Failure failure) error,
   }) {
     return auth(user);
   }
@@ -724,7 +724,7 @@ class _$AuthImpl extends Auth {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(User? user)? auth,
-    TResult? Function(CloudFailure failure)? error,
+    TResult? Function(Failure failure)? error,
   }) {
     return auth?.call(user);
   }
@@ -735,7 +735,7 @@ class _$AuthImpl extends Auth {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(User? user)? auth,
-    TResult Function(CloudFailure failure)? error,
+    TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (auth != null) {
@@ -798,9 +798,7 @@ abstract class _$$ErrorImplCopyWith<$Res> {
           _$ErrorImpl value, $Res Function(_$ErrorImpl) then) =
       __$$ErrorImplCopyWithImpl<$Res>;
   @useResult
-  $Res call({CloudFailure failure});
-
-  $CloudFailureCopyWith<$Res> get failure;
+  $Res call({Failure failure});
 }
 
 /// @nodoc
@@ -820,16 +818,8 @@ class __$$ErrorImplCopyWithImpl<$Res>
       null == failure
           ? _value.failure
           : failure // ignore: cast_nullable_to_non_nullable
-              as CloudFailure,
+              as Failure,
     ));
-  }
-
-  @override
-  @pragma('vm:prefer-inline')
-  $CloudFailureCopyWith<$Res> get failure {
-    return $CloudFailureCopyWith<$Res>(_value.failure, (value) {
-      return _then(_value.copyWith(failure: value));
-    });
   }
 }
 
@@ -839,7 +829,7 @@ class _$ErrorImpl extends Error {
   const _$ErrorImpl(this.failure) : super._();
 
   @override
-  final CloudFailure failure;
+  final Failure failure;
 
   @JsonKey(ignore: true)
   @override
@@ -853,7 +843,7 @@ class _$ErrorImpl extends Error {
     required TResult Function() init,
     required TResult Function() loading,
     required TResult Function(User? user) auth,
-    required TResult Function(CloudFailure failure) error,
+    required TResult Function(Failure failure) error,
   }) {
     return error(failure);
   }
@@ -864,7 +854,7 @@ class _$ErrorImpl extends Error {
     TResult? Function()? init,
     TResult? Function()? loading,
     TResult? Function(User? user)? auth,
-    TResult? Function(CloudFailure failure)? error,
+    TResult? Function(Failure failure)? error,
   }) {
     return error?.call(failure);
   }
@@ -875,7 +865,7 @@ class _$ErrorImpl extends Error {
     TResult Function()? init,
     TResult Function()? loading,
     TResult Function(User? user)? auth,
-    TResult Function(CloudFailure failure)? error,
+    TResult Function(Failure failure)? error,
     required TResult orElse(),
   }) {
     if (error != null) {
@@ -923,10 +913,10 @@ class _$ErrorImpl extends Error {
 }
 
 abstract class Error extends UserState {
-  const factory Error(final CloudFailure failure) = _$ErrorImpl;
+  const factory Error(final Failure failure) = _$ErrorImpl;
   const Error._() : super._();
 
-  CloudFailure get failure;
+  Failure get failure;
   @JsonKey(ignore: true)
   _$$ErrorImplCopyWith<_$ErrorImpl> get copyWith =>
       throw _privateConstructorUsedError;

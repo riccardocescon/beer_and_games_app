@@ -3,13 +3,14 @@ import 'package:beer_and_games/features/beer_and_games/data/models/user_rating_m
 class WineModel {
   final String id;
   final String name;
-  final String? imageUrl;
+  final String? imageUrl, imageHash;
   final List<UserRatingModel> ratings;
 
   WineModel._({
     required this.id,
     required this.name,
     required this.imageUrl,
+    required this.imageHash,
     required this.ratings,
   });
 
@@ -30,6 +31,7 @@ class WineModel {
       id: id,
       name: json['name'],
       imageUrl: json['img'],
+      imageHash: json['imgHash'],
       ratings: ratings,
     );
   }
