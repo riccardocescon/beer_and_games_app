@@ -1,15 +1,15 @@
 import 'package:beer_and_games/features/beer_and_games/data/models/user_rating_model.dart';
 
 class BeerModel {
-  final String id;
-  final String name;
-  final String? imageUrl;
+  final String id, name;
+  final String? imageUrl, imageHash;
   final List<UserRatingModel> ratings;
 
   BeerModel._({
     required this.id,
     required this.name,
     required this.imageUrl,
+    required this.imageHash,
     required this.ratings,
   });
 
@@ -29,6 +29,7 @@ class BeerModel {
       id: id,
       name: json['name'],
       imageUrl: json['img'],
+      imageHash: json['imgHash'],
       ratings: ratings,
     );
   }

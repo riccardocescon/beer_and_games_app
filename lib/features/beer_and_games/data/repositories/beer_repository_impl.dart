@@ -6,6 +6,7 @@ import 'package:beer_and_games/core/beer_and_games/errors/failure.dart';
 import 'package:beer_and_games/core/enums/rating.dart';
 import 'package:beer_and_games/core/extentions/either_extensions.dart';
 import 'package:beer_and_games/core/extentions/list_extensions.dart';
+import 'package:beer_and_games/core/mixin/image_item_entity_model_getter.dart';
 import 'package:beer_and_games/core/mixin/image_selector_api_helper.dart';
 import 'package:beer_and_games/features/beer_and_games/data/datasources/beer_api.dart';
 import 'package:beer_and_games/features/beer_and_games/data/datasources/cloud_image_storage_api.dart';
@@ -18,7 +19,8 @@ import 'package:beer_and_games/features/beer_and_games/domain/repositories/beer_
 import 'package:dartz/dartz.dart';
 import 'package:crypto/crypto.dart' as crypto;
 
-class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
+class BeerRepositoryImpl extends BeerRepository
+    with ImageSelectorApiHelper, ImageItemEntityModelGetter<BeerModel> {
   final BeerAPI beerAPI;
   final CloudImageStorageAPI cloudImageStorageAPI;
   final LocalImageStorageAPI localImageStorageAPI;
@@ -101,15 +103,16 @@ class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
               beersModelsWithImage.any((model) => element.name == model.name))
           .toList();
       for (final currentBeer in beersWithImage) {
-        final imagePath = _getImagePath(
-          gameId: currentBeer.id,
-          beerModels: beerModels,
+        final currentBeerModel = searchModel(
+          id: currentBeer.id,
+          models: beerModels,
         );
 
         final foImage = await getImageBytes(
           id: currentBeer.id,
           name: currentBeer.name,
-          imagePath: imagePath,
+          imagePath: currentBeerModel.imageUrl!,
+          cloudHash: currentBeerModel.imageHash!,
           localImageStorageAPI: localImageStorageAPI,
           cloudImageStorageAPI: cloudImageStorageAPI,
         );
@@ -129,11 +132,11 @@ class BeerRepositoryImpl extends BeerRepository with ImageSelectorApiHelper {
     }
   }
 
-  String _getImagePath({
+  BeerModel _getImageModel({
     required String gameId,
     required List<BeerModel> beerModels,
   }) =>
-      beerModels.firstWhere((element) => element.id == gameId).imageUrl!;
+      beerModels.firstWhere((element) => element.id == gameId);
 
   @override
   Future<Either<CloudFailure, void>> updateRating({

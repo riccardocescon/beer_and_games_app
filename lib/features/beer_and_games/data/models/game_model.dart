@@ -3,7 +3,7 @@ class GameModel {
   final String name;
   final int minPlayers, maxPlayers;
   final bool onlyMinMaxPlayers;
-  final String? imageUrl;
+  final String? imageUrl, imageHash;
   final int timesPlayed;
 
   GameModel._({
@@ -14,6 +14,7 @@ class GameModel {
     required this.onlyMinMaxPlayers,
     required this.timesPlayed,
     this.imageUrl,
+    this.imageHash,
   });
 
   factory GameModel.fromJson(Map<String, dynamic> json, {required String id}) {
@@ -24,6 +25,7 @@ class GameModel {
       maxPlayers: json['max_p'],
       onlyMinMaxPlayers: json.containsKey('only_mm') ? json['only_mm'] : false,
       imageUrl: json['img'],
+      imageHash: json['imgHash'],
       timesPlayed: json.containsKey('times') ? json['times'] : 0,
     );
   }
